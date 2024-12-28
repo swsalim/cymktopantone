@@ -12,7 +12,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Privacy Policy',
   description:
-    'At Flip Image, your privacy and the protection of your data is our top priority. All data collected, both personal and non-personal, is protected with the highest global standards.',
+    'At CMYK Pantone, your privacy and the protection of your data is our top priority. All data collected, both personal and non-personal, is protected with the highest global standards.',
   url: '/legal/privacy-policy',
 };
 
@@ -62,7 +62,7 @@ export default function Page() {
           <Prose>
             <h1>Privacy Policy</h1>
             <p>
-              At flipanimage.xyz, we are committed to protecting your privacy. This Privacy Policy
+              At cymktopantone.com, we are committed to protecting your privacy. This Privacy Policy
               outlines how we collect, use, and disclose information when you use our website.
             </p>
             <h2>Information We Collect</h2>
@@ -110,15 +110,15 @@ export default function Page() {
             <p>
               If you have any questions or concerns about this Privacy Policy, please contact us at{' '}
               <a
-                href="mailto:support@flipanimage.xyz"
+                href="mailto:support@cymktopantone.com"
                 target="_blank"
                 className="text-violet-600 hover:text-violet-600 dark:text-violet-400 dark:hover:text-violet-500">
-                support@flipanimage.xyz
+                support@cymktopantone.com
               </a>
               .
             </p>
 
-            <p>Thank you for using flipanimage.xyz!</p>
+            <p>Thank you for using cymktopantone.com!</p>
 
             <p>All uploaded data is deleted instantly. We save no images</p>
           </Prose>

@@ -25,12 +25,20 @@ export default function Navbar() {
             <Logo className="h-8 w-auto fill-violet-600" />
             <span className="text-base font-medium">{siteConfig.siteName}</span>
           </Link>
-          <a
-            href="https://pfpresizer.com?ref=flipanimage"
-            target="_blank"
-            className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
-            Resize Image
-          </a>
+          <div className="flex flex-shrink-0 gap-x-4">
+            <a
+              href="https://pfpresizer.com?ref=cymktopantone"
+              target="_blank"
+              className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+              Resize Image
+            </a>
+            <a
+              href="https://www.flipanimge.xyz?ref=cymktopantone"
+              target="_blank"
+              className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+              Flip Image
+            </a>
+          </div>
         </Container>
       </div>
     </>

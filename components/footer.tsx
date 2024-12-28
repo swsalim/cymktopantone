@@ -27,7 +27,7 @@ export default function Footer({ className, ...props }: FooterProps) {
           <div className="space-y-8">
             <Logo className="size-9 text-white" />
             <p className="text-balance text-base/6 text-gray-100">
-              Flip your images online for free
+              Get instant, accurate Pantone matches for your CMYK colors.
             </p>
           </div>
           <div className="mt-16 grid gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">

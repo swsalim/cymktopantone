@@ -14,7 +14,7 @@ interface ImageKitProps extends ImageProps {
 export function ImageKit({
   src = 'default-image.jpg',
   alt = 'Default image',
-  directory = 'flipanimage',
+  directory = 'cymktopantone',
   width = 400,
   height = 400,
   ...props
