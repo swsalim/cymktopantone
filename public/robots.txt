@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Disallow: /*.json$
+Disallow: /*_buildManifest.js$
+Disallow: /*_middlewareManifest.js$
+Disallow: /*_ssgManifest.js$
+Disallow: /*.js$
+
+# Host
+Host: https://pfpresizer.com
+
+# Sitemaps
+Sitemap: https://pfpresizer.com/sitemap.xml
