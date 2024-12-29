@@ -77,10 +77,16 @@ export default function RootLayout({
         <link rel="preconnect" href="//ik.imagekit.io" />
         <link rel="preconnect" href="//scripts.simpleanalyticscdn.com" />
         <link rel="preconnect" href="//queue.simpleanalyticscdn.com" />
+        <link rel="preconnect" href="//analytics.ahrefs.com" />
+        <link rel="dns-prefetch" href="//analytics.ahrefs.com" />
         <link rel="dns-prefetch" href="//queue.simpleanalyticscdn.com" />
         <link rel="dns-prefetch" href="//scripts.simpleanalyticscdn.com" />
         <link rel="dns-prefetch" href="//ik.imagekit.io" />
         <LogoJsonLd logo={absoluteUrl('/icons/logo.png')} url={absoluteUrl()} />
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="+mdYbdTzJP3E6remwxTQLg"
+          defer></script>
       </head>
       <body
         className={cn('flex min-h-screen flex-col font-sans antialiased', plusJakartaSans.variable)}
