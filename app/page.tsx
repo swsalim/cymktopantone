@@ -1,6 +1,6 @@
 import { siteConfig } from '@/config/site';
 
-import { absoluteUrl, cn } from '@/lib/utils';
+import { absoluteUrl } from '@/lib/utils';
 
 import ColorConverter from '@/components/color-converter';
 import Content from '@/components/pages/homepage/content';

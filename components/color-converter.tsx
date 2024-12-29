@@ -23,12 +23,10 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { ToastAction } from '@/components/ui/toast';
 
 import { Container } from './container';
 import { Wrapper } from './wrapper';
@@ -178,8 +176,9 @@ export default function ColorConverter() {
             <Card>
               <CardContent>
                 <div className="relative grid grid-cols-2 gap-4 rounded-lg sm:grid-cols-3 md:grid-cols-5 md:gap-4 lg:grid-cols-6">
-                  {matchingColors.map((color) => (
+                  {matchingColors.map((color, index) => (
                     <div
+                      key={index}
                       className="relative flex h-32 w-full flex-col justify-center rounded-lg p-2 md:h-40 md:py-4"
                       style={{
                         backgroundColor: formatRgbString(hexToRgb(color.hex)),
