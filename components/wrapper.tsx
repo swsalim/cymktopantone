@@ -8,8 +8,8 @@ const wrapperVariants = cva('mx-auto my-0 w-full', {
   variants: {
     size: {
       default: 'py-12 md:py-20',
-      sm: 'py-6 md:py-10',
-      lg: 'py-16 md:py-28',
+      sm: 'py-8 md:py-12',
+      lg: 'py-20 md:py-28',
     },
   },
   defaultVariants: {

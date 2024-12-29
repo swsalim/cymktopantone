@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type NavItem = {
   title: string;
   href: string;
@@ -42,15 +40,21 @@ export type MarketingConfig = {
   mainNav: MainNavItem[];
 };
 
-export type SocialMediaPlatform = {
-  name: string;
-  title: string;
-  description: string;
-  slug: string;
-  heroHeading: string;
-  heroDescription: string;
-  heroFeature?: string;
-  imageWidth: number;
-  imageHeight: number;
-  icon?: () => Promise<React.ReactElement>;
+export type RGB = {
+  r: number;
+  g: number;
+  b: number;
+};
+
+export type CYMK = {
+  c: number;
+  m: number;
+  y: number;
+  k: number;
+};
+
+export type HSL = {
+  h: number;
+  s: number;
+  l: number;
 };

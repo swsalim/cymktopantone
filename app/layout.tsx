@@ -9,6 +9,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import LogoJsonLd from '@/components/structured-data/logo-json-ld';
+import { Toaster } from '@/components/ui/toaster';
 
 import './globals.css';
 
@@ -87,6 +88,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex grow flex-col justify-center">{children}</main>
         <Footer />
+        <Toaster />
         <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
         {/* <script async src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script> */}
         <noscript>
