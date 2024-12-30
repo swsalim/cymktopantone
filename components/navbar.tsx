@@ -33,7 +33,7 @@ export default function Navbar() {
               Resize Image
             </a>
             <a
-              href="https://www.flipanimge.xyz?ref=cymktopantone"
+              href="https://www.flipanimage.xyz?ref=cymktopantone"
               target="_blank"
               className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
               Flip Image
