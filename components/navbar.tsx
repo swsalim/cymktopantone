@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`fixed top-0 w-full ${
+        className={`sticky top-[-1px] w-full ${
           scrolled
             ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-900/50'
             : 'bg-white/0'
