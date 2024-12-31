@@ -88,6 +88,10 @@ export default function RootLayout({
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="+mdYbdTzJP3E6remwxTQLg"
           defer></script>
+        <script
+          src="https://beamanalytics.b-cdn.net/beam.min.js"
+          data-token="c2fbac7b-0b09-48f0-b925-7a5a61de2a3b"
+          async></script>
       </head>
       <body
         className={cn(
