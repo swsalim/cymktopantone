@@ -65,8 +65,8 @@ export default function CYMKPantoneConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your CMYK values into Pantone perfection! Enter your CMYK values below
-          and get instant, accurate results.
+          Easily transform your HEX values into Pantone perfection! Enter your HEX value below and
+          get instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
