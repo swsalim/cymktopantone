@@ -216,20 +216,24 @@ export default function CymkPantoneConverter() {
           </div>
         )}
       </Container>
-      <Container className="flex flex-row items-center justify-start gap-x-4 py-8">
-        <span className="text-sm font-medium uppercase text-gray-500 dark:text-gray-100">
-          Related tools:
-        </span>
-        <Link
-          href="/convert-hex-to-pantone-pms"
-          className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
-          Convert HEX to Pantone
-        </Link>
-        <Link
-          href="/convert-rgb-to-pantone-pms"
-          className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
-          Convert RGB to Pantone
-        </Link>
+      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-center">
+        <div>
+          <span className="text-sm font-medium uppercase text-gray-500 dark:text-gray-100">
+            Related tools:
+          </span>
+        </div>
+        <div className="flex flex-row gap-x-4">
+          <Link
+            href="/convert-hex-to-pantone-pms"
+            className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+            Convert HEX to Pantone
+          </Link>
+          <Link
+            href="/convert-rgb-to-pantone-pms"
+            className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+            Convert RGB to Pantone
+          </Link>
+        </div>
       </Container>
     </Wrapper>
   );
