@@ -35,7 +35,7 @@ import { Wrapper } from './wrapper';
 
 const distances = ['16', '32', '48', '64', '80', '96'];
 
-export default function CYMKPantoneConverter() {
+export default function CymkPantoneConverter() {
   const { toast } = useToast();
 
   const [cmyk, setCmyk] = useState({ c: 18, m: 17, y: 84, k: 0 });
@@ -224,6 +224,11 @@ export default function CYMKPantoneConverter() {
           href="/convert-hex-to-pantone-pms"
           className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
           Convert HEX to Pantone
+        </Link>
+        <Link
+          href="/convert-rgb-to-pantone-pms"
+          className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+          Convert RGB to Pantone
         </Link>
       </Container>
     </Wrapper>

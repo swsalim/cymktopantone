@@ -30,6 +30,18 @@ const Slider = React.forwardRef<
       rangeColor = 'bg-[#000000]';
       thumbColor = 'border-[#000000]';
       break;
+    case 'red':
+      rangeColor = 'bg-[#FF0000]';
+      thumbColor = 'border-[#FF0000]';
+      break;
+    case 'green':
+      rangeColor = 'bg-[#00FF00]';
+      thumbColor = 'border-[#00FF00]';
+      break;
+    case 'blue':
+      rangeColor = 'bg-[#0000FF]';
+      thumbColor = 'border-[#0000FF]';
+      break;
     default:
       rangeColor = '';
       thumbColor = '';
