@@ -2,8 +2,8 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import ColorConverter from '@/components/color-converter';
-import Content from '@/components/pages/homepage/content';
+import CymkPantoneContent from '@/components/cymk-pantone-content';
+import CymkPantoneConverter from '@/components/cymk-pantone-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
     <>
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl()} />
 
-      <ColorConverter />
-      <Content />
+      <CymkPantoneConverter />
+      <CymkPantoneContent />
     </>
   );
 }

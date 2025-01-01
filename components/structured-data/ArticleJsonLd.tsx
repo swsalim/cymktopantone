@@ -35,7 +35,7 @@ export default function ArticleJsonLd({
         ],
         publisher: {
           '@type': 'Organization',
-          name: 'Flip Image',
+          name: 'CMYK Pantone',
           logo: {
             '@type': 'ImageObject',
             url: absoluteUrl('/icons/logo.png'),

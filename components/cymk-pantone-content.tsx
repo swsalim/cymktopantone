@@ -1,8 +1,8 @@
 import { Container } from '@/components/container';
 
-export default function Content() {
+export default function CymkPantoneContent() {
   return (
-    <Container as="section" className="prose py-12 dark:prose-invert md:py-24">
+    <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
       <h1>CYMK to Pantone Conversion</h1>
       <p>
         Color is an essential part of design, and the systems we use to manage and reproduce it can

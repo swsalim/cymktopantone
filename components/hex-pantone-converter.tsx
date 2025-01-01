@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
+
 import { CopyIcon } from 'lucide-react';
 
 import {
@@ -26,26 +28,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
 
 import { Container } from './container';
 import { Wrapper } from './wrapper';
 
 const distances = ['16', '32', '48', '64', '80', '96'];
 
-export default function ColorConverter() {
+export default function CYMKPantoneConverter() {
   const { toast } = useToast();
 
-  const [cmyk, setCmyk] = useState({ c: 44, m: 46, y: 42, k: 0 });
+  const [hex, setHex] = useState('#6D39AC');
   const [matchingColors, setMatchingColors] = useState<{ pantone: string; hex: string }[]>([]);
   const [distance, setDistance] = useState('32');
 
-  const rgb = cmykToRgb(cmyk);
-  const hex = rgbToHex(rgb);
+  const rgb = hexToRgb(hex);
 
-  const handleInputChange = (key: keyof typeof cmyk, value: string) => {
-    const numValue = Math.min(100, Math.max(0, Number(value) || 0));
-    setCmyk((prev) => ({ ...prev, [key]: numValue }));
+  const handleInputChange = (value: string) => {
+    setHex(value);
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -60,7 +59,7 @@ export default function ColorConverter() {
   useEffect(() => {
     const tempMatchingColors = findMatchingPMSColors(hex.substring(1), Number(distance));
     setMatchingColors(tempMatchingColors);
-  }, [cmyk, distance, hex]);
+  }, [hex, distance]);
 
   return (
     <Wrapper size="lg">
@@ -73,39 +72,23 @@ export default function ColorConverter() {
           <Card>
             <CardContent>
               <div className="flex flex-col gap-y-6">
-                {Object.entries({
-                  Cyan: 'c',
-                  Magenta: 'm',
-                  Yellow: 'y',
-                  'Black Key': 'k',
-                }).map(([label, key]) => (
-                  <div key={key}>
-                    <div className="mb-2 flex items-center justify-between">
-                      <Label>{label}</Label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          type="number"
-                          value={cmyk[key as keyof typeof cmyk]}
-                          onChange={(e) =>
-                            handleInputChange(key as keyof typeof cmyk, e.target.value)
-                          }
-                          className="w-20"
-                          min={0}
-                          max={100}
-                        />
-                        <span className="w-4 text-sm text-gray-500">%</span>
-                      </div>
-                    </div>
-                    <Slider
-                      value={[cmyk[key as keyof typeof cmyk]]}
-                      onValueChange={([value]) => setCmyk((prev) => ({ ...prev, [key]: value }))}
-                      max={100}
-                      step={1}
-                      className="mt-2"
-                      color={label.toLowerCase()}
+                <div>
+                  <Label>HEX</Label>
+                  <div className="mb-2 flex items-center justify-between">
+                    <Input
+                      type="color"
+                      id="colorPicker"
+                      value={hex}
+                      onChange={(e) => handleInputChange(e.target.value)}
+                      className="h-20 w-full cursor-pointer"
                     />
                   </div>
-                ))}
+                  <Input
+                    type="text"
+                    value={hex.toUpperCase()}
+                    onChange={(e) => handleInputChange(e.target.value)}
+                  />
+                </div>
                 <div>
                   <div className="mb-2">
                     <Label>Distance</Label>
@@ -136,7 +119,7 @@ export default function ColorConverter() {
             <CardContent>
               <div className="mb-4">
                 <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
-                <div className="h-24 w-full rounded" style={{ backgroundColor: hex }} />
+                <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
               </div>
 
               <div className="space-y-3">
@@ -153,17 +136,6 @@ export default function ColorConverter() {
                     onClick={() =>
                       copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
                     }>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">HEX:</span> <b>{hex}</b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => copyToClipboard(hex, 'HEX value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
@@ -213,6 +185,16 @@ export default function ColorConverter() {
             </Card>
           </div>
         )}
+      </Container>
+      <Container className="flex flex-row items-center justify-start gap-x-4 py-8">
+        <span className="text-sm font-medium uppercase text-gray-500 dark:text-gray-100">
+          Related tools:
+        </span>
+        <Link
+          href="/"
+          className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
+          Convert CYMK to Pantone
+        </Link>
       </Container>
     </Wrapper>
   );
