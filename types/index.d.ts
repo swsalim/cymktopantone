@@ -46,7 +46,7 @@ export type RGB = {
   b: number;
 };
 
-export type CYMK = {
+export type CMYK = {
   c: number;
   m: number;
   y: number;

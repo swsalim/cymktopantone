@@ -1,9 +1,9 @@
 import { Container } from '@/components/container';
 
-export default function CymkPantoneContent() {
+export default function CmykPantoneContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>CYMK to Pantone Conversion</h1>
+      <h1>CMYK to Pantone Conversion</h1>
       <p>
         Color is an essential part of design, and the systems we use to manage and reproduce it can
         greatly influence the final result. The CMYK model—standing for Cyan, Magenta, Yellow, and

@@ -33,7 +33,7 @@ import { Wrapper } from '@/components/wrapper';
 
 const distances = ['16', '32', '48', '64', '80', '96'];
 
-export default function CymkPantoneConverter() {
+export default function CmykPantoneConverter() {
   const { toast } = useToast();
 
   const [cmyk, setCmyk] = useState({ c: 18, m: 17, y: 84, k: 0 });

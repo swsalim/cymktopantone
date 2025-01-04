@@ -62,7 +62,7 @@ export default function Page() {
           <Prose>
             <h1>Privacy Policy</h1>
             <p>
-              At cymktopantone.com, we are committed to protecting your privacy. This Privacy Policy
+              At cmyktopantone.com, we are committed to protecting your privacy. This Privacy Policy
               outlines how we collect, use, and disclose information when you use our website.
             </p>
             <h2>Information We Collect</h2>
@@ -110,15 +110,15 @@ export default function Page() {
             <p>
               If you have any questions or concerns about this Privacy Policy, please contact us at{' '}
               <a
-                href="mailto:support@cymktopantone.com"
+                href="mailto:support@cmyktopantone.com"
                 target="_blank"
                 className="text-violet-600 hover:text-violet-600 dark:text-violet-400 dark:hover:text-violet-500">
-                support@cymktopantone.com
+                support@cmyktopantone.com
               </a>
               .
             </p>
 
-            <p>Thank you for using cymktopantone.com!</p>
+            <p>Thank you for using cmyktopantone.com!</p>
 
             <p>All uploaded data is deleted instantly. We save no images</p>
           </Prose>

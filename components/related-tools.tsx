@@ -12,7 +12,7 @@ type Tool = {
 const tools: Tool[] = [
   {
     url: '/',
-    name: 'Convert CYMK to Pantone',
+    name: 'Convert CMYK to Pantone',
     target: '_blank',
   },
   {

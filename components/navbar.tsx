@@ -27,13 +27,13 @@ export default function Navbar() {
           </Link>
           <div className="flex flex-shrink-0 gap-x-4">
             <a
-              href="https://pfpresizer.com?ref=cymktopantone"
+              href="https://pfpresizer.com?ref=cmyktopantone"
               target="_blank"
               className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
               Resize Image
             </a>
             <a
-              href="https://www.flipanimage.xyz?ref=cymktopantone"
+              href="https://www.flipanimage.xyz?ref=cmyktopantone"
               target="_blank"
               className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
               Flip Image

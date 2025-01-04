@@ -1,8 +1,8 @@
-import { CYMK, HSL, HSV, RGB } from '@/types';
+import { CMYK, HSL, HSV, RGB } from '@/types';
 
 import { HEX, PMS } from '@/config/colors';
 
-export const cmykToRgb = ({ c, m, y, k }: CYMK): RGB => {
+export const cmykToRgb = ({ c, m, y, k }: CMYK): RGB => {
   const r = 255 * (1 - c / 100) * (1 - k / 100);
   const g = 255 * (1 - m / 100) * (1 - k / 100);
   const b = 255 * (1 - y / 100) * (1 - k / 100);
@@ -135,7 +135,7 @@ export function formatHslString({ h, s, l }: HSL): string {
 }
 
 // Formats CMYK string
-export function formatCmykString({ c, m, y, k }: CYMK): string {
+export function formatCmykString({ c, m, y, k }: CMYK): string {
   return `cmyk(${c ?? 0},${m ?? 0},${y ?? 0},${k ?? 0})`;
 }
 
