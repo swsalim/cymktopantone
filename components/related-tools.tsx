@@ -7,6 +7,7 @@ type Tool = {
   url: string;
   name: string;
   target: '_blank' | '_self';
+  isExternal?: boolean;
 };
 const tools: Tool[] = [
   {
@@ -15,9 +16,10 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
-    url: '/convert-rgb-to-pantone-pms',
+    url: 'https://www.rgbtopantone.com/',
     name: 'Convert RGB to Pantone',
     target: '_blank',
+    isExternal: true,
   },
   {
     url: '/convert-hex-to-pantone-pms',
@@ -48,15 +50,16 @@ export default function RelatedTools() {
       </div>
       <div className="flex flex-col gap-x-4 gap-y-5 md:flex-row">
         {tools.map((tool) => {
+          const Comp = tool.isExternal ? 'a' : Link;
           return tool.url !== pathname ? (
             <>
-              <Link
+              <Comp
                 key={tool.url}
                 href={tool.url}
                 target={tool.target}
                 className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
                 {tool.name}
-              </Link>
+              </Comp>
             </>
           ) : null;
         })}
