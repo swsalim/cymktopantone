@@ -58,3 +58,9 @@ export type HSL = {
   s: number;
   l: number;
 };
+
+export type HSV = {
+  h: number;
+  s: number;
+  v: number;
+};

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
-
 import { CopyIcon } from 'lucide-react';
 
 import {
@@ -16,6 +14,8 @@ import {
 } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { Container } from '@/components/container';
+import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -29,9 +29,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-
-import { Container } from './container';
-import { Wrapper } from './wrapper';
+import { Wrapper } from '@/components/wrapper';
 
 const distances = ['16', '32', '48', '64', '80', '96'];
 
@@ -217,23 +215,7 @@ export default function CymkPantoneConverter() {
         )}
       </Container>
       <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-center">
-        <div>
-          <span className="text-sm font-medium uppercase text-gray-500 dark:text-gray-100">
-            Related tools:
-          </span>
-        </div>
-        <div className="flex flex-row gap-x-4">
-          <Link
-            href="/convert-hex-to-pantone-pms"
-            className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
-            Convert HEX to Pantone
-          </Link>
-          <Link
-            href="/convert-rgb-to-pantone-pms"
-            className="font-medium text-gray-700 transition hover:text-violet-600 dark:text-gray-300 dark:hover:text-violet-400">
-            Convert RGB to Pantone
-          </Link>
-        </div>
+        <RelatedTools />
       </Container>
     </Wrapper>
   );
