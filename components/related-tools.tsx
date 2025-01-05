@@ -11,6 +11,11 @@ type Tool = {
 };
 const tools: Tool[] = [
   {
+    url: '/pantone-colors',
+    name: 'Pantone Colors Chart',
+    target: '_blank',
+  },
+  {
     url: '/',
     name: 'Convert CMYK to Pantone',
     target: '_blank',
