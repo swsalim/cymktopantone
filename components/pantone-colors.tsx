@@ -27,7 +27,6 @@ export default function PantoneColorsList() {
       <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 md:gap-6 lg:grid-cols-6">
         {PMS.map((pantoneColor) => {
           const hex = convertPantoneToHex(pantoneColor);
-          console.log(hex);
           return (
             <Card
               key={pantoneColor}
