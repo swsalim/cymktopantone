@@ -18,6 +18,37 @@ export const rgbToHex = ({ r, g, b }: RGB): string => {
   return `#${bin.toString(16).padStart(6, '0').toUpperCase()}`;
 };
 
+export const rgbToCmyk = ({ r, g, b }: RGB): CMYK => {
+  // First convert RGB values to 0-1 range
+  const rr = r / 255;
+  const gg = g / 255;
+  const bb = b / 255;
+
+  // Find the maximum value among R, G, B
+  const max = Math.max(rr, gg, bb);
+
+  // If max is 0, it means the color is black
+  if (max === 0) {
+    return { c: 0, m: 0, y: 0, k: 100 };
+  }
+
+  // Calculate K (black)
+  const k = (1 - max) * 100;
+
+  // Calculate C, M, Y values
+  const c = ((1 - rr - k / 100) / (1 - k / 100)) * 100;
+  const m = ((1 - gg - k / 100) / (1 - k / 100)) * 100;
+  const y = ((1 - bb - k / 100) / (1 - k / 100)) * 100;
+
+  // Round values and ensure they're within 0-100 range
+  return {
+    c: Math.round(Math.max(0, Math.min(100, c))),
+    m: Math.round(Math.max(0, Math.min(100, m))),
+    y: Math.round(Math.max(0, Math.min(100, y))),
+    k: Math.round(Math.max(0, Math.min(100, k))),
+  };
+};
+
 // Converts a HEX color string to RGB values
 export const hexToRgb = (hex: string): RGB => {
   hex = hex.replace('#', '');

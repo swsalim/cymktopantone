@@ -177,7 +177,7 @@ export default function HexPantoneConverter() {
           </div>
         )}
       </Container>
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-center">
+      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
         <RelatedTools />
       </Container>
     </Wrapper>
