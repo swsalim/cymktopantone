@@ -42,6 +42,16 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
+    url: '/convert-cmyk-to-rgb',
+    name: 'Convert CMYK to RGB',
+    target: '_blank',
+  },
+  {
+    url: '/convert-hex-to-hsv',
+    name: 'Convert HEX to HSV',
+    target: '_blank',
+  },
+  {
     url: '/convert-pantone-to-cmyk',
     name: 'Convert Pantone to CMYK',
     target: '_blank',

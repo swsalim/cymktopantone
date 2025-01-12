@@ -44,7 +44,7 @@ export default function HsvPantoneConverter() {
   const hex = rgbToHex(rgb);
 
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
-    const numValue = Math.min(100, Math.max(0, Number(value) || 0));
+    const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
     setHsv((prev) => ({ ...prev, [key]: numValue }));
   };
 
@@ -90,7 +90,7 @@ export default function HsvPantoneConverter() {
                           }
                           className="w-20"
                           min={0}
-                          max={100}
+                          max={key === 'h' ? 360 : 100}
                         />
                       </div>
                     </div>

@@ -109,6 +109,27 @@ export const hsvToRgb = ({ h, s, v }: HSV): RGB => {
   };
 };
 
+// Convert RGB to HSV
+export const rgbToHsv = ({ r, g, b }: RGB): HSV => {
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const h =
+    max === min
+      ? 0
+      : max === r
+        ? (g - b) / (max - min)
+        : max === g
+          ? 2 + (b - r) / (max - min)
+          : 4 + (r - g) / (max - min);
+  const s = max === 0 ? 0 : (max - min) / max;
+  const v = max / 255;
+  return {
+    h: Math.round(h * 60),
+    s: Math.round(s * 100),
+    v: Math.round(v * 100),
+  };
+};
+
 // Converts RGB to HSL
 export const rgbToHsl = ({ r, g, b }: RGB): HSL => {
   r /= 255;

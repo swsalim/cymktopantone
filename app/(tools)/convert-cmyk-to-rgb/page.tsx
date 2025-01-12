@@ -4,15 +4,15 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import HexRgbContent from '@/components/hex-rgb-content';
-import HexRgbConverter from '@/components/hex-rgb-converter';
+import CmykRgbContent from '@/components/cmyk-rgb-content';
+import CmykRgbConverter from '@/components/cmyk-rgb-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
 const config = {
-  title: 'HEX to RGB Color Converter',
+  title: 'CMYK to RGB Color Converter',
   description:
-    'Easily convert HEX to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
-  url: '/convert-hex-to-rgb',
+    'Easily convert CMYK to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
+  url: '/convert-cmyk-to-rgb',
 };
 
 export const metadata: Metadata = {
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HexRgbPage() {
+export default function CmykRgbPage() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-hex-to-rgb')} />
 
-      <HexRgbConverter />
-      <HexRgbContent />
+      <CmykRgbConverter />
+      <CmykRgbContent />
     </>
   );
 }

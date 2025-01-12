@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HexPantonePage() {
+export default function PantoneCmykPage() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-pantone-to-cymk')} />
