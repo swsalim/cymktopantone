@@ -66,6 +66,16 @@ const tools: Tool[] = [
     name: 'Convert Pantone to CMYK',
     target: '_blank',
   },
+  {
+    url: '/convert-pantone-to-hex',
+    name: 'Convert Pantone to HEX',
+    target: '_blank',
+  },
+  {
+    url: '/convert-pantone-to-rgb',
+    name: 'Convert Pantone to RGB',
+    target: '_blank',
+  },
 ];
 
 export default function RelatedTools() {
