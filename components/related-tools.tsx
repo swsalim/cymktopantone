@@ -47,6 +47,11 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
+    url: '/convert-hsv-to-hex',
+    name: 'Convert HSV to HEX',
+    target: '_blank',
+  },
+  {
     url: '/convert-hex-to-rgb',
     name: 'Convert HEX to RGB',
     target: '_blank',
