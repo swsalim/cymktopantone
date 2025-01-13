@@ -17,7 +17,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { Slider } from './ui/slider';
 
-export default function CmykRgbConverter() {
+export default function CmykHexConverter() {
   const { toast } = useToast();
 
   const [cmyk, setCmyk] = useState({ c: 18, m: 17, y: 84, k: 0 });
@@ -43,7 +43,7 @@ export default function CmykRgbConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your CMYK values into RGB values! Enter your CMYK values below and get
+          Easily transform your CMYK values into HEX value! Enter your CMYK values below and get
           instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -97,17 +97,12 @@ export default function CmykRgbConverter() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <p>
-                    <span className="font-medium">RGB:</span>{' '}
-                    <b>
-                      rgb({rgb.r}, {rgb.g}, {rgb.b})
-                    </b>
+                    <span className="font-medium">HEX:</span> <b>{hex}</b>
                   </p>
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                    }>
+                    onClick={() => copyToClipboard(`${hex}`, 'RGB value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

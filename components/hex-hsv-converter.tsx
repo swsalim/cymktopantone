@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Wrapper } from '@/components/wrapper';
 
-export default function HexRgbConverter() {
+export default function HexHsvConverter() {
   const { toast } = useToast();
 
   const [hex, setHex] = useState('#6D39AC');
@@ -40,7 +40,7 @@ export default function HexRgbConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your HEX values into RGB values! Enter your HEX value below and get
+          Easily transform your HEX values into HSV values! Enter your HEX values below and get
           instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">

@@ -56,7 +56,7 @@ export default function HexPantoneConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your HEX values into Pantone perfection! Enter your HEX value below and
+          Easily transform your HEX values into Pantone perfection! Enter your HEX values below and
           get instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">

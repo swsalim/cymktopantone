@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { CopyIcon } from 'lucide-react';
 
-import { hexToRgb } from '@/lib/colors';
+import { hexToRgb, rgbToCmyk } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -15,12 +15,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Wrapper } from '@/components/wrapper';
 
-export default function HexRgbConverter() {
+export default function HexCmykConverter() {
   const { toast } = useToast();
 
   const [hex, setHex] = useState('#6D39AC');
 
   const rgb = hexToRgb(hex);
+  const cmyk = rgbToCmyk(rgb);
 
   const handleInputChange = (value: string) => {
     setHex(value);
@@ -39,7 +40,7 @@ export default function HexRgbConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your HEX values into RGB values! Enter your HEX values below and get
+          Easily transform your HEX values into CMYK values! Enter your HEX values below and get
           instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -77,16 +78,19 @@ export default function HexRgbConverter() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <p>
-                    <span className="font-medium">RGB:</span>{' '}
+                    <span className="font-medium">CMYK:</span>{' '}
                     <b>
-                      rgb({rgb.r}, {rgb.g}, {rgb.b})
+                      cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
                     </b>
                   </p>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() =>
-                      copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
+                      copyToClipboard(
+                        `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
+                        'CMYK value',
+                      )
                     }>
                     <CopyIcon className="h-4 w-4" />
                   </Button>

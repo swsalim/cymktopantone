@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 export default function CmykRgbPage() {
   return (
     <>
-      <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-hex-to-rgb')} />
+      <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-cmyk-to-rgb')} />
 
       <CmykRgbConverter />
       <CmykRgbContent />

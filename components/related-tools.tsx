@@ -16,6 +16,11 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
+    url: '/convert-cmyk-to-hex',
+    name: 'Convert CMYK to HEX',
+    target: '_blank',
+  },
+  {
     url: '/',
     name: 'Convert CMYK to Pantone',
     target: '_blank',
@@ -39,6 +44,11 @@ const tools: Tool[] = [
   {
     url: '/convert-hex-to-rgb',
     name: 'Convert HEX to RGB',
+    target: '_blank',
+  },
+  {
+    url: '/convert-hex-to-cmyk',
+    name: 'Convert HEX to CMYK',
     target: '_blank',
   },
   {
