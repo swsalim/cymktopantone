@@ -42,17 +42,19 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
-    url: '/convert-hsv-to-rgb',
+    url: 'https://www.rgbtopantone.com/convert-hsv-to-rgb',
     name: 'Convert HSV to RGB',
     target: '_blank',
+    isExternal: true,
   },
   {
     url: '/convert-hsv-to-hex',
     name: 'Convert HSV to HEX',
     target: '_blank',
+    isExternal: true,
   },
   {
-    url: '/convert-hex-to-rgb',
+    url: 'https://www.rgbtopantone.com/convert-hex-to-rgb',
     name: 'Convert HEX to RGB',
     target: '_blank',
   },
@@ -62,9 +64,10 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
-    url: '/convert-cmyk-to-rgb',
+    url: 'https://www.rgbtopantone.com/convert-cmyk-to-rgb',
     name: 'Convert CMYK to RGB',
     target: '_blank',
+    isExternal: true,
   },
   {
     url: '/convert-hex-to-hsv',
@@ -82,9 +85,10 @@ const tools: Tool[] = [
     target: '_blank',
   },
   {
-    url: '/convert-pantone-to-rgb',
+    url: 'https://www.rgbtopantone.com/convert-pantone-to-rgb',
     name: 'Convert Pantone to RGB',
     target: '_blank',
+    isExternal: true,
   },
 ];
 
