@@ -2,9 +2,10 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'PFP Resizer',
-    short_name: 'PFP Resizer',
-    description: 'Perfectly Sized Profile Pictures, Instantly',
+    name: 'CMYK to Pantone Converter',
+    short_name: 'CMYK to Pantone',
+    description:
+      'Get instant, accurate Pantone matches for your CMYK colors. Perfect for designers, printers & creative professionals who need reliable color conversions.',
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',
