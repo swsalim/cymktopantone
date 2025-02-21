@@ -7,6 +7,7 @@ import { siteConfig } from '@/config/site';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import StickyAds from '@/components/ads/sticky-ads';
+import { AnalyticsWrapper } from '@/components/analytics';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import LogoJsonLd from '@/components/structured-data/logo-json-ld';
@@ -108,6 +109,7 @@ export default function RootLayout({
         />
         <Navbar />
         <main className="flex grow flex-col justify-center">{children}</main>
+        <AnalyticsWrapper />
         <Footer />
         <Toaster />
         <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
