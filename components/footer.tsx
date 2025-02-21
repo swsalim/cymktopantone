@@ -53,7 +53,7 @@ export default function Footer({ className, ...props }: FooterProps) {
           <p className="text-base/6 text-gray-300">
             &copy; 2024{' '}
             <a
-              href="https://www.yuurrific.com?ref=flipanimage"
+              href="https://www.yuurrific.com?ref=cmyktopantone"
               className="font-medium text-violet-400 transition hover:text-violet-400"
               target="_blank">
               Yuurrific
