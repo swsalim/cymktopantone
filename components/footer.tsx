@@ -19,10 +19,6 @@ const navigation = {
       href: 'https://www.rgbtopantone.com/',
     },
     {
-      name: 'CMYK to Pantone Converter',
-      href: 'https://www.cmyktopantone.com/',
-    },
-    {
       name: 'Sudoku Unlimited',
       href: 'https://sudokuunlimited.com/',
     },
