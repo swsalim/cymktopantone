@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Container } from '@/components/container';
 
 export default function CmykPantoneContent() {
@@ -8,8 +10,9 @@ export default function CmykPantoneContent() {
         Color is an essential part of design, and the systems we use to manage and reproduce it can
         greatly influence the final result. The CMYK model—standing for Cyan, Magenta, Yellow, and
         Black—is widely used in printing processes. It’s subtractive, meaning colors are created by
-        subtracting light using inks. On the other hand, the Pantone Matching System (PMS) provides
-        standardized spot colors that ensure consistency across different materials and devices.
+        subtracting light using inks. On the other hand, the{' '}
+        <Link href="/pantone-colors">Pantone Matching System (PMS)</Link> provides standardized spot
+        colors that ensure consistency across different materials and devices.
       </p>
       <p>
         Designers often face challenges when transitioning between these systems, as the way colors
