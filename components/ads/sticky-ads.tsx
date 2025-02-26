@@ -26,7 +26,7 @@ export default function StickyAds({ url, image, name, description, label }: Stic
               <div className="mb-3 hidden w-12 sm:block md:mb-0 md:py-3">
                 <div className="relative h-10 w-10">
                   <ImageKit
-                    directory="pfpresizer/logos"
+                    directory="cymktopantone/logos"
                     src={image}
                     width={150}
                     height={150}
