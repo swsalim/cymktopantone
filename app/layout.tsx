@@ -106,6 +106,11 @@ export default function RootLayout({
         <AnalyticsWrapper />
         <Footer />
         <Toaster />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
+          crossOrigin="anonymous"></script>
         <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
         {/* <script async src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script> */}
         <noscript>
