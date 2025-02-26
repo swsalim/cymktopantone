@@ -6,6 +6,7 @@ export default function CmykPantoneContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
       <h1>CMYK to Pantone Conversion</h1>
+      <h2>What is CMYK and Pantone?</h2>
       <p>
         Color is an essential part of design, and the systems we use to manage and reproduce it can
         greatly influence the final result. The CMYK model—standing for Cyan, Magenta, Yellow, and
@@ -21,7 +22,7 @@ export default function CmykPantoneContent() {
         Understanding these systems lays the foundation for creating impactful and consistent visual
         projects.
       </p>
-      <h2>Why should you convert CYMP to Pantone Colors in Design?</h2>
+      <h2>Why should you convert CYMK to Pantone Colors in Design?</h2>
       <p>
         Pantone colors offer a level of consistency that CMYK alone can’t guarantee. Imagine
         creating a logo where the exact shade of blue becomes your brand’s signature. With Pantone,
