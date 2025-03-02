@@ -13,17 +13,17 @@ const tools: Tool[] = [
   {
     url: '/pantone-colors',
     name: 'Pantone Colors Chart',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/convert-cmyk-to-hex',
     name: 'Convert CMYK to HEX',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/',
     name: 'Convert CMYK to Pantone',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: 'https://www.rgbtopantone.com/',
@@ -34,12 +34,12 @@ const tools: Tool[] = [
   {
     url: '/convert-hex-to-pantone-pms',
     name: 'Convert HEX to Pantone',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/convert-hsv-to-pantone-pms',
     name: 'Convert HSV to Pantone',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: 'https://www.rgbtopantone.com/convert-hsv-to-rgb',
@@ -56,12 +56,12 @@ const tools: Tool[] = [
   {
     url: 'https://www.rgbtopantone.com/convert-hex-to-rgb',
     name: 'Convert HEX to RGB',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/convert-hex-to-cmyk',
     name: 'Convert HEX to CMYK',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: 'https://www.rgbtopantone.com/convert-cmyk-to-rgb',
@@ -72,17 +72,17 @@ const tools: Tool[] = [
   {
     url: '/convert-hex-to-hsv',
     name: 'Convert HEX to HSV',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/convert-pantone-to-cmyk',
     name: 'Convert Pantone to CMYK',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: '/convert-pantone-to-hex',
     name: 'Convert Pantone to HEX',
-    target: '_blank',
+    target: '_self',
   },
   {
     url: 'https://www.rgbtopantone.com/convert-pantone-to-rgb',
