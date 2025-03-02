@@ -23,7 +23,7 @@ export default function Navbar() {
         <Container className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-x-2 text-xl">
             <Logo className="h-8 w-auto fill-violet-600" />
-            <span className="text-base font-medium">{siteConfig.siteName}</span>
+            <span className="hidden text-base font-medium md:block">{siteConfig.siteName}</span>
           </Link>
           <div className="flex flex-shrink-0 gap-x-4">
             <a
