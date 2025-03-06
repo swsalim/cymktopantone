@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import HexPantoneContent from '@/components/hex-pantone-content';
 import HexPantoneConverter from '@/components/hex-pantone-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -61,6 +62,7 @@ export default function HexPantonePage() {
       />
 
       <HexPantoneConverter />
+      <IndieBoostingAds />
       <HexPantoneContent />
     </>
   );

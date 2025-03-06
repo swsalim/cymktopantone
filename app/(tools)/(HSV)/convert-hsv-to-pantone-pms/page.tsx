@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import HsvPantoneContent from '@/components/hsv-pantone-content';
 import HsvPantoneConverter from '@/components/hsv-pantone-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -61,6 +62,7 @@ export default function HsvPantonePage() {
       />
 
       <HsvPantoneConverter />
+      <IndieBoostingAds />
       <HsvPantoneContent />
     </>
   );

@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import HsvRgbContent from '@/components/hsv-rgb-content';
 import HsvRgbConverter from '@/components/hsv-rgb-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -58,6 +59,7 @@ export default function HsvRgbPage() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-hsv-to-rgb')} />
 
       <HsvRgbConverter />
+      <IndieBoostingAds />
       <HsvRgbContent />
     </>
   );

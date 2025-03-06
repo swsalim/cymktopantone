@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import RgbPantoneContent from '@/components/rgb-pantone-content';
 import RgbPantoneConverter from '@/components/rgb-pantone-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -61,6 +62,7 @@ export default function RgbPantonePage() {
       />
 
       <RgbPantoneConverter />
+      <IndieBoostingAds />
       <RgbPantoneContent />
     </>
   );

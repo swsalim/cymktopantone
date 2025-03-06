@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import CmykHexContent from '@/components/cmyk-hex-content';
 import CmykHexConverter from '@/components/cmyk-hex-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -58,6 +59,7 @@ export default function CmykHexPage() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-cmyk-to-hex')} />
 
       <CmykHexConverter />
+      <IndieBoostingAds />
       <CmykHexContent />
     </>
   );

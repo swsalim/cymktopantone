@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import CmykRgbContent from '@/components/cmyk-rgb-content';
 import CmykRgbConverter from '@/components/cmyk-rgb-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -58,6 +59,7 @@ export default function CmykRgbPage() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-cmyk-to-rgb')} />
 
       <CmykRgbConverter />
+      <IndieBoostingAds />
       <CmykRgbContent />
     </>
   );

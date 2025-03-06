@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import { Container } from '@/components/container';
 import PantoneColorsList from '@/components/pantone-colors';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -87,6 +88,9 @@ export default function PantoneColors() {
             </li>
           </ul>
         </Container>
+
+        <IndieBoostingAds />
+
         <Container>
           <PantoneColorsList />
         </Container>

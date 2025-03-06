@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import PantoneRgbConverter from '@/components/pantone-rgb-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
@@ -57,6 +58,7 @@ export default function PantoneCmykPage() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-pantone-to-rgb')} />
 
       <PantoneRgbConverter />
+      <IndieBoostingAds />
     </>
   );
 }

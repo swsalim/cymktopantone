@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import IndieBoostingAds from '@/components/ads/indie-boosting';
 import HsvHexContent from '@/components/hsv-hex-content';
 import HsvHexConverter from '@/components/hsv-hex-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -58,6 +59,7 @@ export default function HsvHexPage() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/convert-hsv-to-hex')} />
 
       <HsvHexConverter />
+      <IndieBoostingAds />
       <HsvHexContent />
     </>
   );
