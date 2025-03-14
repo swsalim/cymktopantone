@@ -90,6 +90,16 @@ const tools: Tool[] = [
     target: '_blank',
     isExternal: true,
   },
+  {
+    url: '/convert-hex-to-hsl',
+    name: 'Convert HEX to HSL',
+    target: '_self',
+  },
+  {
+    url: '/convert-cmyk-to-hsl',
+    name: 'Convert CMYK to HSL',
+    target: '_self',
+  },
 ];
 
 export default function RelatedTools() {
