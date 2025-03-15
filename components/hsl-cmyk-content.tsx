@@ -1,6 +1,6 @@
 import { Container } from '@/components/container';
 
-export default function HslHexContent() {
+export default function HslCmykContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
       <h1>HSL to CMYK Conversion</h1>

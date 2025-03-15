@@ -9,6 +9,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 import RotatingBanner from '@/components/ads/rotating-banner';
 import { AnalyticsWrapper } from '@/components/analytics';
 import Footer from '@/components/footer';
+import { NavMobile } from '@/components/nav-mobile';
 import Navbar from '@/components/navbar';
 import LogoJsonLd from '@/components/structured-data/logo-json-ld';
 import { Toaster } from '@/components/ui/toaster';
@@ -101,6 +102,7 @@ export default function RootLayout({
         )}
         suppressHydrationWarning>
         <RotatingBanner />
+        <NavMobile />
         <Navbar />
         <main className="flex grow flex-col justify-center">{children}</main>
         <AnalyticsWrapper />

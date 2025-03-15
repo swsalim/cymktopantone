@@ -77,7 +77,7 @@ export default function RotatingBanner() {
 
   return (
     <div
-      className="relative z-50 border border-b-yellow-300 bg-yellow-50"
+      className="relative z-50 hidden border border-b-yellow-300 bg-yellow-50 md:block"
       onClick={handleBannerClick}>
       <div className="mx-auto max-w-7xl">
         {bannerVersion === 'Codefast' && <BannerCodefast />}
