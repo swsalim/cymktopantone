@@ -100,6 +100,16 @@ const tools: Tool[] = [
     name: 'Convert CMYK to HSL',
     target: '_self',
   },
+  {
+    url: '/convert-hsv-to-hsl',
+    name: 'Convert HSV to HSL',
+    target: '_self',
+  },
+  {
+    url: '/convert-hsl-to-hex',
+    name: 'Convert HSL to HEX',
+    target: '_self',
+  },
 ];
 
 export default function RelatedTools() {
