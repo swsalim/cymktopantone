@@ -6,7 +6,14 @@ import { CopyIcon } from 'lucide-react';
 
 import { PMS } from '@/config/colors';
 
-import { convertPantoneToHex, getTextColor, hexToRgb, rgbToCmyk } from '@/lib/colors';
+import {
+  convertPantoneToHex,
+  getTextColor,
+  hexToRgb,
+  rgbToCmyk,
+  rgbToHsl,
+  rgbToHsv,
+} from '@/lib/colors';
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -26,6 +33,8 @@ export default function PantoneCmykConverter() {
   const hex = `#${convertPantoneToHex(pantone)}`;
   const rgb = hexToRgb(hex);
   const cmyk = rgbToCmyk(rgb);
+  const hsl = rgbToHsl(rgb);
+  const hsv = rgbToHsv(rgb);
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -139,6 +148,38 @@ export default function PantoneCmykConverter() {
                       variant="ghost"
                       size="icon"
                       onClick={() => copyToClipboard(hex, 'HEX value')}>
+                      <CopyIcon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p>
+                      <span className="font-medium">HSL:</span>{' '}
+                      <b>
+                        hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
+                      </b>
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
+                      }>
+                      <CopyIcon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p>
+                      <span className="font-medium">HSV:</span>{' '}
+                      <b>
+                        hsv({hsv.h}, {hsv.s}, {hsv.v})
+                      </b>
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
+                      }>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>

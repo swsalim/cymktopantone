@@ -14,7 +14,7 @@ const config = {
   title: 'Pantone Colors Chart',
   description:
     'Pantone Matching System Color Chart. This online PMS Color Chart is intended as a reference guide only for label printing and other print jobs.',
-  url: '/convert-hex-to-pantone-pms',
+  url: '/pantone-colors',
 };
 
 export const metadata: Metadata = {

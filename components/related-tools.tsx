@@ -42,6 +42,11 @@ const tools: Tool[] = [
     target: '_self',
   },
   {
+    url: '/convert-hsl-to-pantone-pms',
+    name: 'Convert HSL to Pantone',
+    target: '_self',
+  },
+  {
     url: 'https://www.rgbtopantone.com/convert-hsv-to-rgb',
     name: 'Convert HSV to RGB',
     target: '_blank',
@@ -50,8 +55,7 @@ const tools: Tool[] = [
   {
     url: '/convert-hsv-to-hex',
     name: 'Convert HSV to HEX',
-    target: '_blank',
-    isExternal: true,
+    target: '_self',
   },
   {
     url: 'https://www.rgbtopantone.com/convert-hex-to-rgb',
@@ -91,6 +95,16 @@ const tools: Tool[] = [
     isExternal: true,
   },
   {
+    url: '/convert-pantone-to-hsl',
+    name: 'Convert Pantone to HSL',
+    target: '_self',
+  },
+  {
+    url: '/convert-pantone-to-hsv',
+    name: 'Convert Pantone to HSV',
+    target: '_self',
+  },
+  {
     url: '/convert-hex-to-hsl',
     name: 'Convert HEX to HSL',
     target: '_self',
@@ -108,6 +122,16 @@ const tools: Tool[] = [
   {
     url: '/convert-hsl-to-hex',
     name: 'Convert HSL to HEX',
+    target: '_self',
+  },
+  {
+    url: '/convert-hsl-to-rgb',
+    name: 'Convert HSL to RGB',
+    target: '_self',
+  },
+  {
+    url: '/convert-hsl-to-cmyk',
+    name: 'Convert HSL to CMYK',
     target: '_self',
   },
 ];

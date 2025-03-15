@@ -23,7 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
-export default function PantoneHexConverter() {
+export default function PantoneHsvConverter() {
   const { toast } = useToast();
   const previewRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -66,11 +66,11 @@ export default function PantoneHexConverter() {
     <Wrapper size="lg">
       <Container>
         <div className="prose dark:prose-invert">
-          <h1>Pantone to HEX Converter</h1>
+          <h1>Pantone to HSV Converter</h1>
           <p>
-            Our free converter gives you instant HEX, CMYK, and RGB values for any Pantone color –
-            no Pantone color chart needed. Just browse, click, and get precise color values for all
-            your design needs.
+            Our free converter gives you instant HSV, CMYK, RGB, HEX, and HSL values for any Pantone
+            color – no Pantone color chart needed. Just browse, click, and get precise color values
+            for all your design needs.
           </p>
         </div>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -107,27 +107,32 @@ export default function PantoneHexConverter() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <p>
-                      <span className="font-medium">HEX:</span> <b>{hex}</b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => copyToClipboard(hex, 'HEX value')}>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">RGB:</span>{' '}
+                      <span className="font-medium">HSV:</span>{' '}
                       <b>
-                        rgb({rgb.r}, {rgb.g}, {rgb.b})
+                        hsv({hsv.h}, {hsv.s}, {hsv.v})
                       </b>
                     </p>
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() =>
-                        copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
+                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
+                      }>
+                      <CopyIcon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p>
+                      <span className="font-medium">HSL:</span>{' '}
+                      <b>
+                        hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
+                      </b>
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
                       }>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
@@ -153,33 +158,28 @@ export default function PantoneHexConverter() {
                   </div>
                   <div className="flex items-center justify-between">
                     <p>
-                      <span className="font-medium">HSL:</span>{' '}
+                      <span className="font-medium">RGB:</span>{' '}
                       <b>
-                        hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
+                        rgb({rgb.r}, {rgb.g}, {rgb.b})
                       </b>
                     </p>
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() =>
-                        copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
+                        copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
                       }>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
                   <div className="flex items-center justify-between">
                     <p>
-                      <span className="font-medium">HSV:</span>{' '}
-                      <b>
-                        hsv({hsv.h}, {hsv.s}, {hsv.v})
-                      </b>
+                      <span className="font-medium">HEX:</span> <b>{hex}</b>
                     </p>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
-                      }>
+                      onClick={() => copyToClipboard(hex, 'HEX value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
