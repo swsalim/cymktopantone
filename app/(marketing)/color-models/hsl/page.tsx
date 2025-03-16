@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PantoneColors() {
+export default function ColorModelHsl() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/hsl')} />

@@ -14,6 +14,24 @@ const navigation = {
     { name: 'Terms of service', href: '/legal/terms-and-conditions' },
     { name: 'Privacy policy', href: '/legal/privacy-policy' },
   ],
+  colorModels: [
+    {
+      name: 'CMYK',
+      href: '/color-models/cmyk',
+    },
+    {
+      name: 'RGB',
+      href: '/color-models/rgb',
+    },
+    {
+      name: 'HEX',
+      href: '/color-models/hex',
+    },
+    {
+      name: 'HSL',
+      href: '/color-models/hsl',
+    },
+  ],
   pantone: [
     {
       name: 'Pantone to CMYK',
@@ -87,9 +105,9 @@ export default function Footer({ className, ...props }: FooterProps) {
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
-              <h2 className="text-base font-semibold text-gray-100">Pantone Colors</h2>
+              <h2 className="text-base font-semibold text-gray-100">Color Models</h2>
               <ul role="list" className="mt-4 space-y-4 md:mt-6">
-                {navigation.pantone.map((item) => (
+                {navigation.colorModels.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={`${item.href}`}
@@ -101,18 +119,34 @@ export default function Footer({ className, ...props }: FooterProps) {
               </ul>
             </div>
             <div className="md:mt-0">
-              <h3 className="text-base/6 font-semibold text-gray-100">Legal</h3>
-              <ul role="list" className="mt-4 space-y-4 md:mt-6">
-                {navigation.legal.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="text-base/6 text-gray-300 transition hover:text-violet-400">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="md:mt-0">
+                <h2 className="text-base font-semibold text-gray-100">Pantone Colors</h2>
+                <ul role="list" className="mt-4 space-y-4 md:mt-6">
+                  {navigation.pantone.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={`${item.href}`}
+                        className="text-base/6 text-gray-300 transition hover:text-violet-400">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-6 md:mt-8">
+                <h3 className="text-base/6 font-semibold text-gray-100">Legal</h3>
+                <ul role="list" className="mt-4 space-y-4 md:mt-6">
+                  {navigation.legal.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-base/6 text-gray-300 transition hover:text-violet-400">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="md:mt-0">
               <h3 className="text-base/6 font-semibold text-gray-100">Our Projects</h3>

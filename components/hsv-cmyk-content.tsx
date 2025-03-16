@@ -11,9 +11,9 @@ export default function HsvCmykContent() {
         printers who need <em>precise and consistent colors</em>. The{' '}
         <Link href="#">
           <strong>HSV (Hue, Saturation, Value)</strong>
-        </Link>
-        model is widely used in <strong>digital design</strong>, while the
-        <Link href="#">
+        </Link>{' '}
+        model is widely used in <strong>digital design</strong>, while the{' '}
+        <Link href="/color-models/cmyk">
           <strong>CMYK color model</strong>
         </Link>{' '}
         (Cyan, Magenta, Yellow, and Black) is the standard for{' '}

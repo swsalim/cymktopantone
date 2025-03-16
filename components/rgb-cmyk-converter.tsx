@@ -1,0 +1,123 @@
+'use client';
+
+import { useState } from 'react';
+
+import { CopyIcon } from 'lucide-react';
+
+import { rgbToCmyk, rgbToHex } from '@/lib/colors';
+import { useToast } from '@/lib/hooks/use-toast';
+
+import { Container } from '@/components/container';
+import RelatedTools from '@/components/related-tools';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
+import { Wrapper } from '@/components/wrapper';
+
+export default function RgbCmykConverter() {
+  const { toast } = useToast();
+
+  const [rgb, setRgb] = useState({ r: 199, g: 63, b: 103 });
+  const hex = rgbToHex(rgb);
+  const cmyk = rgbToCmyk(rgb);
+
+  const handleInputChange = (key: keyof typeof rgb, value: string) => {
+    const numValue = Math.min(100, Math.max(0, Number(value) || 0));
+    setRgb((prev) => ({ ...prev, [key]: numValue }));
+  };
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toast({
+        description: `${label} copied!`,
+        duration: 2000,
+      });
+    });
+  };
+
+  return (
+    <Wrapper size="lg">
+      <Container>
+        <p>
+          Easily transform your RGB values into CMYK value! Enter your HSL values below and get
+          instant, accurate results.
+        </p>
+        <div className="mt-10 grid gap-8 md:grid-cols-2">
+          <Card>
+            <CardContent>
+              <div className="flex flex-col gap-y-6">
+                {Object.entries({
+                  Red: 'r',
+                  Green: 'g',
+                  Blue: 'b',
+                }).map(([label, key]) => (
+                  <div key={key}>
+                    <div className="mb-2 flex items-center justify-between">
+                      <Label>{label}</Label>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="number"
+                          value={rgb[key as keyof typeof rgb]}
+                          onChange={(e) =>
+                            handleInputChange(key as keyof typeof rgb, e.target.value)
+                          }
+                          className="w-20"
+                          min={0}
+                          max={100}
+                        />
+                      </div>
+                    </div>
+                    <Slider
+                      value={[rgb[key as keyof typeof rgb]]}
+                      onValueChange={([value]) => setRgb((prev) => ({ ...prev, [key]: value }))}
+                      max={255}
+                      step={1}
+                      className="mt-2"
+                      color={label.toLowerCase()}
+                    />
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent>
+              <div className="mb-4">
+                <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
+                <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <p>
+                    <span className="font-medium">CMYK:</span>{' '}
+                    <b>
+                      cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
+                    </b>
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      copyToClipboard(
+                        `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
+                        'CMYK value',
+                      )
+                    }>
+                    <CopyIcon className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </Container>
+      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+        <RelatedTools />
+      </Container>
+    </Wrapper>
+  );
+}

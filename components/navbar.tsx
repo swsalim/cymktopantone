@@ -37,6 +37,31 @@ export const navItems: {
   }[];
 }[] = [
   {
+    name: 'Color Models',
+    childItems: [
+      {
+        title: 'CMYK',
+        href: '/color-models/cmyk',
+        description: 'Everything You Need to Know about CMYK',
+      },
+      {
+        title: 'RGB',
+        href: '/color-models/rgb',
+        description: 'All You Need to Know About RGB Color Model',
+      },
+      {
+        title: 'HEX',
+        href: '/color-models/hex',
+        description: 'HEX Color Codes - The Essential Guide for Designers',
+      },
+      {
+        title: 'HSL',
+        href: '/color-models/hsl',
+        description: 'A Guide to HSL Color Model',
+      },
+    ],
+  },
+  {
     name: 'Convert Color',
     childItems: [
       {
@@ -53,6 +78,21 @@ export const navItems: {
         title: 'CMYK to RGB',
         href: '/convert-cmyk-to-rgb',
         description: 'Easily convert CMYK to RGB colors with our fast and reliable tool.',
+      },
+      {
+        title: 'RGB to CMYK',
+        href: '/convert-rgb-to-cmyk',
+        description: 'Easily convert HSV to CMYK colors with our fast and reliable tool.',
+      },
+      {
+        title: 'RGB to HEX',
+        href: '/convert-rgb-to-hex',
+        description: 'Easily convert HSV to HEX colors with our fast and reliable tool.',
+      },
+      {
+        title: 'RGB to HSL',
+        href: '/convert-rgb-to-hsl',
+        description: 'Easily convert HSV to HSL colors with our fast and reliable tool.',
       },
       {
         title: 'HEX to CMYK',
