@@ -2,88 +2,36 @@ import type { ComponentProps } from 'react';
 
 import Link from 'next/link';
 
+import { colorModels } from '@/config/colorModels';
+import { converters } from '@/config/converters';
+import { tools } from '@/config/tools';
+
 import { cn } from '@/lib/utils';
 
 import { Logo } from '@/components/icons';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
-// TODO: Loop data from navbar
 const navigation = {
   legal: [
     { name: 'Terms of service', href: '/legal/terms-and-conditions' },
     { name: 'Privacy policy', href: '/legal/privacy-policy' },
   ],
-  colorModels: [
-    {
-      name: 'CMYK',
-      href: '/color-models/cmyk',
-    },
-    {
-      name: 'RGB',
-      href: '/color-models/rgb',
-    },
-    {
-      name: 'HEX',
-      href: '/color-models/hex',
-    },
-    {
-      name: 'HSL',
-      href: '/color-models/hsl',
-    },
-  ],
-  pantone: [
-    {
-      name: 'Pantone to CMYK',
-      href: '/convert-pantone-to-cmyk',
-    },
-    {
-      name: 'Pantone to HEX',
-      href: '/convert-pantone-to-hex',
-    },
-    {
-      name: 'Pantone to HSL',
-      href: '/convert-pantone-to-hsl',
-    },
-    {
-      name: 'Pantone to HSV',
-      href: '/convert-pantone-to-hsv',
-    },
-    {
-      name: 'Pantone to RGB',
-      href: '/convert-pantone-to-rgb',
-    },
-  ],
-  projects: [
-    {
-      name: 'Random Number Generator',
-      href: 'https://www.randomnumberapp.com/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'Resize Image',
-      href: 'https://pfpresizer.com/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'Flip Image',
-      href: 'https://www.flipanimage.xyz/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'Play Sudoku',
-      href: 'https://sudokuunlimited.com/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'RGB to Pantone Converter',
-      href: 'https://www.rgbtopantone.com/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'Water a Day',
-      href: 'https://www.wateraday.com/?ref=cmyktopantone.com',
-    },
-    {
-      name: 'Will it rain tomorrow?',
-      href: 'https://www.willitraintomorrow.com/?ref=cmyktopantone.com',
-    },
-  ],
+  colorModels: colorModels.map((model) => ({
+    name: model.title,
+    href: model.href,
+  })),
+  pantone: converters
+    .filter((converter) => converter.sourceColor === 'PANTONE')
+    .map((converter) => ({
+      name: converter.title,
+      href: converter.url,
+    })),
+  projects: tools.map((tool) => ({
+    name: tool.title,
+    href: tool.href,
+    isExternal: tool.isExternal,
+  })),
 };
 
 interface FooterProps extends ComponentProps<'footer'> {

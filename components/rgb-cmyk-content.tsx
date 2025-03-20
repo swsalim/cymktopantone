@@ -98,13 +98,13 @@ export default function RgbCmykContent() {
       <p>Need additional color conversions? Explore our:</p>
       <ul>
         <li>
-          <a href="/convert-cmyk-to-rgb">CMYK to RGB Converter</a>
+          <Link href="/convert-cmyk-to-rgb">CMYK to RGB Converter</Link>
         </li>
         <li>
-          <a href="/convert-rgb-to-hex">RGB to Hex Converter</a>
+          <Link href="/convert-rgb-to-hex">RGB to Hex Converter</Link>
         </li>
         <li>
-          <a href="/convert-rgb-to-hsl">RGB to HSL Converter</a>
+          <Link href="/convert-rgb-to-hsl">RGB to HSL Converter</Link>
         </li>
       </ul>
       <p>

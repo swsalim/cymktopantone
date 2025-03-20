@@ -3,26 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { converters } from '@/config/converters';
+
 type Tool = {
   url: string;
   name: string;
   target: '_blank' | '_self';
   isExternal?: boolean;
 };
-const tools: Tool[] = [
+
+// External tools that are not part of our converter configuration
+const externalTools: Tool[] = [
   {
     url: '/pantone-colors',
     name: 'Pantone Colors Chart',
-    target: '_self',
-  },
-  {
-    url: '/convert-cmyk-to-hex',
-    name: 'Convert CMYK to HEX',
-    target: '_self',
-  },
-  {
-    url: '/',
-    name: 'Convert CMYK to Pantone',
     target: '_self',
   },
   {
@@ -32,39 +26,14 @@ const tools: Tool[] = [
     isExternal: true,
   },
   {
-    url: '/convert-hex-to-pantone-pms',
-    name: 'Convert HEX to Pantone',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsv-to-pantone-pms',
-    name: 'Convert HSV to Pantone',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsl-to-pantone-pms',
-    name: 'Convert HSL to Pantone',
-    target: '_self',
-  },
-  {
     url: 'https://www.rgbtopantone.com/convert-hsv-to-rgb',
     name: 'Convert HSV to RGB',
     target: '_blank',
     isExternal: true,
   },
   {
-    url: '/convert-hsv-to-hex',
-    name: 'Convert HSV to HEX',
-    target: '_self',
-  },
-  {
     url: 'https://www.rgbtopantone.com/convert-hex-to-rgb',
     name: 'Convert HEX to RGB',
-    target: '_self',
-  },
-  {
-    url: '/convert-hex-to-cmyk',
-    name: 'Convert HEX to CMYK',
     target: '_self',
   },
   {
@@ -73,67 +42,16 @@ const tools: Tool[] = [
     target: '_blank',
     isExternal: true,
   },
-  {
-    url: '/convert-hex-to-hsv',
-    name: 'Convert HEX to HSV',
-    target: '_self',
-  },
-  {
-    url: '/convert-pantone-to-cmyk',
-    name: 'Convert Pantone to CMYK',
-    target: '_self',
-  },
-  {
-    url: '/convert-pantone-to-hex',
-    name: 'Convert Pantone to HEX',
-    target: '_self',
-  },
-  {
-    url: 'https://www.rgbtopantone.com/convert-pantone-to-rgb',
-    name: 'Convert Pantone to RGB',
-    target: '_blank',
-    isExternal: true,
-  },
-  {
-    url: '/convert-pantone-to-hsl',
-    name: 'Convert Pantone to HSL',
-    target: '_self',
-  },
-  {
-    url: '/convert-pantone-to-hsv',
-    name: 'Convert Pantone to HSV',
-    target: '_self',
-  },
-  {
-    url: '/convert-hex-to-hsl',
-    name: 'Convert HEX to HSL',
-    target: '_self',
-  },
-  {
-    url: '/convert-cmyk-to-hsl',
-    name: 'Convert CMYK to HSL',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsv-to-hsl',
-    name: 'Convert HSV to HSL',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsl-to-hex',
-    name: 'Convert HSL to HEX',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsl-to-rgb',
-    name: 'Convert HSL to RGB',
-    target: '_self',
-  },
-  {
-    url: '/convert-hsl-to-cmyk',
-    name: 'Convert HSL to CMYK',
-    target: '_self',
-  },
+];
+
+// Combine converter tools with external tools
+const tools: Tool[] = [
+  ...externalTools,
+  ...converters.map((converter) => ({
+    url: converter.url,
+    name: converter.title.replace(' Converter', ''),
+    target: '_self' as const,
+  })),
 ];
 
 export default function RelatedTools() {

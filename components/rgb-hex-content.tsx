@@ -97,13 +97,13 @@ export default function RgbHexContent() {
         Need more color conversions? Try our:
         <ul>
           <li>
-            <a href="/convert-hex-to-rgb">Hex to RGB Converter</a>
+            <Link href="/convert-hex-to-rgb">Hex to RGB Converter</Link>
           </li>
           <li>
-            <a href="/convert-rgb-to-cmyk">RGB to CMYK Converter</a>
+            <Link href="/convert-rgb-to-cmyk">RGB to CMYK Converter</Link>
           </li>
           <li>
-            <a href="/convert-rgb-to-hsl">RGB to HSL Converter</a>
+            <Link href="/convert-rgb-to-hsl">RGB to HSL Converter</Link>
           </li>
         </ul>
       </p>

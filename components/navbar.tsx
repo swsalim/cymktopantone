@@ -6,7 +6,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { colorModels } from '@/config/colorModels';
+import { converters } from '@/config/converters';
 import { siteConfig } from '@/config/site';
+import { tools } from '@/config/tools';
 
 import useScroll from '@/lib/hooks/use-scroll';
 import { cn } from '@/lib/utils';
@@ -38,221 +41,38 @@ export const navItems: {
 }[] = [
   {
     name: 'Color Models',
-    childItems: [
-      {
-        title: 'CMYK',
-        href: '/color-models/cmyk',
-        description: 'Everything You Need to Know about CMYK',
-      },
-      {
-        title: 'RGB',
-        href: '/color-models/rgb',
-        description: 'All You Need to Know About RGB Color Model',
-      },
-      {
-        title: 'HEX',
-        href: '/color-models/hex',
-        description: 'HEX Color Codes - The Essential Guide for Designers',
-      },
-      {
-        title: 'HSL',
-        href: '/color-models/hsl',
-        description: 'A Guide to HSL Color Model',
-      },
-    ],
+    childItems: colorModels,
   },
   {
     name: 'Convert Color',
-    childItems: [
-      {
-        title: 'CMYK to HEX',
-        href: '/convert-cmyk-to-hex',
-        description: 'Easily convert CMYK to HEX colors with our fast and reliable tool.',
-      },
-      {
-        title: 'CMYK to HSL',
-        href: '/convert-cmyk-to-hsl',
-        description: 'Easily convert CMYK to HSL colors with our fast and reliable tool.',
-      },
-      {
-        title: 'CMYK to RGB',
-        href: '/convert-cmyk-to-rgb',
-        description: 'Easily convert CMYK to RGB colors with our fast and reliable tool.',
-      },
-      {
-        title: 'RGB to CMYK',
-        href: '/convert-rgb-to-cmyk',
-        description: 'Easily convert HSV to CMYK colors with our fast and reliable tool.',
-      },
-      {
-        title: 'RGB to HEX',
-        href: '/convert-rgb-to-hex',
-        description: 'Easily convert HSV to HEX colors with our fast and reliable tool.',
-      },
-      {
-        title: 'RGB to HSL',
-        href: '/convert-rgb-to-hsl',
-        description: 'Easily convert HSV to HSL colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HEX to CMYK',
-        href: '/convert-hex-to-cmyk',
-        description: 'Easily convert HEX to CMYK colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HEX to HSL',
-        href: '/convert-hex-to-hsl',
-        description: 'Easily convert HEX to HSL colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HEX to HSV',
-        href: '/convert-hex-to-hsv',
-        description: 'Easily convert HEX to HSV colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HEX to RGB',
-        href: '/convert-hex-to-rgb',
-        description: 'Easily convert HEX to RGB colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HEX to Pantone',
-        href: '/convert-hex-to-pantone-pms',
-        description: 'Easily convert HEX to Pantone colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSL to CMYK',
-        href: '/convert-hsl-to-cmyk',
-        description: 'Easily convert HSL to CMYK colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSL to HEX',
-        href: '/convert-hsl-to-hex',
-        description: 'Easily convert HSL to HEX colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSL to RGB',
-        href: '/convert-hsl-to-rgb',
-        description: 'Easily convert HSL to RGB colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSL to Pantone',
-        href: '/convert-hsl-to-pantone-pms',
-        description: 'Easily convert HSL to Pantone colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSV to CMYK',
-        href: '/convert-hsv-to-cmyk',
-        description: 'Easily convert HSV to CMYK colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSV to HEX',
-        href: '/convert-hsv-to-hex',
-        description: 'Easily convert HSV to HEX colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSV to HSL',
-        href: '/convert-hsv-to-hsl',
-        description: 'Easily convert HSV to HSL colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSV to RGB',
-        href: '/convert-hsv-to-rgb',
-        description: 'Easily convert HSV to RGB colors with our fast and reliable tool.',
-      },
-      {
-        title: 'HSV to Pantone',
-        href: '/convert-hsv-to-pantone-pms',
-        description: 'Easily convert HSV to Pantone colors with our fast and reliable tool.',
-      },
-    ],
+    childItems: converters
+      .filter((converter) => converter.sourceColor !== 'PANTONE')
+      .map((converter) => ({
+        title: converter.title,
+        href: converter.url,
+        description: converter.description,
+      })),
   },
   {
     name: 'Pantone',
-    childItems: [
-      {
-        title: 'Pantone to CMYK',
-        href: '/convert-pantone-to-cmyk',
-        description: 'Easily convert Pantone to CMYK colors with our fast and reliable tool.',
-      },
-      {
-        title: 'Pantone to HEX',
-        href: '/convert-pantone-to-hex',
-        description: 'Easily convert Pantone to HEX colors with our fast and reliable tool.',
-      },
-      {
-        title: 'Pantone to HSL',
-        href: '/convert-pantone-to-hsl',
-        description: 'Easily convert Pantone to HSL colors with our fast and reliable tool.',
-      },
-      {
-        title: 'Pantone to HSV',
-        href: '/convert-pantone-to-hsv',
-        description: 'Easily convert Pantone to HSV colors with our fast and reliable tool.',
-      },
-      {
-        title: 'Pantone to RGB',
-        href: '/convert-pantone-to-rgb',
-        description: 'Easily convert Pantone to RGB colors with our fast and reliable tool.',
-      },
-    ],
+    childItems: converters
+      .filter((converter) => converter.sourceColor === 'PANTONE')
+      .map((converter) => ({
+        title: converter.title,
+        href: converter.url,
+        description: converter.description,
+      })),
   },
   {
     name: 'More Tools',
-    childItems: [
-      {
-        title: 'Random Number Generator',
-        href: 'https://www.randomnumberapp.com/',
-        description: 'Random number generator for numbers 0 to 10,000.',
-        isExternal: true,
-      },
-      {
-        title: 'Resize Image',
-        href: 'https://pfpresizer.com/',
-        description:
-          'Quickly resize your profile picture for Instagram, Facebook, WhatsApp, and other platforms. Free and easy-to-use PFP resizer for all social media platforms.',
-        isExternal: true,
-      },
-      {
-        title: 'Flip Image',
-        href: 'https://www.flipanimage.xyz/',
-        description: 'Flip an image horizontally or vertically for free.',
-        isExternal: true,
-      },
-      {
-        title: 'Play Sudoku',
-        href: 'https://sudokuunlimited.com/',
-        description: 'Play free Sudoku online from Easy to Expert level',
-        isExternal: true,
-      },
-      {
-        title: 'RGB to Pantone Converter',
-        href: 'https://www.rgbtopantone.com/',
-        description:
-          'Get instant, accurate Pantone matches for your RGB colors. Perfect for designers, printers & creative professionals who need reliable color conversions.',
-        isExternal: true,
-      },
-      {
-        title: 'Water a Day',
-        href: 'https://www.wateraday.com/',
-        description: 'How Much Water Should You Drink Daily?',
-        isExternal: true,
-      },
-      {
-        title: 'Will it rain tomorrow?',
-        href: 'https://www.willitraintomorrow.com/',
-        description:
-          'Tomorrow’s Weather Forecast, Today’s Advantage - Plan Your Day Right, Come Rain or Shine',
-        isExternal: true,
-      },
-    ],
+    childItems: tools,
   },
 ];
 
-// TODO: Check for external link
 const ListItem = React.forwardRef<
   React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'> & { logo?: string }
->(({ className, title, children, logo, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<'a'> & { logo?: string; isExternal?: boolean }
+>(({ className, title, children, logo, isExternal, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -262,6 +82,8 @@ const ListItem = React.forwardRef<
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-violet-50 hover:text-violet-900 focus:bg-violet-50 focus:text-violet-900',
             className,
           )}
+          target={isExternal ? '_blank' : '_self'}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
           {...props}>
           {!logo && <div className="text-sm font-medium leading-none">{title}</div>}
           {logo && (
@@ -333,6 +155,7 @@ export default function Navbar() {
                                     title={item.title}
                                     href={item.href}
                                     logo={item.logo}
+                                    isExternal={item.isExternal}
                                     data-active={pathname === item.href}
                                     className={cn(
                                       pathname === item.href && 'bg-violet-50 text-violet-900',

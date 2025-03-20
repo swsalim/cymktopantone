@@ -18,7 +18,7 @@ export default function HexPantoneContent() {
       </p>
       <p>
         Designers often need to bridge the gap between these systems to ensure their designs
-        translate perfectly from <a href="/hsl-to-rgb">screen to print</a>. Our{' '}
+        translate perfectly from <Link href="/convert-hsl-to-rgb">screen to print</Link>. Our{' '}
         <strong>HSL to Pantone converter</strong>
         simplifies this process, allowing seamless transitions while preserving color integrity.
       </p>

@@ -115,13 +115,13 @@ export default function RgbHslContent() {
       <p>Need additional color conversions? Explore our:</p>
       <ul>
         <li>
-          <a href="/convert-hsl-to-rgb">HSL to RGB Converter</a> – Convert back to RGB easily.
+          <Link href="/convert-hsl-to-rgb">HSL to RGB Converter</Link> – Convert back to RGB easily.
         </li>
         <li>
-          <a href="/convert-rgb-to-hex">RGB to Hex Converter</a> – Perfect for web design.
+          <Link href="/convert-rgb-to-hex">RGB to Hex Converter</Link> – Perfect for web design.
         </li>
         <li>
-          <a href="/convert-rgb-to-cmyk">RGB to CMYK Converter</a> – Get print-ready colors.
+          <Link href="/convert-rgb-to-cmyk">RGB to CMYK Converter</Link> – Get print-ready colors.
         </li>
       </ul>
       <p>

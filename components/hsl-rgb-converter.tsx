@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { CopyIcon } from 'lucide-react';
 
-import { hslToRgb, rgbToCmyk, rgbToHex } from '@/lib/colors';
+import { hslToRgb, rgbToHex } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
