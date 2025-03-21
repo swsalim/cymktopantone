@@ -7,23 +7,28 @@ import { CopyIcon } from 'lucide-react';
 import { hslToRgb, rgbToHex } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Slider } from '@/components/ui/slider';
 import { Wrapper } from '@/components/wrapper';
-
-import { Slider } from './ui/slider';
 
 export default function HslHexConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
 
   const [hsl, setHsl] = useState({ h: 48, s: 100, l: 69 });
 
   const rgb = hslToRgb(hsl);
   const hex = rgbToHex(rgb);
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  const hexString = `${hex}`;
 
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -37,6 +42,28 @@ export default function HslHexConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'HSL',
+      targetColor: 'HEX',
+      sourceValue: hslString,
+      targetValue: hexString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    const hslMatches = sourceValue.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+    if (hslMatches) {
+      const [, h, s, l] = hslMatches;
+      setHsl({
+        h: parseInt(h),
+        s: parseInt(s),
+        l: parseInt(l),
+      });
+      return;
+    }
   };
 
   return (
@@ -83,6 +110,8 @@ export default function HslHexConverter() {
                   </div>
                 ))}
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
@@ -105,6 +134,10 @@ export default function HslHexConverter() {
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>

@@ -10,7 +10,10 @@ import { convertPantoneToHex, getTextColor, hexToRgb, rgbToCmyk } from '@/lib/co
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,6 +21,7 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function PantoneRgbConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
   const previewRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -26,6 +30,7 @@ export default function PantoneRgbConverter() {
   const hex = `#${convertPantoneToHex(pantone)}`;
   const rgb = hexToRgb(hex);
   const cmyk = rgbToCmyk(rgb);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -51,6 +56,19 @@ export default function PantoneRgbConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'PANTONE',
+      targetColor: 'RGB',
+      sourceValue: pantone,
+      targetValue: rgbString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    setPantone(sourceValue);
   };
 
   return (
@@ -142,6 +160,13 @@ export default function PantoneRgbConverter() {
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
+
+                  <AddToHistoryButton
+                    onClick={addToHistory}
+                    disabled={colorHistory.items.length >= 5}
+                  />
+
+                  <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
                 </div>
               </CardContent>
             </Card>

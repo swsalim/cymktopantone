@@ -36,12 +36,6 @@ const externalTools: Tool[] = [
     name: 'Convert HEX to RGB',
     target: '_self',
   },
-  {
-    url: 'https://www.rgbtopantone.com/convert-cmyk-to-rgb',
-    name: 'Convert CMYK to RGB',
-    target: '_blank',
-    isExternal: true,
-  },
 ];
 
 // Combine converter tools with external tools

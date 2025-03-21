@@ -7,7 +7,10 @@ import { CopyIcon } from 'lucide-react';
 import { hsvToRgb, rgbToHex, rgbToHsl } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,12 +21,15 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function HsvHSLConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
 
   const [hsv, setHsv] = useState({ h: 199, s: 68, v: 38 });
 
   const rgb = hsvToRgb(hsv);
   const hex = rgbToHex(rgb);
   const hsl = rgbToHsl(rgb);
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
 
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
@@ -37,6 +43,28 @@ export default function HsvHSLConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'HSV',
+      targetColor: 'HSL',
+      sourceValue: hsvString,
+      targetValue: hslString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    const hsvMatches = sourceValue.match(/hsv\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+    if (hsvMatches) {
+      const [, h, s, v] = hsvMatches;
+      setHsv({
+        h: parseInt(h),
+        s: parseInt(s),
+        v: parseInt(v),
+      });
+      return;
+    }
   };
 
   return (
@@ -82,6 +110,8 @@ export default function HsvHSLConverter() {
                   </div>
                 ))}
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
@@ -109,6 +139,11 @@ export default function HsvHSLConverter() {
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
+
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>

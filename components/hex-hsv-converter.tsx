@@ -7,7 +7,10 @@ import { CopyIcon } from 'lucide-react';
 import { hexToRgb, rgbToHsv } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,11 +20,14 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function HexHsvConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
 
   const [hex, setHex] = useState('#6D39AC');
 
   const rgb = hexToRgb(hex);
   const hsv = rgbToHsv(rgb);
+  const hexString = hex;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
 
   const handleInputChange = (value: string) => {
     setHex(value);
@@ -34,6 +40,25 @@ export default function HexHsvConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'HEX',
+      targetColor: 'HSV',
+      sourceValue: hexString,
+      targetValue: hsvString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    const hexMatch = sourceValue.match(/#([0-9a-f]{6})/i);
+    console.log(hexMatch);
+    if (hexMatch) {
+      const [hex] = hexMatch;
+      setHex(hex);
+      return;
+    }
   };
 
   return (
@@ -65,6 +90,8 @@ export default function HexHsvConverter() {
                   />
                 </div>
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
@@ -108,6 +135,11 @@ export default function HexHsvConverter() {
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
+
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>
