@@ -17,7 +17,10 @@ import {
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,6 +28,7 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function PantoneHslConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
   const previewRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -35,6 +39,7 @@ export default function PantoneHslConverter() {
   const cmyk = rgbToCmyk(rgb);
   const hsl = rgbToHsl(rgb);
   const hsv = rgbToHsv(rgb);
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -60,6 +65,19 @@ export default function PantoneHslConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'PANTONE',
+      targetColor: 'HSL',
+      sourceValue: pantone,
+      targetValue: hslString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    setPantone(sourceValue);
   };
 
   return (
@@ -184,6 +202,13 @@ export default function PantoneHslConverter() {
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
+
+                  <AddToHistoryButton
+                    onClick={addToHistory}
+                    disabled={colorHistory.items.length >= 5}
+                  />
+
+                  <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
                 </div>
               </CardContent>
             </Card>

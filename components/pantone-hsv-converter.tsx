@@ -17,7 +17,10 @@ import {
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,6 +28,7 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function PantoneHsvConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
   const previewRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -35,6 +39,8 @@ export default function PantoneHsvConverter() {
   const cmyk = rgbToCmyk(rgb);
   const hsl = rgbToHsl(rgb);
   const hsv = rgbToHsv(rgb);
+
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -60,6 +66,19 @@ export default function PantoneHsvConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'PANTONE',
+      targetColor: 'HSV',
+      sourceValue: pantone,
+      targetValue: hsvString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    setPantone(sourceValue);
   };
 
   return (
@@ -107,17 +126,12 @@ export default function PantoneHsvConverter() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <p>
-                      <span className="font-medium">HSV:</span>{' '}
-                      <b>
-                        hsv({hsv.h}, {hsv.s}, {hsv.v})
-                      </b>
+                      <span className="font-medium">HSV:</span> <b>{hsvString}</b>
                     </p>
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
-                      }>
+                      onClick={() => copyToClipboard(hsvString, 'HSV value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -183,6 +197,13 @@ export default function PantoneHsvConverter() {
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
+
+                  <AddToHistoryButton
+                    onClick={addToHistory}
+                    disabled={colorHistory.items.length >= 5}
+                  />
+
+                  <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
                 </div>
               </CardContent>
             </Card>

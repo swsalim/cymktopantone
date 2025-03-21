@@ -7,7 +7,10 @@ import { CopyIcon } from 'lucide-react';
 import { cmykToRgb, rgbToHex } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,11 +22,14 @@ import { Slider } from './ui/slider';
 
 export default function CmykHexConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
 
   const [cmyk, setCmyk] = useState({ c: 18, m: 17, y: 84, k: 0 });
 
   const rgb = cmykToRgb(cmyk);
   const hex = rgbToHex(rgb);
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const hexString = `${hex}`;
 
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -37,6 +43,29 @@ export default function CmykHexConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'CMYK',
+      targetColor: 'HEX',
+      sourceValue: cmykString,
+      targetValue: hexString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    // Parse CMYK string like "cmyk(18%, 17%, 84%, 0%)"
+    const matches = sourceValue.match(/cmyk\((\d+)%,\s*(\d+)%,\s*(\d+)%,\s*(\d+)%\)/);
+    if (matches) {
+      const [, c, m, y, k] = matches;
+      setCmyk({
+        c: parseInt(c),
+        m: parseInt(m),
+        y: parseInt(y),
+        k: parseInt(k),
+      });
+    }
   };
 
   return (
@@ -84,6 +113,8 @@ export default function CmykHexConverter() {
                   </div>
                 ))}
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
@@ -106,6 +137,11 @@ export default function CmykHexConverter() {
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
+
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>

@@ -7,7 +7,10 @@ import { CopyIcon } from 'lucide-react';
 import { hsvToRgb, rgbToCmyk, rgbToHex } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/add-to-history-button';
+import { ColorHistory } from '@/components/color-history';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -18,12 +21,14 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function HsvCmykConverter() {
   const { toast } = useToast();
-
+  const { colorHistory } = useColorHistoryContext();
   const [hsv, setHsv] = useState({ h: 199, s: 68, v: 38 });
 
   const rgb = hsvToRgb(hsv);
   const hex = rgbToHex(rgb);
   const cmyk = rgbToCmyk(rgb);
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
 
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
@@ -37,6 +42,28 @@ export default function HsvCmykConverter() {
         duration: 2000,
       });
     });
+  };
+
+  const addToHistory = () => {
+    colorHistory.addToHistory({
+      sourceColor: 'HSV',
+      targetColor: 'CMYK',
+      sourceValue: hsvString,
+      targetValue: cmykString,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    const hsvMatches = sourceValue.match(/hsv\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+    if (hsvMatches) {
+      const [, h, s, v] = hsvMatches;
+      setHsv({
+        h: parseInt(h),
+        s: parseInt(s),
+        v: parseInt(v),
+      });
+      return;
+    }
   };
 
   return (
@@ -82,6 +109,8 @@ export default function HsvCmykConverter() {
                   </div>
                 ))}
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
@@ -112,6 +141,11 @@ export default function HsvCmykConverter() {
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
+
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>
