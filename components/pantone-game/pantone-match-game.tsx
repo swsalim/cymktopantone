@@ -8,6 +8,7 @@ import { Clock, RefreshCw, Zap } from 'lucide-react';
 import { PMS } from '@/config/colors';
 import { DEFAULT_GAME_SETTINGS, GAME_DIFFICULTY, GameMode } from '@/config/game';
 
+import { saEvent } from '@/lib/analytics';
 import { usePantoneGameStats } from '@/lib/hooks/use-pantone-game-stats';
 import { usePantoneMatchGame } from '@/lib/hooks/use-pantone-match-game';
 
@@ -139,6 +140,9 @@ function PantoneMatchGameContent({
       // Use daily colors for daily mode
       setSelectedColors(dailyColors);
     }
+
+    // Track game start event
+    saEvent(`game_start_${gameMode}_${difficulty}`);
   }, [gameMode, dailyColors, difficulty]);
 
   // Determine if we should apply limits based on game mode
@@ -150,6 +154,16 @@ function PantoneMatchGameContent({
       maxMoves: shouldApplyLimits ? GAME_DIFFICULTY[difficulty].maxMoves : undefined,
       timeLimit: shouldApplyLimits ? GAME_DIFFICULTY[difficulty].timeLimit : undefined,
     });
+
+  // Wrap the handleCardClick function to add analytics
+  const handleCardClickWithAnalytics = (cardId: string) => {
+    handleCardClick(cardId);
+
+    // Only track first card flip to avoid excessive events
+    if (gameState.flippedCards.length === 0) {
+      saEvent(`card_flip_${gameMode}`);
+    }
+  };
 
   // Update game settings when difficulty or mode changes
   useEffect(() => {
@@ -201,17 +215,31 @@ function PantoneMatchGameContent({
             // Register win in stats
             registerWin();
 
+            // Track win event with game stats
+            saEvent(`game_win_${gameMode}_${difficulty}`);
+            saEvent(`game_complete_time_${gameTime}s`);
+            saEvent(`game_complete_moves_${gameState.moves}`);
+
             // Mark daily challenge as played if in daily mode
             if (gameMode === 'daily') {
               markAsPlayed();
+              saEvent('daily_challenge_completed');
             }
           } else {
             // Register loss in stats
             registerLoss();
 
+            // Track loss event with reason
+            const lossReason =
+              gameState.timeLimit && timeRemaining !== null && timeRemaining <= 0
+                ? 'timeout'
+                : 'max_moves';
+            saEvent(`game_loss_${gameMode}_${difficulty}_${lossReason}`);
+
             // Mark daily challenge as played if in daily mode
             if (gameMode === 'daily') {
               markAsPlayed();
+              saEvent('daily_challenge_attempted');
             }
           }
         }, 100);
@@ -229,6 +257,7 @@ function PantoneMatchGameContent({
     gameTime,
     gameState.moves,
     timeRemaining,
+    difficulty,
   ]);
 
   // Format time display
@@ -246,15 +275,18 @@ function PantoneMatchGameContent({
       setSelectedColors(randomColors);
     }
     resetGame();
+    saEvent(`new_game_${gameMode}_${difficulty}`);
   };
 
   const handlePlayAgain = () => {
-    // Just start a new game
     handleNewGame();
+    setIsModalOpen(false);
+    saEvent(`play_again_${gameMode}_${difficulty}`);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    saEvent('game_results_closed');
   };
 
   return (
@@ -331,7 +363,7 @@ function PantoneMatchGameContent({
 
         <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
           {gameState.cards.map((card) => (
-            <GameCard key={card.id} card={card} onClick={handleCardClick} />
+            <GameCard key={card.id} card={card} onClick={handleCardClickWithAnalytics} />
           ))}
         </div>
 

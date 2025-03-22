@@ -21,9 +21,16 @@ interface ShareResultsProps {
   timeInSeconds: number;
   gameMode: string;
   isWin: boolean;
+  onShare?: () => void;
 }
 
-export function ShareResults({ moves, timeInSeconds, gameMode, isWin }: ShareResultsProps) {
+export function ShareResults({
+  moves,
+  timeInSeconds,
+  gameMode,
+  isWin,
+  onShare,
+}: ShareResultsProps) {
   const { toast } = useToast();
   const [isMounted, setIsMounted] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -80,6 +87,9 @@ export function ShareResults({ moves, timeInSeconds, gameMode, isWin }: ShareRes
           description: 'Your results are ready to share!',
         });
         setTimeout(() => setIsCopied(false), 2000);
+
+        // Call onShare callback if provided
+        if (onShare) onShare();
       });
     } catch (error) {
       console.error('Error copying to clipboard:', error);
@@ -92,6 +102,9 @@ export function ShareResults({ moves, timeInSeconds, gameMode, isWin }: ShareRes
     try {
       const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
       window.open(url, '_blank');
+
+      // Call onShare callback if provided
+      if (onShare) onShare();
     } catch (error) {
       console.error('Error sharing to Twitter:', error);
     }
@@ -105,6 +118,9 @@ export function ShareResults({ moves, timeInSeconds, gameMode, isWin }: ShareRes
         shareUrl,
       )}&quote=${encodeURIComponent(shareText)}`;
       window.open(url, '_blank');
+
+      // Call onShare callback if provided
+      if (onShare) onShare();
     } catch (error) {
       console.error('Error sharing to Facebook:', error);
     }

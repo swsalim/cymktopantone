@@ -2,6 +2,7 @@
 
 import { Award, BarChart3, Clock, Repeat, Trophy } from 'lucide-react';
 
+import { saEvent } from '@/lib/analytics';
 import { GameStats } from '@/lib/hooks/use-pantone-game-stats';
 
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,11 @@ interface GameStatsProps {
 
 export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
   const { gamesPlayed, gamesWon, winPercentage, currentStreak, maxStreak } = stats;
+
+  const handleResetStats = () => {
+    onReset();
+    saEvent('stats_reset');
+  };
 
   const statItems = [
     {
@@ -74,7 +80,7 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
         <Button
           variant="outline"
           size="sm"
-          onClick={onReset}
+          onClick={handleResetStats}
           className="ml-auto flex gap-1 text-xs">
           <Repeat className="h-3 w-3" />
           Reset Stats
