@@ -84,7 +84,7 @@ export function DifficultySelector({ difficulty, onDifficultyChange }: Difficult
                 />
                 <div>
                   <div>{level.label}</div>
-                  <div className="text-muted-foreground text-xs">{level.description}</div>
+                  <div className="text-xs text-gray-700">{level.description}</div>
                 </div>
               </CommandItem>
             ))}

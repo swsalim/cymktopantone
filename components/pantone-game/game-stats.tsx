@@ -25,27 +25,27 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
 
   const statItems = [
     {
-      icon: <BarChart3 className="h-4 w-4" />,
+      icon: <BarChart3 className="h-4 w-4 text-blue-500" />,
       label: 'Games Played',
       value: gamesPlayed.toString(),
     },
     {
-      icon: <Trophy className="h-4 w-4" />,
+      icon: <Trophy className="h-4 w-4 text-yellow-500" />,
       label: 'Games Won',
       value: gamesWon.toString(),
     },
     {
-      icon: <Award className="h-4 w-4" />,
+      icon: <Award className="h-4 w-4 text-green-500" />,
       label: 'Win %',
       value: `${winPercentage}%`,
     },
     {
-      icon: <Clock className="h-4 w-4" />,
+      icon: <Clock className="h-4 w-4 text-red-500" />,
       label: 'Current Streak',
       value: currentStreak.toString(),
     },
     {
-      icon: <Trophy className="h-4 w-4" />,
+      icon: <Trophy className="h-4 w-4 text-violet-500" />,
       label: 'Max Streak',
       value: maxStreak.toString(),
     },
@@ -58,12 +58,14 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
         <CardDescription>Track your Pantone matching skills</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-5">
           {statItems.map((item) => (
-            <div key={item.label} className="flex flex-col items-center justify-center space-y-1">
-              <div className="text-muted-foreground flex items-center">{item.icon}</div>
+            <div
+              key={item.label}
+              className="flex flex-col items-center justify-center space-y-1 font-medium">
+              <div className="flex items-center text-gray-700">{item.icon}</div>
               <span className="text-xl font-bold">{item.value}</span>
-              <span className="text-muted-foreground text-xs">{item.label}</span>
+              <span className="text-xs text-gray-700">{item.label}</span>
             </div>
           ))}
         </div>

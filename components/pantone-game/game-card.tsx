@@ -25,7 +25,9 @@ function GameCardComponent({ card, onClick }: GameCardProps) {
   const hexColor = `#${convertPantoneToHex(pantoneColor)}`;
 
   return (
-    <div className="perspective-1000 relative size-32 cursor-pointer" onClick={handleClick}>
+    <div
+      className="perspective-1000 aspect-square relative h-32 w-full cursor-pointer"
+      onClick={handleClick}>
       <motion.div
         className="transform-style-3d relative h-full w-full transition-transform duration-100"
         animate={{
@@ -40,11 +42,11 @@ function GameCardComponent({ card, onClick }: GameCardProps) {
         }}>
         {/* Back of card (shown first) */}
         <div
-          className="backface-hidden bg-slate-100 absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 shadow-md"
+          className="backface-hidden absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 bg-gray-100 shadow-md"
           style={{
             backfaceVisibility: 'hidden',
           }}>
-          <span className="text-slate-400 text-lg font-semibold">?</span>
+          <span className="text-lg font-semibold text-gray-400">?</span>
         </div>
 
         {/* Front of card (Pantone color) */}

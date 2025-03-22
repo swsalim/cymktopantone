@@ -60,11 +60,6 @@ export function PantoneMatchGame({
   gameMode,
   difficulty = DEFAULT_GAME_SETTINGS.difficulty,
 }: PantoneMatchGameProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
-
-  // Flag to track if we've processed the game completion for this game
-  const hasProcessedGameCompletion = useRef(false);
   // Flag to track component mounted state
   const isMountedRef = useRef(true);
 
@@ -75,9 +70,6 @@ export function PantoneMatchGame({
       isMountedRef.current = false;
     };
   }, []);
-
-  // Stats from localStorage
-  const { stats, registerWin, registerLoss, resetStats } = usePantoneGameStats();
 
   // Render the appropriate game based on mode
   if (gameMode === 'daily') {
@@ -134,7 +126,7 @@ function PantoneMatchGameContent({
   const { stats, registerWin, registerLoss, resetStats } = usePantoneGameStats();
 
   // Use daily challenge data
-  const { dailyColors, hasPlayedToday, markAsPlayed, resetDailyStatus } = dailyChallenge;
+  const { dailyColors, markAsPlayed, resetDailyStatus } = dailyChallenge;
 
   // Initialize with a random selection for classic/challenge mode
   useEffect(() => {
@@ -278,7 +270,7 @@ function PantoneMatchGameContent({
                 <Zap className="h-4 w-4 text-yellow-500" />
                 <span className="text-2xl font-bold">{gameState.moves}</span>
                 {shouldApplyLimits && gameState.maxMoves && (
-                  <span className="text-muted-foreground text-sm">/ {gameState.maxMoves}</span>
+                  <span className="text-sm font-medium text-gray-500">/ {gameState.maxMoves}</span>
                 )}
               </div>
             </CardContent>
@@ -299,7 +291,7 @@ function PantoneMatchGameContent({
                     : formatTime(gameTime)}
                 </span>
                 {shouldApplyLimits && gameState.timeLimit && (
-                  <span className="text-muted-foreground text-sm">
+                  <span className="text-sm font-medium text-gray-500">
                     / {formatTime(gameState.timeLimit)}
                   </span>
                 )}
@@ -337,7 +329,7 @@ function PantoneMatchGameContent({
           </Button>
         </div>
 
-        <div className="mb-10 grid grid-cols-4 gap-3 sm:grid-cols-4 md:grid-cols-8">
+        <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
           {gameState.cards.map((card) => (
             <GameCard key={card.id} card={card} onClick={handleCardClick} />
           ))}

@@ -7,7 +7,7 @@ import { GameHeader } from '@/components/pantone-game/game-header';
 import { PantoneMatchGame } from '@/components/pantone-game/pantone-match-game';
 
 export const metadata: Metadata = {
-  title: 'Classic Medium Mode - Pantone Memory Match',
+  title: 'Classic Medium Mode - Pantone Color Match',
   description: `Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`,
   keywords: 'pantone, color matching, memory game, classic mode, medium difficulty',
   authors: [{ name: 'CMYK to Pantone' }],
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: '/pantone-match/classic/medium',
   },
   openGraph: {
-    title: 'Classic Medium Mode - Pantone Memory Match',
+    title: 'Classic Medium Mode - Pantone Color Match',
     description: `Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`,
     type: 'website',
   },

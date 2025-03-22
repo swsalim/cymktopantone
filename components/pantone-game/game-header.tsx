@@ -13,28 +13,28 @@ export function GameHeader({ gameMode, difficulty }: GameHeaderProps) {
   // Customize title and description based on game mode and difficulty
   if (gameMode === 'classic') {
     if (difficulty === 'easy') {
-      title = 'Classic Easy Mode - Pantone Memory Match';
-      description = `A relaxed game of Pantone color matching with just ${GAME_DIFFICULTY.easy.pairsCount} pairs. Perfect for beginners or a quick game.`;
+      title = 'Classic Easy Mode - Pantone Color Match';
+      description = `A relaxed game of Pantone color matching gamewith just ${GAME_DIFFICULTY.easy.pairsCount} pairs. Perfect for beginners or a quick game.`;
     } else if (difficulty === 'medium') {
-      title = 'Classic Medium Mode - Pantone Memory Match';
+      title = 'Classic Medium Mode - Pantone Color Match';
       description = `Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`;
     } else if (difficulty === 'hard') {
-      title = 'Classic Hard Mode - Pantone Memory Match';
+      title = 'Classic Hard Mode - Pantone Color Match';
       description = `The ultimate memory challenge with ${GAME_DIFFICULTY.hard.pairsCount} Pantone color pairs. For those with a sharp eye for color.`;
     }
   } else if (gameMode === 'challenge') {
     if (difficulty === 'easy') {
-      title = 'Easy Challenge Mode - Pantone Memory Match';
+      title = 'Easy Challenge Mode - Pantone Color Match';
       description = `Find ${GAME_DIFFICULTY.easy.pairsCount} color pairs in ${GAME_DIFFICULTY.easy.timeLimit} seconds with only ${GAME_DIFFICULTY.easy.maxMoves} moves. A friendly challenge for beginners.`;
     } else if (difficulty === 'medium') {
-      title = 'Medium Challenge Mode - Pantone Memory Match';
+      title = 'Medium Challenge Mode - Pantone Color Match';
       description = `Match ${GAME_DIFFICULTY.medium.pairsCount} color pairs in ${GAME_DIFFICULTY.medium.timeLimit} seconds with ${GAME_DIFFICULTY.medium.maxMoves} moves. Race against time!`;
     } else if (difficulty === 'hard') {
-      title = 'Hard Challenge Mode - Pantone Memory Match';
+      title = 'Hard Challenge Mode - Pantone Color Match';
       description = `Can you match ${GAME_DIFFICULTY.hard.pairsCount} color pairs in just ${GAME_DIFFICULTY.hard.timeLimit} seconds with ${GAME_DIFFICULTY.hard.maxMoves} moves? For true color experts!`;
     }
   } else if (gameMode === 'daily') {
-    title = 'Daily Challenge - Pantone Memory Match';
+    title = 'Daily Challenge - Pantone Color Match';
     description =
       "A fresh challenge every day! Match today's specially selected Pantone colors before time runs out.";
   }

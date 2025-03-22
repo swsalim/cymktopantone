@@ -143,23 +143,23 @@ export function GameCompleteModal({
         <div className="flex flex-col space-y-4 py-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-muted-foreground text-sm">Game Mode</span>
+              <span className="text-sm font-medium text-gray-500">Game Mode</span>
               <span className="text-lg font-bold capitalize">{getGameModeDisplay()}</span>
             </div>
             <div className="flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-muted-foreground text-sm">Time</span>
+              <span className="text-sm font-medium text-gray-500">Time</span>
               <span className="text-lg font-bold">{formatTime(finalStats.timeInSeconds)}</span>
               {hasLimits && timeLimit && (
-                <span className="text-muted-foreground text-xs">
+                <span className="text-xs font-medium text-gray-500">
                   Limit: {formatTime(timeLimit)}
                 </span>
               )}
             </div>
             <div className="col-span-2 flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-muted-foreground text-sm">Moves</span>
+              <span className="text-sm font-medium text-gray-500">Moves</span>
               <span className="text-lg font-bold">{finalStats.moves}</span>
               {hasLimits && maxMoves && (
-                <span className="text-muted-foreground text-xs">Limit: {maxMoves}</span>
+                <span className="text-xs font-medium text-gray-500">Limit: {maxMoves}</span>
               )}
             </div>
           </div>
