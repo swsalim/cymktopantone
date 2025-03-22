@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import { GAME_DIFFICULTY } from '@/config/game';
+import { siteConfig } from '@/config/site';
 
 import { DifficultyNavigation } from '@/components/pantone-game/difficulty-navigation';
 import { GameHeader } from '@/components/pantone-game/game-header';
@@ -17,7 +18,35 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Classic Medium Mode - Pantone Color Match',
     description: `Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`,
+    url: '/pantone-match/classic/medium',
+    images: [
+      {
+        url: new URL(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${'Classic Medium Mode - Pantone Color Match'}`,
+        ),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: 'Classic Medium Mode - Pantone Color Match',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    title: 'Classic Medium Mode - Pantone Color Match',
+    description: `Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`,
+    card: 'summary_large_image',
+    creator: siteConfig.creator,
+    images: [
+      {
+        url: new URL(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${'Classic Medium Mode - Pantone Color Match'}`,
+        ),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: 'Classic Medium Mode - Pantone Color Match',
+      },
+    ],
   },
 };
 
