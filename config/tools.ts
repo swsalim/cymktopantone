@@ -1,8 +1,12 @@
+import { Gamepad2 } from 'lucide-react';
+
 export interface Tool {
   title: string;
   href: string;
   description: string;
   isExternal?: boolean;
+  icon?: React.ComponentType<{ className?: string }>;
+  iconClassName?: string;
 }
 
 export const tools: Tool[] = [
@@ -51,4 +55,29 @@ export const tools: Tool[] = [
       "Tomorrow's Weather Forecast, Today's Advantage - Plan Your Day Right, Come Rain or Shine",
     isExternal: true,
   },
+  // {
+  //   title: 'Color Palette Generator',
+  //   href: '/palettes',
+  //   description: 'Generate beautiful color palettes with a click.',
+  //   icon: undefined,
+  // },
+  {
+    title: 'Pantone Color Match Game',
+    href: '/pantone-color-match',
+    description: 'Color Memory Match: Find the Pantone color pairs in a fun memory game.',
+    icon: Gamepad2,
+    iconClassName: 'text-pink-500',
+  },
+  // {
+  //   title: 'Color Blindness Simulator',
+  //   href: '/color-blindness',
+  //   description: 'Simulate your design as seen by the color blind.',
+  //   icon: undefined,
+  // },
+  // {
+  //   title: 'Gradient Generator',
+  //   href: '/gradients',
+  //   description: 'Create beautiful gradients from any two colors.',
+  //   icon: undefined,
+  // },
 ];

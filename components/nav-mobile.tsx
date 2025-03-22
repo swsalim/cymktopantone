@@ -38,7 +38,7 @@ export function NavMobile() {
       </button>
       <nav
         className={cn(
-          'fixed inset-0 z-20 hidden w-full bg-white px-5 py-16 lg:hidden dark:bg-black dark:text-white/70',
+          'fixed inset-0 z-20 hidden max-h-screen w-full overflow-y-auto bg-white px-5 py-16 lg:hidden dark:bg-black dark:text-white/70',
           open && 'block',
         )}>
         <ul className="grid divide-y divide-gray-100 dark:divide-white/[0.15]">
