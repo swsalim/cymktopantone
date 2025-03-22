@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   keywords: 'pantone, color matching, memory game, daily challenge, daily puzzle, pantone colors',
   authors: [{ name: 'CMYK to Pantone' }],
   alternates: {
-    canonical: '/pantone-match/daily',
+    canonical: '/pantone-color-match/daily',
   },
   openGraph: {
     title: 'Daily Challenge - Pantone Color Match',
     description:
       "A fresh challenge every day! Match today's specially selected Pantone colors before time runs out.",
-    url: '/pantone-match/daily',
+    url: '/pantone-color-match/daily',
     images: [
       {
         url: new URL(

@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     'pantone, color matching, memory game, challenge mode, timed, easy difficulty, beginner',
   authors: [{ name: 'CMYK to Pantone' }],
   alternates: {
-    canonical: '/pantone-match/challenge/easy',
+    canonical: '/pantone-color-match/challenge/easy',
   },
   openGraph: {
     title: 'Easy Challenge Mode - Pantone Color Match',
     description: `Find ${GAME_DIFFICULTY.easy.pairsCount} color pairs in ${GAME_DIFFICULTY.easy.timeLimit} seconds with only ${GAME_DIFFICULTY.easy.maxMoves} moves. A friendly challenge for beginners.`,
-    url: '/pantone-match/challenge/easy',
+    url: '/pantone-color-match/challenge/easy',
     images: [
       {
         url: new URL(
@@ -55,7 +55,7 @@ export default function PantoneChallengeEasyPage() {
   return (
     <>
       <GameHeader gameMode="challenge" difficulty="easy" />
-      <DifficultyNavigation basePath="/pantone-match/challenge" />
+      <DifficultyNavigation basePath="/pantone-color-match/challenge" />
       <PantoneMatchGame gameMode="challenge" difficulty="easy" />
     </>
   );

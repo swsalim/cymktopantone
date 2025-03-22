@@ -30,9 +30,9 @@ function PantoneMatchNavigation() {
     <div className="mb-6 flex flex-wrap justify-center gap-3">
       <Button
         asChild
-        variant={isActivePath('/pantone-match/classic') ? 'default' : 'outline'}
+        variant={isActivePath('/pantone-color-match/classic') ? 'default' : 'outline'}
         className="flex gap-2">
-        <Link href="/pantone-match/classic">
+        <Link href="/pantone-color-match/classic">
           <Gamepad2 className="h-4 w-4" />
           Classic Mode
         </Link>
@@ -40,9 +40,9 @@ function PantoneMatchNavigation() {
 
       <Button
         asChild
-        variant={isActivePath('/pantone-match/challenge') ? 'default' : 'outline'}
+        variant={isActivePath('/pantone-color-match/challenge') ? 'default' : 'outline'}
         className="flex gap-2">
-        <Link href="/pantone-match/challenge">
+        <Link href="/pantone-color-match/challenge">
           <Timer className="h-4 w-4" />
           Challenge Mode
         </Link>
@@ -50,9 +50,9 @@ function PantoneMatchNavigation() {
 
       <Button
         asChild
-        variant={isActivePath('/pantone-match/daily') ? 'default' : 'outline'}
+        variant={isActivePath('/pantone-color-match/daily') ? 'default' : 'outline'}
         className={cn('flex gap-2', hasPlayedToday && 'opacity-70')}>
-        <Link href="/pantone-match/daily">
+        <Link href="/pantone-color-match/daily">
           <CalendarDays className="h-4 w-4" />
           Daily Challenge
           {hasPlayedToday && <span className="ml-1 text-xs opacity-70">(Completed)</span>}

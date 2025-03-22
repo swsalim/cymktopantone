@@ -52,14 +52,14 @@ export function ShareResults({ moves, timeInSeconds, gameMode, isWin }: ShareRes
 
       if (isWin) {
         if (gameMode === 'classic') {
-          text = `🎮 I matched all Pantone color pairs in ${formatTime(timeInSeconds)} with ${moves} moves in Classic mode! Play Pantone Match Game at ${origin}/pantone-match #PantoneMatchGame`;
+          text = `🎮 I matched all Pantone color pairs in ${formatTime(timeInSeconds)} with ${moves} moves in Classic mode! Play Pantone Match Game at ${origin}/pantone-color-match #PantoneMatchGame`;
         } else if (gameMode === 'challenge') {
-          text = `🎮 I completed the Challenge mode in ${formatTime(timeInSeconds)} with ${moves} moves! Can you beat my score? Play Pantone Match Game at ${origin}/pantone-match #PantoneMatchGame`;
+          text = `🎮 I completed the Challenge mode in ${formatTime(timeInSeconds)} with ${moves} moves! Can you beat my score? Play Pantone Match Game at ${origin}/pantone-color-match #PantoneMatchGame`;
         } else {
-          text = `🎮 I completed today's Daily Challenge in ${formatTime(timeInSeconds)} with ${moves} moves! Play Pantone Match Game at ${origin}/pantone-match #PantoneMatchGame`;
+          text = `🎮 I completed today's Daily Challenge in ${formatTime(timeInSeconds)} with ${moves} moves! Play Pantone Match Game at ${origin}/pantone-color-match #PantoneMatchGame`;
         }
       } else {
-        text = `🎮 I played Pantone Match Game in ${gameMode} mode! Can you beat the challenge? Play at ${origin}/pantone-match #PantoneMatchGame`;
+        text = `🎮 I played Pantone Match Game in ${gameMode} mode! Can you beat the challenge? Play at ${origin}/pantone-color-match #PantoneMatchGame`;
       }
 
       setShareUrl(origin);

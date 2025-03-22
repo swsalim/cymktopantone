@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   keywords: 'pantone, color matching, memory game, challenge mode, timed, medium difficulty',
   authors: [{ name: 'CMYK to Pantone' }],
   alternates: {
-    canonical: '/pantone-match/challenge/medium',
+    canonical: '/pantone-color-match/challenge/medium',
   },
   openGraph: {
     title: 'Medium Challenge Mode - Pantone Color Match',
     description: `Match ${GAME_DIFFICULTY.medium.pairsCount} color pairs in ${GAME_DIFFICULTY.medium.timeLimit} seconds with ${GAME_DIFFICULTY.medium.maxMoves} moves. Race against time!`,
-    url: '/pantone-match/challenge/medium',
+    url: '/pantone-color-match/challenge/medium',
     images: [
       {
         url: new URL(
@@ -54,7 +54,7 @@ export default function PantoneChallengeMediumPage() {
   return (
     <>
       <GameHeader gameMode="challenge" difficulty="medium" />
-      <DifficultyNavigation basePath="/pantone-match/challenge" />
+      <DifficultyNavigation basePath="/pantone-color-match/challenge" />
       <PantoneMatchGame gameMode="challenge" difficulty="medium" />
     </>
   );

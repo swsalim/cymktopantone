@@ -62,9 +62,9 @@ export const tools: Tool[] = [
   //   icon: undefined,
   // },
   {
-    title: 'Pantone Match Game',
-    href: '/pantone-match',
-    description: 'Memory Match: Find the Pantone color pairs in a fun memory game.',
+    title: 'Pantone Color Match Game',
+    href: '/pantone-color-match',
+    description: 'Color Memory Match: Find the Pantone color pairs in a fun memory game.',
     icon: Gamepad2,
     iconClassName: 'text-pink-500',
   },

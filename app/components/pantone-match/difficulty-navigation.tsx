@@ -11,7 +11,9 @@ interface DifficultyNavigationProps {
   basePath?: string;
 }
 
-export function DifficultyNavigation({ basePath = '/pantone-match' }: DifficultyNavigationProps) {
+export function DifficultyNavigation({
+  basePath = '/pantone-color-match',
+}: DifficultyNavigationProps) {
   const pathname = usePathname();
 
   return (

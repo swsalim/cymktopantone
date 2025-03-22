@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   keywords: 'pantone, color matching, memory game, classic mode, hard difficulty, advanced',
   authors: [{ name: 'CMYK to Pantone' }],
   alternates: {
-    canonical: '/pantone-match/classic/hard',
+    canonical: '/pantone-color-match/classic/hard',
   },
   openGraph: {
     title: 'Classic Hard Mode - Pantone Color Match',
     description: `The ultimate memory challenge with ${GAME_DIFFICULTY.hard.pairsCount} Pantone color pairs. For those with a sharp eye for color.`,
-    url: '/pantone-match/classic/hard',
+    url: '/pantone-color-match/classic/hard',
     images: [
       {
         url: new URL(
@@ -54,7 +54,7 @@ export default function PantoneMatchHardPage() {
   return (
     <>
       <GameHeader gameMode="classic" difficulty="hard" />
-      <DifficultyNavigation basePath="/pantone-match/classic" />
+      <DifficultyNavigation basePath="/pantone-color-match/classic" />
       <PantoneMatchGame gameMode="classic" difficulty="hard" />
     </>
   );
