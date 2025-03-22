@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { convertPantoneToHex } from '@/lib/colors';
-
 export interface Card {
   id: string;
   pantoneColor: string;

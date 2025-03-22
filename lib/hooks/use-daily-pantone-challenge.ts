@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 // Using a date string as the key in the format YYYY-MM-DD

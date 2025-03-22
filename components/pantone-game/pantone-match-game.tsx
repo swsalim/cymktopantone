@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { CalendarDays, Clock, Gamepad2, RefreshCw, Timer, Zap } from 'lucide-react';
+import { useDailyChallenge } from '@/app/components/pantone-match/daily-challenge-provider';
+import { Clock, RefreshCw, Zap } from 'lucide-react';
 
 import { PMS } from '@/config/colors';
 import { DEFAULT_GAME_SETTINGS, GAME_DIFFICULTY, GameMode } from '@/config/game';
 
-import { useDailyPantoneChallenge } from '@/lib/hooks/use-daily-pantone-challenge';
 import { usePantoneGameStats } from '@/lib/hooks/use-pantone-game-stats';
 import { usePantoneMatchGame } from '@/lib/hooks/use-pantone-match-game';
 
@@ -20,13 +20,48 @@ import { GameCard } from './game-card';
 import { GameCompleteModal } from './game-complete-modal';
 import { GameStatsCard } from './game-stats';
 
-export function PmsColors() {
-  const [gameMode, setGameMode] = useState<GameMode>('classic');
+interface PantoneMatchGameProps {
+  gameMode: GameMode;
+  difficulty?: keyof typeof GAME_DIFFICULTY;
+}
+
+// Noop function for non-daily modes
+const noop = () => {
+  // Intentionally empty
+};
+
+// Default daily values for non-daily game modes
+const defaultDailyValues = {
+  dailyColors: [],
+  hasPlayedToday: false,
+  markAsPlayed: noop,
+  resetDailyStatus: noop,
+};
+
+// Define the type for the daily challenge
+interface DailyChallenge {
+  dailyColors: string[];
+  hasPlayedToday: boolean;
+  markAsPlayed: () => void;
+  resetDailyStatus: () => void;
+}
+
+// Daily mode wrapper to properly use the context
+function DailyModeWrapper({
+  children,
+}: {
+  children: (dailyChallenge: DailyChallenge) => React.ReactNode;
+}) {
+  const dailyChallenge = useDailyChallenge();
+  return <>{children(dailyChallenge)}</>;
+}
+
+export function PantoneMatchGame({
+  gameMode,
+  difficulty = DEFAULT_GAME_SETTINGS.difficulty,
+}: PantoneMatchGameProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [difficulty, setDifficulty] = useState<keyof typeof GAME_DIFFICULTY>(
-    DEFAULT_GAME_SETTINGS.difficulty,
-  );
 
   // Flag to track if we've processed the game completion for this game
   const hasProcessedGameCompletion = useRef(false);
@@ -44,9 +79,62 @@ export function PmsColors() {
   // Stats from localStorage
   const { stats, registerWin, registerLoss, resetStats } = usePantoneGameStats();
 
-  // Daily challenge from localStorage
-  const { dailyColors, hasPlayedToday, markAsPlayed, resetDailyStatus } =
-    useDailyPantoneChallenge(PMS);
+  // Render the appropriate game based on mode
+  if (gameMode === 'daily') {
+    return (
+      <DailyModeWrapper>
+        {(dailyChallenge) => (
+          <PantoneMatchGameContent
+            gameMode={gameMode}
+            difficulty={difficulty}
+            dailyChallenge={dailyChallenge}
+          />
+        )}
+      </DailyModeWrapper>
+    );
+  }
+
+  // For non-daily modes, use default values
+  return (
+    <PantoneMatchGameContent
+      gameMode={gameMode}
+      difficulty={difficulty}
+      dailyChallenge={defaultDailyValues}
+    />
+  );
+}
+
+// The actual game content component
+function PantoneMatchGameContent({
+  gameMode,
+  difficulty,
+  dailyChallenge,
+}: {
+  gameMode: GameMode;
+  difficulty: keyof typeof GAME_DIFFICULTY;
+  dailyChallenge: DailyChallenge;
+}) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
+  // Flag to track if we've processed the game completion for this game
+  const hasProcessedGameCompletion = useRef(false);
+  // Flag to track component mounted state
+  const isMountedRef = useRef(true);
+
+  // Set isMounted to false on cleanup
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
+  // Stats from localStorage
+  const { stats, registerWin, registerLoss, resetStats } = usePantoneGameStats();
+
+  // Use daily challenge data
+  const { dailyColors, hasPlayedToday, markAsPlayed, resetDailyStatus } = dailyChallenge;
 
   // Initialize with a random selection for classic/challenge mode
   useEffect(() => {
@@ -158,11 +246,6 @@ export function PmsColors() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const handleModeChange = (mode: GameMode) => {
-    setGameMode(mode);
-    resetGame();
-  };
-
   const handleNewGame = () => {
     if (gameMode === 'classic' || gameMode === 'challenge') {
       // Generate new random colors
@@ -178,11 +261,6 @@ export function PmsColors() {
     handleNewGame();
   };
 
-  const handleDifficultyChange = (newDifficulty: keyof typeof GAME_DIFFICULTY) => {
-    setDifficulty(newDifficulty);
-    resetGame();
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -190,73 +268,6 @@ export function PmsColors() {
   return (
     <Wrapper>
       <Container>
-        <div className="mb-8">
-          <h1 className="mb-2 text-center text-3xl font-bold md:text-4xl">
-            Memory Match: Find the Pantone Pairs
-          </h1>
-          <p className="mx-auto max-w-2xl text-center text-gray-700">
-            Flip the cards to match identical Pantone color pairs. The fewer moves you make, the
-            better your score!
-          </p>
-        </div>
-
-        <div className="mb-6 flex flex-wrap justify-center gap-3">
-          <Button
-            variant={gameMode === 'classic' ? 'default' : 'outline'}
-            onClick={() => handleModeChange('classic')}
-            className="flex gap-2">
-            <Gamepad2 className="h-4 w-4" />
-            Classic Mode
-          </Button>
-          <Button
-            variant={gameMode === 'challenge' ? 'default' : 'outline'}
-            onClick={() => handleModeChange('challenge')}
-            className="flex gap-2">
-            <Timer className="h-4 w-4" />
-            Challenge Mode
-          </Button>
-          <Button
-            variant={gameMode === 'daily' ? 'default' : 'outline'}
-            onClick={() => handleModeChange('daily')}
-            disabled={hasPlayedToday}
-            className="flex gap-2">
-            <CalendarDays className="h-4 w-4" />
-            Daily Challenge
-            {hasPlayedToday && <span className="ml-1 text-xs opacity-70">(Completed)</span>}
-          </Button>
-        </div>
-
-        {(gameMode === 'classic' || gameMode === 'challenge') && (
-          <div className="mb-6 flex flex-wrap justify-center gap-3">
-            <Button
-              size="sm"
-              variant={difficulty === 'easy' ? 'default' : 'outline'}
-              onClick={() => handleDifficultyChange('easy')}
-              className="flex gap-1">
-              Easy
-              <span className="text-xs opacity-75">({GAME_DIFFICULTY.easy.pairsCount} pairs)</span>
-            </Button>
-            <Button
-              size="sm"
-              variant={difficulty === 'medium' ? 'default' : 'outline'}
-              onClick={() => handleDifficultyChange('medium')}
-              className="flex gap-1">
-              Medium
-              <span className="text-xs opacity-75">
-                ({GAME_DIFFICULTY.medium.pairsCount} pairs)
-              </span>
-            </Button>
-            <Button
-              size="sm"
-              variant={difficulty === 'hard' ? 'default' : 'outline'}
-              onClick={() => handleDifficultyChange('hard')}
-              className="flex gap-1">
-              Hard
-              <span className="text-xs opacity-75">({GAME_DIFFICULTY.hard.pairsCount} pairs)</span>
-            </Button>
-          </div>
-        )}
-
         <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
           <Card>
             <CardHeader className="p-3">

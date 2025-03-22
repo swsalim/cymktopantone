@@ -5,17 +5,17 @@ export const GAME_DIFFICULTY = {
   easy: {
     maxMoves: 10,
     timeLimit: 120, // seconds
-    pairsCount: 2,
+    pairsCount: 3,
   },
   medium: {
     maxMoves: 16,
     timeLimit: 90, // seconds
-    pairsCount: 4,
+    pairsCount: 5,
   },
   hard: {
     maxMoves: 24,
     timeLimit: 60, // seconds
-    pairsCount: 6,
+    pairsCount: 8,
   },
 };
 
