@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { hslToRgb, rgbToHex } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -30,6 +31,15 @@ export default function HslHexConverter() {
   const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
   const hexString = `${hex}`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HSL';
+  const TARGET_COLOR = 'HEX';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${hsl.h},${hsl.s},${hsl.l}`,
+  );
+
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
     setHsl((prev) => ({ ...prev, [key]: numValue }));
@@ -37,6 +47,9 @@ export default function HslHexConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -45,6 +58,9 @@ export default function HslHexConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'HSL',
       targetColor: 'HEX',
@@ -62,6 +78,9 @@ export default function HslHexConverter() {
         s: parseInt(s),
         l: parseInt(l),
       });
+
+      // Track selection from history
+      trackSelectFromHistory();
       return;
     }
   };
@@ -130,7 +149,7 @@ export default function HslHexConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => copyToClipboard(`${hex}`, 'RGB value')}>
+                    onClick={() => copyToClipboard(hexString, 'HEX value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

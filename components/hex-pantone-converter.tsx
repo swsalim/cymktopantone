@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { findMatchingPMSColors, formatRgbString, getTextColor, hexToRgb } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -33,6 +34,12 @@ export default function HexPantoneConverter() {
   const [distance, setDistance] = useState('32');
 
   const rgb = hexToRgb(hex);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HEX';
+  const TARGET_COLOR = 'PANTONE';
+  const { trackCopy } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR, hex);
 
   const handleInputChange = (value: string) => {
     setHex(value);
@@ -40,6 +47,15 @@ export default function HexPantoneConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on the label
+      if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'Pantone') {
+        trackCopy('PANTONE');
+      } else if (label === 'HEX') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -116,17 +132,12 @@ export default function HexPantoneConverter() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <p>
-                    <span className="font-medium">RGB:</span>{' '}
-                    <b>
-                      rgb({rgb.r}, {rgb.g}, {rgb.b})
-                    </b>
+                    <span className="font-medium">RGB:</span> <b>{rgbString}</b>
                   </p>
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                    }>
+                    onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
@@ -164,7 +175,7 @@ export default function HexPantoneConverter() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => copyToClipboard(color.hex, 'HEX')}>
+                            onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
                             <CopyIcon className="h-4 w-4" />
                           </Button>
                         </div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { cmykToRgb, rgbToHex } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -31,6 +32,15 @@ export default function CmykRgbConverter() {
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'CMYK';
+  const TARGET_COLOR = 'RGB';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k}`,
+  );
+
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
     setCmyk((prev) => ({ ...prev, [key]: numValue }));
@@ -38,6 +48,9 @@ export default function CmykRgbConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -46,6 +59,9 @@ export default function CmykRgbConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'CMYK',
       targetColor: 'RGB',
@@ -65,6 +81,9 @@ export default function CmykRgbConverter() {
         y: parseInt(y),
         k: parseInt(k),
       });
+
+      // Track selection from history
+      trackSelectFromHistory();
     }
   };
 

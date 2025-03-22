@@ -14,6 +14,7 @@ import {
   rgbToHsl,
   rgbToHsv,
 } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -42,6 +43,15 @@ export default function PantoneHsvConverter() {
 
   const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'PANTONE';
+  const TARGET_COLOR = 'HSV';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    pantone,
+  );
+
   const handleClick = (value: string) => {
     setPantone(value);
 
@@ -61,6 +71,19 @@ export default function PantoneHsvConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on label
+      if (label === 'HSV value') {
+        trackCopy('HSV');
+      } else if (label === 'HSL value') {
+        trackCopy('HSL');
+      } else if (label === 'CMYK value') {
+        trackCopy('CMYK');
+      } else if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -69,6 +92,9 @@ export default function PantoneHsvConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'PANTONE',
       targetColor: 'HSV',
@@ -79,6 +105,9 @@ export default function PantoneHsvConverter() {
 
   const handleColorSelect = (sourceValue: string) => {
     setPantone(sourceValue);
+
+    // Track selection from history
+    trackSelectFromHistory();
   };
 
   return (

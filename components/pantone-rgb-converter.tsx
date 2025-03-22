@@ -7,6 +7,7 @@ import { CopyIcon } from 'lucide-react';
 import { PMS } from '@/config/colors';
 
 import { convertPantoneToHex, getTextColor, hexToRgb, rgbToCmyk } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -31,6 +32,16 @@ export default function PantoneRgbConverter() {
   const rgb = hexToRgb(hex);
   const cmyk = rgbToCmyk(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'PANTONE';
+  const TARGET_COLOR = 'RGB';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    pantone,
+  );
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -51,6 +62,15 @@ export default function PantoneRgbConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on label
+      if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'CMYK value') {
+        trackCopy('CMYK');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -59,6 +79,9 @@ export default function PantoneRgbConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'PANTONE',
       targetColor: 'RGB',
@@ -69,6 +92,9 @@ export default function PantoneRgbConverter() {
 
   const handleColorSelect = (sourceValue: string) => {
     setPantone(sourceValue);
+
+    // Track selection from history
+    trackSelectFromHistory();
   };
 
   return (
@@ -124,9 +150,7 @@ export default function PantoneRgbConverter() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                      }>
+                      onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>

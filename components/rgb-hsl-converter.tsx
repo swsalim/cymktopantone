@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { rgbToHex, rgbToHsl } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -23,6 +24,16 @@ export default function RgbHslConverter() {
 
   const hex = rgbToHex(rgb);
   const hsl = rgbToHsl(rgb);
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'RGB';
+  const TARGET_COLOR = 'HSL';
+  const { trackCopy } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${rgb.r},${rgb.g},${rgb.b}`,
+  );
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -31,6 +42,9 @@ export default function RgbHslConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -102,9 +116,7 @@ export default function RgbHslConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                    }>
+                    onClick={() => copyToClipboard(hslString, 'HSL value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

@@ -12,6 +12,7 @@ import {
   hsvToRgb,
   rgbToHex,
 } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -42,6 +43,17 @@ export default function HsvPantoneConverter() {
 
   const rgb = hsvToRgb(hsv);
   const hex = rgbToHex(rgb);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HSV';
+  const TARGET_COLOR = 'PANTONE';
+  const { trackCopy } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${hsv.h},${hsv.s},${hsv.v}`,
+  );
 
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
@@ -50,6 +62,17 @@ export default function HsvPantoneConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on the label
+      if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
+      } else if (label === 'Pantone') {
+        trackCopy('PANTONE');
+      } else if (label === 'HEX') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -199,7 +222,7 @@ export default function HsvPantoneConverter() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => copyToClipboard(color.hex, 'HEX')}>
+                            onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
                             <CopyIcon className="h-4 w-4" />
                           </Button>
                         </div>

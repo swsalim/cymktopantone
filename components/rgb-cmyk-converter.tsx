@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { rgbToCmyk, rgbToHex } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -22,6 +23,16 @@ export default function RgbCmykConverter() {
   const [rgb, setRgb] = useState({ r: 199, g: 63, b: 103 });
   const hex = rgbToHex(rgb);
   const cmyk = rgbToCmyk(rgb);
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'RGB';
+  const TARGET_COLOR = 'CMYK';
+  const { trackCopy } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${rgb.r},${rgb.g},${rgb.b}`,
+  );
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -30,6 +41,9 @@ export default function RgbCmykConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -101,12 +115,7 @@ export default function RgbCmykConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(
-                        `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                        'CMYK value',
-                      )
-                    }>
+                    onClick={() => copyToClipboard(cmykString, 'CMYK value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

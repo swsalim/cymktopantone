@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 
-import { saEvent } from '@/lib/analytics';
 import { ColorHistoryState, useColorHistory } from '@/lib/hooks/use-color-history';
 
 import { Skeleton } from '@/components/ui/skeleton';
@@ -33,17 +32,6 @@ interface DynamicConverterProps {
 export function DynamicConverter({ componentName }: DynamicConverterProps) {
   // Create a converter-specific color history
   const colorHistory = useColorHistory(componentName);
-
-  // Track when converter is loaded
-  useEffect(() => {
-    // Extract source and target colors from component name (e.g., hex-rgb-converter → HEX to RGB)
-    const parts = componentName.split('-');
-    if (parts.length >= 3) {
-      const sourceColor = parts[0].toUpperCase();
-      const targetColor = parts[1].toUpperCase();
-      saEvent(`converter_view_${sourceColor}_to_${targetColor}`);
-    }
-  }, [componentName]);
 
   // Memoize the dynamic component to prevent re-loading on state changes
   const ConverterComponent = useMemo(

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { hsvToRgb, rgbToCmyk, rgbToHex } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -30,6 +31,15 @@ export default function HsvCmykConverter() {
   const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HSV';
+  const TARGET_COLOR = 'CMYK';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${hsv.h},${hsv.s},${hsv.v}`,
+  );
+
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
     setHsv((prev) => ({ ...prev, [key]: numValue }));
@@ -37,6 +47,9 @@ export default function HsvCmykConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -45,6 +58,9 @@ export default function HsvCmykConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'HSV',
       targetColor: 'CMYK',
@@ -62,6 +78,9 @@ export default function HsvCmykConverter() {
         s: parseInt(s),
         v: parseInt(v),
       });
+
+      // Track selection from history
+      trackSelectFromHistory();
       return;
     }
   };
@@ -132,12 +151,7 @@ export default function HsvCmykConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(
-                        `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                        'CMYK value',
-                      )
-                    }>
+                    onClick={() => copyToClipboard(cmykString, 'CMYK value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

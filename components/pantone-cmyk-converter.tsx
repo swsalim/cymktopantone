@@ -14,6 +14,7 @@ import {
   rgbToHsl,
   rgbToHsv,
 } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -40,6 +41,18 @@ export default function PantoneCmykConverter() {
   const hsl = rgbToHsl(rgb);
   const hsv = rgbToHsv(rgb);
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'PANTONE';
+  const TARGET_COLOR = 'CMYK';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    pantone,
+  );
 
   const handleClick = (value: string) => {
     setPantone(value);
@@ -60,6 +73,19 @@ export default function PantoneCmykConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on label
+      if (label === 'CMYK value') {
+        trackCopy('CMYK');
+      } else if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
+      } else if (label === 'HSL value') {
+        trackCopy('HSL');
+      } else if (label === 'HSV value') {
+        trackCopy('HSV');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -68,6 +94,9 @@ export default function PantoneCmykConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'PANTONE',
       targetColor: 'CMYK',
@@ -78,6 +107,9 @@ export default function PantoneCmykConverter() {
 
   const handleColorSelect = (sourceValue: string) => {
     setPantone(sourceValue);
+
+    // Track selection from history
+    trackSelectFromHistory();
   };
 
   return (
@@ -133,12 +165,7 @@ export default function PantoneCmykConverter() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(
-                          `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                          'CMYK value',
-                        )
-                      }>
+                      onClick={() => copyToClipboard(cmykString, 'CMYK value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -152,9 +179,7 @@ export default function PantoneCmykConverter() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                      }>
+                      onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -179,9 +204,7 @@ export default function PantoneCmykConverter() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                      }>
+                      onClick={() => copyToClipboard(hslString, 'HSL value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -195,9 +218,7 @@ export default function PantoneCmykConverter() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
-                      }>
+                      onClick={() => copyToClipboard(hsvString, 'HSV value')}>
                       <CopyIcon className="h-4 w-4" />
                     </Button>
                   </div>

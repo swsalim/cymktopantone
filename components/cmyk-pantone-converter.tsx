@@ -12,6 +12,7 @@ import {
   hexToRgb,
   rgbToHex,
 } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -42,6 +43,17 @@ export default function CmykPantoneConverter() {
 
   const rgb = cmykToRgb(cmyk);
   const hex = rgbToHex(rgb);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'CMYK';
+  const TARGET_COLOR = 'PANTONE';
+  const { trackCopy } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k}`,
+  );
 
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -50,6 +62,17 @@ export default function CmykPantoneConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on the label
+      if (label === 'RGB value') {
+        trackCopy('RGB');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
+      } else if (label === 'Pantone') {
+        trackCopy('PANTONE');
+      } else if (label === 'HEX') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -142,17 +165,12 @@ export default function CmykPantoneConverter() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <p>
-                    <span className="font-medium">RGB:</span>{' '}
-                    <b>
-                      rgb({rgb.r}, {rgb.g}, {rgb.b})
-                    </b>
+                    <span className="font-medium">RGB:</span> <b>{rgbString}</b>
                   </p>
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                    }>
+                    onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
@@ -201,7 +219,7 @@ export default function CmykPantoneConverter() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => copyToClipboard(color.hex, 'HEX')}>
+                            onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
                             <CopyIcon className="h-4 w-4" />
                           </Button>
                         </div>

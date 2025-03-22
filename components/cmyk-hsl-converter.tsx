@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { cmykToRgb, rgbToHex, rgbToHsl } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -30,6 +31,16 @@ export default function CmykHslConverter() {
   const hsl = rgbToHsl(rgb);
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
   const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'CMYK';
+  const TARGET_COLOR = 'HSL';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k}`,
+  );
+
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
     setCmyk((prev) => ({ ...prev, [key]: numValue }));
@@ -37,6 +48,9 @@ export default function CmykHslConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -45,6 +59,9 @@ export default function CmykHslConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'CMYK',
       targetColor: 'HSL',
@@ -65,6 +82,9 @@ export default function CmykHslConverter() {
         y: parseInt(y),
         k: parseInt(k),
       });
+
+      // Track selection from history
+      trackSelectFromHistory();
     }
   };
 
@@ -136,9 +156,7 @@ export default function CmykHslConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                    }>
+                    onClick={() => copyToClipboard(hslString, 'HSL value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>

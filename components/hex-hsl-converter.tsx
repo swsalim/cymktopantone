@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { hexToRgb, rgbToHsl } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -29,12 +30,24 @@ export default function HexHslConverter() {
   const hexString = hex;
   const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HEX';
+  const TARGET_COLOR = 'HSL';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    hex,
+  );
+
   const handleInputChange = (value: string) => {
     setHex(value);
   };
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -43,6 +56,9 @@ export default function HexHslConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'HEX',
       targetColor: 'HSL',
@@ -57,6 +73,9 @@ export default function HexHslConverter() {
     if (hexMatch) {
       const [hex] = hexMatch;
       setHex(hex);
+
+      // Track selection from history
+      trackSelectFromHistory();
       return;
     }
   };

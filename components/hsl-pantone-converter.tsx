@@ -12,6 +12,7 @@ import {
   hslToRgb,
   rgbToHex,
 } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { Container } from '@/components/container';
@@ -43,6 +44,16 @@ export default function HslPantoneConverter() {
 
   const rgb = hslToRgb(hsl);
   const hex = rgbToHex(rgb);
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HSL';
+  const TARGET_COLOR = 'PANTONE';
+  const { trackCopy } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${hsl.h},${hsl.s},${hsl.l}`,
+  );
 
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -51,6 +62,15 @@ export default function HslPantoneConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event based on the label
+      if (label === 'HSL value') {
+        trackCopy('HSL');
+      } else if (label === 'Pantone') {
+        trackCopy('PANTONE');
+      } else if (label === 'HEX') {
+        trackCopy('HEX');
+      }
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -190,7 +210,7 @@ export default function HslPantoneConverter() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => copyToClipboard(color.hex, 'HEX')}>
+                            onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
                             <CopyIcon className="h-4 w-4" />
                           </Button>
                         </div>

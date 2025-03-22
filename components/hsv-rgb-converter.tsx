@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { CopyIcon } from 'lucide-react';
 
 import { hsvToRgb, rgbToHex } from '@/lib/colors';
+import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/add-to-history-button';
@@ -29,6 +30,15 @@ export default function HsvRgbConverter() {
   const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
 
+  // Initialize tracking with source and target color formats
+  const SOURCE_COLOR = 'HSV';
+  const TARGET_COLOR = 'RGB';
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+    SOURCE_COLOR,
+    TARGET_COLOR,
+    `${hsv.h},${hsv.s},${hsv.v}`,
+  );
+
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
     setHsv((prev) => ({ ...prev, [key]: numValue }));
@@ -36,6 +46,9 @@ export default function HsvRgbConverter() {
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
+      // Track copy event
+      trackCopy(TARGET_COLOR);
+
       toast({
         description: `${label} copied!`,
         duration: 2000,
@@ -44,6 +57,9 @@ export default function HsvRgbConverter() {
   };
 
   const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
     colorHistory.addToHistory({
       sourceColor: 'HSV',
       targetColor: 'RGB',
@@ -61,6 +77,9 @@ export default function HsvRgbConverter() {
         s: parseInt(s),
         v: parseInt(v),
       });
+
+      // Track selection from history
+      trackSelectFromHistory();
       return;
     }
   };
@@ -131,9 +150,7 @@ export default function HsvRgbConverter() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() =>
-                      copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                    }>
+                    onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                     <CopyIcon className="h-4 w-4" />
                   </Button>
                 </div>
