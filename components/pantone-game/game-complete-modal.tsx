@@ -169,21 +169,23 @@ export function GameCompleteModal({
         </DialogHeader>
         <div className="flex flex-col space-y-4 py-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-sm font-medium text-gray-500">Game Mode</span>
+            <div className="flex flex-col items-center space-y-1 rounded-lg border p-2 dark:border-gray-700">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                Game Mode
+              </span>
               <span className="text-lg font-bold capitalize">{getGameModeDisplay()}</span>
             </div>
-            <div className="flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-sm font-medium text-gray-500">Time</span>
+            <div className="flex flex-col items-center space-y-1 rounded-lg border p-2 dark:border-gray-700">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Time</span>
               <span className="text-lg font-bold">{formatTime(finalStats.timeInSeconds)}</span>
               {hasLimits && timeLimit && (
-                <span className="text-xs font-medium text-gray-500">
+                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
                   Limit: {formatTime(timeLimit)}
                 </span>
               )}
             </div>
-            <div className="col-span-2 flex flex-col items-center space-y-1 rounded-lg border p-2">
-              <span className="text-sm font-medium text-gray-500">Moves</span>
+            <div className="col-span-2 flex flex-col items-center space-y-1 rounded-lg border p-2 dark:border-gray-700">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Moves</span>
               <span className="text-lg font-bold">{finalStats.moves}</span>
               {hasLimits && maxMoves && (
                 <span className="text-xs font-medium text-gray-500">Limit: {maxMoves}</span>
@@ -192,7 +194,7 @@ export function GameCompleteModal({
           </div>
 
           {!isWin && hasLimits && (
-            <div className="mt-2 rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm">
+            <div className="mt-2 rounded-lg border border-red-200 bg-red-50 p-3 text-center text-sm text-red-500 dark:text-red-500">
               {getLossReason() === 'You ran out of moves!' ? (
                 <div className="flex items-center justify-center gap-2">
                   <Shuffle className="h-4 w-4 text-red-500" />

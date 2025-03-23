@@ -115,7 +115,9 @@ export default function HslHexConverter() {
                           min={0}
                           max={label === 'Hue' ? 360 : 100}
                         />
-                        {label !== 'Hue' && <span className="w-4 text-sm text-gray-500">%</span>}
+                        {label !== 'Hue' && (
+                          <span className="w-4 text-sm text-gray-500 dark:text-gray-100">%</span>
+                        )}
                       </div>
                     </div>
                     <Slider

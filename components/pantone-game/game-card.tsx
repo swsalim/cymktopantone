@@ -42,7 +42,7 @@ function GameCardComponent({ card, onClick }: GameCardProps) {
         }}>
         {/* Back of card (shown first) */}
         <div
-          className="backface-hidden absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 bg-gray-100 shadow-md"
+          className="backface-hidden absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 bg-gray-100 shadow-md dark:border-gray-700 dark:bg-gray-900/80"
           style={{
             backfaceVisibility: 'hidden',
           }}>
@@ -51,7 +51,7 @@ function GameCardComponent({ card, onClick }: GameCardProps) {
 
         {/* Front of card (Pantone color) */}
         <motion.div
-          className="backface-hidden absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 p-2 text-center text-xs font-medium shadow-md sm:text-sm"
+          className="backface-hidden absolute inset-0 flex h-full w-full items-center justify-center rounded-lg border border-gray-200 p-2 text-center text-xs font-medium shadow-md sm:text-sm dark:border-gray-700"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',

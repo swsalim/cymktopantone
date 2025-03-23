@@ -71,7 +71,7 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
               className="flex flex-col items-center justify-center space-y-1 font-medium">
               <div className="flex items-center text-gray-700">{item.icon}</div>
               <span className="text-xl font-bold">{item.value}</span>
-              <span className="text-xs text-gray-700">{item.label}</span>
+              <span className="text-xs text-gray-700 dark:text-gray-400">{item.label}</span>
             </div>
           ))}
         </div>

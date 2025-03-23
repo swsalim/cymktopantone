@@ -119,7 +119,7 @@ export default function CmykHslConverter() {
                           min={0}
                           max={100}
                         />
-                        <span className="w-4 text-sm text-gray-500">%</span>
+                        <span className="w-4 text-sm text-gray-500 dark:text-gray-100">%</span>
                       </div>
                     </div>
                     <Slider
