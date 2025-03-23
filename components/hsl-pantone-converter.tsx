@@ -18,7 +18,7 @@ import { useToast } from '@/lib/hooks/use-toast';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -148,43 +148,48 @@ export default function HslPantoneConverter() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                <div>
+                  <div className="mb-4">
+                    <h2 className="mb-2 text-lg font-semibold">Color Preview</h2>
+                    <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
+                  </div>
+
+                  <div className="flex flex-col gap-y-0.5 text-sm">
+                    <div className="flex items-center justify-start gap-x-2">
+                      <p>
+                        <span className="font-medium">HSL:</span>{' '}
+                        <b>
+                          hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
+                        </b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
+                        }>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
 
           <Card>
+            <CardHeader>
+              <h2 className="text-lg font-semibold">
+                Closest Pantone {matchingColors.length > 1 ? 'Colors' : 'Color'}
+              </h2>
+            </CardHeader>
             <CardContent>
-              <div className="mb-4">
-                <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
-                <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">HSL:</span>{' '}
-                    <b>
-                      hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
-                    </b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() =>
-                      copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                    }>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        {matchingColors.length > 1 && (
-          <div className="mt-10 grid gap-8">
-            <Card>
-              <CardContent>
-                <div className="relative grid grid-cols-2 gap-4 rounded-lg sm:grid-cols-3 md:grid-cols-5 md:gap-4 lg:grid-cols-6">
+              {!matchingColors.length && (
+                <p className="text-start text-base text-gray-500">No matching colors found</p>
+              )}
+              {matchingColors.length >= 1 && (
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {matchingColors.map((color, index) => (
                     <div
                       key={index}
@@ -195,7 +200,7 @@ export default function HslPantoneConverter() {
                       }}>
                       <div className="flex cursor-pointer flex-col items-center justify-between">
                         <div className="flex flex-row items-center justify-center gap-x-2">
-                          <div className="text-center text-base font-medium">{color.pantone}</div>
+                          <div className="text-center text-sm font-medium">{color.pantone}</div>
                           <Button
                             variant="ghost"
                             size="icon"
@@ -218,10 +223,10 @@ export default function HslPantoneConverter() {
                     </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </Container>
       <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
         <RelatedTools />
