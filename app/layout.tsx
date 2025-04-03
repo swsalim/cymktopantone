@@ -121,6 +121,10 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
           crossOrigin="anonymous"></script>
         <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+        <script
+          src="https://app.tinyadz.com/scripts/ads.js?siteId=67ee06492dfc280f87938650"
+          type="module"
+          async></script>
         {/* <script async src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script> */}
         <noscript>
           <Image
