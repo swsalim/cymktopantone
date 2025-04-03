@@ -71,7 +71,6 @@ export default function CmykHslConverter() {
   };
 
   const handleColorSelect = (sourceValue: string) => {
-    console.log(sourceValue);
     // Parse CMYK string like "cmyk(18%, 17%, 84%, 0%)"
     const matches = sourceValue.match(/cmyk\((\d+)%,\s*(\d+)%,\s*(\d+)%,\s*(\d+)%\)/);
     if (matches) {

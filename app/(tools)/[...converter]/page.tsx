@@ -76,10 +76,8 @@ export async function generateMetadata({ params }: ConverterPageProps): Promise<
 
 export default async function ConverterPage({ params }: ConverterPageProps) {
   const converter = (await params).converter;
-  console.log(converter);
   const path = `/${converter.join('/')}`;
   const converterConfig = getConverterByUrl(path);
-  console.log(converterConfig);
 
   if (!converterConfig) {
     notFound();
