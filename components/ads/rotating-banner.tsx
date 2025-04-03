@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { saEvent } from '@/lib/analytics';
 
-import BannerCodefast from '@/components/ads/banner-codefast';
-import BannerFrogDr from '@/components/ads/banner-frogdr';
-import BannerRandomnumber from '@/components/ads/banner-randomnumber';
+// import BannerCodefast from '@/components/ads/banner-codefast';
+// import BannerFrogDr from '@/components/ads/banner-frogdr';
+// import BannerRandomnumber from '@/components/ads/banner-randomnumber';
+import BannerUnicorn from './banner-unicorn';
 
 interface BannerAssignment {
   version: string;
@@ -21,7 +22,7 @@ export default function RotatingBanner() {
     // Function to assign a new banner version
     const assignNewBanner = (previousVersions: string[] = []): BannerAssignment => {
       // All possible banner versions
-      const allVersions = ['Codefast', 'Frogdr', 'Randomnumber'];
+      const allVersions = ['Codefast', 'Frogdr', 'Randomnumber', 'Unicorn'];
 
       // Filter out recently shown banners if possible
       let availableVersions = allVersions;
@@ -76,13 +77,12 @@ export default function RotatingBanner() {
   };
 
   return (
-    <div
-      className="relative z-50 hidden border border-b-yellow-300 bg-yellow-50 md:block"
-      onClick={handleBannerClick}>
+    <div onClick={handleBannerClick}>
       <div className="mx-auto max-w-7xl">
-        {bannerVersion === 'Codefast' && <BannerCodefast />}
-        {bannerVersion === 'Frogdr' && <BannerFrogDr />}
-        {bannerVersion === 'Randomnumber' && <BannerRandomnumber />}
+        {bannerVersion === 'Codefast' && <BannerUnicorn />}
+        {bannerVersion === 'Frogdr' && <BannerUnicorn />}
+        {bannerVersion === 'Randomnumber' && <BannerUnicorn />}
+        {bannerVersion === 'Unicorn' && <BannerUnicorn />}
       </div>
     </div>
   );
