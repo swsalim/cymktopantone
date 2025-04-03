@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react';
 
+import Link from 'next/link';
+
 import { CopyIcon } from 'lucide-react';
 
 import { PMS } from '@/config/colors';
@@ -115,9 +117,11 @@ export default function PantoneHslConverter() {
         <div className="prose dark:prose-invert">
           <h1>Pantone to HSL Converter</h1>
           <p>
-            Our free converter gives you instant HSL, CMYK, RGB, HEX, and HSV values for any Pantone
-            color – no Pantone color chart needed. Just browse, click, and get precise color values
-            for all your design needs.
+            Our free converter gives you instant <Link href="/color-models/hsl">HSL</Link>,{' '}
+            <Link href="/color-models/cmyk">CMYK</Link>, <Link href="/color-models/rgb">RGB</Link>,{' '}
+            <Link href="/color-models/hex">HEX</Link>, and HSV values for any Pantone color – no
+            Pantone color chart needed. Just browse, click, and get precise color values for all
+            your design needs.
           </p>
         </div>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -140,107 +144,120 @@ export default function PantoneHslConverter() {
           </Card>
 
           <div ref={previewRef}>
-            <Card className="sticky top-[70px] min-h-[300px]">
-              <CardContent>
-                <div className="mb-4">
-                  <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
-                  <div
-                    className="flex h-24 w-full items-center justify-center rounded-lg"
-                    style={{ backgroundColor: hex, color: getTextColor(hex) }}>
-                    <div className="text-center text-base font-medium">{pantone}</div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">HSL:</span>{' '}
-                      <b>
-                        hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
-                      </b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                      }>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">CMYK:</span>{' '}
-                      <b>
-                        cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
-                      </b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() =>
-                        copyToClipboard(
-                          `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                          'CMYK value',
-                        )
-                      }>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">RGB:</span>{' '}
-                      <b>
-                        rgb({rgb.r}, {rgb.g}, {rgb.b})
-                      </b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() =>
-                        copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                      }>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">HEX:</span> <b>{hex}</b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => copyToClipboard(hex, 'HEX value')}>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
+            <div className="sticky top-[70px]">
+              <Card className="min-h-[300px]">
+                <CardContent>
+                  <div className="mb-4">
+                    <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
+                    <div
+                      className="flex h-24 w-full items-center justify-center rounded-lg"
+                      style={{ backgroundColor: hex, color: getTextColor(hex) }}>
+                      <div className="text-center text-base font-medium">{pantone}</div>
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <p>
-                      <span className="font-medium">HSV:</span>{' '}
-                      <b>
-                        hsv({hsv.h}, {hsv.s}, {hsv.v})
-                      </b>
-                    </p>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() =>
-                        copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
-                      }>
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <p>
+                        <span className="font-medium">HSL:</span>{' '}
+                        <b>
+                          hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
+                        </b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
+                        }>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <p>
+                        <span className="font-medium">CMYK:</span>{' '}
+                        <b>
+                          cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
+                        </b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          copyToClipboard(
+                            `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
+                            'CMYK value',
+                          )
+                        }>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <p>
+                        <span className="font-medium">RGB:</span>{' '}
+                        <b>
+                          rgb({rgb.r}, {rgb.g}, {rgb.b})
+                        </b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
+                        }>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <p>
+                        <span className="font-medium">HEX:</span> <b>{hex}</b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => copyToClipboard(hex, 'HEX value')}>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <p>
+                        <span className="font-medium">HSV:</span>{' '}
+                        <b>
+                          hsv({hsv.h}, {hsv.s}, {hsv.v})
+                        </b>
+                      </p>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
+                        }>
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
+
+                    <AddToHistoryButton
+                      onClick={addToHistory}
+                      disabled={colorHistory.items.length >= 5}
+                    />
+
+                    <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
                   </div>
+                </CardContent>
+              </Card>
 
-                  <AddToHistoryButton
-                    onClick={addToHistory}
-                    disabled={colorHistory.items.length >= 5}
-                  />
-
-                  <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
-                </div>
-              </CardContent>
-            </Card>
+              <div className="my-4">
+                <iframe
+                  width="100%"
+                  height="250"
+                  frameBorder="0"
+                  className="ta-widget"
+                  data-min-height="250"
+                  id="67ee0a352dfc280f879388c3-6603"
+                  src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

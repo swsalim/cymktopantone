@@ -76,8 +76,10 @@ export async function generateMetadata({ params }: ConverterPageProps): Promise<
 
 export default async function ConverterPage({ params }: ConverterPageProps) {
   const converter = (await params).converter;
+  console.log(converter);
   const path = `/${converter.join('/')}`;
   const converterConfig = getConverterByUrl(path);
+  console.log(converterConfig);
 
   if (!converterConfig) {
     notFound();
@@ -93,18 +95,20 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl(converterConfig.url)} />
 
       <DynamicConverter componentName={converterConfig.component} />
-      <Wrapper>
-        <Container>
-          <iframe
-            width="100%"
-            height="250"
-            frameBorder="0"
-            className="ta-widget"
-            data-min-height="250"
-            id="67ee0a352dfc280f879388c3-6603"
-            src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
-        </Container>
-      </Wrapper>
+      {converterConfig.sourceColor !== 'PANTONE' && (
+        <Wrapper>
+          <Container>
+            <iframe
+              width="100%"
+              height="250"
+              frameBorder="0"
+              className="ta-widget"
+              data-min-height="250"
+              id="67ee0a352dfc280f879388c3-6603"
+              src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
+          </Container>
+        </Wrapper>
+      )}
       {ContentComponent && <ContentComponent />}
       <IndieBoostingAds />
     </>
