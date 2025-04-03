@@ -125,6 +125,16 @@ export default function RootLayout({
           src="https://app.tinyadz.com/scripts/ads.js?siteId=67ee06492dfc280f87938650"
           type="module"
           async></script>
+        <script async src="https://app.tinyadz.com/libs/widget.js" type="module"></script>
+        <script async src="https://app.tinyadz.com/libs/manager.js" type="module"></script>
+        <iframe
+          width="100%"
+          height="250"
+          frameBorder="0"
+          className="ta-widget"
+          data-min-height="250"
+          id="67ee0a352dfc280f879388c3-6603"
+          src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
         {/* <script async src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script> */}
         <noscript>
           <Image
