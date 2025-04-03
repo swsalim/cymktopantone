@@ -7,7 +7,7 @@ import { saEvent } from '@/lib/analytics';
 // import BannerCodefast from '@/components/ads/banner-codefast';
 // import BannerFrogDr from '@/components/ads/banner-frogdr';
 // import BannerRandomnumber from '@/components/ads/banner-randomnumber';
-import BannerUnicorn from './banner-unicorn';
+import BannerUnicorn from '@/components/ads/banner-unicorn';
 
 interface BannerAssignment {
   version: string;
