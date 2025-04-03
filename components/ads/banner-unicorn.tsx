@@ -5,7 +5,7 @@ import { ImageKit } from '@/components/image-kit';
 export default function BannerUnicorn() {
   return (
     <a
-      href="https://unicornplatform.com/?via=yuyu96"
+      href="https://unicornplatform.com/?via=yuyu"
       target="_blank"
       className="relative flex items-center px-6 py-4 text-left transition-all duration-150 ease-in-out md:flex-row"
       rel="noreferrer">
