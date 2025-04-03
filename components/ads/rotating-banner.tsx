@@ -77,7 +77,9 @@ export default function RotatingBanner() {
   };
 
   return (
-    <div onClick={handleBannerClick}>
+    <div
+      onClick={handleBannerClick}
+      className="relative z-50 border border-b-yellow-300 bg-yellow-50">
       <div className="mx-auto max-w-7xl">
         {bannerVersion === 'Codefast' && <BannerUnicorn />}
         {bannerVersion === 'Frogdr' && <BannerUnicorn />}
