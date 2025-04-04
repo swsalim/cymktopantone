@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import Link from 'next/link';
 
-import { colorModels } from '@/config/colorModels';
+import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
 import { tools } from '@/config/tools';
 

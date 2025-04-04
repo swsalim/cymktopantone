@@ -25,8 +25,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert CMYK to HEX colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-cmyk-to-hex',
-    component: 'cmyk-hex-converter',
-    content: 'cmyk-hex-content',
+    component: 'cmyk/to-hex',
+    content: 'cmyk/to-hex-content',
   },
   {
     id: 'cmyk-to-hsl',
@@ -36,8 +36,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert CMYK to HSL colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-cmyk-to-hsl',
-    component: 'cmyk-hsl-converter',
-    content: 'cmyk-hsl-content',
+    component: 'cmyk/to-hsl',
+    content: 'cmyk/to-hsl-content',
   },
   {
     id: 'cmyk-to-rgb',
@@ -47,8 +47,19 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert CMYK to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-cmyk-to-rgb',
-    component: 'cmyk-rgb-converter',
-    content: 'cmyk-rgb-content',
+    component: 'cmyk/to-rgb',
+    content: 'cmyk/to-rgb-content',
+  },
+  {
+    id: 'cmyk-to-pantone-pms',
+    sourceColor: 'CMYK',
+    targetColor: 'PANTONE',
+    title: 'CMYK to Pantone Color Converter',
+    description:
+      'Convert CMYK color values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-cmyk-to-pantone-pms',
+    component: 'cmyk/to-pantone',
+    content: 'cmyk/to-pantone-content',
   },
 
   // HEX Converters
@@ -60,8 +71,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HEX to CMYK colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hex-to-cmyk',
-    component: 'hex-cmyk-converter',
-    content: 'hex-cmyk-content',
+    component: 'hex/to-cmyk',
+    content: 'hex/to-cmyk-content',
   },
   {
     id: 'hex-to-hsl',
@@ -71,8 +82,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HEX to HSL colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hex-to-hsl',
-    component: 'hex-hsl-converter',
-    content: 'hex-hsl-content',
+    component: 'hex/to-hsl',
+    content: 'hex/to-hsl-content',
   },
   {
     id: 'hex-to-hsv',
@@ -82,8 +93,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HEX to HSV colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hex-to-hsv',
-    component: 'hex-hsv-converter',
-    content: 'hex-hsv-content',
+    component: 'hex/to-hsv',
+    content: 'hex/to-hsv-content',
   },
   {
     id: 'hex-to-rgb',
@@ -93,8 +104,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HEX to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hex-to-rgb',
-    component: 'hex-rgb-converter',
-    content: 'hex-rgb-content',
+    component: 'hex/to-rgb',
+    content: 'hex/to-rgb-content',
   },
   {
     id: 'hex-to-pantone-pms',
@@ -104,8 +115,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Convert HEX color codes to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
     url: '/convert-hex-to-pantone-pms',
-    component: 'hex-pantone-converter',
-    content: 'hex-pantone-content',
+    component: 'hex/to-pantone',
+    content: 'hex/to-pantone-content',
   },
 
   // HSL Converters
@@ -117,8 +128,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSL to CMYK colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsl-to-cmyk',
-    component: 'hsl-cmyk-converter',
-    content: 'hsl-cmyk-content',
+    component: 'hsl/to-cmyk',
+    content: 'hsl/to-cmyk-content',
   },
   {
     id: 'hsl-to-hex',
@@ -128,8 +139,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSL to HEX colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsl-to-hex',
-    component: 'hsl-hex-converter',
-    content: 'hsl-hex-content',
+    component: 'hsl/to-hex',
+    content: 'hsl/to-hex-content',
   },
   {
     id: 'hsl-to-rgb',
@@ -139,8 +150,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSL to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsl-to-rgb',
-    component: 'hsl-rgb-converter',
-    content: 'hsl-rgb-content',
+    component: 'hsl/to-rgb',
+    content: 'hsl/to-rgb-content',
   },
   {
     id: 'hsl-to-pantone-pms',
@@ -150,8 +161,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Convert HSL color values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
     url: '/convert-hsl-to-pantone-pms',
-    component: 'hsl-pantone-converter',
-    content: 'hsl-pantone-content',
+    component: 'hsl/to-pantone',
+    content: 'hsl/to-pantone-content',
   },
 
   // HSV Converters
@@ -163,8 +174,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSV to CMYK colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsv-to-cmyk',
-    component: 'hsv-cmyk-converter',
-    content: 'hsv-cmyk-content',
+    component: 'hsv/to-cmyk',
+    content: 'hsv/to-cmyk-content',
   },
   {
     id: 'hsv-to-hex',
@@ -174,8 +185,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSV to HEX colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsv-to-hex',
-    component: 'hsv-hex-converter',
-    content: 'hsv-hex-content',
+    component: 'hsv/to-hex',
+    content: 'hsv/to-hex-content',
   },
   {
     id: 'hsv-to-hsl',
@@ -185,8 +196,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSV to HSL colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsv-to-hsl',
-    component: 'hsv-hsl-converter',
-    content: 'hsv-hsl-content',
+    component: 'hsv/to-hsl',
+    content: 'hsv/to-hsl-content',
   },
   {
     id: 'hsv-to-rgb',
@@ -196,8 +207,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert HSV to RGB colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-hsv-to-rgb',
-    component: 'hsv-rgb-converter',
-    content: 'hsv-rgb-content',
+    component: 'hsv/to-rgb',
+    content: 'hsv/to-rgb-content',
   },
   {
     id: 'hsv-to-pantone-pms',
@@ -207,8 +218,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Convert HSV color values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
     url: '/convert-hsv-to-pantone-pms',
-    component: 'hsv-pantone-converter',
-    content: 'hsv-pantone-content',
+    component: 'hsv/to-pantone',
+    content: 'hsv/to-pantone-content',
   },
 
   // RGB Converters
@@ -220,8 +231,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert RGB to CMYK colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-rgb-to-cmyk',
-    component: 'rgb-cmyk-converter',
-    content: 'rgb-cmyk-content',
+    component: 'rgb/to-cmyk',
+    content: 'rgb/to-cmyk-content',
   },
   {
     id: 'rgb-to-hex',
@@ -231,8 +242,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert RGB to HEX colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-rgb-to-hex',
-    component: 'rgb-hex-converter',
-    content: 'rgb-hex-content',
+    component: 'rgb/to-hex',
+    content: 'rgb/to-hex-content',
   },
   {
     id: 'rgb-to-hsl',
@@ -242,8 +253,8 @@ export const converters: ConverterConfig[] = [
     description:
       'Easily convert RGB to HSL colors with our fast and reliable tool. Achieve perfect color consistency for your design projects.',
     url: '/convert-rgb-to-hsl',
-    component: 'rgb-hsl-converter',
-    content: 'rgb-hsl-content',
+    component: 'rgb/to-hsl',
+    content: 'rgb/to-hsl-content',
   },
   // {
   //   id: 'rgb-to-hsv',
@@ -262,62 +273,62 @@ export const converters: ConverterConfig[] = [
     targetColor: 'PANTONE',
     title: 'RGB to Pantone Color Converter',
     description:
-      'Convert RGB values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
+      'Convert RGB color values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
     url: '/convert-rgb-to-pantone-pms',
-    component: 'rgb-pantone-converter',
-    content: 'rgb-pantone-content',
+    component: 'rgb/to-pantone',
+    content: 'rgb/to-pantone-content',
   },
 
   // PANTONE Converters
   {
-    id: 'pantone-to-cmyk',
+    id: 'pantone-pms-to-cmyk',
     sourceColor: 'PANTONE',
     targetColor: 'CMYK',
-    title: 'Pantone to CMYK Converter',
+    title: 'Pantone to CMYK Color Converter',
     description:
-      'The quickest way to get accurate CMYK, RGB, and HEX values for Pantone colors without using a PMS color chart. Produce more successful color combinations for your designs.',
-    url: '/convert-pantone-to-cmyk',
-    component: 'pantone-cmyk-converter',
+      'Convert Pantone color values to CMYK with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-pantone-pms-to-cmyk',
+    component: 'pantone/to-cmyk',
   },
   {
-    id: 'pantone-to-hex',
+    id: 'pantone-pms-to-hex',
     sourceColor: 'PANTONE',
     targetColor: 'HEX',
-    title: 'Pantone to HEX Converter',
+    title: 'Pantone to HEX Color Converter',
     description:
-      'The quickest way to get accurate HEX, CMYK, and RGB values for Pantone colors without using a PMS color chart. Produce more successful color combinations for your designs.',
-    url: '/convert-pantone-to-hex',
-    component: 'pantone-hex-converter',
+      'Convert Pantone color values to HEX with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-pantone-pms-to-hex',
+    component: 'pantone/to-hex',
   },
   {
-    id: 'pantone-to-hsv',
-    sourceColor: 'PANTONE',
-    targetColor: 'HSV',
-    title: 'Pantone to HSV Converter',
-    description:
-      'The quickest way to get accurate HSV, HSL, CMYK, RGB, and HEX values for Pantone colors without using a PMS color chart. Produce more successful color combinations for your designs.',
-    url: '/convert-pantone-to-hsv',
-    component: 'pantone-hsv-converter',
-  },
-  {
-    id: 'pantone-to-rgb',
-    sourceColor: 'PANTONE',
-    targetColor: 'RGB',
-    title: 'Pantone to RGB Converter',
-    description:
-      'The quickest way to get accurate RGB, CMYK, and HEX values for Pantone colors without using a PMS color chart. Produce more successful color combinations for your designs.',
-    url: '/convert-pantone-to-rgb',
-    component: 'pantone-rgb-converter',
-  },
-  {
-    id: 'pantone-to-hsl',
+    id: 'pantone-pms-to-hsl',
     sourceColor: 'PANTONE',
     targetColor: 'HSL',
-    title: 'Pantone to HSL Converter',
+    title: 'Pantone to HSL Color Converter',
     description:
-      'The quickest way to get accurate HSL, HSV, CMYK, and RGB values for Pantone colors without using a PMS color chart. Produce more successful color combinations for your designs.',
-    url: '/convert-pantone-to-hsl',
-    component: 'pantone-hsl-converter',
+      'Convert Pantone color values to HSL with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-pantone-pms-to-hsl',
+    component: 'pantone/to-hsl',
+  },
+  {
+    id: 'pantone-pms-to-hsv',
+    sourceColor: 'PANTONE',
+    targetColor: 'HSV',
+    title: 'Pantone to HSV Color Converter',
+    description:
+      'Convert Pantone color values to HSV with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-pantone-pms-to-hsv',
+    component: 'pantone/to-hsv',
+  },
+  {
+    id: 'pantone-pms-to-rgb',
+    sourceColor: 'PANTONE',
+    targetColor: 'RGB',
+    title: 'Pantone to RGB Color Converter',
+    description:
+      'Convert Pantone color values to RGB with our efficient tool. Perfect for brand consistency across digital and print media.',
+    url: '/convert-pantone-pms-to-rgb',
+    component: 'pantone/to-rgb',
   },
 ];
 

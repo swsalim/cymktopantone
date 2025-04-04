@@ -85,7 +85,9 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
 
   // Dynamically import the content component if it exists
   const ContentComponent = converterConfig.content
-    ? dynamic(() => import(`@/components/${converterConfig.content}`), { ssr: true })
+    ? dynamic(() => import(`@/components/color-converters/content/${converterConfig.content}`), {
+        ssr: true,
+      })
     : null;
 
   return (

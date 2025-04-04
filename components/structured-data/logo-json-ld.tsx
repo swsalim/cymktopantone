@@ -1,4 +1,4 @@
-import JsonLd from './json-ld';
+import JsonLd from '@/components/structured-data/json-ld';
 
 export default function LogoJsonLd({ url, logo }: { url: string; logo: string }) {
   return (

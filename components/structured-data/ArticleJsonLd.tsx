@@ -1,6 +1,6 @@
 import { absoluteUrl } from '@/lib/utils';
 
-import JsonLd from './json-ld';
+import JsonLd from '@/components/structured-data/json-ld';
 
 export default function ArticleJsonLd({
   title,

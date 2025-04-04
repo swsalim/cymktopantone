@@ -1,4 +1,4 @@
-import JsonLd from './json-ld';
+import JsonLd from '@/components/structured-data/json-ld';
 
 export default function BreadcrumbJsonLd({
   itemListElements,

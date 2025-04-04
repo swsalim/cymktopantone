@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { colorModels } from '@/config/colorModels';
+import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
 import { siteConfig } from '@/config/site';
 import { tools } from '@/config/tools';

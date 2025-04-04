@@ -29,7 +29,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
-export default function PantoneHexConverter() {
+export default function PantoneCmykConverter() {
   const { toast } = useToast();
   const { colorHistory } = useColorHistoryContext();
   const previewRef = useRef<HTMLDivElement>(null);
@@ -42,11 +42,14 @@ export default function PantoneHexConverter() {
   const cmyk = rgbToCmyk(rgb);
   const hsl = rgbToHsl(rgb);
   const hsv = rgbToHsv(rgb);
-  const hexString = `${hex}`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'PANTONE';
-  const TARGET_COLOR = 'HEX';
+  const TARGET_COLOR = 'CMYK';
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
@@ -73,12 +76,12 @@ export default function PantoneHexConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on label
-      if (label === 'HEX value') {
-        trackCopy('HEX');
+      if (label === 'CMYK value') {
+        trackCopy('CMYK');
       } else if (label === 'RGB value') {
         trackCopy('RGB');
-      } else if (label === 'CMYK value') {
-        trackCopy('CMYK');
+      } else if (label === 'HEX value') {
+        trackCopy('HEX');
       } else if (label === 'HSL value') {
         trackCopy('HSL');
       } else if (label === 'HSV value') {
@@ -98,9 +101,9 @@ export default function PantoneHexConverter() {
 
     colorHistory.addToHistory({
       sourceColor: 'PANTONE',
-      targetColor: 'HEX',
+      targetColor: 'CMYK',
       sourceValue: pantone,
-      targetValue: hexString,
+      targetValue: cmykString,
     });
   };
 
@@ -115,13 +118,12 @@ export default function PantoneHexConverter() {
     <Wrapper size="lg">
       <Container>
         <div className="prose dark:prose-invert">
-          <h1>Pantone to HEX Converter</h1>
+          <h1>Pantone to CMYK Converter</h1>
           <p>
-            Our free converter gives you instant <Link href="/color-models/hex">HEX</Link>,{' '}
-            <Link href="/color-models/cmyk">CMYK</Link>, and{' '}
-            <Link href="/color-models/rgb">RGB</Link> values for any Pantone color – no Pantone
-            color chart needed. Just browse, click, and get precise color values for all your design
-            needs.
+            Our free converter gives you instant <Link href="/color-models/cmyk">CMYK</Link>,{' '}
+            <Link href="/color-models/rgb">RGB</Link>, and <Link href="/color-models/hex">HEX</Link>{' '}
+            values for any Pantone color – no Pantone color chart needed. Just browse, click, and
+            get precise color values for all your design needs.
           </p>
         </div>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -159,12 +161,15 @@ export default function PantoneHexConverter() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <p>
-                        <span className="font-medium">HEX:</span> <b>{hex}</b>
+                        <span className="font-medium">CMYK:</span>{' '}
+                        <b>
+                          cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
+                        </b>
                       </p>
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => copyToClipboard(hex, 'HEX value')}>
+                        onClick={() => copyToClipboard(cmykString, 'CMYK value')}>
                         <CopyIcon className="h-4 w-4" />
                       </Button>
                     </div>
@@ -178,28 +183,18 @@ export default function PantoneHexConverter() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() =>
-                          copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                        }>
+                        onClick={() => copyToClipboard(rgbString, 'RGB value')}>
                         <CopyIcon className="h-4 w-4" />
                       </Button>
                     </div>
                     <div className="flex items-center justify-between">
                       <p>
-                        <span className="font-medium">CMYK:</span>{' '}
-                        <b>
-                          cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
-                        </b>
+                        <span className="font-medium">HEX:</span> <b>{hex}</b>
                       </p>
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() =>
-                          copyToClipboard(
-                            `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                            'CMYK value',
-                          )
-                        }>
+                        onClick={() => copyToClipboard(hex, 'HEX value')}>
                         <CopyIcon className="h-4 w-4" />
                       </Button>
                     </div>
@@ -213,9 +208,7 @@ export default function PantoneHexConverter() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() =>
-                          copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                        }>
+                        onClick={() => copyToClipboard(hslString, 'HSL value')}>
                         <CopyIcon className="h-4 w-4" />
                       </Button>
                     </div>
@@ -229,9 +222,7 @@ export default function PantoneHexConverter() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() =>
-                          copyToClipboard(`hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`, 'HSV value')
-                        }>
+                        onClick={() => copyToClipboard(hsvString, 'HSV value')}>
                         <CopyIcon className="h-4 w-4" />
                       </Button>
                     </div>

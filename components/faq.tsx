@@ -1,4 +1,4 @@
-import FaqJsonLd from './structured-data/faq-json-ld';
+import FaqJsonLd from '@/components/structured-data/faq-json-ld';
 
 export default function Faqs({
   data,

@@ -1,14 +1,13 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 
 import { ColorHistoryState, useColorHistory } from '@/lib/hooks/use-color-history';
 
+import { Container } from '@/components/container';
 import { Skeleton } from '@/components/ui/skeleton';
-
-import { Container } from './container';
 
 // Context to share color history between parent and dynamically loaded component
 interface ColorHistoryContextType {
@@ -36,7 +35,7 @@ export function DynamicConverter({ componentName }: DynamicConverterProps) {
   // Memoize the dynamic component to prevent re-loading on state changes
   const ConverterComponent = useMemo(
     () =>
-      dynamic(() => import(`@/components/${componentName}`), {
+      dynamic(() => import(`@/components/color-converters/converters/${componentName}`), {
         loading: () => <ConverterSkeleton />,
         ssr: true,
       }),

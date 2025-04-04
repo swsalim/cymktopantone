@@ -6,6 +6,7 @@ import { AlertTriangle, Shuffle, Timer, Trophy } from 'lucide-react';
 
 import { saEvent } from '@/lib/analytics';
 
+import { ShareResults } from '@/components/pantone-game/share-results';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -15,8 +16,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-
-import { ShareResults } from './share-results';
 
 interface GameCompleteModalProps {
   isOpen: boolean;

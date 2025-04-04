@@ -8,9 +8,8 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
+import { navItems } from '@/components/navbar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-
-import { navItems } from './navbar';
 
 export function NavMobile() {
   const [open, setOpen] = useState(false);

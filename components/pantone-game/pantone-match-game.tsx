@@ -13,13 +13,12 @@ import { usePantoneGameStats } from '@/lib/hooks/use-pantone-game-stats';
 import { usePantoneMatchGame } from '@/lib/hooks/use-pantone-match-game';
 
 import { Container } from '@/components/container';
+import { GameCard } from '@/components/pantone-game/game-card';
+import { GameCompleteModal } from '@/components/pantone-game/game-complete-modal';
+import { GameStatsCard } from '@/components/pantone-game/game-stats';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
-
-import { GameCard } from './game-card';
-import { GameCompleteModal } from './game-complete-modal';
-import { GameStatsCard } from './game-stats';
 
 interface PantoneMatchGameProps {
   gameMode: GameMode;
