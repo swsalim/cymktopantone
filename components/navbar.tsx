@@ -29,6 +29,10 @@ export const navItems: {
   name: string;
   href?: string;
   segments?: string[];
+  viewMore?: {
+    name: string;
+    href: string;
+  };
   childItems: {
     title: string;
     href: string;
@@ -42,16 +46,23 @@ export const navItems: {
   {
     name: 'Color Models',
     childItems: colorModels,
+    href: '/color-models',
+    segments: ['/color-models'],
   },
   {
     name: 'Convert Color',
     childItems: converters
       .filter((converter) => converter.sourceColor !== 'PANTONE')
+      .slice(0, 8)
       .map((converter) => ({
         title: converter.title,
         href: converter.url,
         description: converter.description,
       })),
+    viewMore: {
+      name: 'View All',
+      href: '/convert-color',
+    },
   },
   {
     name: 'Pantone',
@@ -125,7 +136,7 @@ export default function Navbar() {
           </Link>
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList>
-              {navItems.map(({ name, href, segments, childItems }) => {
+              {navItems.map(({ name, href, segments, childItems, viewMore }) => {
                 const isActive = segments?.some((segment) => pathname?.startsWith(segment));
 
                 return (
@@ -134,8 +145,9 @@ export default function Navbar() {
                       {href && (
                         <Link href={href} legacyBehavior passHref>
                           <NavigationMenuLink
+                            data-active={isActive}
                             className={cn(
-                              'group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-700 focus:bg-violet-50 focus:text-violet-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-violet-50/50 data-[state=open]:bg-violet-50/50 data-[active=true]:text-violet-700 data-[state=open]:text-violet-700 data-[active=true]:hover:bg-violet-50 data-[state=open]:hover:bg-violet-50 data-[active=true]:focus:bg-violet-50 data-[state=open]:focus:bg-violet-50',
+                              'group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-700 focus:bg-violet-50 focus:text-violet-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-violet-50 data-[state=open]:bg-violet-50 data-[active=true]:text-violet-700 data-[state=open]:text-violet-700 data-[active=true]:hover:bg-violet-50 data-[state=open]:hover:bg-violet-50 data-[active=true]:focus:bg-violet-50 data-[state=open]:focus:bg-violet-50 dark:text-gray-300',
                             )}>
                             {name}
                           </NavigationMenuLink>
@@ -165,6 +177,13 @@ export default function Navbar() {
                                 );
                               })}
                             </ul>
+                            {viewMore && (
+                              <Link
+                                href={viewMore.href}
+                                className="block bg-violet-50 py-3 text-center text-sm font-medium text-violet-700">
+                                {viewMore.name}
+                              </Link>
+                            )}
                           </NavigationMenuContent>
                         </>
                       )}

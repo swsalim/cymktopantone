@@ -25,7 +25,7 @@ export default function BannerUnicorn() {
           </div>
           <div className="">
             <h3 className="mt-0 text-base font-medium text-yellow-800">
-              Create your website in 5 minutes with Unicorn Platform ⚡️
+              Create your website in 5 minutes ⚡️
             </h3>
             <span className="block text-sm text-yellow-700">
               Unicorn Platform is the best website builder for busy founders.

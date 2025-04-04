@@ -41,14 +41,17 @@ export function NavMobile() {
           open && 'block',
         )}>
         <ul className="grid divide-y divide-gray-100 dark:divide-white/[0.15]">
-          {navItems.map(({ name, href, childItems }, idx) => (
-            <MobileNavItem
-              key={idx}
-              name={name}
-              href={href}
-              childItems={childItems}
-              setOpen={setOpen}
-            />
+          {navItems.map(({ name, href, childItems, viewMore }, idx) => (
+            <>
+              <MobileNavItem
+                key={idx}
+                name={name}
+                href={href}
+                childItems={childItems}
+                setOpen={setOpen}
+                viewMore={viewMore}
+              />
+            </>
           ))}
         </ul>
       </nav>
@@ -61,6 +64,7 @@ const MobileNavItem = ({
   href,
   childItems,
   setOpen,
+  viewMore,
 }: {
   name: string;
   href?: string;
@@ -73,6 +77,10 @@ const MobileNavItem = ({
     iconClassName?: string;
   }[];
   setOpen: (open: boolean) => void;
+  viewMore?: {
+    name: string;
+    href: string;
+  };
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -115,6 +123,13 @@ const MobileNavItem = ({
                   </div>
                 </Link>
               ))}
+              {viewMore && (
+                <Link
+                  href={viewMore.href}
+                  className="block bg-violet-50 py-3 text-center text-sm font-medium text-violet-700">
+                  {viewMore.name}
+                </Link>
+              )}
             </div>
           </CollapsibleContent>
         </Collapsible>

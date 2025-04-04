@@ -274,7 +274,7 @@ export const converters: ConverterConfig[] = [
     title: 'RGB to Pantone Color Converter',
     description:
       'Convert RGB color values to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
-    url: '/convert-rgb-to-pantone-pms',
+    url: 'https://www.rgbtopantone.com/',
     component: 'rgb/to-pantone',
     content: 'rgb/to-pantone-content',
   },

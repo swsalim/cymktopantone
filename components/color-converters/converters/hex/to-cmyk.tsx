@@ -70,7 +70,6 @@ export default function HexCmykConverter() {
 
   const handleColorSelect = (sourceValue: string) => {
     const hexMatch = sourceValue.match(/#([0-9a-f]{6})/i);
-    console.log(hexMatch);
     if (hexMatch) {
       const [hex] = hexMatch;
       setHex(hex);
