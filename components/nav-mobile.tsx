@@ -84,6 +84,10 @@ const MobileNavItem = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
 
+  const handleLinkClick = () => {
+    setOpen(false);
+  };
+
   if (childItems && childItems.length > 0) {
     return (
       <li className="py-3">
@@ -108,7 +112,7 @@ const MobileNavItem = ({
                 <Link
                   key={href}
                   href={href}
-                  onClick={() => setOpen(false)}
+                  onClick={handleLinkClick}
                   className="flex w-full gap-3">
                   {Icon && (
                     <div className="border-neutral-200 from-neutral-100 flex size-10 items-center justify-center rounded-lg border bg-gradient-to-t">
@@ -126,6 +130,7 @@ const MobileNavItem = ({
               {viewMore && (
                 <Link
                   href={viewMore.href}
+                  onClick={handleLinkClick}
                   className="block bg-violet-50 py-3 text-center text-sm font-medium text-violet-700">
                   {viewMore.name}
                 </Link>
@@ -143,10 +148,7 @@ const MobileNavItem = ({
 
   return (
     <li className="py-3">
-      <Link
-        href={href}
-        onClick={() => setOpen(false)}
-        className="flex w-full font-semibold capitalize">
+      <Link href={href} onClick={handleLinkClick} className="flex w-full font-semibold capitalize">
         {name}
       </Link>
     </li>

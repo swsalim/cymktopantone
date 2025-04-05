@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 
 import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
+import { pantoneCategories } from '@/config/pantoneCategories';
 import { siteConfig } from '@/config/site';
 import { tools } from '@/config/tools';
 
@@ -65,14 +66,18 @@ export const navItems: {
     },
   },
   {
-    name: 'Pantone',
-    childItems: converters
-      .filter((converter) => converter.sourceColor === 'PANTONE')
-      .map((converter) => ({
-        title: converter.title,
-        href: converter.url,
-        description: converter.description,
-      })),
+    name: 'Pantone Colors',
+    childItems: pantoneCategories
+      .map((category) => ({
+        title: category.name,
+        href: `/pantone-colors/${category.slug}`,
+        description: category.description,
+      }))
+      .slice(0, 10),
+    viewMore: {
+      name: 'View All',
+      href: '/pantone-colors',
+    },
   },
   {
     name: 'More Tools',
