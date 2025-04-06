@@ -4,8 +4,6 @@ import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 
-import { CopyIcon } from 'lucide-react';
-
 import { PMS } from '@/config/colors';
 
 import { convertPantoneToHex, getTextColor, hexToRgb, rgbToCmyk } from '@/lib/colors';
@@ -15,10 +13,10 @@ import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
@@ -35,6 +33,7 @@ export default function PantoneRgbConverter() {
   const cmyk = rgbToCmyk(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const hexString = `${hex}`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'PANTONE';
@@ -145,50 +144,9 @@ export default function PantoneRgbConverter() {
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">RGB:</span>{' '}
-                        <b>
-                          rgb({rgb.r}, {rgb.g}, {rgb.b})
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(rgbString, 'RGB value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">CMYK:</span>{' '}
-                        <b>
-                          cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() =>
-                          copyToClipboard(
-                            `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`,
-                            'CMYK value',
-                          )
-                        }>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">HEX:</span> <b>{hex}</b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(hex, 'HEX value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
+                    <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="CMYK" value={cmykString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="HEX" value={hexString} onCopy={copyToClipboard} />
 
                     <AddToHistoryButton
                       onClick={addToHistory}

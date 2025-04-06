@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
 import { rgbToHex, rgbToHsl } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -104,20 +102,7 @@ export default function RgbHslConverter() {
               <ColorPreview color={hex} />
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">HSL:</span>{' '}
-                    <b>
-                      hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
-                    </b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => copyToClipboard(hslString, 'HSL value')}>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
+                <ColorValueDisplay label="HSL" value={hslString} onCopy={copyToClipboard} />
               </div>
             </CardContent>
           </Card>

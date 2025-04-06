@@ -87,8 +87,8 @@ export default function RgbPantoneConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your RGB values into Pantone perfection! Enter your RGB values below and
-          get instant, accurate results.
+          Transform your RGB values into Pantone perfection with instant, accurate results. Find the
+          closest Pantone matches for your RGB color.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>

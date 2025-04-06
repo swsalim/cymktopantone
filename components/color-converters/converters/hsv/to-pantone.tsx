@@ -16,6 +16,7 @@ import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -90,8 +91,8 @@ export default function HsvPantoneConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your HSV values into Pantone perfection! Enter your HSV values below and
-          get instant, accurate results.
+          Transform your HSV values into Pantone perfection with instant, accurate results. Find the
+          closest Pantone matches for your HSV color.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
@@ -157,33 +158,8 @@ export default function HsvPantoneConverter() {
                   </div>
 
                   <div className="flex flex-col gap-y-0.5 text-sm">
-                    <div className="flex items-center justify-start gap-x-2">
-                      <p>
-                        <span className="font-medium">RGB:</span>{' '}
-                        <b>
-                          rgb({rgb.r}, {rgb.g}, {rgb.b})
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() =>
-                          copyToClipboard(`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, 'RGB value')
-                        }>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-start gap-x-2">
-                      <p>
-                        <span className="font-medium">HEX:</span> <b>{hex}</b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(hex, 'HEX value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
+                    <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="HSV" value={hsvString} onCopy={copyToClipboard} />
                   </div>
                 </div>
               </div>

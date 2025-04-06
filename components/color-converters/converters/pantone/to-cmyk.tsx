@@ -4,8 +4,6 @@ import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 
-import { CopyIcon } from 'lucide-react';
-
 import { PMS } from '@/config/colors';
 
 import {
@@ -22,10 +20,10 @@ import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
@@ -159,73 +157,11 @@ export default function PantoneCmykConverter() {
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">CMYK:</span>{' '}
-                        <b>
-                          cmyk({cmyk.c}%, {cmyk.m}%, {cmyk.y}%, {cmyk.k}%)
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(cmykString, 'CMYK value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">RGB:</span>{' '}
-                        <b>
-                          rgb({rgb.r}, {rgb.g}, {rgb.b})
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(rgbString, 'RGB value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">HEX:</span> <b>{hex}</b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(hex, 'HEX value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">HSL:</span>{' '}
-                        <b>
-                          hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(hslString, 'HSL value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <p>
-                        <span className="font-medium">HSV:</span>{' '}
-                        <b>
-                          hsv({hsv.h}, {hsv.s}, {hsv.v})
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(hsvString, 'HSV value')}>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
+                    <ColorValueDisplay label="CMYK" value={cmykString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="HEX" value={hex} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="HSL" value={hslString} onCopy={copyToClipboard} />
+                    <ColorValueDisplay label="HSV" value={hsvString} onCopy={copyToClipboard} />
 
                     <AddToHistoryButton
                       onClick={addToHistory}

@@ -2,18 +2,16 @@
 
 import { useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
 import { hexToRgb } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -120,17 +118,7 @@ export default function HexRgbConverter() {
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">RGB:</span> <b>{rgbString}</b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => copyToClipboard(rgbString, 'RGB value')}>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
+                <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
 
                 <AddToHistoryButton
                   onClick={addToHistory}

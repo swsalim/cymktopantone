@@ -16,6 +16,7 @@ import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -87,8 +88,8 @@ export default function HslPantoneConverter() {
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your HSL values into Pantone perfection! Enter your HSL values below and
-          get instant, accurate results.
+          Transform your HSL values into Pantone perfection with instant, accurate results. Find the
+          closest Pantone matches for your HSL color.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
@@ -157,22 +158,7 @@ export default function HslPantoneConverter() {
                   </div>
 
                   <div className="flex flex-col gap-y-0.5 text-sm">
-                    <div className="flex items-center justify-start gap-x-2">
-                      <p>
-                        <span className="font-medium">HSL:</span>{' '}
-                        <b>
-                          hsl({hsl.h}, {hsl.s}%, {hsl.l}%)
-                        </b>
-                      </p>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() =>
-                          copyToClipboard(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`, 'HSL value')
-                        }>
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
+                    <ColorValueDisplay label="HSL" value={hslString} onCopy={copyToClipboard} />
                   </div>
                 </div>
               </div>

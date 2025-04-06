@@ -2,18 +2,16 @@
 
 import { useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
 import { hslToRgb, rgbToHex, rgbToHsv } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -138,20 +136,9 @@ export default function HslHsvConverter() {
               <ColorPreview color={hex} />
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">HSV:</span>{' '}
-                    <b>
-                      hsv({hsv.h}, {hsv.s}%, {hsv.v}%)
-                    </b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => copyToClipboard(hsvString, 'HSV value')}>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
+                <ColorValueDisplay label="HSL" value={hslString} onCopy={copyToClipboard} />
+                <ColorValueDisplay label="HSV" value={hsvString} onCopy={copyToClipboard} />
+
                 <AddToHistoryButton
                   onClick={addToHistory}
                   disabled={colorHistory.items.length >= 5}

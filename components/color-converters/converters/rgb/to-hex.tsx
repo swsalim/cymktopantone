@@ -2,15 +2,13 @@
 
 import { useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
 import { rgbToHex } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -104,17 +102,7 @@ export default function RgbHexConverter() {
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <p>
-                    <span className="font-medium">HEX:</span> <b>{hex}</b>
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => copyToClipboard(`${hex}`, 'RGB value')}>
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
-                </div>
+                <ColorValueDisplay label="HEX" value={hex} onCopy={copyToClipboard} />
               </div>
             </CardContent>
           </Card>
