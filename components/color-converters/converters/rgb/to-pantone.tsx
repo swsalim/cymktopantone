@@ -32,7 +32,7 @@ import {
 import { Slider } from '@/components/ui/slider';
 import { Wrapper } from '@/components/wrapper';
 
-const distances = ['16', '32', '48', '64', '80', '96'];
+const distances = ['5', '10', '15', '20', '25', '30'];
 
 export default function RgbPantoneConverter() {
   const { toast } = useToast();
@@ -41,8 +41,9 @@ export default function RgbPantoneConverter() {
   const [matchingColors, setMatchingColors] = useState<
     { pantone: string; hex: string; matchPercentage: number }[]
   >([]);
-  const [distance, setDistance] = useState('32');
+  const [distance, setDistance] = useState('15');
   const [sortOrder, setSortOrder] = useState<'high-to-low' | 'low-to-high'>('high-to-low');
+  const [visibleCount, setVisibleCount] = useState(15);
 
   const hex = rgbToHex(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
@@ -194,9 +195,10 @@ export default function RgbPantoneConverter() {
 
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between px-6 pb-2">
+              <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold">
-                  Closest Pantone {matchingColors.length > 1 ? 'Colors' : 'Color'}
+                  Closest Pantone {matchingColors.length > 1 ? 'Colors' : 'Color'} (
+                  {matchingColors.length})
                 </h2>
                 <Select
                   defaultValue="high-to-low"
@@ -218,43 +220,54 @@ export default function RgbPantoneConverter() {
                 <p className="text-start text-base text-gray-500">No matching colors found</p>
               )}
               {matchingColors.length >= 1 && (
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {matchingColors.map((color, index) => (
-                    <div
-                      key={index}
-                      className="relative flex h-32 w-full flex-col justify-center rounded-lg p-2 md:h-40 md:py-4"
-                      style={{
-                        backgroundColor: formatRgbString(hexToRgb(color.hex)),
-                        color: getTextColor(color.hex),
-                      }}>
-                      <div className="absolute right-2 top-2 rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-500 drop-shadow-md">
-                        {color.matchPercentage}% Match
-                      </div>
-                      <div className="flex cursor-pointer flex-col items-center justify-between">
-                        <div className="flex flex-row items-center justify-center gap-x-2">
-                          <div className="text-center text-sm font-medium">{color.pantone}</div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => copyToClipboard(color.pantone, 'Pantone')}>
-                            <CopyIcon className="h-4 w-4" />
-                          </Button>
+                <>
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {matchingColors.slice(0, visibleCount).map((color, index) => (
+                      <div
+                        key={index}
+                        className="relative flex h-32 w-full flex-col justify-center rounded-lg p-2 md:h-40 md:py-4"
+                        style={{
+                          backgroundColor: formatRgbString(hexToRgb(color.hex)),
+                          color: getTextColor(color.hex),
+                        }}>
+                        <div className="absolute right-2 top-2 rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-500 drop-shadow-md">
+                          {color.matchPercentage}% Match
                         </div>
-                        <div className="flex flex-row items-center justify-center gap-x-2">
-                          <div className="text-center text-sm uppercase opacity-90">
-                            #{color.hex}
+                        <div className="flex cursor-pointer flex-col items-center justify-between">
+                          <div className="flex flex-row items-center justify-center gap-x-2">
+                            <div className="text-center text-sm font-medium">{color.pantone}</div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => copyToClipboard(color.pantone, 'Pantone')}>
+                              <CopyIcon className="h-4 w-4" />
+                            </Button>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
-                            <CopyIcon className="h-4 w-4" />
-                          </Button>
+                          <div className="flex flex-row items-center justify-center gap-x-2">
+                            <div className="text-center text-sm uppercase opacity-90">
+                              #{color.hex}
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
+                              <CopyIcon className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                  {matchingColors.length > visibleCount && (
+                    <div className="mt-6 flex justify-center">
+                      <Button
+                        variant="outline"
+                        onClick={() => setVisibleCount((prev) => prev + 15)}>
+                        Load More
+                      </Button>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               )}
             </CardContent>
           </Card>
