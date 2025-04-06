@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
+import { CopyIcon, Info } from 'lucide-react';
 
 import { findMatchingPMSColors, rgbToHex } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Wrapper } from '@/components/wrapper';
 
 const distances = ['5', '10', '15', '20', '25', '30'];
@@ -132,8 +133,39 @@ export default function RgbPantoneConverter() {
                     </div>
                   ))}
                   <div>
-                    <div className="mb-2">
+                    <div className="mb-2 flex flex-row gap-x-2">
                       <Label>Distance</Label>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Info className="size-4"></Info>
+                          </TooltipTrigger>
+                          <TooltipContent className="p-5">
+                            <ul className="font-medium">
+                              <li>
+                                <strong>5</strong>: Very close matches only (high quality matches).
+                                Match percentages: 85-100%.
+                              </li>
+                              <li>
+                                <strong>10</strong>: Good matches. Match percentages: 70-100%.
+                              </li>
+                              <li>
+                                <strong>15</strong>: Default value - Acceptable matches. Match
+                                percentages: 50-100%.
+                              </li>
+                              <li>
+                                <strong>20</strong>: More permissive. Match percentages: 35-100%.
+                              </li>
+                              <li>
+                                <strong>25</strong>: Very permissive. Match percentages: 20-100%.
+                              </li>
+                              <li>
+                                <strong>30</strong>: Maximum range. Match percentages: 10-100%.
+                              </li>
+                            </ul>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                     <Select
                       defaultValue={distance}
