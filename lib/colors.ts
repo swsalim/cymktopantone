@@ -498,6 +498,8 @@ export function calculateMatchPercentage(deltaE: number): number {
   if (deltaE <= minDeltaE) return 100;
   if (deltaE >= maxDeltaE) return 0;
 
-  // Non-linear mapping using exponential decay
-  return Math.round(100 * Math.exp(-((deltaE - minDeltaE) / (maxDeltaE - minDeltaE))));
+  // Enhanced non-linear mapping using modified exponential decay
+  // Using a steeper curve and one decimal place precision
+  const percentage = 100 * Math.exp(-1.5 * ((deltaE - minDeltaE) / (maxDeltaE - minDeltaE)));
+  return Number(percentage.toFixed(1));
 }

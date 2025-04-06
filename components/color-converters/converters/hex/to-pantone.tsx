@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
-import { findMatchingPMSColors, formatRgbString, getTextColor, hexToRgb } from '@/lib/colors';
+import { findMatchingPMSColors, hexToRgb } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
+import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -86,61 +85,61 @@ export default function HexPantoneConverter() {
           closest Pantone matches for your HEX color.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
-          <Card>
-            <CardContent>
-              <div className="flex flex-col gap-y-6">
-                <div>
-                  <Label>HEX</Label>
-                  <div className="mb-2 flex items-center justify-between">
+          <div>
+            <Card>
+              <CardContent>
+                <div className="flex flex-col gap-y-6">
+                  <div>
+                    <Label>HEX</Label>
+                    <div className="mb-2 flex items-center justify-between">
+                      <Input
+                        type="color"
+                        id="colorPicker"
+                        value={hex}
+                        onChange={(e) => handleInputChange(e.target.value)}
+                        className="h-20 w-full cursor-pointer"
+                      />
+                    </div>
                     <Input
-                      type="color"
-                      id="colorPicker"
-                      value={hex}
+                      type="text"
+                      value={hex.toUpperCase()}
                       onChange={(e) => handleInputChange(e.target.value)}
-                      className="h-20 w-full cursor-pointer"
                     />
                   </div>
-                  <Input
-                    type="text"
-                    value={hex.toUpperCase()}
-                    onChange={(e) => handleInputChange(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <div className="mb-2">
-                    <Label>Distance</Label>
+                  <div>
+                    <div className="mb-2">
+                      <Label>Distance</Label>
+                    </div>
+                    <Select
+                      defaultValue={distance}
+                      value={distance}
+                      onValueChange={(value) => setDistance(value)}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {distances.map((value) => (
+                            <SelectItem key={value} value={value}>
+                              {value}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  <Select
-                    defaultValue={distance}
-                    value={distance}
-                    onValueChange={(value) => setDistance(value)}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {distances.map((value) => (
-                          <SelectItem key={value} value={value}>
-                            {value}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <div className="mb-4">
-                    <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
-                  </div>
-
-                  <div className="flex flex-col gap-y-0.5 text-sm">
-                    <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
+                  <div>
+                    <div className="mb-4">
+                      <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
+                    </div>
+                    <div className="flex flex-col gap-y-0.5 text-sm">
+                      <ColorValueDisplay label="RGB" value={rgbString} onCopy={copyToClipboard} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
           <Card>
             <CardHeader>
@@ -172,39 +171,13 @@ export default function HexPantoneConverter() {
                 <>
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {matchingColors.slice(0, visibleCount).map((color, index) => (
-                      <div
+                      <PantoneColorCard
                         key={index}
-                        className="relative flex h-32 w-full flex-col justify-center rounded-lg p-2 md:h-40 md:py-4"
-                        style={{
-                          backgroundColor: formatRgbString(hexToRgb(color.hex)),
-                          color: getTextColor(color.hex),
-                        }}>
-                        <div className="absolute right-2 top-2 rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-500 drop-shadow-md">
-                          {color.matchPercentage}% Match
-                        </div>
-                        <div className="flex cursor-pointer flex-col items-center justify-between">
-                          <div className="flex flex-row items-center justify-center gap-x-2">
-                            <div className="text-center text-sm font-medium">{color.pantone}</div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => copyToClipboard(color.pantone, 'Pantone')}>
-                              <CopyIcon className="h-4 w-4" />
-                            </Button>
-                          </div>
-                          <div className="flex flex-row items-center justify-center gap-x-2">
-                            <div className="text-center text-sm uppercase opacity-90">
-                              #{color.hex}
-                            </div>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => copyToClipboard(`#${color.hex}`, 'HEX')}>
-                              <CopyIcon className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
+                        pantone={color.pantone}
+                        hex={color.hex}
+                        matchPercentage={color.matchPercentage}
+                        onCopy={copyToClipboard}
+                      />
                     ))}
                   </div>
                   {matchingColors.length > visibleCount && (
@@ -212,7 +185,7 @@ export default function HexPantoneConverter() {
                       <Button
                         variant="outline"
                         onClick={() => setVisibleCount((prev) => prev + 15)}>
-                        Load More
+                        Load More Matches
                       </Button>
                     </div>
                   )}
