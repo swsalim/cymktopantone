@@ -263,7 +263,7 @@ export const convertHexToPantone = (hexColor: string): string => {
 export const findMatchingPMSColors = (
   hexColor: string,
   maxDistance = 32,
-): { pantone: string; hex: string }[] => {
+): { pantone: string; hex: string; matchPercentage: number }[] => {
   const result = [];
   const tempResult = [];
 
@@ -273,6 +273,7 @@ export const findMatchingPMSColors = (
     ((result[0] = {
       pantone: matchingPantoneColor,
       hex: hexColor,
+      matchPercentage: 100,
     }),
     tempResult.push(matchingPantoneColor));
 
@@ -288,18 +289,18 @@ export const findMatchingPMSColors = (
     colorHEXValues[i] = Math.sqrt(Math.pow(r - r1, 2) + Math.pow(g - g1, 2) + Math.pow(b - b1, 2));
   }
 
-  // for (let i = 0; i < colorHEXValues.length; i++)
-  //   colorHEXValues[i] <= maxDistance && -1 == (result.indexOf(PMS[i]) && result.push(PMS[i]));
-
   for (let i = 0; i < colorHEXValues.length; i++) {
-    // Check if the color value is within the maximum distance
     if (colorHEXValues[i] <= maxDistance) {
-      // Check if this PMS color isn't already in the result array
       if (tempResult.indexOf(PMS[i]) === -1) {
-        // Add the PMS color to the result array
+        // Calculate match percentage (100% for exact match, decreasing as distance increases)
+        const matchPercentage = Math.max(
+          0,
+          Math.round(100 * (1 - colorHEXValues[i] / maxDistance)),
+        );
         result.push({
           pantone: PMS[i],
           hex: HEX[i],
+          matchPercentage,
         });
       }
     }

@@ -38,8 +38,11 @@ export default function RgbPantoneConverter() {
   const { toast } = useToast();
 
   const [rgb, setRgb] = useState({ r: 199, g: 63, b: 103 });
-  const [matchingColors, setMatchingColors] = useState<{ pantone: string; hex: string }[]>([]);
+  const [matchingColors, setMatchingColors] = useState<
+    { pantone: string; hex: string; matchPercentage: number }[]
+  >([]);
   const [distance, setDistance] = useState('32');
+  const [sortOrder, setSortOrder] = useState<'high-to-low' | 'low-to-high'>('high-to-low');
 
   const hex = rgbToHex(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
@@ -80,8 +83,13 @@ export default function RgbPantoneConverter() {
 
   useEffect(() => {
     const tempMatchingColors = findMatchingPMSColors(hex.substring(1), Number(distance));
-    setMatchingColors(tempMatchingColors);
-  }, [rgb, distance, hex]);
+    const sortedColors = [...tempMatchingColors].sort((a, b) => {
+      return sortOrder === 'high-to-low'
+        ? b.matchPercentage - a.matchPercentage
+        : a.matchPercentage - b.matchPercentage;
+    });
+    setMatchingColors(sortedColors);
+  }, [hex, distance, sortOrder]);
 
   return (
     <Wrapper size="lg">
@@ -186,9 +194,24 @@ export default function RgbPantoneConverter() {
 
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold">
-                Closest Pantone {matchingColors.length > 1 ? 'Colors' : 'Color'}
-              </h2>
+              <div className="flex items-center justify-between px-6 pb-2">
+                <h2 className="text-lg font-semibold">
+                  Closest Pantone {matchingColors.length > 1 ? 'Colors' : 'Color'}
+                </h2>
+                <Select
+                  defaultValue="high-to-low"
+                  onValueChange={(value: 'high-to-low' | 'low-to-high') => setSortOrder(value)}>
+                  <SelectTrigger className="w-[180px] dark:text-gray-900">
+                    <SelectValue placeholder="Sort by match %" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="high-to-low">Highest match first</SelectItem>
+                      <SelectItem value="low-to-high">Lowest match first</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent>
               {!matchingColors.length && (
@@ -204,6 +227,9 @@ export default function RgbPantoneConverter() {
                         backgroundColor: formatRgbString(hexToRgb(color.hex)),
                         color: getTextColor(color.hex),
                       }}>
+                      <div className="absolute right-2 top-2 rounded-full bg-gray-50 px-2 py-1 text-xs font-medium text-gray-500 drop-shadow-md">
+                        {color.matchPercentage}% Match
+                      </div>
                       <div className="flex cursor-pointer flex-col items-center justify-between">
                         <div className="flex flex-row items-center justify-center gap-x-2">
                           <div className="text-center text-sm font-medium">{color.pantone}</div>
