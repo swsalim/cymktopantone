@@ -17,20 +17,22 @@ export interface ColorHistoryState {
 }
 
 export function useColorHistory(converterType: string): ColorHistoryState {
-  const [history, setHistory] = useState<ColorHistoryItem[]>([]);
+  // Initialize state with localStorage data
+  const [history, setHistory] = useState<ColorHistoryItem[]>(() => {
+    if (typeof window === 'undefined') return [];
 
-  // Load history from localStorage on component mount
-  useEffect(() => {
     const storedHistory = localStorage.getItem(`colorHistory-${converterType}`);
     if (storedHistory) {
       try {
-        setHistory(JSON.parse(storedHistory));
+        return JSON.parse(storedHistory);
       } catch (error) {
         console.error('Failed to parse color history:', error);
         localStorage.removeItem(`colorHistory-${converterType}`);
+        return [];
       }
     }
-  }, [converterType]);
+    return [];
+  });
 
   // Save history to localStorage whenever it changes
   useEffect(() => {

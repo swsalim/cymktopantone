@@ -36,8 +36,18 @@ export function ColorHistory({ history, onColorSelect }: ColorHistoryProps) {
         return hex;
       }
     } else if (item.sourceColor === 'RGB') {
-      const rgb = item.sourceValue;
-      return rgb;
+      const rgbMatches = item.sourceValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+      if (rgbMatches) {
+        const [, r, g, b] = rgbMatches;
+        const rgb = {
+          r: parseInt(r),
+          g: parseInt(g),
+          b: parseInt(b),
+        };
+
+        const hex = rgbToHex(rgb);
+        return hex;
+      }
     } else if (item.sourceColor === 'HSL') {
       const hslMatches = item.sourceValue.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
       if (hslMatches) {

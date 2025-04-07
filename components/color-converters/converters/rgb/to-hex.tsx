@@ -6,8 +6,12 @@ import { rgbToHex } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
+import { ColorHistory } from '@/components/color-converters/shared/color-history';
+import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { Container } from '@/components/container';
+import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -17,22 +21,23 @@ import { Wrapper } from '@/components/wrapper';
 
 export default function RgbHexConverter() {
   const { toast } = useToast();
+  const { colorHistory } = useColorHistoryContext();
 
   const [rgb, setRgb] = useState({ r: 199, g: 63, b: 103 });
-
   const hex = rgbToHex(rgb);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'RGB';
   const TARGET_COLOR = 'HEX';
-  const { trackCopy } = useConverterTracking(
+  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
     `${rgb.r},${rgb.g},${rgb.b}`,
   );
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
-    const numValue = Math.min(100, Math.max(0, Number(value) || 0));
+    const numValue = Math.min(255, Math.max(0, Number(value) || 0));
     setRgb((prev) => ({ ...prev, [key]: numValue }));
   };
 
@@ -48,11 +53,39 @@ export default function RgbHexConverter() {
     });
   };
 
+  const addToHistory = () => {
+    // Track history addition
+    trackAddToHistory();
+
+    colorHistory.addToHistory({
+      sourceColor: 'RGB',
+      targetColor: 'HEX',
+      sourceValue: rgbString,
+      targetValue: hex,
+    });
+  };
+
+  const handleColorSelect = (sourceValue: string) => {
+    const rgbMatches = sourceValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (rgbMatches) {
+      const [, r, g, b] = rgbMatches;
+      setRgb({
+        r: parseInt(r),
+        g: parseInt(g),
+        b: parseInt(b),
+      });
+
+      // Track selection from history
+      trackSelectFromHistory();
+      return;
+    }
+  };
+
   return (
     <Wrapper size="lg">
       <Container>
         <p>
-          Easily transform your RGB values into HEX value! Enter your HSL values below and get
+          Easily transform your RGB values into HEX value! Enter your RGB values below and get
           instant, accurate results.
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -76,7 +109,7 @@ export default function RgbHexConverter() {
                           }
                           className="w-20"
                           min={0}
-                          max={100}
+                          max={255}
                         />
                       </div>
                     </div>
@@ -91,18 +124,22 @@ export default function RgbHexConverter() {
                   </div>
                 ))}
               </div>
+
+              <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
             </CardContent>
           </Card>
 
           <Card>
             <CardContent>
-              <div className="mb-4">
-                <h2 className="mb-2 text-xl font-semibold">Color Preview</h2>
-                <div className="h-24 w-full rounded-lg" style={{ backgroundColor: hex }} />
-              </div>
+              <ColorPreview color={hex} />
 
               <div className="space-y-3">
                 <ColorValueDisplay label="HEX" value={hex} onCopy={copyToClipboard} />
+
+                <AddToHistoryButton
+                  onClick={addToHistory}
+                  disabled={colorHistory.items.length >= 5}
+                />
               </div>
             </CardContent>
           </Card>
