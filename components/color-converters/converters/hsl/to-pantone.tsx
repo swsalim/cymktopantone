@@ -58,6 +58,7 @@ export default function HslPantoneConverter() {
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
     setHsl((prev) => ({ ...prev, [key]: numValue }));
+    setVisibleCount(15);
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -126,7 +127,10 @@ export default function HslPantoneConverter() {
                       </div>
                       <Slider
                         value={[hsl[key as keyof typeof hsl]]}
-                        onValueChange={([value]) => setHsl((prev) => ({ ...prev, [key]: value }))}
+                        onValueChange={([value]) => {
+                          setHsl((prev) => ({ ...prev, [key]: value }));
+                          setVisibleCount(15);
+                        }}
                         max={label === 'Hue' ? 360 : 100}
                         step={1}
                         className="mt-2"

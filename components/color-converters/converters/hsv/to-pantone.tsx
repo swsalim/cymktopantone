@@ -59,6 +59,7 @@ export default function HsvPantoneConverter() {
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
     const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
     setHsv((prev) => ({ ...prev, [key]: numValue }));
+    setVisibleCount(15);
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -126,7 +127,10 @@ export default function HsvPantoneConverter() {
                       </div>
                       <Slider
                         value={[hsv[key as keyof typeof hsv]]}
-                        onValueChange={([value]) => setHsv((prev) => ({ ...prev, [key]: value }))}
+                        onValueChange={([value]) => {
+                          setHsv((prev) => ({ ...prev, [key]: value }));
+                          setVisibleCount(15);
+                        }}
                         max={key === 'h' ? 360 : 100}
                         step={1}
                         className="mt-2"

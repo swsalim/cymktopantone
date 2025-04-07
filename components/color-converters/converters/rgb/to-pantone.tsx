@@ -54,8 +54,9 @@ export default function RgbPantoneConverter() {
   );
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
-    const numValue = Math.min(100, Math.max(0, Number(value) || 0));
+    const numValue = Math.min(255, Math.max(0, Number(value) || 0));
     setRgb((prev) => ({ ...prev, [key]: numValue }));
+    setVisibleCount(15);
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -118,13 +119,16 @@ export default function RgbPantoneConverter() {
                             }
                             className="w-20"
                             min={0}
-                            max={100}
+                            max={255}
                           />
                         </div>
                       </div>
                       <Slider
                         value={[rgb[key as keyof typeof rgb]]}
-                        onValueChange={([value]) => setRgb((prev) => ({ ...prev, [key]: value }))}
+                        onValueChange={([value]) => {
+                          setRgb((prev) => ({ ...prev, [key]: value }));
+                          setVisibleCount(15);
+                        }}
                         max={255}
                         step={1}
                         className="mt-2"

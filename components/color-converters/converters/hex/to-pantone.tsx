@@ -50,6 +50,7 @@ export default function HexPantoneConverter() {
 
   const handleInputChange = (value: string) => {
     setHex(value);
+    setVisibleCount(15);
   };
 
   const copyToClipboard = (text: string, label: string) => {

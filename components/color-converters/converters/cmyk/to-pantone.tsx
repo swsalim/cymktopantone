@@ -31,6 +31,8 @@ import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Wrapper } from '@/components/wrapper';
 
+import { PantoneComparisonCard } from '../../shared/pantone-comparison-card';
+
 const distances = ['5', '10', '15', '20', '25', '30'];
 
 export default function CmykPantoneConverter() {
@@ -61,6 +63,7 @@ export default function CmykPantoneConverter() {
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
     setCmyk((prev) => ({ ...prev, [key]: numValue }));
+    setVisibleCount(15);
   };
 
   const copyToClipboard = (text: string, label: string) => {
@@ -130,7 +133,10 @@ export default function CmykPantoneConverter() {
                       </div>
                       <Slider
                         value={[cmyk[key as keyof typeof cmyk]]}
-                        onValueChange={([value]) => setCmyk((prev) => ({ ...prev, [key]: value }))}
+                        onValueChange={([value]) => {
+                          setCmyk((prev) => ({ ...prev, [key]: value }));
+                          setVisibleCount(15);
+                        }}
                         max={100}
                         step={1}
                         className="mt-2"
@@ -278,6 +284,28 @@ export default function CmykPantoneConverter() {
           </Card>
         </div>
       </Container>
+      {matchingColors.length > 0 && (
+        <Container className="prose mt-16 dark:prose-invert">
+          <h2 className="text-center">Color Comparison</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <PantoneComparisonCard
+              title="Original CMYK Color"
+              cmyk={cmykString}
+              rgb={rgbString}
+              hex={hex}
+            />
+
+            <PantoneComparisonCard
+              title={`Best Pantone Match (${matchingColors[0].pantone})`}
+              pantone={matchingColors[0].pantone}
+              cmyk={cmykString}
+              rgb={rgbString}
+              hex={hex}
+              deltaE={`${(((100 - matchingColors[0].matchPercentage) / 100) * 2.1).toFixed(3)} (Excellent match)`}
+            />
+          </div>
+        </Container>
+      )}
       <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
         <RelatedTools />
       </Container>
