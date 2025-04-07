@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
+import { Info } from 'lucide-react';
 
-import { Gamepad2, Info } from 'lucide-react';
-
-import { cmykToRgb, findMatchingPMSColors, rgbToHex } from '@/lib/colors';
+import { cmykToRgb, findMatchingPMSColors, rgbToHex, rgbToHsl, rgbToHsv } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import BannerMatching from '@/components/ads/banner-matching';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
+import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -31,8 +31,6 @@ import { Slider } from '@/components/ui/slider';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Wrapper } from '@/components/wrapper';
 
-import { PantoneComparisonCard } from '../../shared/pantone-comparison-card';
-
 const distances = ['5', '10', '15', '20', '25', '30'];
 
 export default function CmykPantoneConverter() {
@@ -48,8 +46,12 @@ export default function CmykPantoneConverter() {
 
   const rgb = cmykToRgb(cmyk);
   const hex = rgbToHex(rgb);
+  const hsl = rgbToHsl(rgb);
+  const hsv = rgbToHsv(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'CMYK';
@@ -213,20 +215,12 @@ export default function CmykPantoneConverter() {
               </CardContent>
             </Card>
 
-            <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-gray-50/50 p-6 shadow-sm md:flex-row dark:border-gray-700 dark:bg-gray-900">
-              <div>
-                <h2 className="mb-1 flex items-center gap-2 text-xl font-semibold text-gray-800 dark:text-gray-50">
-                  <Gamepad2 className="text-pink-500 h-5 w-5" />
-                  Play the Pantone Color Match Game!
-                </h2>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-200">
-                  Test your memory. Train your eye. Can you match the colors?
-                </p>
-              </div>
-              <Link href="/pantone-color-match/classic/medium">
-                <Button>Start Matching</Button>
-              </Link>
-            </div>
+            <BannerMatching
+              title="Play the Pantone Color Match Game!"
+              description="Test your memory. Train your eye. Can you match the colors?"
+              href="/pantone-color-match/classic/medium"
+              buttonText="Start Matching"
+            />
           </div>
 
           <Card>
@@ -293,14 +287,14 @@ export default function CmykPantoneConverter() {
               cmyk={cmykString}
               rgb={rgbString}
               hex={hex}
+              hsl={hslString}
+              hsv={hsvString}
             />
 
             <PantoneComparisonCard
               title={`Best Pantone Match (${matchingColors[0].pantone})`}
               pantone={matchingColors[0].pantone}
-              cmyk={cmykString}
-              rgb={rgbString}
-              hex={hex}
+              hex={matchingColors[0].hex}
               deltaE={`${(((100 - matchingColors[0].matchPercentage) / 100) * 2.1).toFixed(3)} (Excellent match)`}
             />
           </div>

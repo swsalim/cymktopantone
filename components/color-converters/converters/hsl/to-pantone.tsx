@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react';
 
 import { Info } from 'lucide-react';
 
-import { findMatchingPMSColors, hslToRgb, rgbToHex } from '@/lib/colors';
+import { findMatchingPMSColors, hslToRgb, rgbToCmyk, rgbToHex, rgbToHsv } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import BannerMatching from '@/components/ads/banner-matching';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
+import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -44,7 +46,12 @@ export default function HslPantoneConverter() {
 
   const rgb = hslToRgb(hsl);
   const hex = rgbToHex(rgb);
+  const cmyk = rgbToCmyk(rgb);
+  const hsv = rgbToHsv(rgb);
+  const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'HSL';
@@ -86,6 +93,7 @@ export default function HslPantoneConverter() {
         ? b.matchPercentage - a.matchPercentage
         : a.matchPercentage - b.matchPercentage;
     });
+
     setMatchingColors(sortedColors);
   }, [hex, distance, sortOrder]);
 
@@ -202,6 +210,13 @@ export default function HslPantoneConverter() {
                 </div>
               </CardContent>
             </Card>
+
+            <BannerMatching
+              title="Play the Pantone Color Match Game!"
+              description="Test your memory. Train your eye. Can you match the colors?"
+              href="/pantone-color-match/classic/medium"
+              buttonText="Start Matching"
+            />
           </div>
 
           <Card>
@@ -258,6 +273,28 @@ export default function HslPantoneConverter() {
           </Card>
         </div>
       </Container>
+      {matchingColors.length > 0 && (
+        <Container className="prose mt-16 dark:prose-invert">
+          <h2 className="text-center">Color Comparison</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <PantoneComparisonCard
+              title="Original HSL Color"
+              cmyk={cmykString}
+              rgb={rgbString}
+              hex={hex}
+              hsl={hslString}
+              hsv={hsvString}
+            />
+
+            <PantoneComparisonCard
+              title={`Best Pantone Match (${matchingColors[0].pantone})`}
+              pantone={matchingColors[0].pantone}
+              hex={matchingColors[0].hex}
+              deltaE={`${(((100 - matchingColors[0].matchPercentage) / 100) * 2.1).toFixed(3)} (Excellent match)`}
+            />
+          </div>
+        </Container>
+      )}
       <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
         <RelatedTools />
       </Container>

@@ -42,16 +42,14 @@ export function NavMobile() {
         )}>
         <ul className="grid divide-y divide-gray-100 dark:divide-white/[0.15]">
           {navItems.map(({ name, href, childItems, viewMore }, idx) => (
-            <>
-              <MobileNavItem
-                key={idx}
-                name={name}
-                href={href}
-                childItems={childItems}
-                setOpen={setOpen}
-                viewMore={viewMore}
-              />
-            </>
+            <MobileNavItem
+              key={idx}
+              name={name}
+              href={href}
+              childItems={childItems}
+              setOpen={setOpen}
+              viewMore={viewMore}
+            />
           ))}
         </ul>
       </nav>

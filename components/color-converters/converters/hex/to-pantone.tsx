@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { Info } from 'lucide-react';
 
-import { findMatchingPMSColors, hexToRgb } from '@/lib/colors';
+import { findMatchingPMSColors, hexToRgb, rgbToCmyk, rgbToHsl, rgbToHsv } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import BannerMatching from '@/components/ads/banner-matching';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
+import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
 import { Container } from '@/components/container';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
@@ -41,7 +43,13 @@ export default function HexPantoneConverter() {
   const [visibleCount, setVisibleCount] = useState(15);
 
   const rgb = hexToRgb(hex);
+  const cmyk = rgbToCmyk(rgb);
+  const hsv = rgbToHsv(rgb);
+  const hsl = rgbToHsl(rgb);
   const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+  const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+  const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
+  const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
 
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'HEX';
@@ -174,6 +182,13 @@ export default function HexPantoneConverter() {
                 </div>
               </CardContent>
             </Card>
+
+            <BannerMatching
+              title="Play the Pantone Color Match Game!"
+              description="Test your memory. Train your eye. Can you match the colors?"
+              href="/pantone-color-match/classic/medium"
+              buttonText="Start Matching"
+            />
           </div>
 
           <Card>
@@ -230,6 +245,30 @@ export default function HexPantoneConverter() {
           </Card>
         </div>
       </Container>
+
+      {matchingColors.length > 0 && (
+        <Container className="prose mt-16 dark:prose-invert">
+          <h2 className="text-center">Color Comparison</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <PantoneComparisonCard
+              title="Original Hex Color"
+              cmyk={cmykString}
+              hsv={hsvString}
+              rgb={rgbString}
+              hex={hex}
+              hsl={hslString}
+            />
+
+            <PantoneComparisonCard
+              title={`Best Pantone Match (${matchingColors[0].pantone})`}
+              pantone={matchingColors[0].pantone}
+              hex={matchingColors[0].hex}
+              deltaE={`${(((100 - matchingColors[0].matchPercentage) / 100) * 2.1).toFixed(3)} (Excellent match)`}
+            />
+          </div>
+        </Container>
+      )}
+
       <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
         <RelatedTools />
       </Container>

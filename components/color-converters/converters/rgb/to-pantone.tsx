@@ -8,6 +8,7 @@ import { findMatchingPMSColors, rgbToHex } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import BannerMatching from '@/components/ads/banner-matching';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
 import { Container } from '@/components/container';
@@ -221,6 +222,13 @@ export default function RgbPantoneConverter() {
                 </div>
               </CardContent>
             </Card>
+
+            <BannerMatching
+              title="Play the Pantone Color Match Game!"
+              description="Test your memory. Train your eye. Can you match the colors?"
+              href="/pantone-color-match/classic/medium"
+              buttonText="Start Matching"
+            />
           </div>
 
           <Card>

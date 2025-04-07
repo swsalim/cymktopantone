@@ -27,6 +27,7 @@ export default function HslCmykConverter() {
   const rgb = hslToRgb(hsl);
   const hex = rgbToHex(rgb);
   const cmyk = rgbToCmyk(rgb);
+  const hexString = hex;
   const hslString = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
 
@@ -123,7 +124,7 @@ export default function HslCmykConverter() {
 
               <div className="space-y-3">
                 <ColorValueDisplay label="CMYK" value={cmykString} onCopy={copyToClipboard} />
-
+                <ColorValueDisplay label="HEX" value={hexString} onCopy={copyToClipboard} />
                 <AddToHistoryButton
                   onClick={addToHistory}
                   disabled={colorHistory.items.length >= 5}
