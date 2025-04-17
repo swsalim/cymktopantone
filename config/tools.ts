@@ -11,46 +11,52 @@ export interface Tool {
 
 export const tools: Tool[] = [
   {
+    title: 'Clinic Geek',
+    href: 'https://www.clinicgeek.com/?ref=cmyktopantone',
+    description: 'Clinic Geek is a directory of clinics in Singapore.',
+    isExternal: true,
+  },
+  {
     title: 'Random Number Generator',
-    href: 'https://www.randomnumberapp.com/',
+    href: 'https://www.randomnumberapp.com/?ref=cmyktopantone',
     description: 'Random number generator for numbers 0 to 10,000.',
     isExternal: true,
   },
   {
     title: 'Resize Image',
-    href: 'https://pfpresizer.com/',
+    href: 'https://pfpresizer.com/?ref=cmyktopantone',
     description:
       'Quickly resize your profile picture for Instagram, Facebook, WhatsApp, and other platforms. Free and easy-to-use PFP resizer for all social media platforms.',
     isExternal: true,
   },
   {
     title: 'Flip Image',
-    href: 'https://www.flipanimage.xyz/',
+    href: 'https://www.flipanimage.xyz/?ref=cmyktopantone',
     description: 'Flip an image horizontally or vertically for free.',
     isExternal: true,
   },
   {
     title: 'Play Sudoku',
-    href: 'https://sudokuunlimited.com/',
+    href: 'https://sudokuunlimited.com/?ref=cmyktopantone',
     description: 'Play free Sudoku online from Easy to Expert level',
     isExternal: true,
   },
   {
     title: 'RGB to Pantone Converter',
-    href: 'https://www.rgbtopantone.com/',
+    href: 'https://www.rgbtopantone.com/?ref=cmyktopantone',
     description:
       'Get instant, accurate Pantone matches for your RGB colors. Perfect for designers, printers & creative professionals who need reliable color conversions.',
     isExternal: true,
   },
   {
     title: 'Water a Day',
-    href: 'https://www.wateraday.com/',
+    href: 'https://www.wateraday.com/?ref=cmyktopantone',
     description: 'How Much Water Should You Drink Daily?',
     isExternal: true,
   },
   {
     title: 'Will it rain tomorrow?',
-    href: 'https://www.willitraintomorrow.com/',
+    href: 'https://www.willitraintomorrow.com/?ref=cmyktopantone',
     description:
       "Tomorrow's Weather Forecast, Today's Advantage - Plan Your Day Right, Come Rain or Shine",
     isExternal: true,
@@ -67,6 +73,25 @@ export const tools: Tool[] = [
     description: 'Color Memory Match: Find the Pantone color pairs in a fun memory game.',
     icon: Gamepad2,
     iconClassName: 'text-pink-500',
+  },
+  {
+    title: 'Will it rain tomorrow?',
+    href: 'https://www.willitraintomorrow.com/?ref=cmyktopantone',
+    description:
+      "Tomorrow's Weather Forecast, Today's Advantage - Plan Your Day Right, Come Rain or Shine",
+    isExternal: true,
+  },
+  {
+    title: 'Aesthetic Clinics Malaysia 🇲🇾',
+    href: 'http://www.aestheticclinics.my/?ref=cmyktopantone',
+    description: 'Aesthetic clinics directory in Malaysia',
+    isExternal: true,
+  },
+  {
+    title: 'Dental Clinics Malaysia 🇲🇾',
+    href: 'http://www.dentalclinicclosetome.my/?ref=cmyktopantone',
+    description: 'Dental clinics directory in Malaysia',
+    isExternal: true,
   },
   // {
   //   title: 'Color Blindness Simulator',

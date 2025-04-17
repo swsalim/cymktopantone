@@ -7,7 +7,6 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import IndieBoostingAds from '@/components/ads/indie-boosting';
 import { Container } from '@/components/container';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -110,7 +109,6 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
         </Wrapper>
       )}
       {ContentComponent && <ContentComponent />}
-      <IndieBoostingAds />
     </>
   );
 }

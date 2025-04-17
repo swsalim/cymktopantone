@@ -2,7 +2,6 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import IndieBoostingAds from '@/components/ads/indie-boosting';
 import CmykPantoneContent from '@/components/color-converters/content/cmyk/to-pantone-content';
 import CmykPantoneConverter from '@/components/color-converters/converters/cmyk/to-pantone';
 import { Container } from '@/components/container';
@@ -28,7 +27,6 @@ export default function Home() {
         </Container>
       </Wrapper>
       <CmykPantoneContent />
-      <IndieBoostingAds />
     </>
   );
 }

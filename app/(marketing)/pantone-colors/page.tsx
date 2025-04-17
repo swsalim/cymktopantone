@@ -4,7 +4,6 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import IndieBoostingAds from '@/components/ads/indie-boosting';
 import { Container } from '@/components/container';
 import PantoneColorsList from '@/components/pantone-colors';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -89,7 +88,18 @@ export default function PantoneColors() {
           </ul>
         </Container>
 
-        <IndieBoostingAds />
+        <Wrapper>
+          <Container>
+            <iframe
+              width="100%"
+              height="250"
+              frameBorder="0"
+              className="ta-widget"
+              data-min-height="250"
+              id="67ee0a352dfc280f879388c3-6603"
+              src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
+          </Container>
+        </Wrapper>
 
         <Container>
           <PantoneColorsList />
