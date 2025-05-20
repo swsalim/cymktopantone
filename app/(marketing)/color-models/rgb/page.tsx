@@ -129,8 +129,8 @@ export default function ColorModelRgb() {
             materials, which use <Link href="#">CMYK</Link>.
           </p>
 
-          <Wrapper>
-            <Container>
+          <Wrapper className="mx-auto text-center">
+            <div className="mx-auto max-w-2xl">
               <iframe
                 width="100%"
                 height="250"
@@ -139,7 +139,7 @@ export default function ColorModelRgb() {
                 data-min-height="250"
                 id="67ee0a352dfc280f879388c3-6603"
                 src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
-            </Container>
+            </div>
           </Wrapper>
 
           <h2>RGB vs. CMYK: What’s the Difference?</h2>
