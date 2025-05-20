@@ -103,8 +103,8 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
               frameBorder="0"
               className="ta-widget"
               data-min-height="250"
-              id="67ee0a352dfc280f879388c3-6603"
-              src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed=6603&previewMode=false&showInPopup=false&theme=light"></iframe>
+              id="67ee0a352dfc280f879388c3-4728"
+              src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed= 4728&previewMode=false&showInPopup=false&theme=light"></iframe>
           </div>
         </Wrapper>
       )}
