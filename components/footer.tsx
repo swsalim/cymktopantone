@@ -8,7 +8,7 @@ import { tools } from '@/config/tools';
 
 import { cn } from '@/lib/utils';
 
-import { Logo } from '@/components/icons';
+import { LaunchBadge, Logo } from '@/components/icons';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -50,6 +50,11 @@ export default function Footer({ className, ...props }: FooterProps) {
             <p className="text-balance text-base/6 text-gray-100">
               Get instant, accurate Pantone matches for your CMYK colors.
             </p>
+            <div className="mt-4 h-auto w-fit rounded-lg border-gray-300 bg-gray-50 p-4 shadow-lg">
+              <a href="https://fazier.com/?ref=cmyktopantone" target="_blank">
+                <LaunchBadge className="w-24" />
+              </a>
+            </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
