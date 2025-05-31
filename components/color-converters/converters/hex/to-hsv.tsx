@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { hexToRgb, rgbToHsv } from '@/lib/colors';
+import { hexToRgb, isValidHex, rgbToHsv } from '@/lib/colors';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
@@ -28,7 +28,9 @@ export default function HexHsvConverter() {
   const hsvString = `hsv(${hsv.h}, ${hsv.s}, ${hsv.v})`;
 
   const handleInputChange = (value: string) => {
-    setHex(value);
+    if (isValidHex(value)) {
+      setHex(value);
+    }
   };
 
   const copyToClipboard = (text: string, label: string) => {

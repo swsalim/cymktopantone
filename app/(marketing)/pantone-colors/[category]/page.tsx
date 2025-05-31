@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+import { ArrowRightIcon } from 'lucide-react';
 
 import { pantoneCategories } from '@/config/pantoneCategories';
 import { siteConfig } from '@/config/site';
@@ -71,7 +74,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  return pantoneCategories.map((color) => ({ slug: color.slug }));
+  return pantoneCategories.map((color) => ({ category: color.slug }));
 }
 
 export default async function PantoneCategoryPage({ params }: PageProps) {
@@ -131,11 +134,18 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
             <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
               {pantoneCategory.relatedColors.map((color) => (
                 <div key={color.slug} className="rounded-lg border p-4">
-                  <div
-                    className="mb-2 h-24 w-full rounded-lg"
-                    style={{ backgroundColor: color.hex }}
-                  />
-                  <h3 className="text-sm font-medium">{color.name}</h3>
+                  <Link
+                    href={`/convert-hex-to-pantone-pms/${color.hex.replace('#', '')}`}
+                    className="group">
+                    <span
+                      className="mb-2 block h-24 w-full rounded-lg"
+                      style={{ backgroundColor: color.hex }}
+                    />
+                    <h3 className="flex items-center text-sm font-medium">
+                      {color.name}{' '}
+                      <ArrowRightIcon className="ml-1 inline-block size-4 transition duration-150 group-hover:translate-x-1" />
+                    </h3>
+                  </Link>
                 </div>
               ))}
             </div>

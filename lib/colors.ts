@@ -503,3 +503,16 @@ export function calculateMatchPercentage(deltaE: number): number {
   const percentage = 100 * Math.exp(-1.5 * ((deltaE - minDeltaE) / (maxDeltaE - minDeltaE)));
   return Number(percentage.toFixed(1));
 }
+
+/**
+ * Validates if a string is a valid hex color code
+ * @param {string} hex The hex color code to validate
+ * @returns {boolean} True if the hex color is valid, false otherwise
+ */
+export const isValidHex = (hex: string): boolean => {
+  // Remove # if present
+  const cleanHex = hex.replace('#', '');
+
+  // Check if the hex is 3 or 6 characters long and contains only valid hex characters
+  return /^([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(cleanHex);
+};

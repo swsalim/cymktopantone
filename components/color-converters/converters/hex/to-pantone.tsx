@@ -4,7 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { Info } from 'lucide-react';
 
-import { findMatchingPMSColors, hexToRgb, rgbToCmyk, rgbToHsl, rgbToHsv } from '@/lib/colors';
+import {
+  findMatchingPMSColors,
+  hexToRgb,
+  isValidHex,
+  rgbToCmyk,
+  rgbToHsl,
+  rgbToHsv,
+} from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -31,10 +38,12 @@ import { Wrapper } from '@/components/wrapper';
 
 const distances = ['5', '10', '15', '20', '25', '30'];
 
-export default function HexPantoneConverter() {
+export default function HexPantoneConverter({ defaultValue }: { defaultValue?: string }) {
   const { toast } = useToast();
 
-  const [hex, setHex] = useState('#6D39AC');
+  const defaultColor = defaultValue ? `#${defaultValue}` : '#6D39AC';
+
+  const [hex, setHex] = useState(defaultColor);
   const [matchingColors, setMatchingColors] = useState<
     { pantone: string; hex: string; matchPercentage: number }[]
   >([]);
@@ -57,8 +66,10 @@ export default function HexPantoneConverter() {
   const { trackCopy } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR, hex);
 
   const handleInputChange = (value: string) => {
-    setHex(value);
-    setVisibleCount(15);
+    // Only update if the input is a valid hex color
+    if (isValidHex(value)) {
+      setHex(value);
+    }
   };
 
   const copyToClipboard = (text: string, label: string) => {

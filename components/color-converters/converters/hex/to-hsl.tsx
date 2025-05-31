@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { hexToRgb, rgbToHsl } from '@/lib/colors';
+import { hexToRgb, isValidHex, rgbToHsl } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -38,7 +38,10 @@ export default function HexHslConverter() {
   );
 
   const handleInputChange = (value: string) => {
-    setHex(value);
+    // Only update if the input is a valid hex color
+    if (isValidHex(value)) {
+      setHex(value);
+    }
   };
 
   const copyToClipboard = (text: string, label: string) => {
