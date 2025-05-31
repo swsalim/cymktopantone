@@ -7,7 +7,6 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
-import { Container } from '@/components/container';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';

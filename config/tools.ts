@@ -75,13 +75,6 @@ export const tools: Tool[] = [
     iconClassName: 'text-pink-500',
   },
   {
-    title: 'Will it rain tomorrow?',
-    href: 'https://www.willitraintomorrow.com/?ref=cmyktopantone',
-    description:
-      "Tomorrow's Weather Forecast, Today's Advantage - Plan Your Day Right, Come Rain or Shine",
-    isExternal: true,
-  },
-  {
     title: 'Aesthetic Clinics Malaysia 🇲🇾',
     href: 'http://www.aestheticclinics.my/?ref=cmyktopantone',
     description: 'Aesthetic clinics directory in Malaysia',
