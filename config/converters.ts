@@ -7,6 +7,7 @@ export interface ConverterConfig {
   url: string;
   component: string;
   content?: string;
+  isExternal?: boolean;
 }
 
 export type ColorType = 'CMYK' | 'RGB' | 'HEX' | 'HSL' | 'HSV' | 'PANTONE';
@@ -277,6 +278,7 @@ export const converters: ConverterConfig[] = [
     url: 'https://www.rgbtopantone.com/',
     component: 'rgb/to-pantone',
     content: 'rgb/to-pantone-content',
+    isExternal: true,
   },
 
   // PANTONE Converters
@@ -350,5 +352,5 @@ export function getConvertersByTargetColor(color: ColorType): ConverterConfig[] 
 }
 
 export function getAllConverters(): ConverterConfig[] {
-  return converters;
+  return converters.filter((converter) => !converter.isExternal);
 }
