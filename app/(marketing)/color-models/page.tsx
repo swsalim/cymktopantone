@@ -1,15 +1,60 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ExternalLinkIcon } from 'lucide-react';
 
 import { colorModels } from '@/config/colors';
-import { converters } from '@/config/converters';
+import { siteConfig } from '@/config/site';
 
 import { cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
+
+const config = {
+  title: 'Color Models Guide - CMYK, RGB, HEX & HSL Explained',
+  description:
+    'Complete guide to color models - CMYK, RGB, HEX, and HSL. Learn how each model works and their applications in design and development.',
+  url: '/color-models',
+};
+
+export const metadata: Metadata = {
+  title: config.title,
+  description: config.description,
+  alternates: {
+    canonical: config.url,
+  },
+  openGraph: {
+    title: config.title,
+    description: config.description,
+    url: config.url,
+    images: [
+      {
+        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: config.title,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: config.title,
+    description: config.description,
+    card: 'summary_large_image',
+    creator: siteConfig.creator,
+    images: [
+      {
+        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: config.title,
+      },
+    ],
+  },
+};
 
 export default function ColorModelsPage() {
   return (
