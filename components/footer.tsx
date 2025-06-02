@@ -51,10 +51,10 @@ export default function Footer({ className, ...props }: FooterProps) {
               Get instant, accurate Pantone matches for your CMYK colors.
             </p>
             <div className="pt-4">
-              <a href="https://fazier.com" target="_blank">
+              <a href="https://fazier.com/launches/cmyk-to-pantone-converter" target="_blank">
                 <img
-                  src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=dark"
-                  width="120"
+                  src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4551&badge_type=daily&theme=dark"
+                  width="270"
                   alt="Fazier badge"
                 />
               </a>
@@ -105,9 +105,9 @@ export default function Footer({ className, ...props }: FooterProps) {
                 </ul>
               </div>
             </div>
-            <div className="md:mt-0">
+            <div className="col-span-2 md:col-span-1 md:mt-0">
               <h3 className="text-base/6 font-semibold text-gray-100">Our Projects</h3>
-              <ul role="list" className="mt-4 space-y-4 md:mt-6">
+              <ul role="list" className="mt-4 grid grid-cols-2 gap-4 md:mt-6 md:grid-cols-1">
                 {navigation.projects.map((item) => (
                   <li key={item.name}>
                     <a
