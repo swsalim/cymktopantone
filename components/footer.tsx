@@ -59,6 +59,18 @@ export default function Footer({ className, ...props }: FooterProps) {
                 />
               </a>
             </div>
+            <div className="pt-4">
+              <a
+                href="https://startupfa.me/s/cmyk-to-pantone?utm_source=www.cmyktopantone.com"
+                target="_blank">
+                <img
+                  src="https://startupfa.me/badges/featured-badge.webp"
+                  alt="Featured on Startup Fame"
+                  width="171"
+                  height="54"
+                />
+              </a>
+            </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
