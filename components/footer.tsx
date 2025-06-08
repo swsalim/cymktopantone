@@ -71,6 +71,26 @@ export default function Footer({ className, ...props }: FooterProps) {
                 />
               </a>
             </div>
+            <div className="pt-4">
+              <a
+                href="https://indie.deals?ref=https%3A%2F%2Fwww.cmyktopantone.com%2F"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}>
+                <span style={{ fontSize: '14px', fontWeight: 500, color: '#4b5563' }}>
+                  Find us on{' '}
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      color: '#0070f3',
+                      position: 'relative',
+                      display: 'inline-block',
+                    }}>
+                    Indie.Deals
+                  </span>
+                </span>
+              </a>
+            </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
