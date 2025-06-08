@@ -60,6 +60,16 @@ export default function Footer({ className, ...props }: FooterProps) {
               </a>
             </div>
             <div className="pt-4">
+              <a href="https://twelve.tools" target="_blank">
+                <img
+                  src="https://twelve.tools/badge0-white.svg"
+                  alt="Featured on Twelve Tools"
+                  width="200"
+                  height="54"
+                />
+              </a>
+            </div>
+            <div className="pt-4">
               <a
                 href="https://startupfa.me/s/cmyk-to-pantone?utm_source=www.cmyktopantone.com"
                 target="_blank">
