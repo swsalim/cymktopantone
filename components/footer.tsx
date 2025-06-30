@@ -101,6 +101,19 @@ export default function Footer({ className, ...props }: FooterProps) {
                 </span>
               </a>
             </div>
+            <div className="pt-4">
+              <a
+                href="https://launchboard.dev/?via=launchboardBadge"
+                target="_blank"
+                rel="noopener">
+                <img
+                  src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
+                  alt="See us on LaunchBoard"
+                  width="120"
+                  height="40"
+                />
+              </a>
+            </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
