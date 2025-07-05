@@ -50,70 +50,6 @@ export default function Footer({ className, ...props }: FooterProps) {
             <p className="text-balance text-base/6 text-gray-100">
               Get instant, accurate Pantone matches for your CMYK colors.
             </p>
-            <div className="pt-4">
-              <a href="https://fazier.com/launches/cmyk-to-pantone-converter" target="_blank">
-                <img
-                  src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4551&badge_type=daily&theme=dark"
-                  width="270"
-                  alt="Fazier badge"
-                />
-              </a>
-            </div>
-            <div className="pt-4">
-              <a href="https://twelve.tools" target="_blank">
-                <img
-                  src="https://twelve.tools/badge0-white.svg"
-                  alt="Featured on Twelve Tools"
-                  width="200"
-                  height="54"
-                />
-              </a>
-            </div>
-            <div className="pt-4">
-              <a
-                href="https://startupfa.me/s/cmyk-to-pantone?utm_source=www.cmyktopantone.com"
-                target="_blank">
-                <img
-                  src="https://startupfa.me/badges/featured-badge.webp"
-                  alt="Featured on Startup Fame"
-                  width="171"
-                  height="54"
-                />
-              </a>
-            </div>
-            <div className="pt-4">
-              <a
-                href="https://indie.deals?ref=https%3A%2F%2Fwww.cmyktopantone.com%2F"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}>
-                <span style={{ fontSize: '14px', fontWeight: 500, color: '#4b5563' }}>
-                  Find us on{' '}
-                  <span
-                    style={{
-                      fontWeight: 700,
-                      color: '#0070f3',
-                      position: 'relative',
-                      display: 'inline-block',
-                    }}>
-                    Indie.Deals
-                  </span>
-                </span>
-              </a>
-            </div>
-            <div className="pt-4">
-              <a
-                href="https://launchboard.dev/?via=launchboardBadge"
-                target="_blank"
-                rel="noopener">
-                <img
-                  src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
-                  alt="See us on LaunchBoard"
-                  width="120"
-                  height="40"
-                />
-              </a>
-            </div>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8 md:col-span-2 md:mt-0 md:grid-cols-3">
             <div className="md:mt-0">
@@ -175,6 +111,95 @@ export default function Footer({ className, ...props }: FooterProps) {
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="mt-16 flex flex-row flex-wrap gap-4 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
+          <div className="shrink-0">
+            <a href="https://fazier.com/launches/cmyk-to-pantone-converter" target="_blank">
+              <img
+                src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4551&badge_type=daily&theme=dark"
+                width="270"
+                alt="Fazier badge"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://twelve.tools" target="_blank">
+              <img
+                src="https://twelve.tools/badge0-white.svg"
+                alt="Featured on Twelve Tools"
+                width="200"
+                height="54"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a
+              href="https://startupfa.me/s/cmyk-to-pantone?utm_source=www.cmyktopantone.com"
+              target="_blank">
+              <img
+                src="https://startupfa.me/badges/featured-badge.webp"
+                alt="Featured on Startup Fame"
+                width="171"
+                height="54"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://launchboard.dev/?via=launchboardBadge" target="_blank" rel="noopener">
+              <img
+                src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
+                alt="See us on LaunchBoard"
+                width="120"
+                height="40"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://liiinks.net" target="_blank">
+              <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+                <rect width="120" height="40" rx="8" fill="#667eea" />
+                <text
+                  x="60"
+                  y="25"
+                  font-family="Arial, sans-serif"
+                  font-size="12"
+                  fill="white"
+                  text-anchor="middle">
+                  Liiinks
+                </text>
+              </svg>
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://theindiewall.net" target="_blank">
+              <img
+                src="https://theindiewall.net/indiewall.svg"
+                alt="IndieWall"
+                width="120"
+                height="60"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a
+              href="https://indie.deals?ref=https%3A%2F%2Fwww.cmyktopantone.com%2F"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}>
+              <span style={{ fontSize: '14px', fontWeight: 500, color: '#4b5563' }}>
+                Find us on{' '}
+                <span
+                  style={{
+                    fontWeight: 700,
+                    color: '#0070f3',
+                    position: 'relative',
+                    display: 'inline-block',
+                  }}>
+                  Indie.Deals
+                </span>
+              </span>
+            </a>
           </div>
         </div>
         <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
