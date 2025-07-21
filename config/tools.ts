@@ -17,6 +17,12 @@ export const tools: Tool[] = [
     isExternal: true,
   },
   {
+    title: 'Indie World Map',
+    href: 'https://www.indieworldmap.com/?ref=cmyktopantone',
+    description: 'Discover & explore indie hacker projects globally.',
+    isExternal: true,
+  },
+  {
     title: 'Random Number Generator',
     href: 'https://www.randomnumberapp.com/?ref=cmyktopantone',
     description: 'Random number generator for numbers 0 to 10,000.',
