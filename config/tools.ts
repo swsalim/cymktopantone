@@ -67,6 +67,13 @@ export const tools: Tool[] = [
     isExternal: true,
   },
   {
+    title: 'mainan.fun',
+    href: 'https://www.mainan.fun/?ref=cmyktopantone',
+    description:
+      "Mainan is where you'll discover handpicked educational toys that blends learning with fun. Perfect picks for curious minds are just a click away!",
+    isExternal: true,
+  },
+  {
     title: 'Will it rain tomorrow?',
     href: 'https://www.willitraintomorrow.com/?ref=cmyktopantone',
     description:
