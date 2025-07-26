@@ -11,6 +11,12 @@ export interface Tool {
 
 export const tools: Tool[] = [
   {
+    title: 'Bye Indonesia',
+    href: 'https://www.byeindonesia.com/?ref=cmyktopantone',
+    description: 'Renunciation of Indonesian Citizenship Guide',
+    isExternal: true,
+  },
+  {
     title: 'Clinic Geek',
     href: 'https://www.clinicgeek.com/?ref=cmyktopantone',
     description: 'Clinic Geek is a directory of clinics in Singapore.',
