@@ -92,6 +92,12 @@ export const tools: Tool[] = [
     description: 'Dental clinics directory in Malaysia',
     isExternal: true,
   },
+  {
+    title: 'GraffitiVibe',
+    href: 'https://www.graffitivibe.pro/?ref=cmyktopantone',
+    description: "Create stunning graffiti art with GraffitiVibe's graffiti generator.",
+    isExternal: true,
+  },
   // {
   //   title: 'Color Blindness Simulator',
   //   href: '/color-blindness',
