@@ -182,6 +182,16 @@ export default function Footer({ className, ...props }: FooterProps) {
             </a>
           </div>
           <div className="shrink-0">
+            <a href="https://turbo0.com/item/cmyk-to-pantone-converter" target="_blank">
+              <img
+                src="https://img.turbo0.com/badge-listed-light.svg"
+                alt="Listed on Turbo0"
+                width="120"
+                height="54"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
             <a
               href="https://indie.deals?ref=https%3A%2F%2Fwww.cmyktopantone.com%2F"
               target="_blank"
