@@ -118,7 +118,8 @@ export default function Footer({ className, ...props }: FooterProps) {
             <a href="https://fazier.com/launches/cmyk-to-pantone-converter" target="_blank">
               <img
                 src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4551&badge_type=daily&theme=dark"
-                width="270"
+                width="170"
+                height="34"
                 alt="Fazier badge"
               />
             </a>
@@ -128,8 +129,8 @@ export default function Footer({ className, ...props }: FooterProps) {
               <img
                 src="https://twelve.tools/badge0-white.svg"
                 alt="Featured on Twelve Tools"
-                width="200"
-                height="54"
+                width="126"
+                height="34"
               />
             </a>
           </div>
@@ -140,8 +141,8 @@ export default function Footer({ className, ...props }: FooterProps) {
               <img
                 src="https://startupfa.me/badges/featured-badge.webp"
                 alt="Featured on Startup Fame"
-                width="171"
-                height="54"
+                width="108"
+                height="34"
               />
             </a>
           </div>
@@ -150,14 +151,14 @@ export default function Footer({ className, ...props }: FooterProps) {
               <img
                 src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
                 alt="See us on LaunchBoard"
-                width="120"
-                height="40"
+                width="102"
+                height="34"
               />
             </a>
           </div>
           <div className="shrink-0">
             <a href="https://liiinks.net" target="_blank">
-              <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+              <svg width="102" height="34" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
                 <rect width="120" height="40" rx="8" fill="#667eea" />
                 <text
                   x="60"
@@ -176,8 +177,8 @@ export default function Footer({ className, ...props }: FooterProps) {
               <img
                 src="https://theindiewall.net/indiewall.svg"
                 alt="IndieWall"
-                width="120"
-                height="60"
+                width="68"
+                height="34"
               />
             </a>
           </div>
@@ -186,8 +187,8 @@ export default function Footer({ className, ...props }: FooterProps) {
               <img
                 src="https://img.turbo0.com/badge-listed-light.svg"
                 alt="Listed on Turbo0"
-                width="120"
-                height="54"
+                width="76"
+                height="34"
               />
             </a>
           </div>
@@ -209,6 +210,26 @@ export default function Footer({ className, ...props }: FooterProps) {
                   Indie.Deals
                 </span>
               </span>
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://magicbox.tools" target="_blank">
+              <img
+                src="https://magicbox.tools/badge.svg"
+                alt="Featured on MagicBox.tools"
+                width="137"
+                height="37"
+              />
+            </a>
+          </div>
+          <div className="shrink-0">
+            <a href="https://dang.ai/" target="_blank">
+              <img
+                src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png"
+                alt="Dang.ai"
+                width="103"
+                height="37"
+              />
             </a>
           </div>
         </div>
