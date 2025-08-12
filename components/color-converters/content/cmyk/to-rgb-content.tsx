@@ -9,30 +9,30 @@ export default function CmykRgbContent() {
       <p>
         In the realm of design and printing, <strong>accurate color conversion</strong> is essential
         to ensure your visuals appear as intended, whether on digital screens or in physical print
-        materials. The <em>CMYK color model</em>, used in printing, represents{' '}
-        <strong>Cyan, Magenta, Yellow, and Key (Black)</strong> inks. Meanwhile, the{' '}
-        <em>RGB color model</em>, optimized for digital displays, is based on{' '}
-        <strong>Red, Green, and Blue</strong> light.
+        materials. The <Link href="/color-models/cmyk">CMYK color model</Link>, used in printing,
+        represents <strong>Cyan, Magenta, Yellow, and Key (Black)</strong> inks. Meanwhile, the{' '}
+        <Link href="/color-models/rgb">RGB color model</Link>, optimized for digital displays, is
+        based on <strong>Red, Green, and Blue</strong> light.
       </p>
       <p>
         Converting between these color models is a common challenge for designers working across
-        mediums. Our
-        <strong>CMYK to RGB converter</strong> streamlines this process, ensuring seamless
-        transitions while preserving the vibrancy and accuracy of your designs.
+        mediums. Our <Link href="/convert-cmyk-to-rgb">CMYK to RGB converter</Link> streamlines this
+        process, ensuring seamless transitions while preserving the vibrancy and accuracy of your
+        designs.
       </p>
 
       <h2>Why Convert CMYK to RGB in Design?</h2>
       <p>
         <strong>RGB colors</strong> are optimized for digital screens, offering a broad spectrum of{' '}
-        <em>vibrant hues</em> ideal for <Link href="/convert-hsl-to-rgb">web design</Link>, mobile
-        apps, and other digital platforms. In contrast, <strong>CMYK</strong>
-        is used in <Link href="/convert-hsl-to-cmyk">print applications</Link>, where inks are mixed
-        to create different colors.
+        <em>vibrant hues</em> ideal for web design, mobile apps, and other digital platforms. In
+        contrast, <strong>CMYK</strong> is used in{' '}
+        <Link href="/convert-hsl-to-cmyk">print applications</Link>, where inks are mixed to create
+        different colors.
       </p>
       <p>
         Converting <strong>CMYK to RGB</strong> is essential when adapting print materials for
         digital use. Without proper conversion, colors may appear <em>muted or inaccurate</em> on
-        screens. Ensuring an accurate color transition helps maintain
+        screens. Ensuring an accurate color transition helps maintain{' '}
         <strong>design consistency</strong> across all platforms.
       </p>
 

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Container } from '@/components/container';
 
 export default function CmykHslContent() {
@@ -6,22 +8,24 @@ export default function CmykHslContent() {
       <h1>CMYK to HSL Conversion</h1>
       <p>
         In the world of design, accurate color conversion is essential for maintaining consistency
-        across different media. The CMYK color model, which stands for Cyan, Magenta, Yellow, and
-        Key (Black), is commonly used in printing. On the other hand, the HSL color model—Hue,
-        Saturation, and Lightness—provides a more intuitive way to work with colors, making it
-        easier to adjust tones and shades for digital applications.
+        across different media. The <Link href="/color-models/cmyk">CMYK color model</Link>, which
+        stands for Cyan, Magenta, Yellow, and Key (Black), is commonly used in printing. On the
+        other hand, the <Link href="/color-models/hsl">HSL color model</Link>—Hue, Saturation, and
+        Lightness—provides a more intuitive way to work with colors, making it easier to adjust
+        tones and shades for digital applications.
       </p>
       <p>
-        Converting CMYK to HSL is crucial for designers and developers who need to adapt print
-        colors for digital use or refine color schemes with greater flexibility. Our CMYK to HSL
-        converter simplifies this process, ensuring accurate and efficient transformations.
+        <Link href="/convert-cmyk-to-hsl">Converting CMYK to HSL</Link> is crucial for designers and
+        developers who need to adapt print colors for digital use or refine color schemes with
+        greater flexibility. Our CMYK to HSL converter simplifies this process, ensuring accurate
+        and efficient transformations.
       </p>
       <h2>Why Should You Convert CMYK to HSL Colors in Design?</h2>
       <p>
-        The HSL color model offers a more natural and human-friendly approach to working with
-        colors. Unlike CMYK, which is subtractive and used for print, HSL allows for easy
-        manipulation of color properties—such as adjusting brightness, saturation, or hue—without
-        affecting the overall integrity of the color.
+        The <Link href="/color-models/hsl">HSL color model</Link> offers a more natural and
+        human-friendly approach to working with colors. Unlike CMYK, which is subtractive and used
+        for print, HSL allows for easy manipulation of color properties—such as adjusting
+        brightness, saturation, or hue—without affecting the overall integrity of the color.
       </p>
       <p>
         By converting CMYK to HSL, designers can seamlessly transition colors from print to digital
