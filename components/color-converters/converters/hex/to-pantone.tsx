@@ -16,6 +16,7 @@ import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import BannerMatching from '@/components/ads/banner-matching';
+import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
 import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
@@ -200,6 +201,10 @@ export default function HexPantoneConverter({ defaultValue }: { defaultValue?: s
               href="/pantone-color-match/classic/medium"
               buttonText="Start Matching"
             />
+
+            <div className="mx-auto my-4">
+              <LazyAdsArticle />
+            </div>
           </div>
 
           <Card>

@@ -35,7 +35,7 @@ export default function PantoneColorsList() {
                   className="flex h-24 w-full cursor-pointer items-center justify-center"
                   style={{ backgroundColor: `#${hex}` }}
                   onClick={() => copyToClipboard(`#${hex}`, 'HEX value')}>
-                  <div className="rounded-full bg-gray-50/50 p-3 text-gray-50 transition-colors duration-300 group-hover:bg-gray-50 dark:text-gray-800 dark:group-hover:text-gray-900">
+                  <div className="rounded-full bg-gray-50/50 p-3 text-gray-50 transition-colors duration-300 group-hover:bg-gray-50 group-hover:text-gray-500 dark:text-gray-800 dark:group-hover:text-gray-900">
                     <CopyIcon className="size-4" />
                   </div>
                 </div>

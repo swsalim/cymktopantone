@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { Container } from '@/components/container';
 import PantoneColorsList from '@/components/pantone-colors';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -59,7 +60,7 @@ export default function PantoneColors() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/pantone-colors')} />
 
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
+        <Container as="section" className="prose dark:prose-invert">
           <h1>Guide to Pantone Colors</h1>
 
           <h2>What are Pantone Colors?</h2>
@@ -88,11 +89,9 @@ export default function PantoneColors() {
           </ul>
         </Container>
 
-        <Wrapper className="mx-auto text-center">
-          <div className="mx-auto">
-            <div ta-ad-container=""></div>
-          </div>
-        </Wrapper>
+        <div className="mx-auto my-14 md:my-20">
+          <LazyAdsLeaderboard />
+        </div>
 
         <Container>
           <PantoneColorsList />
