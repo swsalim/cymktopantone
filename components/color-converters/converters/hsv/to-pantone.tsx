@@ -99,7 +99,7 @@ export default function HsvPantoneConverter() {
   }, [hex, distance, sortOrder]);
 
   return (
-    <Wrapper size="lg">
+    <Wrapper size="lg" className="pb-0 md:pb-0">
       <Container>
         <p>
           Transform your HSV values into Pantone perfection with instant, accurate results. Find the
@@ -296,7 +296,7 @@ export default function HsvPantoneConverter() {
         </Container>
       )}
 
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+      <Container>
         <RelatedTools />
       </Container>
     </Wrapper>

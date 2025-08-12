@@ -32,7 +32,7 @@ export function Wrapper({
   ...props
 }: WrapperProps) {
   return (
-    <Comp {...props} className={cn(wrapperVariants({ size, className }))}>
+    <Comp {...props} className={cn(wrapperVariants({ size }), className)}>
       {children}
     </Comp>
   );

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Container } from '@/components/container';
 
 export default function HexHslContent() {
@@ -6,10 +8,12 @@ export default function HexHslContent() {
       <h1>Hex to HSL Conversion</h1>
       <p>
         In the field of design, achieving the perfect color balance is crucial for creating visually
-        appealing compositions. The HEX color model, widely used in web design, represents colors as
-        a six-character code, making it easy to define and use in digital projects. Meanwhile, the
-        HSL color model, which stands for Hue, Saturation, and Lightness, provides a more intuitive
-        way to manipulate colors based on human perception.
+        appealing compositions. The <Link href="/color-models/hex">HEX color model</Link>, widely
+        used in web design, represents colors as a six-character code, making it easy to define and
+        use in digital projects. Meanwhile, the{' '}
+        <Link href="/color-models/hsl">HSL color model</Link>, which stands for{' '}
+        <strong>Hue, Saturation, and Lightness</strong>, provides a more intuitive way to manipulate
+        colors based on human perception.
       </p>
       <p>
         Converting HEX to HSL is essential for designers and developers who want greater control
@@ -19,14 +23,19 @@ export default function HexHslContent() {
       <h2>Why should you convert Hex to HSL Colors in Design?</h2>
       <p>
         The HSL color model offers a more flexible and user-friendly approach to adjusting colors.
-        Unlike HEX, which directly encodes RGB values, HSL allows designers to fine-tune colors by
-        modifying hue, saturation, and lightness independently. This makes it easier to create color
-        variations, apply consistent themes, and generate harmonious palettes.
+        Unlike HEX, which directly encodes <Link href="/convert-hex-to-rgb">RGB values</Link>, HSL
+        allows designers to fine-tune colors by modifying hue, saturation, and lightness
+        independently. This makes it easier to create color variations, apply consistent themes, and
+        generate harmonious palettes.
       </p>
       <p>
-        Converting HEX to HSL is especially useful for responsive design, where colors need to be
-        dynamically adjusted based on backgrounds, themes, or user preferences. With HSL, achieving
-        subtle shading effects and smooth transitions becomes much more intuitive.
+        <Link href="/convert-hex-to-hsl">Converting HEX to HSL</Link> is especially useful for
+        responsive design, where colors need to be dynamically adjusted based on backgrounds,
+        themes, or user preferences.
+      </p>
+      <p>
+        With HSL, achieving subtle shading effects and smooth transitions becomes much more
+        intuitive.
       </p>
       <h2>How to Convert Hex to HSL for Free?</h2>
       <p>

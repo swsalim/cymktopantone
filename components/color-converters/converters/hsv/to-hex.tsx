@@ -66,7 +66,7 @@ export default function HsvRgbConverter() {
   };
 
   return (
-    <Wrapper size="lg">
+    <Wrapper size="lg" className="pb-0 md:pb-0">
       <Container>
         <p>
           Easily transform your HSV values into HEX values! Enter your HSV values below and get
@@ -130,7 +130,7 @@ export default function HsvRgbConverter() {
           </Card>
         </div>
       </Container>
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+      <Container>
         <RelatedTools />
       </Container>
     </Wrapper>

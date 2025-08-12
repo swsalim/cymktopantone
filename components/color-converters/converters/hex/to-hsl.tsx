@@ -81,7 +81,7 @@ export default function HexHslConverter() {
   };
 
   return (
-    <Wrapper size="lg">
+    <Wrapper size="lg" className="pb-0 md:pb-0">
       <Container>
         <p>
           Easily transform your HEX values into HSL values! Enter your HEX values below and get
@@ -134,7 +134,7 @@ export default function HexHslConverter() {
           </Card>
         </div>
       </Container>
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+      <Container>
         <RelatedTools />
       </Container>
     </Wrapper>

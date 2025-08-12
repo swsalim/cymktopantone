@@ -85,7 +85,7 @@ export default function CmykRgbConverter() {
   };
 
   return (
-    <Wrapper size="lg">
+    <Wrapper size="lg" className="pb-0 md:pb-0">
       <Container>
         <p>
           Easily transform your CMYK values into RGB values! Enter your CMYK values below and get
@@ -154,7 +154,7 @@ export default function CmykRgbConverter() {
           </Card>
         </div>
       </Container>
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+      <Container>
         <RelatedTools />
       </Container>
     </Wrapper>

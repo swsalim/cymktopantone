@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Container } from '@/components/container';
 
 export default function HexCmykContent() {
@@ -6,26 +8,27 @@ export default function HexCmykContent() {
       <h1>Hex to CMYK Conversion</h1>
       <p>
         In the field of design, ensuring accurate color representation across different media is
-        essential. The HEX color model, commonly used in web design, represents colors as a
-        six-character code suitable for digital platforms. Meanwhile, the CMYK color model, which
-        stands for Cyan, Magenta, Yellow, and Key (Black), is the standard for printing.
+        essential. The <Link href="/color-models/hex">HEX color model</Link>, commonly used in web
+        design, represents colors as a six-character code suitable for digital platforms. Meanwhile,
+        the <Link href="/color-models/cmyk">CMYK color model</Link>, which stands for Cyan, Magenta,
+        Yellow, and Key (Black), is the standard for printing.
       </p>
       <p>
         Converting HEX to CMYK is a key task for designers and developers transitioning digital
-        designs to print media. Our HEX to CMYK converter simplifies this process, ensuring precise
-        and reliable results.
+        designs to print media. Our <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link>{' '}
+        simplifies this process, ensuring precise and reliable results.
       </p>
       <h2>Why should you convert Hex to CMYK Colors in Design?</h2>
       <p>
-        CMYK is the preferred color model for printing, as it ensures consistent and accurate color
-        reproduction on physical media. While HEX codes are ideal for web and digital designs, they
-        need to be converted to CMYK values for use in printed materials such as brochures, business
-        cards, and packaging.
+        CMYK is the <strong>preferred color model for printing</strong>, as it ensures consistent
+        and accurate color reproduction on physical media. While HEX codes are ideal for web and
+        digital designs, they need to be converted to CMYK values for use in printed materials such
+        as brochures, business cards, and packaging.
       </p>
       <p>
-        Converting HEX to CMYK allows you to maintain color consistency across both digital and
-        print formats. This is especially important for branding, where accurate color
-        representation is critical to maintaining a cohesive visual identity.
+        Converting HEX to CMYK allows you to maintain <strong>color consistency</strong> across both
+        digital and print formats. This is <i>especially</i> important for branding, where accurate
+        color representation is critical to maintaining a cohesive visual identity.
       </p>
       <h2>How to Convert Hex to CMYK for free?</h2>
       <p>
@@ -41,8 +44,9 @@ export default function HexCmykContent() {
       <h2>What are the key differences between Hex and CMYK?</h2>
       <p>
         HEX and CMYK serve distinct purposes in the design workflow. HEX is a compact and efficient
-        representation of RGB values, making it ideal for digital screens and web design. It is
-        widely used in coding and CSS to define colors precisely.
+        representation of <Link href="/convert-hex-to-rgb">RGB values</Link>, making it ideal for
+        digital screens and web design. It is widely used in coding and CSS to define colors
+        precisely.
       </p>
       <p>
         CMYK, on the other hand, is a subtractive color model used for printing. It creates colors

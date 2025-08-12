@@ -7,6 +7,7 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
+import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
@@ -96,7 +97,7 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
       {converterConfig.sourceColor !== 'PANTONE' && (
         <Wrapper className="mx-auto text-center">
           <div className="mx-auto">
-            <div ta-ad-container=""></div>
+            <LazyAdsLeaderboard />
           </div>
         </Wrapper>
       )}

@@ -165,7 +165,7 @@ export default function PantoneRgbConverter() {
           </div>
         </div>
       </Container>
-      <Container className="flex flex-col items-start gap-4 py-8 md:flex-row md:items-start">
+      <Container>
         <RelatedTools />
       </Container>
     </Wrapper>
