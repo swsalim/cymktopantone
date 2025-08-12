@@ -158,15 +158,8 @@ export default function PantoneRgbConverter() {
                 </CardContent>
               </Card>
 
-              <div className="my-4">
-                <iframe
-                  width="100%"
-                  height="250"
-                  frameBorder="0"
-                  className="ta-widget"
-                  data-min-height="250"
-                  id="67ee0a352dfc280f879388c3-4728"
-                  src="https://app.tinyadz.com/widgets/67ee0a352dfc280f879388c3?seed= 4728&previewMode=false&showInPopup=false&theme=light"></iframe>
+              <div className="mx-auto my-4">
+                <div ta-ad-container=""></div>
               </div>
             </div>
           </div>
