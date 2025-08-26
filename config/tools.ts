@@ -112,6 +112,13 @@ export const tools: Tool[] = [
     isExternal: true,
   },
   {
+    title: 'What Is My Screen Size?',
+    href: 'https://www.whatismyscreensize.com/?ref=cmyktopantone',
+    description:
+      "CInstantly discover your device's screen dimensions, resolution, and display specifications. Free tool to check screen size, pixel density, and more..",
+    isExternal: true,
+  },
+  {
     title: 'GraffitiVibe',
     href: 'https://www.graffitivibe.pro/?ref=cmyktopantone',
     description: "Create stunning graffiti art with GraffitiVibe's graffiti generator.",
