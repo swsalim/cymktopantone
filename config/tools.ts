@@ -115,7 +115,7 @@ export const tools: Tool[] = [
     title: 'What Is My Screen Size?',
     href: 'https://www.whatismyscreensize.com/?ref=cmyktopantone',
     description:
-      "CInstantly discover your device's screen dimensions, resolution, and display specifications. Free tool to check screen size, pixel density, and more..",
+      "Instantly discover your device's screen dimensions, resolution, and display specifications. Free tool to check screen size, pixel density, and more.",
     isExternal: true,
   },
   {
