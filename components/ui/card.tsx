@@ -20,7 +20,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('flex flex-col space-y-1.5 p-6 dark:text-gray-50', className)}
+      className={cn('flex flex-col space-y-1.5 p-6 text-gray-900 dark:text-gray-50', className)}
       {...props}
     />
   ),
@@ -31,7 +31,10 @@ const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivE
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn(
+        'text-2xl font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-50',
+        className,
+      )}
       {...props}
     />
   ),
@@ -42,7 +45,7 @@ const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('text-sm text-gray-500 dark:text-gray-400', className)}
+      className={cn('text-sm text-gray-500 dark:text-gray-300', className)}
       {...props}
     />
   ),

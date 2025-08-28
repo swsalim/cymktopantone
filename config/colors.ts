@@ -2686,25 +2686,52 @@ export const HEX = [
   '3D3935',
 ];
 
-export const colorModels = [
+interface ColorModel {
+  title: string;
+  href: string;
+  description: string;
+  bestFor?: string;
+  coverage?: string;
+  format?: string;
+  benefits?: string;
+  useCases?: string;
+}
+
+export const colorModels: ColorModel[] = [
   {
     title: 'CMYK',
     href: '/color-models/cmyk',
     description: 'Everything You Need to Know about CMYK',
+    bestFor: 'Print materials, magazines, business cards',
+    coverage: 'Up to 70% of visible colors',
+    benefits: 'Accurate color reproduction on paper',
+    useCases: 'Professional printing, packaging design',
   },
   {
     title: 'RGB',
     href: '/color-models/rgb',
     description: 'All You Need to Know About RGB Color Model',
+    bestFor: 'Digital screens, websites, mobile apps',
+    coverage: ' ~35% of visible spectrum (sRGB), up to 75% (wide gamut)',
+    benefits: 'Brightest, most vibrant colors possible',
+    useCases: 'Web design, digital photography, video',
   },
   {
     title: 'HEX',
     href: '/color-models/hex',
     description: 'HEX Color Codes - The Essential Guide for Designers',
+    bestFor: 'Web development, CSS styling, digital workflows',
+    coverage: '16.7 million possible combinations',
+    benefits: 'Universal web compatibility',
+    useCases: 'HTML/CSS, design handoffs, brand guidelines',
   },
   {
     title: 'HSL',
     href: '/color-models/hsl',
     description: 'A Guide to HSL Color Model',
+    bestFor: 'Color adjustments, design systems, accessibility',
+    coverage: 'Hue (0-360°), Saturation (0-100%), Lightness (0-100%)',
+    benefits: 'Human-friendly color manipulation',
+    useCases: 'Perfect for creating color palettes, maintaining brand consistency',
   },
 ];

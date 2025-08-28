@@ -80,11 +80,29 @@ export default function PantoneColors() {
           <h3>Recent Colors of the Year</h3>
           <p>Each year's color selection reflects the global zeitgeist and upcoming trends:</p>
           <ul>
-            <li>2024: Peach Fuzz - A warm and cozy shade that combines pink and orange</li>
-            <li>2023: Viva Magenta - A crimson red tone that balances warmth and coolness</li>
-            <li>2022: Very Peri - A dynamic periwinkle blue with violet-red undertones</li>
             <li>
-              2021: Ultimate Gray + Illuminating - A practical gray paired with an optimistic yellow
+              <a href="https://www.pantone.com/color-of-the-year/2024" target="_blank">
+                2024: Peach Fuzz
+              </a>{' '}
+              - A warm and cozy shade that combines pink and orange
+            </li>
+            <li>
+              <a href="https://interiordesign.net/designwire/pantone-color-of-the-year-2023-viva-magenta/">
+                2023: Viva Magenta
+              </a>{' '}
+              - A crimson red tone that balances warmth and coolness
+            </li>
+            <li>
+              <a href="https://www.americangemsociety.org/welcome-pantones-color-of-the-year-very-peri/">
+                2022: Very Peri
+              </a>{' '}
+              - A dynamic periwinkle blue with violet-red undertones
+            </li>
+            <li>
+              <a href="https://br24.com/en/pantone-color-of-the-year-2021-ultimate-gray-illuminating/">
+                2021: Ultimate Gray + Illuminating
+              </a>{' '}
+              - A practical gray paired with an optimistic yellow
             </li>
           </ul>
         </Container>
