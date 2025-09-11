@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+import { hexFaqs } from '@/config/colors';
 import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
+import Faqs from '@/components/faq';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -338,6 +340,16 @@ export default function ColorModelHex() {
           </ul>
 
           <p>By mastering HEX, you’ll create stunning, accurate digital designs every time!</p>
+        </Container>
+      </Wrapper>
+
+      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+        <Container>
+          <Faqs
+            tagline="A list of questions we get asked often"
+            description="Have questions about HEX? We've got you covered."
+            data={hexFaqs}
+          />
         </Container>
       </Wrapper>
     </>

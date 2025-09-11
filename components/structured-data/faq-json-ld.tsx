@@ -5,7 +5,7 @@ export default function FaqJsonLd({
 }: {
   questionListElement: {
     id?: number;
-    category: string;
+    category?: string;
     question: string;
     answer: string;
   }[];

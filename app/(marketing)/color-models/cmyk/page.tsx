@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+import { cmykFaqs } from '@/config/colors';
 import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
+import Faqs from '@/components/faq';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -250,6 +252,15 @@ export default function ColorModelCmyk() {
             Are you designing in RGB and hoping for the best, or are you making informed CMYK
             decisions from project inception?
           </p>
+        </Container>
+      </Wrapper>
+      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+        <Container>
+          <Faqs
+            tagline="A list of questions we get asked often"
+            description="Have questions about CMYK? We've got you covered."
+            data={cmykFaqs}
+          />
         </Container>
       </Wrapper>
     </>

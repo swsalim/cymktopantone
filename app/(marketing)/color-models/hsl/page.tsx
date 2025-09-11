@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+import { hslFaqs } from '@/config/colors';
 import { siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
+import Faqs from '@/components/faq';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -126,15 +128,18 @@ export default function ColorModelHsl() {
           <section>
             <h2>Why Designers and Developers Prefer HSL Over RGB</h2>
             <p>
-              RGB (Red, Green, Blue) is great for <strong>digital displays</strong>, but let’s be
-              honest… <strong>it’s not designer-friendly</strong>.
+              <Link href="/color-models/rgb">RGB (Red, Green, Blue)</Link> is great for{' '}
+              <strong>digital displays</strong>, but let’s be honest…{' '}
+              <strong>it’s not designer-friendly</strong>.
             </p>
             <p>Why? Because tweaking colors in RGB is a pain.</p>
             <p>
               Let’s say you want a darker blue. In RGB, you have to manually decrease the Red and
               Green values, which feels like a guessing game.
             </p>{' '}
-            <p>With HSL, you just reduce the lightness.</p>{' '}
+            <blockquote>
+              With HSL, you just <strong>reduce</strong> the lightness.
+            </blockquote>
             <p>Want a less intense red? In RGB, you need to adjust multiple values.</p>{' '}
             <p>In HSL, you only lower the saturation.</p>{' '}
             <p>
@@ -147,8 +152,10 @@ export default function ColorModelHsl() {
             <h2>How to Convert HSL to Other Color Models</h2>
             <p>
               Designers often need to <strong>convert between HSL and other color models</strong>{' '}
-              like RGB, HEX, or CMYK. These conversions are crucial for web design, printing, and
-              more. To make life easier for you, here's a handy{' '}
+              like <Link href="/color-models/rgb">RGB</Link>,{' '}
+              <Link href="/color-models/hex">HEX</Link>, or{' '}
+              <Link href="/color-models/cmyk">CMYK</Link>. These conversions are crucial for web
+              design, printing, and more. To make life easier for you, here's a handy{' '}
               <Link href="/convert-hsl-to-rgb">tool for converting HSL to RGB</Link>.
             </p>
           </section>
@@ -157,11 +164,12 @@ export default function ColorModelHsl() {
             <h2>Pantone and Its Connection to HSL</h2>
 
             <p>
-              No discussion about colors is complete without mentioning <strong>Pantone</strong>.
-              Pantone LLC is the company renowned for its proprietary color space, the Pantone
-              Matching System (PMS). This system is extensively used in various industries
-              concerning paint, fabric, and plastics. With a solid Pantone reference, you can ensure
-              that specific hues are consistent across different producers regardless of location.
+              No discussion about colors is complete without mentioning <strong>Pantone</strong>.{' '}
+              <a href="https://www.pantone.com/">Pantone LLC</a> is the company renowned for its
+              proprietary color space, the Pantone Matching System (PMS). This system is extensively
+              used in various industries concerning paint, fabric, and plastics. With a solid
+              Pantone reference, you can ensure that specific hues are consistent across different
+              producers regardless of location.
             </p>
 
             <p>
@@ -211,6 +219,16 @@ export default function ColorModelHsl() {
               possibilities!
             </p>
           </section>
+        </Container>
+      </Wrapper>
+
+      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+        <Container>
+          <Faqs
+            tagline="A list of questions we get asked often"
+            description="Have questions about HSL? We've got you covered."
+            data={hslFaqs}
+          />
         </Container>
       </Wrapper>
     </>
