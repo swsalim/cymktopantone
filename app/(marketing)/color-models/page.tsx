@@ -123,9 +123,9 @@ export default function ColorModelsPage() {
         </Container>
       </Wrapper>
       <Wrapper className="mx-auto text-center">
-        <div className="mx-auto">
+        <Container>
           <div ta-ad-container=""></div>
-        </div>
+        </Container>
       </Wrapper>
       <Wrapper className="pb-20 md:pb-24">
         <Container>
