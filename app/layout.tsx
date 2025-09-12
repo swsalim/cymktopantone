@@ -122,8 +122,8 @@ export default function RootLayout({
           crossOrigin="anonymous"></script>
         <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
         <script
-          src="https://app.tinyadz.com/scripts/v1.0/ads.js"
-          site-id="67ee06492dfc280f87938650"
+          src="https://cdn.apitiny.net/scripts/v2.0/main.js"
+          data-site-id="67ee06492dfc280f87938650"
           async></script>
         <script async src="https://app.tinyadz.com/libs/widget.js" type="module"></script>
         <script async src="https://app.tinyadz.com/libs/manager.js" type="module"></script>
