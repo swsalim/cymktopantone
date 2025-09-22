@@ -30,8 +30,13 @@ export default function BannerUnicorn() {
             <span className="block text-sm text-yellow-700">
               Unicorn Platform is the best website builder for busy founders.
             </span>
-            <div className="mt-2 inline-block rounded-md bg-yellow-600 px-2 py-1 text-xs font-medium uppercase text-yellow-100">
-              Featured
+            <div className="flex flex-row items-center gap-x-2">
+              <div className="mt-2 inline-block rounded-md bg-yellow-600 px-2 py-1 text-xs font-medium uppercase text-yellow-100">
+                20% OFF
+              </div>
+              <div className="mt-2 inline-block rounded-md bg-yellow-600 px-2 py-1 text-xs font-medium uppercase text-yellow-100">
+                Code: viafirst20
+              </div>
             </div>
           </div>
         </div>
