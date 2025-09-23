@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
+
 import { Info } from 'lucide-react';
 
 import { cmykToRgb, findMatchingPMSColors, rgbToHex, rgbToHsl, rgbToHsv } from '@/lib/colors';
@@ -15,6 +17,7 @@ import { ColorValueDisplay } from '@/components/color-converters/shared/color-va
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
 import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
 import { Container } from '@/components/container';
+import { ImageKit } from '@/components/image-kit';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -215,6 +218,32 @@ export default function CmykPantoneConverter() {
                 </div>
               </CardContent>
             </Card>
+
+            <div className="my-4 flex flex-col items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-gray-50/50 p-6 shadow-sm md:flex-row dark:border-gray-700 dark:bg-gray-900">
+              <div>
+                <div className="relative h-10 w-10">
+                  <ImageKit
+                    directory="cymktopantone/logos"
+                    src="codefast.png"
+                    width={150}
+                    height={150}
+                    alt="Want to learn to code for entrepreneurship? 💻"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex grow flex-col items-center justify-between md:items-start">
+                <h2 className="mb-1 flex items-center gap-2 text-xl font-semibold text-gray-800 dark:text-gray-50">
+                  CodeFast
+                </h2>
+                <p className="text-base font-medium text-gray-500 dark:text-gray-200">
+                  Learn to code in weeks, not months
+                </p>
+              </div>
+              <Link href="https://codefa.st/?via=cymktopantone">
+                <Button>GET 43% OFF DEAL</Button>
+              </Link>
+            </div>
 
             <BannerMatching
               title="Play the Pantone Color Match Game!"
