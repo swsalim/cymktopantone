@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import { ImageKit } from '@/components/image-kit';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -61,7 +62,7 @@ export default function ColorModelRgb() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/rgb')} />
 
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
+        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
           <h1>The RGB Color Model: Mastering Digital Colors for Perfect Screen Display</h1>
           In 2018, a major streaming platform discovered that their iconic red logo appeared purple
           on nearly 30% of mobile devices. The color that tested perfectly in their design studios
@@ -79,6 +80,17 @@ export default function ColorModelRgb() {
             look stunning whether viewed on a smartphone, tablet, desktop monitor, or smart TV.
             Let's dive into the foundation of every pixel you see.
           </p>
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="rgb-color-model.jpg"
+              width={600}
+              height={600}
+              alt="RGB Color Model"
+              className="mx-auto"
+            />
+            <figcaption>Credit: gotprint.com</figcaption>
+          </figure>
           <h2>RGB Decoded: The Building Blocks of Every Pixel You See</h2>
           <p>
             RGB stands for Red, Green, and Blue—the three primary colors of light that combine to
@@ -124,6 +136,17 @@ export default function ColorModelRgb() {
             sub-pixels, while OLED screens generate colored light directly from organic compounds
             that emit specific wavelengths when electrically stimulated.
           </p>
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="additive-color-mixing.png"
+              width={350}
+              height={350}
+              alt="Additive Color Mixing"
+              className="mx-auto"
+            />
+            <figcaption>Credit: wikipedia.org</figcaption>
+          </figure>
           <p>
             The magic happens at the sub-pixel level, where microscopic elements combine to fool
             your eye into seeing continuous color. When you specify RGB(128,255,64) for a bright

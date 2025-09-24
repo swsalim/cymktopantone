@@ -8,11 +8,12 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import { ImageKit } from '@/components/image-kit';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
 const config = {
-  title: 'The CMYK Color Model: Your Complete Guide to Print-Perfect Colors',
+  title: 'CMYK Color Model: Your Complete Guide to Print-Perfect Colors',
   description:
     'Master CMYK color printing with our complete guide. Learn RGB vs CMYK differences, avoid costly print mistakes, and achieve professional results every time.',
   url: '/color-models/cmyk',
@@ -61,8 +62,8 @@ export default function ColorModelCmyk() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/cmyk')} />
 
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-          <h1>The CMYK Color Model: Your Complete Guide to Print-Perfect Colors</h1>
+        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
+          <h1>CMYK Color Model: Your Complete Guide to Print-Perfect Colors</h1>
 
           <p>
             Picture this: A marketing agency spent $50,000 on a high-profile print campaign for
@@ -72,6 +73,18 @@ export default function ColorModelCmyk() {
             avoided with proper knowledge of how print colors work.
           </p>
 
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="cmyk-color-model.svg"
+              width={400}
+              height={400}
+              alt="CMYK Color Swatches"
+              className="mx-auto"
+            />
+            <figcaption>CMYK Color Model</figcaption>
+          </figure>
+
           <p>
             If you've ever wondered why your printed materials don't match what you see on screen,
             or if you're tired of disappointing print results, you're in the right place.
@@ -79,13 +92,25 @@ export default function ColorModelCmyk() {
             consistent print results that save you time, money, and frustration.
           </p>
 
-          <h2>CMYK Demystified: What Those Four Letters Really Mean</h2>
+          <h2>What Those Four Letters Really Mean</h2>
 
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="cmyk-color-swatches.svg"
+              width={300}
+              height={300}
+              alt="CMYK Color Swatches"
+              className="mx-auto"
+            />
+            <figcaption>CMYK Color Swatches</figcaption>
+          </figure>
           <p>
-            CMYK stands for Cyan, Magenta, Yellow, and Key (Black)—the four ink colors that form the
-            foundation of modern commercial printing. Unlike the digital world where colors glow
-            from your screen, CMYK operates on subtractive color theory, where colors are created by
-            absorbing (subtracting) specific wavelengths of light from white paper.
+            CMYK stands for <strong>Cyan, Magenta, Yellow, and Key (Black)</strong>—the four ink
+            colors that form the foundation of modern commercial printing. Unlike the digital world
+            where colors glow from your screen, CMYK operates on subtractive color theory, where
+            colors are created by absorbing (subtracting) specific wavelengths of light from white
+            paper.
           </p>
 
           <p>
@@ -114,9 +139,22 @@ export default function ColorModelCmyk() {
 
           <h2>CMYK vs. RGB: The Great Color Showdown</h2>
 
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="rgb-vs-cmyk.jpg"
+              width={600}
+              height={600}
+              alt="RGB vs CMYK"
+              className="mx-auto"
+            />
+            <figcaption>Credit: andacademy.com</figcaption>
+          </figure>
+
           <p>
             Understanding the difference between CMYK and RGB is crucial for anyone working with
-            both digital and print media. RGB (Red, Green, Blue) uses additive color
+            both digital and print media.{' '}
+            <Link href="/color-models/rgb">RGB (Red, Green, Blue)</Link> uses additive color
             mixing—combining light to create colors on screens. The more light you add, the brighter
             the result, with all three colors at full intensity producing white.
           </p>
@@ -145,6 +183,19 @@ export default function ColorModelCmyk() {
             specific patterns. These microscopic dots, when viewed from normal reading distance,
             optically blend to create the illusion of continuous tones and mixed colors.
           </p>
+
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="cmyk-printing.webp"
+              width={900}
+              height={900}
+              alt="CMYK Color Swatches"
+              className="mx-auto"
+            />
+            <figcaption>Credit: printplace.com</figcaption>
+          </figure>
+
           <p>
             Each color separation (C, M, Y, K) is printed as a pattern of dots at slightly different
             angles to prevent unwanted moiré patterns. The size and spacing of these dots determine
@@ -165,6 +216,19 @@ export default function ColorModelCmyk() {
             brochures, business cards, magazine advertisements, product packaging, and large-format
             banners all rely on CMYK printing for consistent, professional results.
           </p>
+
+          <figure className="text-center">
+            <ImageKit
+              directory="cymktopantone/images"
+              src="cmyk-printing-result.jpg"
+              width={600}
+              height={600}
+              alt="CMYK Printing Result"
+              className="mx-auto"
+            />
+            <figcaption>Credit: printingsolutions.com</figcaption>
+          </figure>
+
           <p>
             In publishing, newspapers and magazines have perfected CMYK reproduction to deliver
             readable text and appealing images at high speeds and low costs. The ability to maintain

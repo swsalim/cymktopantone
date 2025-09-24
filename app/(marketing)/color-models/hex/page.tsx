@@ -61,7 +61,7 @@ export default function ColorModelHex() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/hex')} />
 
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
+        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
           <h1>HEX Color Codes - The Essential Guide for Designers</h1>
 
           <p>

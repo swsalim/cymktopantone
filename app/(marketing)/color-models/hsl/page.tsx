@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import { ImageKit } from '@/components/image-kit';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -61,7 +62,7 @@ export default function ColorModelHsl() {
       <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/hsl')} />
 
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
+        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
           <h1>A Guide to HSL Color Model</h1>
 
           <p>
@@ -80,6 +81,19 @@ export default function ColorModelHsl() {
               model. Imagine trying to mix paint colors; HSL helps us visualize color adjustments
               the same way!
             </p>
+
+            <figure className="text-center">
+              <ImageKit
+                directory="cymktopantone/images"
+                src="hsl-color-model.png"
+                width={600}
+                height={600}
+                alt="HSL Color Model"
+                className="mx-auto"
+              />
+              <figcaption>Credit: giggster.com</figcaption>
+            </figure>
+
             <p>Here's how it works:</p>
             <ul>
               <li>
@@ -140,6 +154,17 @@ export default function ColorModelHsl() {
             <blockquote>
               With HSL, you just <strong>reduce</strong> the lightness.
             </blockquote>
+            <figure className="text-center">
+              <ImageKit
+                directory="cymktopantone/images"
+                src="hsl-color-wheel.png"
+                width={400}
+                height={400}
+                alt="HSL Color Wheel"
+                className="mx-auto"
+              />
+              <figcaption>Credit: js-craft.io</figcaption>
+            </figure>
             <p>Want a less intense red? In RGB, you need to adjust multiple values.</p>{' '}
             <p>In HSL, you only lower the saturation.</p>{' '}
             <p>
@@ -164,7 +189,9 @@ export default function ColorModelHsl() {
             <h2>Pantone and Its Connection to HSL</h2>
 
             <p>
-              No discussion about colors is complete without mentioning <strong>Pantone</strong>.{' '}
+              No discussion about colors is complete without mentioning <strong>Pantone</strong>.
+            </p>
+            <p>
               <a href="https://www.pantone.com/">Pantone LLC</a> is the company renowned for its
               proprietary color space, the Pantone Matching System (PMS). This system is extensively
               used in various industries concerning paint, fabric, and plastics. With a solid
@@ -183,24 +210,16 @@ export default function ColorModelHsl() {
           </section>
 
           <section>
-            <h2>The Artistic Side of HSL</h2>
-
-            <p>
-              Working with the HSL color model can feel like unleashing your inner artist. You get
-              to experiment with different hues without worrying about technicalities like luminance
-              values which usually come with RGB. Here's a simple creative activity: try adjusting
-              only the hue component of a color and observe the spectrum of shades you can produce.
-              With <strong>HSL</strong>, creativity is practically limitless!
-            </p>
-
             <h2>Why HSL is Essential for Designers</h2>
 
             <p>
               For us design aficionados, understanding the HSL model is akin to having a magic wand!
               With its simplicity and practicality, HSL simplifies complex color adjustments, making
-              it easier to tweak designs for <em>mood, tone, and brand alignment</em>. Using tools
-              like our <Link href="/convert-hsl-to-cmyk">HSL to CMYK converter</Link> allows
-              seamless transference from screen to print.
+              it easier to tweak designs for <em>mood, tone, and brand alignment</em>.
+            </p>
+            <p>
+              Using tools like our <Link href="/convert-hsl-to-cmyk">HSL to CMYK converter</Link>{' '}
+              allows seamless transference from screen to print.
             </p>
 
             <h2>Conclusion</h2>
