@@ -101,6 +101,11 @@ export default function RootLayout({
             __html: `window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`,
           }}
         />
+        <script
+          defer
+          data-website-id="68d7a5656356c21d79fe895d"
+          data-domain="cmyktopantone.com"
+          src="https://datafa.st/js/script.js"></script>
       </head>
       <body
         className={cn(
