@@ -106,6 +106,7 @@ export default function RootLayout({
           data-website-id="68d7a5656356c21d79fe895d"
           data-domain="cmyktopantone.com"
           src="https://datafa.st/js/script.js"></script>
+        <script async src="https://cdn.seline.com/seline.js" data-token="a9e4cfbdd5cd10a"></script>
       </head>
       <body
         className={cn(
