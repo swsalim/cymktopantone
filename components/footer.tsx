@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
+import { siteConfig } from '@/config/site';
 import { tools } from '@/config/tools';
 
 import { cn } from '@/lib/utils';
@@ -234,15 +235,29 @@ export default function Footer({ className, ...props }: FooterProps) {
           </div>
         </div>
         <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
-          <p className="text-sm text-gray-300">
-            &copy; {currentYear}{' '}
-            <a
-              href="https://www.yuurrific.com?ref=cmyktopantone"
-              className="font-medium text-violet-400 transition hover:text-violet-400"
-              target="_blank">
-              Yuurrific
-            </a>
-            . All rights reserved.
+          <p className="text-sm leading-5 text-gray-100">
+            &copy; {currentYear} {siteConfig.siteName}.
+            <span className="ml-2 mt-0 inline-block text-gray-100">
+              Built by{' '}
+              <a
+                href="https://www.yuurrific.com?ref=dentalclinicclosetome.my"
+                className="inline-block font-medium underline underline-offset-4 transition-colors duration-200 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-100 focus:ring-offset-2 focus:ring-offset-gray-900"
+                target="_blank"
+                rel="noopener noreferrer">
+                Yuurrific
+              </a>
+              .
+            </span>
+            <span className="mt-2 block text-gray-100 md:ml-2 md:mt-0 md:inline-block">
+              Privacy-friendly analytics by{' '}
+              <a
+                href="https://seline.com/?via=yuyu"
+                className="inline-block rotate-0 rounded-md bg-blue-600 px-2 py-1 text-gray-100 transition duration-100 ease-out hover:-rotate-3 hover:bg-blue-700 hover:ease-in focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                target="_blank"
+                rel="noopener noreferrer">
+                Seline
+              </a>
+            </span>
           </p>
         </div>
       </div>
