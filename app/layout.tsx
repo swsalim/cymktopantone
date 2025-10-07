@@ -77,10 +77,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="//ik.imagekit.io" />
-        <link rel="preconnect" href="//cdn.seline.com" />
         <link rel="preconnect" href="//analytics.ahrefs.com" />
         <link rel="dns-prefetch" href="//analytics.ahrefs.com" />
-        <link rel="dns-prefetch" href="//cdn.seline.com" />
         <link rel="dns-prefetch" href="//ik.imagekit.io" />
         <LogoJsonLd logo={absoluteUrl('/icons/logo.png')} url={absoluteUrl()} />
         <script
@@ -92,7 +90,7 @@ export default function RootLayout({
           data-token="c2fbac7b-0b09-48f0-b925-7a5a61de2a3b"
           async></script>
         <script
-          src="https://stats.cmyktopantone.com/seline.js"
+          src="https://stats.cmyktopantone.com/ennui.js"
           data-api-host="https://stats.cmyktopantone.com"
           data-token="a9e4cfbdd5cd10a"
           async></script>
