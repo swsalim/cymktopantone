@@ -1,8 +1,8 @@
 'use client';
 
+import { track } from '@vercel/analytics';
 import { Award, BarChart3, Clock, Repeat, Trophy } from 'lucide-react';
 
-import { saEvent } from '@/lib/analytics';
 import { GameStats } from '@/lib/hooks/use-pantone-game-stats';
 
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
 
   const handleResetStats = () => {
     onReset();
-    saEvent('stats_reset');
+    track('stats_reset');
   };
 
   const statItems = [

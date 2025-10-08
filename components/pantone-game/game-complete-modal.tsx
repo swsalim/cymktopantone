@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { track } from '@vercel/analytics';
 import { AlertTriangle, Shuffle, Timer, Trophy } from 'lucide-react';
-
-import { saEvent } from '@/lib/analytics';
 
 import { ShareResults } from '@/components/pantone-game/share-results';
 import { Button } from '@/components/ui/button';
@@ -66,10 +65,10 @@ export function GameCompleteModal({
 
       // Track modal view event
       if (isWin) {
-        saEvent(`results_view_win_${gameMode}${difficulty ? `_${difficulty}` : ''}`);
+        track(`results_view_win_${gameMode}${difficulty ? `_${difficulty}` : ''}`);
       } else {
         const lossReason = getLossReasonType();
-        saEvent(`results_view_loss_${gameMode}${difficulty ? `_${difficulty}` : ''}_${lossReason}`);
+        track(`results_view_loss_${gameMode}${difficulty ? `_${difficulty}` : ''}_${lossReason}`);
       }
     }
   }, [isOpen, moves, timeInSeconds, isMounted, gameMode, difficulty, isWin]);
@@ -90,7 +89,7 @@ export function GameCompleteModal({
   // Handle the play again button click properly
   const handlePlayAgain = () => {
     // Track play again event
-    saEvent(`play_again_from_results_${gameMode}${difficulty ? `_${difficulty}` : ''}`);
+    track(`play_again_from_results_${gameMode}${difficulty ? `_${difficulty}` : ''}`);
 
     // Close the modal first
     onClose();
@@ -102,7 +101,7 @@ export function GameCompleteModal({
   // Handle dialog close event
   const handleOpenChange = (open: boolean) => {
     if (open !== isOpen && !open) {
-      saEvent('results_modal_dismissed');
+      track('results_modal_dismissed');
       onClose();
     }
   };
@@ -219,9 +218,7 @@ export function GameCompleteModal({
             timeInSeconds={finalStats.timeInSeconds}
             gameMode={gameMode}
             isWin={isWin}
-            onShare={() =>
-              saEvent(`share_results_${gameMode}${difficulty ? `_${difficulty}` : ''}`)
-            }
+            onShare={() => track(`share_results_${gameMode}${difficulty ? `_${difficulty}` : ''}`)}
           />
         </DialogFooter>
       </DialogContent>

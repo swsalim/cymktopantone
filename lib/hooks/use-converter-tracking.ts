@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { saEvent } from '@/lib/analytics';
+import { track } from '@vercel/analytics';
 
 /**
  * Hook for tracking converter usage in color conversion components
@@ -25,7 +25,7 @@ export function useConverterTracking(
     if (trackingValue !== lastTrackedValue && trackingValue) {
       // Set a timeout to prevent tracking rapid changes
       const timer = setTimeout(() => {
-        saEvent(`conversion_${sourceColor}_to_${targetColor}`);
+        track(`conversion_${sourceColor}_to_${targetColor}`);
         setLastTrackedValue(trackingValue);
       }, debounceMs);
 
@@ -35,20 +35,20 @@ export function useConverterTracking(
 
   // Track page view on component mount
   useEffect(() => {
-    saEvent(`converter_usage_${sourceColor}_to_${targetColor}`);
+    track(`converter_usage_${sourceColor}_to_${targetColor}`);
   }, [sourceColor, targetColor]);
 
   // Helper functions for tracking specific events
   const trackCopy = (valueType: string) => {
-    saEvent(`copy_${valueType.toLowerCase()}_value`);
+    track(`copy_${valueType.toLowerCase()}_value`);
   };
 
   const trackAddToHistory = () => {
-    saEvent(`add_to_history_${sourceColor.toLowerCase()}_to_${targetColor.toLowerCase()}`);
+    track(`add_to_history_${sourceColor.toLowerCase()}_to_${targetColor.toLowerCase()}`);
   };
 
   const trackSelectFromHistory = () => {
-    saEvent(`select_from_history_${sourceColor.toLowerCase()}_to_${targetColor.toLowerCase()}`);
+    track(`select_from_history_${sourceColor.toLowerCase()}_to_${targetColor.toLowerCase()}`);
   };
 
   return {

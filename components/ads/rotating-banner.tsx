@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { saEvent } from '@/lib/analytics';
+import { track } from '@vercel/analytics';
 
 // import BannerCodefast from '@/components/ads/banner-codefast';
 // import BannerFrogDr from '@/components/ads/banner-frogdr';
@@ -91,9 +91,9 @@ export default function RotatingBanner() {
 }
 
 function trackImpression(version: string) {
-  saEvent(`Banner ${version} impression`);
+  track(`Banner ${version} impression`);
 }
 
 function trackClick(version: string) {
-  saEvent(`Banner ${version} click`);
+  track(`Banner ${version} click`);
 }

@@ -1,8 +1,8 @@
 'use client';
 
+import { track } from '@vercel/analytics';
 import { Trash2, X } from 'lucide-react';
 
-import { saEvent } from '@/lib/analytics';
 import { cmykToRgb, convertPantoneToHex, hslToRgb, hsvToRgb } from '@/lib/colors';
 import { rgbToHex } from '@/lib/colors';
 import { ColorHistoryItem, ColorHistoryState } from '@/lib/hooks/use-color-history';
@@ -80,21 +80,19 @@ export function ColorHistory({ history, onColorSelect }: ColorHistoryProps) {
 
   const handleColorSelect = (sourceValue: string, item: ColorHistoryItem) => {
     // Track color selection from history
-    saEvent(
-      `history_select_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`,
-    );
+    track(`history_select_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`);
     onColorSelect(sourceValue);
   };
 
   const handleClearHistory = () => {
     // Track clearing history
-    saEvent('clear_color_history');
+    track('clear_color_history');
     history.clearHistory();
   };
 
   const handleRemoveFromHistory = (id: string, item: ColorHistoryItem) => {
     // Track removing item from history
-    saEvent(
+    track(
       `remove_from_history_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`,
     );
     history.removeFromHistory(id);

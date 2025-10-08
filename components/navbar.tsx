@@ -83,6 +83,11 @@ export const navItems: {
     name: 'More Tools',
     childItems: tools,
   },
+  {
+    name: 'Advertise',
+    childItems: [],
+    href: '/advertise',
+  },
 ];
 
 const ListItem = React.forwardRef<
