@@ -11,7 +11,7 @@ import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
 import BannerMatching from '@/components/ads/banner-matching';
-import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
+import SponsoredSlot from '@/components/ads/sponsored-slot';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
@@ -253,7 +253,7 @@ export default function CmykPantoneConverter() {
             />
 
             <div className="mx-auto my-4">
-              <LazyAdsArticle />
+              <SponsoredSlot />
             </div>
           </div>
 

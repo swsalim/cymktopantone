@@ -11,6 +11,7 @@ import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useIsMobile } from '@/lib/hooks/use-mobile';
 import { useToast } from '@/lib/hooks/use-toast';
 
+import SponsoredSlot from '@/components/ads/sponsored-slot';
 import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-history-button';
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
@@ -159,7 +160,7 @@ export default function PantoneRgbConverter() {
               </Card>
 
               <div className="mx-auto my-4">
-                <div ta-ad-container=""></div>
+                <SponsoredSlot />
               </div>
             </div>
           </div>

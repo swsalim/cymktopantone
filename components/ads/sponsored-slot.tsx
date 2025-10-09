@@ -6,18 +6,14 @@ import { useIsMobile } from '@/lib/hooks/use-mobile';
 
 import { ImageKit } from '@/components/image-kit';
 
-interface SponsoredSlotProps {
-  href: string;
-}
-
-export default function SponsoredSlot({ href }: SponsoredSlotProps) {
+export default function SponsoredSlot() {
   const isMobile = useIsMobile();
-  const imageSrc = isMobile ? 'unicorn-platform-mobile.png' : 'unicorn-platform-desktop.png';
+  const imageSrc = 'pantone-color-book.png';
   const width = isMobile ? 350 : 728;
   const height = isMobile ? 350 : 728;
 
   return (
-    <Link href={href}>
+    <Link href="https://go.yuurrific.com/pantone" target="_blank" rel="noopener noreferrer">
       <ImageKit
         directory="cymktopantone/banners"
         src={imageSrc}
