@@ -96,10 +96,7 @@ export default function AdvertisePage() {
 
         <p>
           Visit our{' '}
-          <a
-            href="https://app.seline.com/share/www.cmyktopantone.com"
-            target="_blank"
-            rel="noopener noreferrer">
+          <a href="https://dub.sh/sln/cmykpantone" target="_blank" rel="noopener noreferrer">
             analytics dashboard
           </a>{' '}
           powered by{' '}
