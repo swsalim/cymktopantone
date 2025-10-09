@@ -148,6 +148,17 @@ export default function ColorModelHex() {
             and compatible with CSS.
           </p>
 
+          <p>
+            Find out how you could use HEX colors in your TailwindCSS configuration in this blog
+            post:{' '}
+            <a
+              href="https://www.yuurrific.com/dev/mastering-tailwindcss-colors"
+              target="_blank"
+              rel="noopener noreferrer">
+              Streamlining Your Color Palette: Mastering TailwindCSS Configuration
+            </a>
+          </p>
+
           <h2>HEX vs. RGB: What’s the Difference?</h2>
 
           <p>

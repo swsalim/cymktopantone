@@ -105,6 +105,14 @@ export default function RgbHexContent() {
           <li>
             <Link href="/convert-rgb-to-hsl">RGB to HSL Converter</Link>
           </li>
+          <li>
+            <a
+              href="https://www.yuurrific.com/dev/mastering-tailwindcss-colors"
+              target="_blank"
+              rel="noopener noreferrer">
+              Streamlining Your Color Palette: Mastering TailwindCSS Configuration
+            </a>
+          </li>
         </ul>
       </p>
       <p>
