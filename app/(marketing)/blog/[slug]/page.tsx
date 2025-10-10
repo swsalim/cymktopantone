@@ -8,6 +8,7 @@ import { format, parseISO } from 'date-fns';
 
 import { siteConfig } from '@/config/site';
 
+import { getTableOfContents } from '@/lib/toc';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import { ImageKit } from '@/components/image-kit';
@@ -15,6 +16,7 @@ import BlogPostJsonLd from '@/components/structured-data/BlogPostJsonLd';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
+import TableOfContents from '@/components/table-of-contents';
 import Breadcrumb from '@/components/ui/breadcrumb';
 
 type BlogPostPageProps = {
@@ -23,9 +25,15 @@ type BlogPostPageProps = {
   }>;
 };
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+async function getPost({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = allPosts.find((post) => post._meta.path === slug);
+  if (!post) notFound();
+  return post;
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const post = await getPost({ params });
 
   if (!post) notFound();
 
@@ -73,7 +81,7 @@ function PageHeading({
 }) {
   return (
     <div className="mb-6 max-w-3xl text-gray-500">
-      <h1 className="mb-2 text-3xl font-semibold leading-tight tracking-tight text-gray-950 sm:text-4xl md:text-5xl md:font-black dark:text-gray-50">
+      <h1 className="mb-4 text-3xl font-semibold !leading-tight tracking-tight text-gray-950 sm:text-4xl md:text-5xl md:font-bold dark:text-gray-50">
         {title}
       </h1>
       <div className="flex flex-row items-center justify-start gap-3 md:gap-6">
@@ -95,8 +103,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const post = allPosts.find((post) => post._meta.path === slug);
+  const post = await getPost({ params });
 
   if (!post) notFound();
 
@@ -130,6 +137,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     Link,
   };
 
+  const toc = await getTableOfContents(post._meta.path);
+
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
@@ -162,6 +171,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <MDXContent code={post.mdx} components={{ ...components }} />
             </div>
           </article>
+
+          {/* Table of Contents Sidebar */}
+          <TableOfContents toc={toc} />
         </div>
       </main>
     </>
