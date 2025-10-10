@@ -10,8 +10,8 @@ import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
 import { pantoneCategories } from '@/config/pantoneCategories';
 import { siteConfig } from '@/config/site';
-import { tools } from '@/config/tools';
 
+// import { tools } from '@/config/tools';
 import useScroll from '@/lib/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 
@@ -79,10 +79,10 @@ export const navItems: {
       href: '/pantone-colors',
     },
   },
-  {
-    name: 'More Tools',
-    childItems: tools,
-  },
+  // {
+  //   name: 'More Tools',
+  //   childItems: tools,
+  // },
   {
     name: 'Advertise',
     childItems: [],
