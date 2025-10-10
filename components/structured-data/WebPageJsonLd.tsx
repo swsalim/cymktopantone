@@ -3,13 +3,11 @@ import JsonLd from '@/components/structured-data/json-ld';
 export default function WebPageJsonLd({
   id,
   description,
-  lastReviewed,
-  reviewedBy,
+  reviewedBy = 'CMYK Pantone',
 }: {
   id: string;
   description: string;
-  lastReviewed: string;
-  reviewedBy: string;
+  reviewedBy?: string;
 }) {
   return (
     <JsonLd id="webpage-jsonld">
@@ -18,7 +16,7 @@ export default function WebPageJsonLd({
         '@type': 'WebPage',
         '@id': id,
         description: description,
-        lastReviewed: lastReviewed,
+        lastReviewed: new Date().toISOString(),
         reviewedBy: {
           type: 'Person',
           name: reviewedBy,

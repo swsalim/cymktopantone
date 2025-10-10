@@ -7,6 +7,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import { Prose } from '@/components/prose';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -57,9 +58,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <WebsiteJsonLd
-        company={siteConfig.siteName}
-        url={absoluteUrl('/legal/terms-and-conditions')}
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd
+        id={absoluteUrl('/legal/terms-and-conditions')}
+        description={config.description}
       />
       <Wrapper className="my-12 md:my-20">
         <Container>

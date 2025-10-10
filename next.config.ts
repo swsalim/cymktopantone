@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
 
+import { withContentCollections } from '@content-collections/next';
+
 const nextConfig: NextConfig = {
   images: {
     deviceSizes: [200, 350, 600, 900, 1200, 1800],
@@ -24,4 +26,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// withContentCollections must be the outermost plugin
+export default withContentCollections(nextConfig);

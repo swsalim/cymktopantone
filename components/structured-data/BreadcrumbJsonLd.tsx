@@ -4,17 +4,16 @@ export default function BreadcrumbJsonLd({
   itemListElements,
 }: {
   itemListElements: {
-    position: number;
-    item: string;
+    url: string;
     name: string;
   }[];
 }) {
-  const listElement = itemListElements.map((item) => {
+  const listElement = itemListElements.map((item, index) => {
     return {
       '@type': 'ListItem',
-      position: item.position,
+      position: index + 1,
       item: {
-        '@id': item.item,
+        '@id': item.url,
         name: item.name,
       },
     };

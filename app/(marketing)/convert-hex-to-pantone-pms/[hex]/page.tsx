@@ -10,6 +10,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { DynamicConverter } from '@/components/dynamic-converter';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -132,9 +133,10 @@ export default async function HexPantonePage({ params }: HexPantonePageProps) {
 
   return (
     <>
-      <WebsiteJsonLd
-        company={siteConfig.siteName}
-        url={absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`)}
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd
+        id={absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`)}
+        description={converterConfig.description}
       />
 
       <DynamicConverter componentName={converterConfig.component} defaultValue={hex} />

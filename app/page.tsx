@@ -11,7 +11,7 @@ import { Wrapper } from '@/components/wrapper';
 export default function Home() {
   return (
     <>
-      <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl()} />
+      <WebsiteJsonLd company={siteConfig.siteName} />
 
       <CmykPantoneConverter />
       <Wrapper className="mx-auto text-center">

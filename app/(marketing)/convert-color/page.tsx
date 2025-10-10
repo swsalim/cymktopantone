@@ -1,14 +1,17 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ExternalLinkIcon } from 'lucide-react';
 
-import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
+import { siteConfig } from '@/config/site';
 
-import { cn } from '@/lib/utils';
+import { absoluteUrl, cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
+import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
+import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
 function groupConvertersBySource() {
@@ -26,11 +29,57 @@ function groupConvertersBySource() {
   return grouped;
 }
 
+const config = {
+  title: 'Color Converters',
+  description:
+    'Explore our comprehensive collection of color conversion tools. Convert between different color formats including CMYK, RGB, HEX, HSL, HSV, and Pantone.',
+  url: '/convert-color',
+};
+
+export const metadata: Metadata = {
+  title: config.title,
+  description: config.description,
+  alternates: {
+    canonical: config.url,
+  },
+  openGraph: {
+    title: config.title,
+    description: config.description,
+    url: config.url,
+    images: [
+      {
+        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: config.title,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    title: config.title,
+    description: config.description,
+    card: 'summary_large_image',
+    creator: siteConfig.creator,
+    images: [
+      {
+        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
+        width: siteConfig.openGraph.width,
+        height: siteConfig.openGraph.height,
+        alt: config.title,
+      },
+    ],
+  },
+};
+
 export default function ConvertColorsPage() {
   const groupedConverters = groupConvertersBySource();
 
   return (
     <>
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd id={absoluteUrl('/convert-color')} description={config.description} />
       <Wrapper className="md:pb-12">
         <Container as="div" className="prose dark:prose-invert">
           <h1>Color Converters</h1>

@@ -7,6 +7,7 @@ import { absoluteUrl } from '@/lib/utils';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { Container } from '@/components/container';
 import PantoneColorsList from '@/components/pantone-colors';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -57,7 +58,8 @@ export const metadata: Metadata = {
 export default function PantoneColors() {
   return (
     <>
-      <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/pantone-colors')} />
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd id={absoluteUrl('/pantone-colors')} description={config.description} />
 
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">

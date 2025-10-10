@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -58,7 +59,8 @@ export const metadata: Metadata = {
 export default function ColorModelHex() {
   return (
     <>
-      <WebsiteJsonLd company={siteConfig.siteName} url={absoluteUrl('/color-models/hex')} />
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd id={absoluteUrl('/color-models/hex')} description={config.description} />
 
       <Wrapper>
         <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">

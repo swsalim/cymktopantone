@@ -84,6 +84,12 @@ export const navItems: {
   //   childItems: tools,
   // },
   {
+    name: 'Blog',
+    childItems: [],
+    href: '/blog',
+    segments: ['/blog'],
+  },
+  {
     name: 'Advertise',
     childItems: [],
     href: '/advertise',

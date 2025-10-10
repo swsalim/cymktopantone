@@ -11,6 +11,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import { ColorGrid } from '@/components/pantone/color-grid';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Card, CardContent } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
@@ -87,9 +88,10 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
 
   return (
     <>
-      <WebsiteJsonLd
-        company={siteConfig.siteName}
-        url={absoluteUrl(`/pantone-colors/${pantoneCategory.slug}`)}
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd
+        id={absoluteUrl(`/pantone-colors/${pantoneCategory.slug}`)}
+        description={`Find out more about ${pantoneCategory.name} and its meaning in the world of color.`}
       />
 
       <Wrapper>

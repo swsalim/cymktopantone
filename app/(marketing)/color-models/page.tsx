@@ -6,10 +6,12 @@ import { ExternalLinkIcon } from 'lucide-react';
 import { colorModelFaqs, colorModels } from '@/config/colors';
 import { siteConfig } from '@/config/site';
 
-import { cn } from '@/lib/utils';
+import { absoluteUrl, cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
+import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
@@ -61,6 +63,8 @@ export const metadata: Metadata = {
 export default function ColorModelsPage() {
   return (
     <>
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd id={absoluteUrl('/color-models')} description={config.description} />
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">
           <h1 className="mb-6">Color Models: CMYK, RGB, HEX, and HSL Explained</h1>
