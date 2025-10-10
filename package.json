@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": "next-sitemap --config next-sitemap.config.js && tsx scripts/fix-robots.ts"
   },
   "overrides": {
     "react": "$react",
@@ -42,6 +42,7 @@
     "react-easy-crop": "^5.1.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.20.6",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

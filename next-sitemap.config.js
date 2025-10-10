@@ -24,6 +24,36 @@ const config = {
   exclude,
   robotsTxtOptions: {
     policies: [{ userAgent: '*', disallow: NEXT_SSG_FILES }],
+    host: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+      : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
+        ? process.env.NEXT_PUBLIC_VERCEL_URL
+        : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, ''),
+  },
+  transform: async (config, path) => {
+    // Fix robots.txt after generation
+    if (path === 'robots.txt') {
+      const fs = await import('fs');
+      const robotsPath = './public/robots.txt';
+
+      if (fs.existsSync(robotsPath)) {
+        let content = fs.readFileSync(robotsPath, 'utf8');
+
+        // Fix the comment syntax
+        content = content.replace('# *', '# All user agents');
+
+        // Fix the Host directive to only include hostname
+        const hostMatch = content.match(/Host: (https?:\/\/)?([^\/\s]+)/);
+        if (hostMatch) {
+          const hostname = hostMatch[2];
+          content = content.replace(/Host: https?:\/\/[^\/\s]+/, `Host: ${hostname}`);
+        }
+
+        fs.writeFileSync(robotsPath, content);
+      }
+    }
+
+    return config;
   },
 };
 
