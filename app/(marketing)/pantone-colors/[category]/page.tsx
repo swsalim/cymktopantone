@@ -11,6 +11,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import { ColorGrid } from '@/components/pantone/color-grid';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Card, CardContent } from '@/components/ui/card';
@@ -86,6 +87,21 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
     notFound();
   }
 
+  const JSONLDbreadcrumbs = [
+    {
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      name: 'Home',
+    },
+    {
+      url: absoluteUrl(`/pantone-colors`),
+      name: 'Pantone Colors',
+    },
+    {
+      url: absoluteUrl(`/pantone-colors/${pantoneCategory.slug}`),
+      name: pantoneCategory.name,
+    },
+  ];
+
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
@@ -93,7 +109,7 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
         id={absoluteUrl(`/pantone-colors/${pantoneCategory.slug}`)}
         description={`Find out more about ${pantoneCategory.name} and its meaning in the world of color.`}
       />
-
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
           <h1>{pantoneCategory.name}</h1>

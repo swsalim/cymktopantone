@@ -3,9 +3,14 @@ import { Metadata } from 'next';
 import { GAME_DIFFICULTY } from '@/config/game';
 import { siteConfig } from '@/config/site';
 
+import { absoluteUrl } from '@/lib/utils';
+
 import { DifficultyNavigation } from '@/components/pantone-game/difficulty-navigation';
 import { GameHeader } from '@/components/pantone-game/game-header';
 import { PantoneMatchGame } from '@/components/pantone-game/pantone-match-game';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
+import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
 export const metadata: Metadata = {
   title: 'Classic Medium Mode - Pantone Color Match',
@@ -50,9 +55,34 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl('/pantone-color-match'),
+    name: 'Pantone Color Match',
+  },
+  {
+    url: absoluteUrl('/pantone-color-match/classic'),
+    name: 'Classic Mode',
+  },
+  {
+    url: absoluteUrl('/pantone-color-match/classic/medium'),
+    name: 'Medium Mode',
+  },
+];
+
 export default function PantoneMatchMediumPage() {
   return (
     <>
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd
+        id={absoluteUrl('/pantone-color-match/classic/medium')}
+        description={`Balance challenge and fun with ${GAME_DIFFICULTY.medium.pairsCount} Pantone color pairs. Test your memory at a comfortable pace.`}
+      />
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <GameHeader gameMode="classic" difficulty="medium" />
       <DifficultyNavigation basePath="/pantone-color-match/classic" />
       <PantoneMatchGame gameMode="classic" difficulty="medium" />

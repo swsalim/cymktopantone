@@ -24,9 +24,9 @@ export default function BannerCodefast() {
             </div>
           </div>
           <div className="">
-            <h3 className="mt-0 text-base font-medium text-yellow-800">
+            <p className="mt-0 text-base font-medium text-yellow-800">
               Want to learn to code for entrepreneurship? 💻
-            </h3>
+            </p>
             <span className="block text-sm text-yellow-700">
               Everything you need to build your SaaS as a complete beginner.
             </span>

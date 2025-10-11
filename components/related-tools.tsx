@@ -80,9 +80,9 @@ export default function RelatedTools() {
       <div className="flex w-full flex-col items-start divide-y divide-yellow-800/20">
         {Object.entries(groupedConverterTools).map(([sourceColor, tools]) => (
           <div key={sourceColor} className="w-full py-5">
-            <h4 className="mb-3 text-lg font-semibold uppercase text-yellow-900 dark:text-yellow-300">
-              {sourceColor}
-            </h4>
+            <h3 className="mb-3 text-lg font-semibold capitalize text-yellow-900 dark:text-yellow-300">
+              <span className="uppercase">{sourceColor}</span> Color Converter
+            </h3>
             <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
               {tools.map((tool, index) => {
                 return tool.url !== pathname ? (

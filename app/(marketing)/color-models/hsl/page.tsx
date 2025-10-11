@@ -9,6 +9,7 @@ import { absoluteUrl } from '@/lib/utils';
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
 import { ImageKit } from '@/components/image-kit';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
@@ -57,12 +58,23 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl(`/color-models/hsl`),
+    name: 'HSL Color Model',
+  },
+];
+
 export default function ColorModelHsl() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/color-models/hsl')} description={config.description} />
-
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
           <h1>A Guide to HSL Color Model</h1>

@@ -249,7 +249,7 @@ export default function CmykPantoneConverter() {
               title="Play the Pantone Color Match Game!"
               description="Test your memory. Train your eye. Can you match the colors?"
               href="/pantone-color-match/classic/medium"
-              buttonText="Start Matching"
+              buttonText="Play Game"
             />
 
             <div className="mx-auto my-4">
@@ -286,6 +286,7 @@ export default function CmykPantoneConverter() {
               )}
               {matchingColors.length >= 1 && (
                 <>
+                  <h3 className="sr-only">Pantone Matches</h3>
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {matchingColors.slice(0, visibleCount).map((color, index) => (
                       <PantoneColorCard

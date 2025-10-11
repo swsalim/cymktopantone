@@ -24,9 +24,9 @@ export default function BannerFrogDr() {
             </div>
           </div>
           <div className="">
-            <h3 className="mt-0 text-base font-medium text-yellow-800">
+            <p className="mt-0 text-base font-medium text-yellow-800">
               Want to grow your website domain authority? 🔍
-            </h3>
+            </p>
             <span className="block text-sm text-yellow-700">
               FrogDR helps you tracking and growing your Domain Rating. Get more backlinks, improve
               your SEO and increase your Domain Authority.

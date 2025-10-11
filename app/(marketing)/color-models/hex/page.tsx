@@ -8,6 +8,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
@@ -56,12 +57,23 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl(`/color-models/hex`),
+    name: 'HEX Color Model',
+  },
+];
+
 export default function ColorModelHex() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/color-models/hex')} description={config.description} />
-
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
           <h1>HEX Color Codes - The Essential Guide for Designers</h1>

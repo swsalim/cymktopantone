@@ -10,6 +10,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
 import Faqs from '@/components/faq';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { buttonVariants } from '@/components/ui/button';
@@ -60,11 +61,23 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl(`/color-models`),
+    name: 'Color Models',
+  },
+];
+
 export default function ColorModelsPage() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/color-models')} description={config.description} />
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">
           <h1 className="mb-6">Color Models: CMYK, RGB, HEX, and HSL Explained</h1>

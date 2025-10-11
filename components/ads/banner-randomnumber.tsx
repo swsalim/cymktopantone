@@ -24,7 +24,7 @@ export default function BannerRandomnumber() {
             </div>
           </div>
           <div className="">
-            <h3 className="mt-0 text-base font-medium text-yellow-800">Random Number Generator</h3>
+            <p className="mt-0 text-base font-medium text-yellow-800">Random Number Generator</p>
             <span className="block text-sm text-yellow-700">
               Free random number generator in your custom min-max range with repeats or no repeats.
             </span>

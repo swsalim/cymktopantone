@@ -20,10 +20,13 @@ export default function HexCmykContent() {
       </p>
       <h2>Why should you convert Hex to CMYK Colors in Design?</h2>
       <p>
-        CMYK is the <strong>preferred color model for printing</strong>, as it ensures consistent
-        and accurate color reproduction on physical media. While HEX codes are ideal for web and
-        digital designs, they need to be converted to CMYK values for use in printed materials such
-        as brochures, business cards, and packaging.
+        CMYK is the{' '}
+        <Link href="/blog/convert-cmyk-pantone">
+          <strong>preferred color model for printing</strong>
+        </Link>
+        , as it ensures consistent and accurate color reproduction on physical media. While HEX
+        codes are ideal for web and digital designs, they need to be converted to CMYK values for
+        use in printed materials such as brochures, business cards, and packaging.
       </p>
       <p>
         Converting HEX to CMYK allows you to maintain <strong>color consistency</strong> across both

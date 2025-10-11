@@ -9,6 +9,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { DynamicConverter } from '@/components/dynamic-converter';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
@@ -90,6 +91,17 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
       })
     : null;
 
+  const JSONLDbreadcrumbs = [
+    {
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      name: 'Home',
+    },
+    {
+      url: absoluteUrl(converterConfig.url),
+      name: converterConfig.title,
+    },
+  ];
+
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
@@ -97,7 +109,7 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
         id={absoluteUrl(converterConfig.url)}
         description={converterConfig.description}
       />
-
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <DynamicConverter componentName={converterConfig.component} />
       {converterConfig.sourceColor !== 'PANTONE' && (
         <Wrapper className="mx-auto text-center">

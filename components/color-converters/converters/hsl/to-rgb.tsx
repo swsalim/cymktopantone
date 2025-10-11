@@ -93,6 +93,7 @@ export default function HslRgbConverter() {
         </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
+            <h2 className="sr-only">Enter HSL Value</h2>
             <CardContent>
               <div className="flex flex-col gap-y-6">
                 {Object.entries({

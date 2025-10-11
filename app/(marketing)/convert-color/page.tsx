@@ -9,6 +9,7 @@ import { siteConfig } from '@/config/site';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Card, CardContent, CardDescription } from '@/components/ui/card';
@@ -73,6 +74,17 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl(`/convert-color`),
+    name: 'Color Converters',
+  },
+];
+
 export default function ConvertColorsPage() {
   const groupedConverters = groupConvertersBySource();
 
@@ -80,6 +92,7 @@ export default function ConvertColorsPage() {
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/convert-color')} description={config.description} />
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper className="md:pb-12">
         <Container as="div" className="prose dark:prose-invert">
           <h1>Color Converters</h1>

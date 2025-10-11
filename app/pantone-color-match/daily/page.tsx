@@ -2,8 +2,13 @@ import { Metadata } from 'next';
 
 import { siteConfig } from '@/config/site';
 
+import { absoluteUrl } from '@/lib/utils';
+
 import { GameHeader } from '@/components/pantone-game/game-header';
 import { PantoneMatchGame } from '@/components/pantone-game/pantone-match-game';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
+import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
+import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
 export const metadata: Metadata = {
   title: 'Daily Challenge - Pantone Color Match',
@@ -51,9 +56,30 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl('/pantone-color-match'),
+    name: 'Pantone Color Match',
+  },
+  {
+    url: absoluteUrl('/pantone-color-match/daily'),
+    name: 'Daily Mode',
+  },
+];
+
 export default function PantoneDailyChallengePage() {
   return (
     <>
+      <WebsiteJsonLd company={siteConfig.siteName} />
+      <WebPageJsonLd
+        id={absoluteUrl('/pantone-color-match/daily')}
+        description={`A fresh challenge every day! Match today's specially selected Pantone colors before time runs out.`}
+      />
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <GameHeader gameMode="daily" />
       <PantoneMatchGame gameMode="daily" />
     </>

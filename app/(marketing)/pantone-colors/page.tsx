@@ -7,6 +7,7 @@ import { absoluteUrl } from '@/lib/utils';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { Container } from '@/components/container';
 import PantoneColorsList from '@/components/pantone-colors';
+import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
@@ -55,12 +56,23 @@ export const metadata: Metadata = {
   },
 };
 
+const JSONLDbreadcrumbs = [
+  {
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    name: 'Home',
+  },
+  {
+    url: absoluteUrl(`/pantone-colors`),
+    name: 'Pantone Colors',
+  },
+];
+
 export default function PantoneColors() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/pantone-colors')} description={config.description} />
-
+      <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">
           <h1>Guide to Pantone Colors</h1>
