@@ -11,6 +11,9 @@ import { siteConfig } from '@/config/site';
 import { getTableOfContents } from '@/lib/toc';
 import { absoluteUrl, cn } from '@/lib/utils';
 
+import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
+import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
+import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
 import { ImageKit } from '@/components/image-kit';
 import BlogPostJsonLd from '@/components/structured-data/BlogPostJsonLd';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
@@ -135,6 +138,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const components = {
     ImageKit,
     Link,
+    LazyAdsLeaderboard,
+    LazyAdsSquare,
+    LazyAdsArticle,
   };
 
   const toc = await getTableOfContents(post._meta.path);

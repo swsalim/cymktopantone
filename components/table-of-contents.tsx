@@ -2,6 +2,8 @@
 
 import { TableOfContents as TocData } from '@/lib/toc';
 
+import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
+
 interface TocItemProps {
   item: {
     title: string;
@@ -74,6 +76,10 @@ export default function TableOfContents({ toc }: TableOfContentsProps) {
             <TocItem key={index} item={item} />
           ))}
         </nav>
+
+        <div className="mx-auto">
+          <LazyAdsSquare />
+        </div>
       </div>
     </aside>
   );
