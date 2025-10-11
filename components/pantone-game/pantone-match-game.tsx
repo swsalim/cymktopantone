@@ -126,7 +126,7 @@ function PantoneMatchGameContent({
   const { stats, registerWin, registerLoss, resetStats } = usePantoneGameStats();
 
   // Use daily challenge data
-  const { dailyColors, markAsPlayed, resetDailyStatus } = dailyChallenge;
+  const { dailyColors, markAsPlayed } = dailyChallenge;
 
   // Initialize with a random selection for classic/challenge mode
   useEffect(() => {
@@ -257,6 +257,7 @@ function PantoneMatchGameContent({
     gameState.moves,
     timeRemaining,
     difficulty,
+    gameState.timeLimit,
   ]);
 
   // Format time display

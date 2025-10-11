@@ -1,15 +1,28 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { remark } from 'remark';
+import type { Node } from 'unist';
 import { visit } from 'unist-util-visit';
 
 const textTypes = ['text', 'emphasis', 'strong', 'inlineCode'];
 
-function flattenNode(node: any): string {
+interface TextNode extends Node {
+  type: string;
+  value: string;
+}
+
+interface HeadingNode extends Node {
+  type: 'heading';
+  depth: number;
+  children: Node[];
+}
+
+function flattenNode(node: Node): string {
   const p: string[] = [];
-  visit(node, (node: any) => {
-    if (!textTypes.includes(node.type)) return;
-    p.push(node.value);
+  visit(node, (node: Node) => {
+    const textNode = node as TextNode;
+    if (!textTypes.includes(textNode.type)) return;
+    p.push(textNode.value);
   });
   return p.join(``);
 }
@@ -33,13 +46,14 @@ function generateSlug(text: string): string {
     .replace(/^-|-$/g, '');
 }
 
-function extractHeadings(node: any): Item[] {
+function extractHeadings(node: Node): Item[] {
   const headings: Item[] = [];
   const stack: (Item & { depth: number })[] = [];
 
-  visit(node, (node) => {
-    if (node.type === 'heading' && node.depth >= 2 && node.depth <= 6) {
-      const title = flattenNode(node);
+  visit(node, (node: Node) => {
+    const headingNode = node as HeadingNode;
+    if (headingNode.type === 'heading' && headingNode.depth >= 2 && headingNode.depth <= 6) {
+      const title = flattenNode(headingNode);
       const slug = generateSlug(title);
 
       const heading: Item = {
@@ -49,7 +63,7 @@ function extractHeadings(node: any): Item[] {
       };
 
       // Adjust stack based on heading depth
-      while (stack.length > 0 && stack[stack.length - 1].depth >= node.depth) {
+      while (stack.length > 0 && stack[stack.length - 1].depth >= headingNode.depth) {
         stack.pop();
       }
 
@@ -66,7 +80,7 @@ function extractHeadings(node: any): Item[] {
       }
 
       // Add current heading to stack for potential children
-      stack.push({ ...heading, depth: node.depth });
+      stack.push({ ...heading, depth: headingNode.depth });
     }
   });
 

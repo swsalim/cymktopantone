@@ -1,7 +1,5 @@
 'use client';
 
-import { CopyIcon } from 'lucide-react';
-
 import {
   formatRgbString,
   getTextColor,
@@ -10,8 +8,6 @@ import {
   rgbToHsl,
   rgbToHsv,
 } from '@/lib/colors';
-
-import { Button } from '@/components/ui/button';
 
 interface PantoneColorCardProps {
   title: string;

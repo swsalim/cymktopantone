@@ -78,8 +78,18 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="//ik.imagekit.io" />
         <link rel="preconnect" href="//analytics.ahrefs.com" />
+        <link rel="preconnect" href="//beamanalytics.b-cdn.net" />
+        <link rel="preconnect" href="//stats.cmyktopantone.com" />
+        <link rel="preconnect" href="//pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="//cdn.apitiny.net" />
+        <link rel="preconnect" href="//app.tinyadz.com" />
         <link rel="dns-prefetch" href="//analytics.ahrefs.com" />
         <link rel="dns-prefetch" href="//ik.imagekit.io" />
+        <link rel="dns-prefetch" href="//beamanalytics.b-cdn.net" />
+        <link rel="dns-prefetch" href="//stats.cmyktopantone.com" />
+        <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="//cdn.apitiny.net" />
+        <link rel="dns-prefetch" href="//app.tinyadz.com" />
         <LogoJsonLd logo={absoluteUrl('/icons/logo.png')} url={absoluteUrl()} />
         <script
           src="https://analytics.ahrefs.com/analytics.js"
@@ -88,12 +98,12 @@ export default function RootLayout({
         <script
           src="https://beamanalytics.b-cdn.net/beam.min.js"
           data-token="c2fbac7b-0b09-48f0-b925-7a5a61de2a3b"
-          async></script>
+          defer></script>
         <script
           src="https://stats.cmyktopantone.com/ennui.js"
           data-api-host="https://stats.cmyktopantone.com"
           data-token="a9e4cfbdd5cd10a"
-          async></script>
+          defer></script>
       </head>
       <body
         className={cn(
@@ -110,15 +120,15 @@ export default function RootLayout({
         <Toaster />
 
         <script
-          async
+          defer
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
           crossOrigin="anonymous"></script>
         <script
           src="https://cdn.apitiny.net/scripts/v2.0/main.js"
           data-site-id="67ee06492dfc280f87938650"
-          async></script>
-        <script async src="https://app.tinyadz.com/libs/widget.js" type="module"></script>
-        <script async src="https://app.tinyadz.com/libs/manager.js" type="module"></script>
+          defer></script>
+        <script defer src="https://app.tinyadz.com/libs/widget.js" type="module"></script>
+        <script defer src="https://app.tinyadz.com/libs/manager.js" type="module"></script>
       </body>
     </html>
   );

@@ -48,85 +48,77 @@ const popularHexColors = [
   { hex: 'ffc0cb', name: 'Pink' },
   { hex: 'ffb6c1', name: 'Light Pink' },
   { hex: 'ff1493', name: 'Deep Pink' },
+  { hex: 'ff91a4', name: 'Baker-Miller Pink' },
+  { hex: 'ffb3ba', name: 'Pastel Pink' },
+  { hex: 'ffc1cc', name: 'Bubble Gum' },
   { hex: 'db7093', name: 'Pale Violet Red' },
   { hex: 'c71585', name: 'Medium Violet Red' },
-  { hex: 'ff69b4', name: 'Hot Pink' },
   { hex: 'ffdab9', name: 'Peach Puff' },
-  { hex: 'ffb7c5', name: 'Cherry Blossom' },
 
   // === ORANGES ===
   { hex: 'ffa500', name: 'Orange' },
   { hex: 'ff8c00', name: 'Dark Orange' },
   { hex: 'ff7f50', name: 'Coral' },
-  { hex: 'ff6347', name: 'Tomato' },
+  { hex: 'ff6600', name: 'Neon Orange' },
   { hex: 'ffa07a', name: 'Light Salmon' },
-  { hex: 'ff4500', name: 'Orange Red' },
-  { hex: 'f39c12', name: 'Orange' },
-  { hex: 'e67e22', name: 'Carrot' },
-  { hex: 'd35400', name: 'Pumpkin' },
+  { hex: 'ff8c69', name: 'Salmon' },
+  { hex: 'ffb347', name: 'Peach' },
+  { hex: 'ff7f00', name: 'Orange' },
+  { hex: 'ff8c42', name: 'Dark Salmon' },
+  { hex: 'ff6b35', name: 'Red Orange' },
 
   // === YELLOWS ===
-  { hex: 'ffff00', name: 'Yellow' },
+  { hex: 'ffff00', name: 'Pure Yellow' },
   { hex: 'ffd700', name: 'Gold' },
   { hex: 'ffffe0', name: 'Light Yellow' },
-  { hex: 'fffacd', name: 'Lemon Chiffon' },
-  { hex: 'fafad2', name: 'Light Goldenrod' },
+  { hex: 'fff8dc', name: 'Cornsilk' },
+  { hex: 'f0e68c', name: 'Khaki' },
   { hex: 'ffefd5', name: 'Papaya Whip' },
   { hex: 'ffe4b5', name: 'Moccasin' },
-  { hex: 'f1c40f', name: 'Sun Flower' },
-  { hex: 'f39c12', name: 'Orange' },
-  { hex: 'ffeb3b', name: 'Material Yellow' },
+  { hex: 'ffdab9', name: 'Peach Puff' },
+  { hex: 'f5deb3', name: 'Wheat' },
+  { hex: 'daa520', name: 'Goldenrod' },
 
   // === GREENS ===
+  { hex: '008000', name: 'Pure Green' },
+  { hex: '228b22', name: 'Forest Green' },
+  { hex: '32cd32', name: 'Lime Green' },
   { hex: '00ff00', name: 'Lime' },
-  { hex: '008000', name: 'Green' },
-  { hex: '00ff7f', name: 'Spring Green' },
   { hex: '00fa9a', name: 'Medium Spring Green' },
   { hex: '90ee90', name: 'Light Green' },
-  { hex: '32cd32', name: 'Lime Green' },
-  { hex: '228b22', name: 'Forest Green' },
-  { hex: '006400', name: 'Dark Green' },
-  { hex: '2ecc71', name: 'Emerald' },
-  { hex: '27ae60', name: 'Nephritis' },
-  { hex: '1abc9c', name: 'Turquoise' },
-  { hex: '16a085', name: 'Green Sea' },
-  { hex: '4caf50', name: 'Material Green' },
-  { hex: '8bc34a', name: 'Material Light Green' },
+  { hex: '98fb98', name: 'Pale Green' },
+  { hex: '8fbc8f', name: 'Dark Sea Green' },
+  { hex: '2e8b57', name: 'Sea Green' },
+  { hex: '3cb371', name: 'Medium Sea Green' },
 
-  // === TEALS & CYANS ===
-  { hex: '00ffff', name: 'Cyan/Aqua' },
+  // === CYANS ===
+  { hex: '00ffff', name: 'Pure Cyan' },
   { hex: '00ced1', name: 'Dark Turquoise' },
   { hex: '40e0d0', name: 'Turquoise' },
-  { hex: '48d1cc', name: 'Medium Turquoise' },
   { hex: '20b2aa', name: 'Light Sea Green' },
-  { hex: '008b8b', name: 'Dark Cyan' },
-  { hex: '008080', name: 'Teal' },
-  { hex: '5f9ea0', name: 'Cadet Blue' },
+  { hex: '48d1cc', name: 'Medium Turquoise' },
+  { hex: '00e5ee', name: 'Dark Turquoise' },
+  { hex: 'afeeee', name: 'Pale Turquoise' },
+  { hex: '7fffd4', name: 'Aquamarine' },
+  { hex: '00ffff', name: 'Aqua' },
+  { hex: 'e0ffff', name: 'Light Cyan' },
 
   // === BLUES ===
-  { hex: '0000ff', name: 'Blue' },
-  { hex: '0000cd', name: 'Medium Blue' },
-  { hex: '00008b', name: 'Dark Blue' },
-  { hex: '000080', name: 'Navy' },
-  { hex: '191970', name: 'Midnight Blue' },
+  { hex: '0000ff', name: 'Pure Blue' },
   { hex: '4169e1', name: 'Royal Blue' },
+  { hex: '0000cd', name: 'Medium Blue' },
+  { hex: '191970', name: 'Midnight Blue' },
+  { hex: '000080', name: 'Navy' },
   { hex: '6495ed', name: 'Cornflower Blue' },
-  { hex: '4682b4', name: 'Steel Blue' },
-  { hex: '1e90ff', name: 'Dodger Blue' },
-  { hex: '00bfff', name: 'Deep Sky Blue' },
   { hex: '87ceeb', name: 'Sky Blue' },
   { hex: '87cefa', name: 'Light Sky Blue' },
-  { hex: 'add8e6', name: 'Light Blue' },
-  { hex: 'b0c4de', name: 'Light Steel Blue' },
-  { hex: '3498db', name: 'Peter River' },
-  { hex: '2980b9', name: 'Belize Hole' },
-  { hex: '2196f3', name: 'Material Blue' },
-  { hex: '03a9f4', name: 'Material Light Blue' },
+  { hex: '4682b4', name: 'Steel Blue' },
+  { hex: '1e90ff', name: 'Dodger Blue' },
 
   // === PURPLES ===
   { hex: '800080', name: 'Purple' },
-  { hex: '9370db', name: 'Medium Purple' },
-  { hex: '8b008b', name: 'Dark Magenta' },
+  { hex: '4b0082', name: 'Indigo' },
+  { hex: '8a2be2', name: 'Blue Violet' },
   { hex: '9400d3', name: 'Dark Violet' },
   { hex: '9932cc', name: 'Dark Orchid' },
   { hex: 'ba55d3', name: 'Medium Orchid' },
@@ -134,78 +126,30 @@ const popularHexColors = [
   { hex: 'ee82ee', name: 'Violet' },
   { hex: 'dda0dd', name: 'Plum' },
   { hex: 'd8bfd8', name: 'Thistle' },
-  { hex: 'e6e6fa', name: 'Lavender' },
-  { hex: '9b59b6', name: 'Amethyst' },
-  { hex: '8e44ad', name: 'Wisteria' },
-  { hex: '673ab7', name: 'Material Deep Purple' },
-  { hex: '9c27b0', name: 'Material Purple' },
 
   // === MAGENTAS ===
-  { hex: 'ff00ff', name: 'Magenta/Fuchsia' },
-  { hex: 'ff00ff', name: 'Fuchsia' },
+  { hex: 'ff00ff', name: 'Pure Magenta' },
+  { hex: 'ff1493', name: 'Deep Pink' },
+  { hex: 'ff69b4', name: 'Hot Pink' },
+  { hex: 'ffc0cb', name: 'Pink' },
+  { hex: 'ffb6c1', name: 'Light Pink' },
+  { hex: 'db7093', name: 'Pale Violet Red' },
   { hex: 'c71585', name: 'Medium Violet Red' },
-  { hex: 'e91e63', name: 'Material Pink' },
-
-  // === BROWNS ===
-  { hex: 'a52a2a', name: 'Brown' },
-  { hex: '8b4513', name: 'Saddle Brown' },
-  { hex: 'd2691e', name: 'Chocolate' },
-  { hex: 'cd853f', name: 'Peru' },
-  { hex: 'deb887', name: 'Burlywood' },
-  { hex: 'f4a460', name: 'Sandy Brown' },
-  { hex: 'd2b48c', name: 'Tan' },
-  { hex: 'bc8f8f', name: 'Rosy Brown' },
-  { hex: '795548', name: 'Material Brown' },
+  { hex: 'dda0dd', name: 'Plum' },
+  { hex: 'ee82ee', name: 'Violet' },
+  { hex: 'da70d6', name: 'Orchid' },
 
   // === GRAYS ===
-  { hex: '000000', name: 'Black' },
   { hex: '808080', name: 'Gray' },
   { hex: 'a9a9a9', name: 'Dark Gray' },
   { hex: 'c0c0c0', name: 'Silver' },
   { hex: 'd3d3d3', name: 'Light Gray' },
-  { hex: 'dcdcdc', name: 'Gainsboro' },
-  { hex: 'f5f5f5', name: 'White Smoke' },
+  { hex: '696969', name: 'Dim Gray' },
+  { hex: '778899', name: 'Light Slate Gray' },
+  { hex: '708090', name: 'Slate Gray' },
+  { hex: '2f4f4f', name: 'Dark Slate Gray' },
+  { hex: '000000', name: 'Black' },
   { hex: 'ffffff', name: 'White' },
-  { hex: '2c3e50', name: 'Midnight Blue Gray' },
-  { hex: '34495e', name: 'Wet Asphalt' },
-  { hex: '7f8c8d', name: 'Asbestos' },
-  { hex: '95a5a6', name: 'Concrete' },
-  { hex: 'bdc3c7', name: 'Silver' },
-  { hex: 'ecf0f1', name: 'Clouds' },
-  { hex: '607d8b', name: 'Material Blue Gray' },
-
-  // === BRAND COLORS (highly searched) ===
-  { hex: '1877f2', name: 'Facebook Blue' },
-  { hex: '1da1f2', name: 'Twitter Blue' },
-  { hex: '0077b5', name: 'LinkedIn Blue' },
-  { hex: 'ff0000', name: 'YouTube Red' },
-  { hex: 'e4405f', name: 'Instagram Pink' },
-  { hex: '25d366', name: 'WhatsApp Green' },
-  { hex: '5865f2', name: 'Discord Blurple' },
-  { hex: 'ff4500', name: 'Reddit Orange' },
-  { hex: '6441a5', name: 'Twitch Purple' },
-  { hex: 'ea4335', name: 'Google Red' },
-  { hex: '4285f4', name: 'Google Blue' },
-  { hex: 'fbbc05', name: 'Google Yellow' },
-  { hex: '34a853', name: 'Google Green' },
-
-  // === MATERIAL DESIGN COLORS ===
-  { hex: 'f44336', name: 'Material Red' },
-  { hex: 'ff5722', name: 'Material Deep Orange' },
-  { hex: 'ff9800', name: 'Material Orange' },
-  { hex: 'ffc107', name: 'Material Amber' },
-  { hex: 'cddc39', name: 'Material Lime' },
-  { hex: '009688', name: 'Material Teal' },
-  { hex: '00bcd4', name: 'Material Cyan' },
-  { hex: '3f51b5', name: 'Material Indigo' },
-
-  // === PASTEL COLORS ===
-  { hex: 'ffb3ba', name: 'Pastel Red' },
-  { hex: 'ffdfba', name: 'Pastel Orange' },
-  { hex: 'ffffba', name: 'Pastel Yellow' },
-  { hex: 'baffc9', name: 'Pastel Green' },
-  { hex: 'bae1ff', name: 'Pastel Blue' },
-  { hex: 'e0bbe4', name: 'Pastel Purple' },
 
   // === NEON COLORS ===
   { hex: '00ff00', name: 'Neon Green' },
@@ -215,10 +159,26 @@ const popularHexColors = [
   { hex: 'ff6600', name: 'Neon Orange' },
 ];
 
-function getRelatedColors(hex: string, pantone: string): RelatedColor[] {
+// Pre-compute shuffled popular colors for better performance
+const shuffledPopularColors = [...popularHexColors].sort(() => Math.random() - 0.5);
+
+// Static converter configuration
+const CONVERTER_CONFIG = {
+  id: 'hex-to-pantone-pms',
+  sourceColor: 'HEX',
+  targetColor: 'PANTONE',
+  title: 'HEX to Pantone Color Converter',
+  description:
+    'Convert HEX color codes to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
+  url: '/convert-hex-to-pantone-pms',
+  component: 'hex/to-pantone',
+  content: 'hex/to-pantone-content',
+} as const;
+
+async function getRelatedColors(hex: string, pantone: string): Promise<RelatedColor[]> {
   // Remove the # from hex if present
   const cleanHex = hex.replace('#', '');
-  const matches = findMatchingPMSColors(cleanHex, 32);
+  const matches = await findMatchingPMSColors(cleanHex, 32);
 
   // Filter out the main color and limit to 4 results
   return matches
@@ -231,10 +191,13 @@ function getRelatedColors(hex: string, pantone: string): RelatedColor[] {
     }));
 }
 
-function getUniqueColors() {
-  const relatedColors = pantoneCategories.flatMap((category: PantoneCategory) =>
+async function getUniqueColors() {
+  const relatedColorsPromises = pantoneCategories.map((category: PantoneCategory) =>
     getRelatedColors(category.hex.replace('#', ''), category.pantone),
   );
+
+  const relatedColorsArrays = await Promise.all(relatedColorsPromises);
+  const relatedColors = relatedColorsArrays.flat();
 
   const hexValuesOnly = popularHexColors.map((color) => ({
     hex: color.hex.toLowerCase(),
@@ -251,7 +214,7 @@ function getUniqueColors() {
 }
 
 export async function generateStaticParams() {
-  const uniqueColors = getUniqueColors();
+  const uniqueColors = await getUniqueColors();
 
   return uniqueColors.map((color) => ({
     hex: color.hex.replace('#', '').toLowerCase(),
@@ -266,37 +229,30 @@ export async function generateMetadata({ params }: HexPantonePageProps): Promise
   }
 
   const config = {
-    title: `Convert #${hex} to Pantone Color`,
-    description: `Convert #${hex} to Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.`,
-    url: absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`),
+    title: `Convert #${hex} to Pantone Color - HEX to Pantone Converter`,
+    description: `Convert HEX color #${hex} to its closest Pantone color match. Find the perfect Pantone equivalent for your HEX color code with our accurate color converter.`,
+    keywords: [
+      'hex to pantone',
+      'color converter',
+      'pantone color',
+      'hex color',
+      'color matching',
+      'design colors',
+      'brand colors',
+      'print colors',
+      'digital colors',
+      'color palette',
+    ],
   };
 
   return {
     title: config.title,
     description: config.description,
-    alternates: {
-      canonical: config.url,
-    },
+    keywords: config.keywords,
     openGraph: {
       title: config.title,
       description: config.description,
-      url: config.url,
-      images: [
-        {
-          url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
-          width: siteConfig.openGraph.width,
-          height: siteConfig.openGraph.height,
-          alt: config.title,
-        },
-      ],
-      locale: 'en_US',
       type: 'website',
-    },
-    twitter: {
-      title: config.title,
-      description: config.description,
-      card: 'summary_large_image',
-      creator: siteConfig.creator,
       images: [
         {
           url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
@@ -313,18 +269,6 @@ export default async function HexPantonePage({ params }: HexPantonePageProps) {
   const hex = (await params).hex;
 
   const isHexValid = isValidHex(hex);
-
-  const converterConfig = {
-    id: 'hex-to-pantone-pms',
-    sourceColor: 'HEX',
-    targetColor: 'PANTONE',
-    title: 'HEX to Pantone Color Converter',
-    description:
-      'Convert HEX color codes to their closest Pantone color matches with our efficient tool. Perfect for brand consistency across digital and print media.',
-    url: '/convert-hex-to-pantone-pms',
-    component: 'hex/to-pantone',
-    content: 'hex/to-pantone-content',
-  };
 
   if (!isHexValid) {
     notFound();
@@ -350,40 +294,35 @@ export default async function HexPantonePage({ params }: HexPantonePageProps) {
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd
         id={absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`)}
-        description={converterConfig.description}
+        description={CONVERTER_CONFIG.description}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
-      <DynamicConverter componentName={converterConfig.component} defaultValue={hex} />
-      {converterConfig.sourceColor !== 'PANTONE' && (
-        <Wrapper className="mx-auto text-center">
-          <div className="mx-auto">
-            <LazyAdsLeaderboard />
-          </div>
-        </Wrapper>
-      )}
+      <DynamicConverter componentName={CONVERTER_CONFIG.component} defaultValue={hex} />
+      <Wrapper className="mx-auto text-center">
+        <div className="mx-auto">
+          <LazyAdsLeaderboard />
+        </div>
+      </Wrapper>
       <Wrapper className="mx-auto text-start">
         <Container className="prose mt-16 dark:prose-invert">
           <h2>Other Popular HEX Colors</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4 lg:grid-cols-4">
-            {popularHexColors
-              .sort(() => Math.random() - 0.5)
-              .slice(0, 20)
-              .map((color) => (
-                <div key={color.hex} className="rounded-lg border p-4">
-                  <Link
-                    href={`/convert-hex-to-pantone-pms/${color.hex}`}
-                    className="group no-underline">
-                    <span
-                      className="mb-2 block h-24 w-full rounded-lg"
-                      style={{ backgroundColor: `#${color.hex}` }}
-                    />
-                    <h3 className="flex items-center text-sm font-medium">
-                      {color.name} - #{color.hex}{' '}
-                      <ArrowRightIcon className="ml-1 inline-block size-4 transition duration-150 group-hover:translate-x-1" />
-                    </h3>
-                  </Link>
-                </div>
-              ))}
+            {shuffledPopularColors.slice(0, 20).map((color) => (
+              <div key={color.hex} className="rounded-lg border p-4">
+                <Link
+                  href={`/convert-hex-to-pantone-pms/${color.hex}`}
+                  className="group no-underline">
+                  <span
+                    className="mb-2 block h-24 w-full rounded-lg"
+                    style={{ backgroundColor: `#${color.hex}` }}
+                  />
+                  <h3 className="flex items-center text-sm font-medium">
+                    {color.name} - #{color.hex}{' '}
+                    <ArrowRightIcon className="ml-1 inline-block size-4 transition duration-150 group-hover:translate-x-1" />
+                  </h3>
+                </Link>
+              </div>
+            ))}
           </div>
         </Container>
       </Wrapper>

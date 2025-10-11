@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 
-import { CopyIcon } from 'lucide-react';
-
 import { cmykToRgb, rgbToHex, rgbToHsl } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
@@ -15,7 +13,6 @@ import { ColorValueDisplay } from '@/components/color-converters/shared/color-va
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "postbuild": "next-sitemap --config next-sitemap.config.js && tsx scripts/fix-robots.ts"
+    "postbuild": "next-sitemap --config next-sitemap.config.js && tsx scripts/fix-robots.ts",
+    "precompute-colors": "tsx scripts/precompute-related-colors.ts",
+    "prebuild": "npm run precompute-colors"
   },
   "overrides": {
     "react": "$react",

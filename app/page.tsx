@@ -1,7 +1,5 @@
 import { siteConfig } from '@/config/site';
 
-import { absoluteUrl } from '@/lib/utils';
-
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import CmykPantoneContent from '@/components/color-converters/content/cmyk/to-pantone-content';
 import CmykPantoneConverter from '@/components/color-converters/converters/cmyk/to-pantone';

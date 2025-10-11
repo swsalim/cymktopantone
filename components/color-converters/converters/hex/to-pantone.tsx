@@ -92,13 +92,17 @@ export default function HexPantoneConverter({ defaultValue }: { defaultValue?: s
   };
 
   useEffect(() => {
-    const tempMatchingColors = findMatchingPMSColors(hex.substring(1), Number(distance));
-    const sortedColors = [...tempMatchingColors].sort((a, b) => {
-      return sortOrder === 'high-to-low'
-        ? b.matchPercentage - a.matchPercentage
-        : a.matchPercentage - b.matchPercentage;
-    });
-    setMatchingColors(sortedColors);
+    const fetchMatchingColors = async () => {
+      const tempMatchingColors = await findMatchingPMSColors(hex.substring(1), Number(distance));
+      const sortedColors = [...tempMatchingColors].sort((a, b) => {
+        return sortOrder === 'high-to-low'
+          ? b.matchPercentage - a.matchPercentage
+          : a.matchPercentage - b.matchPercentage;
+      });
+      setMatchingColors(sortedColors);
+    };
+
+    fetchMatchingColors();
   }, [hex, distance, sortOrder]);
 
   return (

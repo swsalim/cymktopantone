@@ -55,6 +55,19 @@ export function GameCompleteModal({
     setIsMounted(true);
   }, []);
 
+  // Get loss reason for analytics
+  const getLossReasonType = () => {
+    if (!isWin) {
+      if (maxMoves && moves > maxMoves) {
+        return 'out_of_moves';
+      } else if (timeLimit && timeInSeconds >= timeLimit) {
+        return 'out_of_time';
+      }
+      return 'other';
+    }
+    return '';
+  };
+
   // Track when modal is opened
   useEffect(() => {
     if (isOpen && isMounted) {
@@ -71,20 +84,7 @@ export function GameCompleteModal({
         track(`results_view_loss_${gameMode}${difficulty ? `_${difficulty}` : ''}_${lossReason}`);
       }
     }
-  }, [isOpen, moves, timeInSeconds, isMounted, gameMode, difficulty, isWin]);
-
-  // Get loss reason for analytics
-  const getLossReasonType = () => {
-    if (!isWin) {
-      if (maxMoves && moves > maxMoves) {
-        return 'out_of_moves';
-      } else if (timeLimit && timeInSeconds >= timeLimit) {
-        return 'out_of_time';
-      }
-      return 'other';
-    }
-    return '';
-  };
+  }, [isOpen, moves, timeInSeconds, isMounted, gameMode, difficulty, isWin, getLossReasonType]);
 
   // Handle the play again button click properly
   const handlePlayAgain = () => {

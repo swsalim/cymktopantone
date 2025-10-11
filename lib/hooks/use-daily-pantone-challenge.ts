@@ -19,26 +19,6 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
   const [dailyColors, setDailyColors] = useState<string[]>([]);
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
 
-  useEffect(() => {
-    if (!pantoneColors.length) return;
-
-    const dailyKey = getDailyKey();
-    const savedData = localStorage.getItem(`pantoneDaily-${dailyKey}`);
-
-    if (savedData) {
-      try {
-        const data = JSON.parse(savedData);
-        setDailyColors(data.colors);
-        setHasPlayedToday(data.played);
-      } catch (error) {
-        console.error('Failed to parse daily challenge data:', error);
-        generateDailyColors();
-      }
-    } else {
-      generateDailyColors();
-    }
-  }, [pantoneColors]);
-
   const generateDailyColors = () => {
     if (!pantoneColors.length) return;
 
@@ -103,6 +83,26 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
       }
     }
   };
+
+  useEffect(() => {
+    if (!pantoneColors.length) return;
+
+    const dailyKey = getDailyKey();
+    const savedData = localStorage.getItem(`pantoneDaily-${dailyKey}`);
+
+    if (savedData) {
+      try {
+        const data = JSON.parse(savedData);
+        setDailyColors(data.colors);
+        setHasPlayedToday(data.played);
+      } catch (error) {
+        console.error('Failed to parse daily challenge data:', error);
+        generateDailyColors();
+      }
+    } else {
+      generateDailyColors();
+    }
+  }, [pantoneColors, generateDailyColors]);
 
   return {
     dailyColors,

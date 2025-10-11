@@ -126,8 +126,10 @@ export function usePantoneMatchGame(colorSet: string[], options?: GameOptions) {
         }
 
         // Clear the timer
-        clearInterval(timerRef.current!);
-        timerRef.current = null;
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
       }
     }, 1000);
 
@@ -137,7 +139,7 @@ export function usePantoneMatchGame(colorSet: string[], options?: GameOptions) {
         timerRef.current = null;
       }
     };
-  }, [gameState.startTime, gameState.isGameOver]);
+  }, [gameState.startTime, gameState.isGameOver, gameState.endTime, gameState.timeLimit]);
 
   const initializeGame = (colors: string[]) => {
     // Cancel any pending timeouts

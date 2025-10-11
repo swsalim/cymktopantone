@@ -88,14 +88,18 @@ export default function HslPantoneConverter() {
   };
 
   useEffect(() => {
-    const tempMatchingColors = findMatchingPMSColors(hex.substring(1), Number(distance));
-    const sortedColors = [...tempMatchingColors].sort((a, b) => {
-      return sortOrder === 'high-to-low'
-        ? b.matchPercentage - a.matchPercentage
-        : a.matchPercentage - b.matchPercentage;
-    });
+    const fetchMatchingColors = async () => {
+      const tempMatchingColors = await findMatchingPMSColors(hex.substring(1), Number(distance));
+      const sortedColors = [...tempMatchingColors].sort((a, b) => {
+        return sortOrder === 'high-to-low'
+          ? b.matchPercentage - a.matchPercentage
+          : a.matchPercentage - b.matchPercentage;
+      });
 
-    setMatchingColors(sortedColors);
+      setMatchingColors(sortedColors);
+    };
+
+    fetchMatchingColors();
   }, [hex, distance, sortOrder]);
 
   return (

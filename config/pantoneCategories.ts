@@ -1,4 +1,4 @@
-import { findMatchingPMSColors } from '@/lib/colors';
+import relatedColorsData from '../data/related-colors';
 
 interface ColorConversion {
   format: 'HEX' | 'RGB' | 'CMYK' | 'Pantone';
@@ -27,20 +27,8 @@ export interface PantoneCategory {
   relatedColors: RelatedColor[];
 }
 
-function getRelatedColors(hex: string, pantone: string): RelatedColor[] {
-  // Remove the # from hex if present
-  const cleanHex = hex.replace('#', '');
-  const matches = findMatchingPMSColors(cleanHex, 32);
-
-  // Filter out the main color and limit to 4 results
-  return matches
-    .filter(({ pantone: matchPantone }) => matchPantone !== pantone)
-    .slice(0, 4)
-    .map(({ pantone, hex }) => ({
-      name: pantone,
-      slug: pantone.toLowerCase().replace(/\s+/g, '-'),
-      hex: `#${hex}`,
-    }));
+function getRelatedColors(slug: string): RelatedColor[] {
+  return relatedColorsData[slug as keyof typeof relatedColorsData] || [];
 }
 
 export const pantoneCategories: PantoneCategory[] = [
@@ -65,7 +53,7 @@ export const pantoneCategories: PantoneCategory[] = [
       'Commonly seen in healthcare, organic product packaging, and financial institutions, Pantone Green conveys a message of renewal and harmony.',
     psychology:
       'Green is linked to balance, health, and growth. It has a calming effect and is often used in spaces where relaxation and creativity are encouraged.',
-    relatedColors: getRelatedColors('00A550', 'Pantone 354 C'),
+    relatedColors: getRelatedColors('pantone-green'),
   },
   {
     name: 'Pantone Royal Blue',
@@ -88,7 +76,7 @@ export const pantoneCategories: PantoneCategory[] = [
       'Widely used in corporate branding, financial institutions, and government agencies, Royal Blue projects confidence and dependability.',
     psychology:
       'Royal Blue is associated with intelligence, stability, and trust. It creates a sense of security and is often used in professional settings.',
-    relatedColors: getRelatedColors('002366', 'Pantone 281 C'),
+    relatedColors: getRelatedColors('pantone-royal-blue'),
   },
   {
     name: 'Pantone Grey',
@@ -111,7 +99,7 @@ export const pantoneCategories: PantoneCategory[] = [
       'Commonly used in technology, architecture, and luxury branding, Grey provides a neutral backdrop that allows other elements to stand out.',
     psychology:
       'Grey is associated with professionalism, timelessness, and practicality. It creates a sense of stability and sophistication.',
-    relatedColors: getRelatedColors('808080', 'Pantone Cool Gray 8 C'),
+    relatedColors: getRelatedColors('pantone-grey'),
   },
   {
     name: 'Pantone 485 C',
@@ -131,7 +119,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Common in fast food branding (e.g., McDonald's, Coca-Cola), sports team logos, and warning signs.`,
     psychology: `Red stimulates excitement, appetite, and action. It is often associated with power and urgency.`,
-    relatedColors: getRelatedColors('DA291C', 'Pantone 485 C'),
+    relatedColors: getRelatedColors('pantone-485-c'),
   },
   {
     name: 'Pantone 021 C',
@@ -151,7 +139,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Popular in extreme sports branding, children's products, and safety vests for high visibility.`,
     psychology: `Orange is playful and attention-grabbing, evoking feelings of fun and excitement.`,
-    relatedColors: getRelatedColors('FE5000', 'Pantone 021 C'),
+    relatedColors: getRelatedColors('pantone-021-c'),
   },
   {
     name: 'Pantone 109 C',
@@ -171,7 +159,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Seen in road signs, caution labels, and cheerful branding like DHL and National Geographic.`,
     psychology: `Yellow is associated with energy and joy but also caution when used in high-visibility applications.`,
-    relatedColors: getRelatedColors('FFC72C', 'Pantone 109 C'),
+    relatedColors: getRelatedColors('pantone-109-c'),
   },
   {
     name: 'Pantone 354 C',
@@ -191,7 +179,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Used in natural product packaging, sustainable brands, and healthcare industries.`,
     psychology: `Green conveys balance, renewal, and a connection to nature.`,
-    relatedColors: getRelatedColors('00A550', 'Pantone 354 C'),
+    relatedColors: getRelatedColors('pantone-green'),
   },
   {
     name: 'Pantone 293 C',
@@ -211,7 +199,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Seen in tech brands (IBM, HP), corporate logos, and athletic branding.`,
     psychology: `Blue conveys trust, professionalism, and calmness, making it a dominant corporate color.`,
-    relatedColors: getRelatedColors('0057B7', 'Pantone 293 C'),
+    relatedColors: getRelatedColors('pantone-293-c'),
   },
   {
     name: 'Pantone 2685 C',
@@ -231,7 +219,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Common in beauty, fashion, and luxury branding.`,
     psychology: `Purple stimulates imagination and represents elegance and sophistication.`,
-    relatedColors: getRelatedColors('5D3F91', 'Pantone 2685 C'),
+    relatedColors: getRelatedColors('pantone-2685-c'),
   },
   {
     name: 'Pantone 226 C',
@@ -251,7 +239,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Seen in beauty products, Barbie branding, and Breast Cancer Awareness campaigns.`,
     psychology: `Pink evokes warmth, love, and playfulness, making it ideal for feminine and youth-oriented brands.`,
-    relatedColors: getRelatedColors('E91E63', 'Pantone 226 C'),
+    relatedColors: getRelatedColors('pantone-226-c'),
   },
   {
     name: 'Pantone Cool Gray 6 C',
@@ -271,7 +259,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Used in corporate branding, automotive design, and luxury packaging.`,
     psychology: `Gray is neutral and versatile, offering a sense of stability and refinement.`,
-    relatedColors: getRelatedColors('A7A8AA', 'Pantone Cool Gray 6 C'),
+    relatedColors: getRelatedColors('pantone-cool-gray-6-c'),
   },
   {
     name: 'Pantone Black C',
@@ -291,7 +279,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Common in high-end brands, editorial design, and formal wear.`,
     psychology: `Black represents sophistication, mystery, and exclusivity.`,
-    relatedColors: getRelatedColors('101820', 'Pantone Black C'),
+    relatedColors: getRelatedColors('pantone-black-c'),
   },
   {
     name: 'Pantone White C',
@@ -311,7 +299,7 @@ export const pantoneCategories: PantoneCategory[] = [
     ],
     usage: `Popular in clean aesthetics, medical branding, and minimalist designs.`,
     psychology: `White represents cleanliness, clarity, and new beginnings.`,
-    relatedColors: getRelatedColors('FFFFFF', 'Pantone White C'),
+    relatedColors: getRelatedColors('pantone-white-c'),
   },
   {
     name: 'Pantone Red',
@@ -331,7 +319,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Red is a color of passion, excitement, and energy. It's commonly used in branding, sports teams, and warning signs due to its ability to grab attention instantly.`,
     usage: `Often used in marketing, fast food branding, and sports team logos to evoke urgency and enthusiasm.`,
     psychology: `Red is associated with power, love, and urgency. It stimulates appetite, making it popular in the food industry.`,
-    relatedColors: getRelatedColors('ED1C24', 'Pantone 485 C'),
+    relatedColors: getRelatedColors('pantone-red'),
   },
   {
     name: 'Pantone Orange',
@@ -351,7 +339,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Orange radiates warmth, energy, and creativity. This vibrant hue is commonly associated with enthusiasm, fun, and friendliness.`,
     usage: `Used in entertainment branding, children's products, and safety vests for visibility.`,
     psychology: `Orange is a cheerful and playful color that stimulates conversation and creativity.`,
-    relatedColors: getRelatedColors('FE5000', 'Pantone 021 C'),
+    relatedColors: getRelatedColors('pantone-021-c'),
   },
   {
     name: 'Pantone Yellow',
@@ -371,7 +359,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Yellow symbolizes optimism, happiness, and warmth. It is often used in signage, branding, and advertising to grab attention.`,
     usage: `Seen in road signs, caution labels, and fast food branding to convey positivity and alertness.`,
     psychology: `Yellow is associated with energy and happiness but can also trigger caution in high-visibility applications.`,
-    relatedColors: getRelatedColors('FFC72C', 'Pantone 109 C'),
+    relatedColors: getRelatedColors('pantone-109-c'),
   },
   {
     name: 'Pantone Blue',
@@ -391,7 +379,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Blue is associated with trust, professionalism, and reliability. It is widely used in corporate and financial branding.`,
     usage: `Common in technology, banking, and government branding due to its authoritative appeal.`,
     psychology: `Blue promotes a sense of calm and trustworthiness, making it one of the most used corporate colors.`,
-    relatedColors: getRelatedColors('0057B7', 'Pantone 293 C'),
+    relatedColors: getRelatedColors('pantone-293-c'),
   },
   {
     name: 'Pantone Purple',
@@ -411,7 +399,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Purple symbolizes luxury, creativity, and mystery. It has long been associated with royalty and high-end branding.`,
     usage: `Popular in beauty, fashion, and premium branding to evoke sophistication and exclusivity.`,
     psychology: `Purple stimulates imagination and conveys a sense of creativity and elegance.`,
-    relatedColors: getRelatedColors('5D3F91', 'Pantone 2685 C'),
+    relatedColors: getRelatedColors('pantone-2685-c'),
   },
   {
     name: 'Pantone Pink',
@@ -431,7 +419,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Pink is playful, romantic, and youthful. It is widely used in cosmetics, fashion, and entertainment branding.`,
     usage: `Seen in beauty products, feminine branding, and awareness campaigns like Breast Cancer Awareness.`,
     psychology: `Pink is associated with warmth, love, and kindness, creating a sense of comfort and approachability.`,
-    relatedColors: getRelatedColors('E91E63', 'Pantone 226 C'),
+    relatedColors: getRelatedColors('pantone-226-c'),
   },
   {
     name: 'Pantone Brown',
@@ -451,7 +439,7 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone Brown represents earthiness, reliability, and warmth. It is often used in organic and rustic branding.`,
     usage: `Seen in coffee brands, wood-based products, and natural packaging to emphasize warmth and authenticity.`,
     psychology: `Brown evokes feelings of comfort, stability, and connection to nature.`,
-    relatedColors: getRelatedColors('6F4F28', 'Pantone 4625 C'),
+    relatedColors: getRelatedColors('pantone-brown'),
   },
   {
     name: 'Pantone 342 C',
@@ -471,6 +459,6 @@ export const pantoneCategories: PantoneCategory[] = [
     description: `Pantone 342 C is a deep, rich green that symbolizes growth, stability, and natural harmony. This dark forest green is often associated with environmental consciousness and premium branding.`,
     usage: `Commonly used in financial institutions, environmental organizations, and luxury brands that want to convey trust and sustainability.`,
     psychology: `This deep green evokes feelings of stability, growth, and connection to nature while maintaining a sophisticated and professional appearance.`,
-    relatedColors: getRelatedColors('006747', 'Pantone 342 C'),
+    relatedColors: getRelatedColors('pantone-342-c'),
   },
 ];

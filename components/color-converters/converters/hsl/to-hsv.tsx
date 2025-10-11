@@ -33,7 +33,7 @@ export default function HslHsvConverter() {
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'HSL';
   const TARGET_COLOR = 'HSV';
-  const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
+  const { trackCopy, trackAddToHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
     `${hsl.h},${hsl.s},${hsl.l}`,
@@ -68,21 +68,21 @@ export default function HslHsvConverter() {
     });
   };
 
-  const handleColorSelect = (sourceValue: string) => {
-    const hslMatches = sourceValue.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-    if (hslMatches) {
-      const [, h, s, l] = hslMatches;
-      setHsl({
-        h: parseInt(h),
-        s: parseInt(s),
-        l: parseInt(l),
-      });
+  // const handleColorSelect = (sourceValue: string) => {
+  //   const hslMatches = sourceValue.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+  //   if (hslMatches) {
+  //     const [, h, s, l] = hslMatches;
+  //     setHsl({
+  //       h: parseInt(h),
+  //       s: parseInt(s),
+  //       l: parseInt(l),
+  //     });
 
-      // Track selection from history
-      trackSelectFromHistory();
-      return;
-    }
-  };
+  //     // Track selection from history
+  //     trackSelectFromHistory();
+  //     return;
+  //   }
+  // };
 
   return (
     <Wrapper size="lg" className="pb-0 md:pb-0">

@@ -1,10 +1,4 @@
-'use client';
-
-import { CopyIcon } from 'lucide-react';
-
-import { useToast } from '@/lib/hooks/use-toast';
-
-import { Button } from '@/components/ui/button';
+import { CopyButton } from '@/components/pantone/copy-button';
 
 interface ColorGridProps {
   color: {
@@ -19,16 +13,6 @@ interface ColorGridProps {
 }
 
 export function ColorGrid({ color }: ColorGridProps) {
-  const { toast } = useToast();
-
-  const copyToClipboard = async (value: string, label: string) => {
-    await navigator.clipboard.writeText(value);
-    toast({
-      title: `${label} Copied to clipboard`,
-      description: `Color value ${value} has been copied to your clipboard.`,
-    });
-  };
-
   return (
     <div className="rounded-lg border p-6">
       <div className="mb-4 h-48 w-full rounded-lg" style={{ backgroundColor: color.hex }} />
@@ -42,57 +26,32 @@ export function ColorGrid({ color }: ColorGridProps) {
             <p>
               <span className="font-medium">CMYK:</span> <b>{color.cmyk}</b>
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(`${color.cmyk}`, 'CMYK value')}>
-              <CopyIcon className="h-4 w-4" />
-            </Button>
+            <CopyButton value={color.cmyk} label="CMYK value" />
           </div>
           <div className="flex items-center justify-start">
             <p>
               <span className="font-medium">HEX:</span> <b>{color.hex}</b>
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(`${color.hex}`, 'HEX value')}>
-              <CopyIcon className="h-4 w-4" />
-            </Button>
+            <CopyButton value={color.hex} label="HEX value" />
           </div>
           <div className="flex items-center justify-start">
             <p>
               <span className="font-medium">RGB:</span> <b>{color.rgb}</b>
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(`${color.rgb}`, 'RGB value')}>
-              <CopyIcon className="h-4 w-4" />
-            </Button>
+            <CopyButton value={color.rgb} label="RGB value" />
           </div>
 
           <div className="flex items-center justify-start">
             <p>
               <span className="font-medium">HSL:</span> <b>{color.hsl}</b>
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(`${color.hsl}`, 'HSL value')}>
-              <CopyIcon className="h-4 w-4" />
-            </Button>
+            <CopyButton value={color.hsl} label="HSL value" />
           </div>
           <div className="flex items-center justify-start">
             <p>
               <span className="font-medium">HSV:</span> <b>{color.hsv}</b>
             </p>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(`${color.hsv}`, 'HSV value')}>
-              <CopyIcon className="h-4 w-4" />
-            </Button>
+            <CopyButton value={color.hsv} label="HSV value" />
           </div>
         </div>
       </div>

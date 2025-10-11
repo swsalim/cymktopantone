@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { colorModels } from '@/config/colors';
@@ -117,21 +118,23 @@ export default function Footer({ className, ...props }: FooterProps) {
         <div className="mt-16 flex flex-row flex-wrap gap-4 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
           <div className="shrink-0">
             <a href="https://fazier.com/launches/cmyk-to-pantone-converter" target="_blank">
-              <img
+              <Image
                 src="https://fazier.com/api/v1/public/badges/embed_image.svg?launch_id=4551&badge_type=daily&theme=dark"
                 width="170"
                 height="34"
                 alt="Fazier badge"
+                unoptimized
               />
             </a>
           </div>
           <div className="shrink-0">
             <a href="https://twelve.tools" target="_blank">
-              <img
+              <Image
                 src="https://twelve.tools/badge0-white.svg"
                 alt="Featured on Twelve Tools"
                 width="126"
                 height="34"
+                unoptimized
               />
             </a>
           </div>
@@ -139,21 +142,23 @@ export default function Footer({ className, ...props }: FooterProps) {
             <a
               href="https://startupfa.me/s/cmyk-to-pantone?utm_source=www.cmyktopantone.com"
               target="_blank">
-              <img
+              <Image
                 src="https://startupfa.me/badges/featured-badge.webp"
                 alt="Featured on Startup Fame"
                 width="108"
                 height="34"
+                unoptimized
               />
             </a>
           </div>
           <div className="shrink-0">
             <a href="https://launchboard.dev/?via=launchboardBadge" target="_blank" rel="noopener">
-              <img
+              <Image
                 src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
                 alt="See us on LaunchBoard"
                 width="102"
                 height="34"
+                unoptimized
               />
             </a>
           </div>
@@ -164,10 +169,10 @@ export default function Footer({ className, ...props }: FooterProps) {
                 <text
                   x="60"
                   y="25"
-                  font-family="Arial, sans-serif"
-                  font-size="12"
+                  fontFamily="Arial, sans-serif"
+                  fontSize="12"
                   fill="white"
-                  text-anchor="middle">
+                  textAnchor="middle">
                   Liiinks
                 </text>
               </svg>
@@ -175,21 +180,23 @@ export default function Footer({ className, ...props }: FooterProps) {
           </div>
           <div className="shrink-0">
             <a href="https://theindiewall.net" target="_blank">
-              <img
+              <Image
                 src="https://theindiewall.net/indiewall.svg"
                 alt="IndieWall"
                 width="68"
                 height="34"
+                unoptimized
               />
             </a>
           </div>
           <div className="shrink-0">
             <a href="https://turbo0.com/item/cmyk-to-pantone-converter" target="_blank">
-              <img
+              <Image
                 src="https://img.turbo0.com/badge-listed-light.svg"
                 alt="Listed on Turbo0"
                 width="76"
                 height="34"
+                unoptimized
               />
             </a>
           </div>
@@ -215,21 +222,23 @@ export default function Footer({ className, ...props }: FooterProps) {
           </div>
           <div className="shrink-0">
             <a href="https://magicbox.tools" target="_blank">
-              <img
+              <Image
                 src="https://magicbox.tools/badge.svg"
                 alt="Featured on MagicBox.tools"
                 width="137"
                 height="37"
+                unoptimized
               />
             </a>
           </div>
           <div className="shrink-0">
             <a href="https://dang.ai/" target="_blank">
-              <img
+              <Image
                 src="https://cdn.prod.website-files.com/63d8afd87da01fb58ea3fbcb/6487e2868c6c8f93b4828827_dang-badge.png"
                 alt="Dang.ai"
                 width="103"
                 height="37"
+                unoptimized
               />
             </a>
           </div>
