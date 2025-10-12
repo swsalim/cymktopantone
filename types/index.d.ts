@@ -64,3 +64,11 @@ export type HSV = {
   s: number;
   v: number;
 };
+
+declare global {
+  interface Window {
+    seline: {
+      track: (eventName: string, properties?: Record<string, any>) => void;
+    };
+  }
+}
