@@ -460,5 +460,27 @@ export default {
       "slug": "336-c",
       "hex": "#00664F"
     }
+  ],
+  "pantone-1837-c": [
+    {
+      "name": "7471 C",
+      "slug": "7471-c",
+      "hex": "#7EDDD3"
+    },
+    {
+      "name": "3242 C",
+      "slug": "3242-c",
+      "hex": "#71DBD4"
+    },
+    {
+      "name": "3245 C",
+      "slug": "3245-c",
+      "hex": "#7CE0D3"
+    },
+    {
+      "name": "571 C",
+      "slug": "571-c",
+      "hex": "#98DBCE"
+    }
   ]
 }
