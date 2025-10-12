@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { MDXContent } from '@content-collections/mdx/react';
 import { allPosts } from 'content-collections';
 import { format, parseISO } from 'date-fns';
-import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 
 import { siteConfig } from '@/config/site';
 
@@ -15,6 +14,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
+import { BlogNavigation } from '@/components/blog-navigation';
 import { ImageKit } from '@/components/image-kit';
 import BlogPostJsonLd from '@/components/structured-data/BlogPostJsonLd';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
@@ -22,7 +22,6 @@ import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import TableOfContents from '@/components/table-of-contents';
 import Breadcrumb from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -180,34 +179,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             {/* Previous/Next Post Navigation */}
-            <div className="mt-12 flex items-center justify-between gap-4 border-t border-gray-200 pt-8 dark:border-gray-700">
-              {post.prev && (
-                <Button variant="secondary" size="sm" asChild className="shadow-none">
-                  <Link
-                    href={`/blog/${post.prev._meta.path}`}
-                    className="flex items-center gap-2"
-                    onClick={() => {
-                      window.seline?.track('blog_previous_article_click');
-                    }}>
-                    <ArrowLeftIcon className="size-4" />
-                    <span className="hidden sm:block">Read Previous Article</span>
-                  </Link>
-                </Button>
-              )}
-              {post.next && (
-                <Button variant="secondary" size="sm" className="ml-auto shadow-none" asChild>
-                  <Link
-                    href={`/blog/${post.next._meta.path}`}
-                    className="flex items-center gap-2"
-                    onClick={() => {
-                      window.seline?.track('blog_next_article_click');
-                    }}>
-                    <span className="hidden sm:block">Read Next Article</span>
-                    <ArrowRightIcon className="size-4" />
-                  </Link>
-                </Button>
-              )}
-            </div>
+            <BlogNavigation prev={post.prev} next={post.next} />
           </article>
 
           {/* Table of Contents Sidebar */}
