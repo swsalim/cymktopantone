@@ -19,6 +19,10 @@ const navigation = {
     { name: 'Terms of service', href: '/legal/terms-and-conditions' },
     { name: 'Privacy policy', href: '/legal/privacy-policy' },
   ],
+  resources: [
+    { name: 'Color Theory 101', href: '/blog/color-theory-101' },
+    { name: 'Pantone Digital Branding', href: '/blog/pantone-digital-branding' },
+  ],
   colorModels: colorModels.map((model) => ({
     name: model.title,
     href: model.href,
@@ -67,6 +71,27 @@ export default function Footer({ className, ...props }: FooterProps) {
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-6 md:mt-8">
+                <h3 className="text-base/6 font-semibold text-gray-100">
+                  <a
+                    href="/blog"
+                    className="text-base/6 text-gray-300 transition hover:text-violet-400">
+                    Resources
+                  </a>
+                </h3>
+                <ul role="list" className="mt-4 space-y-4 md:mt-6">
+                  {navigation.resources.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-base/6 text-gray-300 transition hover:text-violet-400">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="md:mt-0">
               <div className="md:mt-0">
