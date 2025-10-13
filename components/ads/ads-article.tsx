@@ -18,14 +18,17 @@ export default function AdsArticle() {
   }, []);
 
   return (
-    <aside className="my-4 block w-full before:block before:text-center before:text-[10px] before:font-medium before:uppercase before:leading-4 before:text-gray-500 before:content-['Advertisement'] md:my-8">
-      <div className="relative mx-auto min-h-[250px] w-full bg-gray-50 text-center">
+    <aside className="my-4 w-full md:my-8">
+      {/* Advertisement label */}
+      <div className="mb-1 text-center text-[10px] font-medium uppercase leading-4 text-gray-500">
+        Advertisement
+      </div>
+
+      {/* Ad container */}
+      <div className="mx-auto w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-700">
         <ins
-          className="adsbygoogle relative mx-auto min-h-[250px] w-full bg-gray-50 text-center dark:bg-gray-700"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-          }}
+          className="adsbygoogle block min-h-[250px] w-full"
+          style={{ display: 'block' }}
           data-ad-layout="in-article"
           data-ad-format="fluid"
           data-ad-client="ca-pub-3799479098488751"
