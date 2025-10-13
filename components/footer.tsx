@@ -74,11 +74,11 @@ export default function Footer({ className, ...props }: FooterProps) {
 
               <div className="mt-6 md:mt-8">
                 <h3 className="text-base/6 font-semibold text-gray-100">
-                  <a
+                  <Link
                     href="/blog"
                     className="text-base/6 text-gray-300 transition hover:text-violet-400">
                     Resources
-                  </a>
+                  </Link>
                 </h3>
                 <ul role="list" className="mt-4 space-y-4 md:mt-6">
                   {navigation.resources.map((item) => (
