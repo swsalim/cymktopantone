@@ -9,7 +9,6 @@ import {
   DailyChallengeProvider,
   useDailyChallenge,
 } from '@/app/components/pantone-match/daily-challenge-provider';
-import { track } from '@vercel/analytics';
 import { CalendarDays, Gamepad2, Timer } from 'lucide-react';
 
 import { PMS } from '@/config/colors';
@@ -31,24 +30,24 @@ function PantoneMatchNavigation() {
 
   // Track navigation events when user selects a game mode
   const handleNavClick = (gameMode: string) => {
-    track(`navigate_to_${gameMode}`);
+    window.seline?.track(`navigate_to_${gameMode}`);
   };
 
   // Track session start
   useEffect(() => {
-    track('pantone_game_session_start');
+    window.seline?.track('pantone_game_session_start');
 
     // Track the initial game mode the user landed on
     if (pathname.includes('/classic')) {
-      track('initial_mode_classic');
+      window.seline?.track('initial_mode_classic');
     } else if (pathname.includes('/challenge')) {
-      track('initial_mode_challenge');
+      window.seline?.track('initial_mode_challenge');
     } else if (pathname.includes('/daily')) {
-      track('initial_mode_daily');
+      window.seline?.track('initial_mode_daily');
     }
 
     return () => {
-      track('pantone_game_session_end');
+      window.seline?.track('pantone_game_session_end');
     };
   }, [pathname]);
 

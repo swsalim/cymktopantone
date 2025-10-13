@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { track } from '@vercel/analytics';
-
 // import BannerCodefast from '@/components/ads/banner-codefast';
 // import BannerFrogDr from '@/components/ads/banner-frogdr';
 // import BannerRandomnumber from '@/components/ads/banner-randomnumber';
@@ -91,9 +89,9 @@ export default function RotatingBanner() {
 }
 
 function trackImpression(version: string) {
-  track(`Banner ${version} impression`);
+  window.seline?.track(`Banner ${version} impression`);
 }
 
 function trackClick(version: string) {
-  track(`Banner ${version} click`);
+  window.seline?.track(`Banner ${version} click`);
 }

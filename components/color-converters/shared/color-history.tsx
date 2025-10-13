@@ -1,6 +1,5 @@
 'use client';
 
-import { track } from '@vercel/analytics';
 import { Trash2, X } from 'lucide-react';
 
 import { cmykToRgb, convertPantoneToHex, hslToRgb, hsvToRgb } from '@/lib/colors';
@@ -80,19 +79,21 @@ export function ColorHistory({ history, onColorSelect }: ColorHistoryProps) {
 
   const handleColorSelect = (sourceValue: string, item: ColorHistoryItem) => {
     // Track color selection from history
-    track(`history_select_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`);
+    window.seline?.track(
+      `history_select_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`,
+    );
     onColorSelect(sourceValue);
   };
 
   const handleClearHistory = () => {
     // Track clearing history
-    track('clear_color_history');
+    window.seline?.track('clear_color_history');
     history.clearHistory();
   };
 
   const handleRemoveFromHistory = (id: string, item: ColorHistoryItem) => {
     // Track removing item from history
-    track(
+    window.seline?.track(
       `remove_from_history_${item.sourceColor.toLowerCase()}_to_${item.targetColor.toLowerCase()}`,
     );
     history.removeFromHistory(id);

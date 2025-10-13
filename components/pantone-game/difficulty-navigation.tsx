@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { track } from '@vercel/analytics';
-
 import { GAME_DIFFICULTY } from '@/config/game';
 
 import { Button } from '@/components/ui/button';
@@ -23,7 +21,7 @@ export function DifficultyNavigation({
 
   // Track difficulty changes
   const handleDifficultyClick = (difficulty: string) => {
-    track(`difficulty_change_${gameMode}_${difficulty}`);
+    window.seline?.track(`difficulty_change_${gameMode}_${difficulty}`);
   };
 
   return (

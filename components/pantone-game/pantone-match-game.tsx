@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useDailyChallenge } from '@/app/components/pantone-match/daily-challenge-provider';
-import { track } from '@vercel/analytics';
 import { Clock, RefreshCw, Zap } from 'lucide-react';
 
 import { PMS } from '@/config/colors';
@@ -141,7 +140,7 @@ function PantoneMatchGameContent({
     }
 
     // Track game start event
-    track(`game_start_${gameMode}_${difficulty}`);
+    window.seline?.track(`game_start_${gameMode}_${difficulty}`);
   }, [gameMode, dailyColors, difficulty]);
 
   // Determine if we should apply limits based on game mode
@@ -160,7 +159,7 @@ function PantoneMatchGameContent({
 
     // Only track first card flip to avoid excessive events
     if (gameState.flippedCards.length === 0) {
-      track(`card_flip_${gameMode}`);
+      window.seline?.track(`card_flip_${gameMode}`);
     }
   };
 
@@ -215,14 +214,14 @@ function PantoneMatchGameContent({
             registerWin();
 
             // Track win event with game stats
-            track(`game_win_${gameMode}_${difficulty}`);
-            track(`game_complete_time_${gameTime}s`);
-            track(`game_complete_moves_${gameState.moves}`);
+            window.seline?.track(`game_win_${gameMode}_${difficulty}`);
+            window.seline?.track(`game_complete_time_${gameTime}s`);
+            window.seline?.track(`game_complete_moves_${gameState.moves}`);
 
             // Mark daily challenge as played if in daily mode
             if (gameMode === 'daily') {
               markAsPlayed();
-              track('daily_challenge_completed');
+              window.seline?.track('daily_challenge_completed');
             }
           } else {
             // Register loss in stats
@@ -233,12 +232,12 @@ function PantoneMatchGameContent({
               gameState.timeLimit && timeRemaining !== null && timeRemaining <= 0
                 ? 'timeout'
                 : 'max_moves';
-            track(`game_loss_${gameMode}_${difficulty}_${lossReason}`);
+            window.seline?.track(`game_loss_${gameMode}_${difficulty}_${lossReason}`);
 
             // Mark daily challenge as played if in daily mode
             if (gameMode === 'daily') {
               markAsPlayed();
-              track('daily_challenge_attempted');
+              window.seline?.track('daily_challenge_attempted');
             }
           }
         }, 100);
@@ -275,18 +274,18 @@ function PantoneMatchGameContent({
       setSelectedColors(randomColors);
     }
     resetGame();
-    track(`new_game_${gameMode}_${difficulty}`);
+    window.seline?.track(`new_game_${gameMode}_${difficulty}`);
   };
 
   const handlePlayAgain = () => {
     handleNewGame();
     setIsModalOpen(false);
-    track(`play_again_${gameMode}_${difficulty}`);
+    window.seline?.track(`play_again_${gameMode}_${difficulty}`);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    track('game_results_closed');
+    window.seline?.track('game_results_closed');
   };
 
   return (

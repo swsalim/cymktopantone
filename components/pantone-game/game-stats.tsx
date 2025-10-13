@@ -1,6 +1,5 @@
 'use client';
 
-import { track } from '@vercel/analytics';
 import { Award, BarChart3, Clock, Repeat, Trophy } from 'lucide-react';
 
 import { GameStats } from '@/lib/hooks/use-pantone-game-stats';
@@ -26,7 +25,7 @@ export function GameStatsCard({ stats, onReset, className }: GameStatsProps) {
 
   const handleResetStats = () => {
     onReset();
-    track('stats_reset');
+    window.seline?.track('stats_reset');
   };
 
   const statItems = [
