@@ -43,16 +43,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   return {
     title: {
-      absolute: post.title,
+      absolute: post.metaTitle || post.title,
     },
-    description: post.summary,
+    description: post.metaDescription || post.summary,
     openGraph: {
-      title: post.title,
-      description: post.summary,
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.summary,
       url: absoluteUrl(`/blog/${post._meta.path}`),
       images: [
         {
-          url: absoluteUrl(`/api/og?title=${post.title}`),
+          url: absoluteUrl(`/api/og?title=${post.metaTitle || post.title}`),
           width: 1200,
           height: 630,
         },
@@ -62,9 +62,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'website',
     },
     twitter: {
-      title: post.title,
-      description: post.summary,
-      images: [absoluteUrl(`/api/og?title=${post.title}`)],
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.summary,
+      images: [absoluteUrl(`/api/og?title=${post.metaTitle || post.title}`)],
       card: 'summary_large_image',
       creator: siteConfig.creator,
     },
@@ -150,7 +150,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
       <BlogPostJsonLd post={post} />
-      <WebPageJsonLd id={absoluteUrl(`/blog/${post._meta.path}`)} description={post.summary} />
+      <WebPageJsonLd
+        id={absoluteUrl(`/blog/${post._meta.path}`)}
+        description={post.metaDescription || post.summary}
+      />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <main className="container mx-auto max-w-7xl space-y-16 px-4 py-8 md:py-16">
         <Breadcrumb items={breadcrumbItems} />
