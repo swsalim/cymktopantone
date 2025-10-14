@@ -20,12 +20,18 @@ const posts = defineCollection({
       rehypePlugins: [rehypeSlug],
     });
     const docs = await context.collection.documents();
-    const idx = docs.findIndex((d) => document._meta.filePath === d._meta.filePath);
+
+    // Sort documents by publication date (newest first) to match blog page sorting
+    const sortedDocs = docs.sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
+
+    const idx = sortedDocs.findIndex((d) => document._meta.filePath === d._meta.filePath);
     return {
       ...document,
       mdx,
-      prev: idx > 0 ? docs[idx - 1] : null,
-      next: idx < docs.length - 1 ? docs[idx + 1] : null,
+      prev: idx > 0 ? sortedDocs[idx - 1] : null,
+      next: idx < sortedDocs.length - 1 ? sortedDocs[idx + 1] : null,
     };
   },
 });
