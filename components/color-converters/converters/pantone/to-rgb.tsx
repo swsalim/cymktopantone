@@ -42,7 +42,6 @@ export default function PantoneRgbConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    pantone,
   );
 
   const handleClick = (value: string) => {
@@ -66,11 +65,11 @@ export default function PantoneRgbConverter() {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on label
       if (label === 'RGB value') {
-        trackCopy('RGB');
+        trackCopy('RGB', text);
       } else if (label === 'CMYK value') {
-        trackCopy('CMYK');
+        trackCopy('CMYK', text);
       } else if (label === 'HEX value') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       }
 
       toast({

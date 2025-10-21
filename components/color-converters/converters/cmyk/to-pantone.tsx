@@ -60,11 +60,7 @@ export default function CmykPantoneConverter() {
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'CMYK';
   const TARGET_COLOR = 'PANTONE';
-  const { trackCopy } = useConverterTracking(
-    SOURCE_COLOR,
-    TARGET_COLOR,
-    `${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k}`,
-  );
+  const { trackCopy } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR);
 
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -76,13 +72,13 @@ export default function CmykPantoneConverter() {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on the label
       if (label === 'RGB value') {
-        trackCopy('RGB');
+        trackCopy('RGB', text);
       } else if (label === 'HEX value') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       } else if (label === 'Pantone') {
-        trackCopy('PANTONE');
+        trackCopy('PANTONE', text);
       } else if (label === 'HEX') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       }
 
       toast({

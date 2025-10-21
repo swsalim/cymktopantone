@@ -49,11 +49,7 @@ export default function RgbPantoneConverter() {
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'RGB';
   const TARGET_COLOR = 'PANTONE';
-  const { trackCopy } = useConverterTracking(
-    SOURCE_COLOR,
-    TARGET_COLOR,
-    `${rgb.r},${rgb.g},${rgb.b}`,
-  );
+  const { trackCopy } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR);
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
     const numValue = Math.min(255, Math.max(0, Number(value) || 0));
@@ -65,13 +61,13 @@ export default function RgbPantoneConverter() {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on the label
       if (label === 'RGB value') {
-        trackCopy('RGB');
+        trackCopy('RGB', text);
       } else if (label === 'HEX value') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       } else if (label === 'Pantone') {
-        trackCopy('PANTONE');
+        trackCopy('PANTONE', text);
       } else if (label === 'HEX') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       }
 
       toast({

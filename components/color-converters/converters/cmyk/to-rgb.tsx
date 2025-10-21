@@ -35,7 +35,6 @@ export default function CmykRgbConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    `${cmyk.c},${cmyk.m},${cmyk.y},${cmyk.k}`,
   );
 
   const handleInputChange = (key: keyof typeof cmyk, value: string) => {
@@ -46,7 +45,7 @@ export default function CmykRgbConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event
-      trackCopy(TARGET_COLOR);
+      trackCopy(TARGET_COLOR, text);
 
       toast({
         description: `${label} copied!`,

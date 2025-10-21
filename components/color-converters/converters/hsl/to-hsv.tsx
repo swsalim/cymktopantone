@@ -33,11 +33,7 @@ export default function HslHsvConverter() {
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'HSL';
   const TARGET_COLOR = 'HSV';
-  const { trackCopy, trackAddToHistory } = useConverterTracking(
-    SOURCE_COLOR,
-    TARGET_COLOR,
-    `${hsl.h},${hsl.s},${hsl.l}`,
-  );
+  const { trackCopy, trackAddToHistory } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR);
 
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -47,7 +43,7 @@ export default function HslHsvConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event
-      trackCopy(TARGET_COLOR);
+      trackCopy(TARGET_COLOR, text);
 
       toast({
         description: `${label} copied!`,

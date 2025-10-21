@@ -33,7 +33,6 @@ export default function RgbHexConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    `${rgb.r},${rgb.g},${rgb.b}`,
   );
 
   const handleInputChange = (key: keyof typeof rgb, value: string) => {
@@ -44,7 +43,7 @@ export default function RgbHexConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event
-      trackCopy(TARGET_COLOR);
+      trackCopy(TARGET_COLOR, text);
 
       toast({
         description: `${label} copied!`,

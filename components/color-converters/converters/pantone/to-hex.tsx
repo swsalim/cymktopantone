@@ -53,7 +53,6 @@ export default function PantoneHexConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    pantone,
   );
 
   const handleClick = (value: string) => {
@@ -77,15 +76,15 @@ export default function PantoneHexConverter() {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on label
       if (label === 'HEX value') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       } else if (label === 'RGB value') {
-        trackCopy('RGB');
+        trackCopy('RGB', text);
       } else if (label === 'CMYK value') {
-        trackCopy('CMYK');
+        trackCopy('CMYK', text);
       } else if (label === 'HSL value') {
-        trackCopy('HSL');
+        trackCopy('HSL', text);
       } else if (label === 'HSV value') {
-        trackCopy('HSV');
+        trackCopy('HSV', text);
       }
 
       toast({

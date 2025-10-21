@@ -37,7 +37,6 @@ export default function HsvHSLConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    `${hsv.h},${hsv.s},${hsv.v}`,
   );
 
   const handleInputChange = (key: keyof typeof hsv, value: string) => {
@@ -48,7 +47,7 @@ export default function HsvHSLConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event
-      trackCopy(TARGET_COLOR);
+      trackCopy(TARGET_COLOR, text);
 
       toast({
         description: `${label} copied!`,

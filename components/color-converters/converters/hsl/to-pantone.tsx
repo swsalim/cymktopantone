@@ -57,11 +57,7 @@ export default function HslPantoneConverter() {
   // Initialize tracking with source and target color formats
   const SOURCE_COLOR = 'HSL';
   const TARGET_COLOR = 'PANTONE';
-  const { trackCopy } = useConverterTracking(
-    SOURCE_COLOR,
-    TARGET_COLOR,
-    `${hsl.h},${hsl.s},${hsl.l}`,
-  );
+  const { trackCopy } = useConverterTracking(SOURCE_COLOR, TARGET_COLOR);
 
   const handleInputChange = (key: keyof typeof hsl, value: string) => {
     const numValue = Math.min(100, Math.max(0, Number(value) || 0));
@@ -73,11 +69,11 @@ export default function HslPantoneConverter() {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event based on the label
       if (label === 'HSL value') {
-        trackCopy('HSL');
+        trackCopy('HSL', text);
       } else if (label === 'Pantone') {
-        trackCopy('PANTONE');
+        trackCopy('PANTONE', text);
       } else if (label === 'HEX') {
-        trackCopy('HEX');
+        trackCopy('HEX', text);
       }
 
       toast({

@@ -34,7 +34,6 @@ export default function HexHslConverter() {
   const { trackCopy, trackAddToHistory, trackSelectFromHistory } = useConverterTracking(
     SOURCE_COLOR,
     TARGET_COLOR,
-    hex,
   );
 
   const handleInputChange = (value: string) => {
@@ -47,7 +46,7 @@ export default function HexHslConverter() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
       // Track copy event
-      trackCopy(TARGET_COLOR);
+      trackCopy(TARGET_COLOR, text);
 
       toast({
         description: `${label} copied!`,
