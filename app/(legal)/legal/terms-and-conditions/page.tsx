@@ -14,7 +14,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Terms and Conditions',
   description:
-    'CMYK Pantone operated by Yuurrific. Yuurrific offers CMYK Pantone and related services to you, a user, under the condition that you accept all of our set terms, including these Terms of Service and all related policies.',
+    'CMYK Pantone operated by Yuurrific. Yuurrific offers CMYK Pantone and related services to you, a user, under the condition that you accept all of our set terms.',
   url: '/legal/terms-and-conditions',
 };
 

@@ -229,8 +229,8 @@ export async function generateMetadata({ params }: HexPantonePageProps): Promise
   }
 
   const config = {
-    title: `Convert #${hex} to Pantone Color - HEX to Pantone Converter`,
-    description: `Convert HEX color #${hex} to its closest Pantone color match. Find the perfect Pantone equivalent for your HEX color code with our accurate color converter.`,
+    title: `Convert #${hex} to Pantone Color`,
+    description: `Convert HEX color #${hex} to its closest Pantone color match. Find the perfect Pantone equivalent for your HEX color code.`,
     keywords: [
       'hex to pantone',
       'color converter',
@@ -248,11 +248,30 @@ export async function generateMetadata({ params }: HexPantonePageProps): Promise
   return {
     title: config.title,
     description: config.description,
+    alternates: {
+      canonical: absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`),
+    },
     keywords: config.keywords,
     openGraph: {
       title: config.title,
       description: config.description,
+      url: absoluteUrl(`/convert-hex-to-pantone-pms/${hex}`),
+      images: [
+        {
+          url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
+          width: siteConfig.openGraph.width,
+          height: siteConfig.openGraph.height,
+          alt: config.title,
+        },
+      ],
+      locale: 'en_US',
       type: 'website',
+    },
+    twitter: {
+      title: config.title,
+      description: config.description,
+      card: 'summary_large_image',
+      creator: siteConfig.creator,
       images: [
         {
           url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),

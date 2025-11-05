@@ -52,7 +52,7 @@ export default function HslPantoneContent() {
 
       <h2>Key Differences Between HSL and Pantone</h2>
       <p>
-        The <Link href="/color-models-hsl">HSL model</Link> defines colors based on hue, saturation,
+        The <Link href="/color-models/hsl">HSL model</Link> defines colors based on hue, saturation,
         and lightness, making it ideal for selecting and adjusting colors in digital design.
         However, since screens display colors using light, there’s no direct one-to-one translation
         to printed materials.

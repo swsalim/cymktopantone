@@ -17,7 +17,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'A Guide to HSL Color Model',
   description:
-    'Learn everything about the HSL color model in this comprehensive guide. Discover how Hue, Saturation, and Lightness work together to create vibrant colors for design and web development.',
+    'Discover how Hue, Saturation, and Lightness work together to create vibrant colors for design and web development.',
   url: '/color-models/hsl',
 };
 
@@ -218,8 +218,8 @@ export default function ColorModelHsl() {
               <strong>Pantone and HSL</strong> are possible. Imagine you’re working on a digital
               project where your brand’s Pantone colors need to be represented on a website.
               Understanding how to{' '}
-              <Link href="/convert-pantone-to-hsl">convert Pantone to an HSL model</Link> ensures
-              fidelity across both digital and print realms.
+              <Link href="/convert-pantone-pms-to-hsl">convert Pantone to an HSL model</Link>{' '}
+              ensures fidelity across both digital and print realms.
             </p>
           </section>
 

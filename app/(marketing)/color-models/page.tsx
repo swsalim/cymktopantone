@@ -20,7 +20,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Color Models Guide - CMYK, RGB, HEX & HSL Explained',
   description:
-    'Learn the differences between CMYK, RGB, HEX, and HSL color models. Discover which model is best for print, web, and digital design, with examples of real-world use.',
+    'Learn the differences between CMYK, RGB, HEX, and HSL color models. Discover which model is best for print, web, and digital design.',
   url: '/color-models',
 };
 

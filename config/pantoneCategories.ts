@@ -21,6 +21,7 @@ export interface PantoneCategory {
   cmyk: string;
   pantone: string;
   description: string;
+  shortDescription: string;
   conversions: ColorConversion[];
   usage: string;
   psychology: string;
@@ -43,6 +44,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsv: '120, 100%, 64%',
     description:
       'Pantone Green symbolizes nature, growth, and sustainability. It is a go-to color for brands that emphasize environmental consciousness and wellness. This vibrant green is often used in organic food packaging, eco-friendly campaigns, and nature-inspired branding.',
+    shortDescription:
+      'A vibrant green representing nature, growth, and sustainability, ideal for eco-friendly branding.',
     conversions: [
       { format: 'HEX', value: '#00A550' },
       { format: 'RGB', value: '0, 165, 80' },
@@ -66,6 +69,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsv: '225, 100%, 40%',
     description:
       'Pantone Royal Blue represents trust, stability, and professionalism. It is a powerful color choice for corporate branding and institutions that want to convey authority and reliability.',
+    shortDescription:
+      'A deep blue representing trust, stability, and professionalism, ideal for corporate branding.',
     conversions: [
       { format: 'HEX', value: '#002366' },
       { format: 'RGB', value: '0, 35, 102' },
@@ -89,6 +94,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsv: '0, 0%, 50%',
     description:
       'Pantone Grey represents neutrality, balance, and sophistication. It is a versatile color that works well in both modern and traditional design contexts.',
+    shortDescription:
+      'A neutral gray representing balance and sophistication, versatile for modern and traditional designs.',
     conversions: [
       { format: 'HEX', value: '#808080' },
       { format: 'RGB', value: '128, 128, 128' },
@@ -111,6 +118,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '0, 80%, 48%',
     hsv: '0, 91%, 85%',
     description: `Pantone 485 C is a vibrant, fiery red that symbolizes passion, energy, and urgency. It is widely used in branding, sports, and marketing materials to create strong visual impact.`,
+    shortDescription:
+      'A vibrant red symbolizing passion, energy, and urgency, perfect for impactful branding and sports.',
     conversions: [
       { format: 'HEX', value: '#DA291C' },
       { format: 'RGB', value: '218, 41, 28' },
@@ -131,6 +140,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '20, 100%, 50%',
     hsv: '20, 100%, 100%',
     description: `Pantone 021 C is an intense orange that radiates warmth, energy, and enthusiasm. It is often used in sports, entertainment, and safety applications.`,
+    shortDescription:
+      'An intense orange radiating warmth and energy, ideal for sports, entertainment, and safety applications.',
     conversions: [
       { format: 'HEX', value: '#FE5000' },
       { format: 'RGB', value: '254, 80, 0' },
@@ -151,6 +162,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '54, 100%, 60%',
     hsv: '54, 100%, 100%',
     description: `Pantone 109 C is a bright, energetic yellow that represents optimism and happiness. It is commonly used in branding, signage, and advertising to grab attention.`,
+    shortDescription:
+      'A bright yellow representing optimism and happiness, perfect for attention-grabbing branding and signage.',
     conversions: [
       { format: 'HEX', value: '#FFC72C' },
       { format: 'RGB', value: '255, 199, 44' },
@@ -171,6 +184,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '120, 100%, 32%',
     hsv: '120, 100%, 64%',
     description: `Pantone 354 C is a rich, fresh green that symbolizes nature, growth, and sustainability. It is a favorite among eco-friendly brands and organic product packaging.`,
+    shortDescription:
+      'A rich green symbolizing nature and sustainability, popular with eco-friendly brands and organic products.',
     conversions: [
       { format: 'HEX', value: '#00A550' },
       { format: 'RGB', value: '0, 165, 80' },
@@ -191,6 +206,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '225, 100%, 36%',
     hsv: '225, 100%, 72%',
     description: `Pantone 293 C is a bold and trustworthy blue that is commonly used in corporate branding and sports team identities.`,
+    shortDescription:
+      'A bold blue representing trust and professionalism, ideal for corporate branding and sports teams.',
     conversions: [
       { format: 'HEX', value: '#0057B7' },
       { format: 'RGB', value: '0, 87, 183' },
@@ -211,6 +228,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '270, 50%, 41%',
     hsv: '270, 50%, 57%',
     description: `Pantone 2685 C is a luxurious, deep purple often associated with royalty, creativity, and high-end branding.`,
+    shortDescription:
+      'A luxurious purple associated with royalty and creativity, perfect for high-end and luxury branding.',
     conversions: [
       { format: 'HEX', value: '#5D3F91' },
       { format: 'RGB', value: '93, 63, 145' },
@@ -231,6 +250,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '330, 80%, 52%',
     hsv: '330, 80%, 91%',
     description: `Pantone 226 C is a striking pink that conveys vibrancy, femininity, and fun. It is widely used in cosmetics, fashion, and pop culture branding.`,
+    shortDescription:
+      'A vibrant pink conveying femininity and fun, ideal for cosmetics, fashion, and pop culture branding.',
     conversions: [
       { format: 'HEX', value: '#E91E63' },
       { format: 'RGB', value: '233, 30, 99' },
@@ -251,6 +272,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '0, 0%, 67%',
     hsv: '0, 0%, 67%',
     description: `Pantone Cool Gray 6 C is a sophisticated neutral gray that conveys balance, professionalism, and modern design.`,
+    shortDescription:
+      'A sophisticated neutral gray representing balance and professionalism, perfect for modern design.',
     conversions: [
       { format: 'HEX', value: '#A7A8AA' },
       { format: 'RGB', value: '167, 168, 170' },
@@ -271,6 +294,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '0, 0%, 12%',
     hsv: '0, 0%, 12%',
     description: `Pantone Black C is a timeless and powerful color used in luxury branding, typography, and fashion.`,
+    shortDescription:
+      'A timeless black representing power and sophistication, ideal for luxury branding and fashion.',
     conversions: [
       { format: 'HEX', value: '#101820' },
       { format: 'RGB', value: '16, 24, 32' },
@@ -291,6 +316,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '0, 0%, 100%',
     hsv: '0, 0%, 100%',
     description: `Pantone White C symbolizes purity, simplicity, and minimalism. It is widely used in modern branding and healthcare applications.`,
+    shortDescription:
+      'A pure white representing simplicity and minimalism, ideal for modern branding and healthcare.',
     conversions: [
       { format: 'HEX', value: '#FFFFFF' },
       { format: 'RGB', value: '255, 255, 255' },
@@ -317,6 +344,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '485 C' },
     ],
     description: `Pantone Red is a color of passion, excitement, and energy. It's commonly used in branding, sports teams, and warning signs due to its ability to grab attention instantly.`,
+    shortDescription:
+      'A passionate red representing energy and excitement, perfect for impactful branding and sports teams.',
     usage: `Often used in marketing, fast food branding, and sports team logos to evoke urgency and enthusiasm.`,
     psychology: `Red is associated with power, love, and urgency. It stimulates appetite, making it popular in the food industry.`,
     relatedColors: getRelatedColors('pantone-red'),
@@ -337,6 +366,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '021 C' },
     ],
     description: `Pantone Orange radiates warmth, energy, and creativity. This vibrant hue is commonly associated with enthusiasm, fun, and friendliness.`,
+    shortDescription:
+      'A vibrant orange radiating warmth and creativity, ideal for fun and friendly branding.',
     usage: `Used in entertainment branding, children's products, and safety vests for visibility.`,
     psychology: `Orange is a cheerful and playful color that stimulates conversation and creativity.`,
     relatedColors: getRelatedColors('pantone-021-c'),
@@ -357,6 +388,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '109 C' },
     ],
     description: `Pantone Yellow symbolizes optimism, happiness, and warmth. It is often used in signage, branding, and advertising to grab attention.`,
+    shortDescription:
+      'A bright yellow representing optimism and happiness, perfect for attention-grabbing signage and branding.',
     usage: `Seen in road signs, caution labels, and fast food branding to convey positivity and alertness.`,
     psychology: `Yellow is associated with energy and happiness but can also trigger caution in high-visibility applications.`,
     relatedColors: getRelatedColors('pantone-109-c'),
@@ -377,6 +410,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '293 C' },
     ],
     description: `Pantone Blue is associated with trust, professionalism, and reliability. It is widely used in corporate and financial branding.`,
+    shortDescription:
+      'A trustworthy blue representing professionalism and reliability, ideal for corporate and financial branding.',
     usage: `Common in technology, banking, and government branding due to its authoritative appeal.`,
     psychology: `Blue promotes a sense of calm and trustworthiness, making it one of the most used corporate colors.`,
     relatedColors: getRelatedColors('pantone-293-c'),
@@ -397,6 +432,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '2685 C' },
     ],
     description: `Pantone Purple symbolizes luxury, creativity, and mystery. It has long been associated with royalty and high-end branding.`,
+    shortDescription:
+      'A luxurious purple representing creativity and mystery, perfect for high-end and luxury branding.',
     usage: `Popular in beauty, fashion, and premium branding to evoke sophistication and exclusivity.`,
     psychology: `Purple stimulates imagination and conveys a sense of creativity and elegance.`,
     relatedColors: getRelatedColors('pantone-2685-c'),
@@ -417,6 +454,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '226 C' },
     ],
     description: `Pantone Pink is playful, romantic, and youthful. It is widely used in cosmetics, fashion, and entertainment branding.`,
+    shortDescription:
+      'A playful pink representing romance and youth, ideal for cosmetics, fashion, and entertainment branding.',
     usage: `Seen in beauty products, feminine branding, and awareness campaigns like Breast Cancer Awareness.`,
     psychology: `Pink is associated with warmth, love, and kindness, creating a sense of comfort and approachability.`,
     relatedColors: getRelatedColors('pantone-226-c'),
@@ -437,6 +476,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '4625 C' },
     ],
     description: `Pantone Brown represents earthiness, reliability, and warmth. It is often used in organic and rustic branding.`,
+    shortDescription:
+      'An earthy brown representing reliability and warmth, perfect for organic and rustic branding.',
     usage: `Seen in coffee brands, wood-based products, and natural packaging to emphasize warmth and authenticity.`,
     psychology: `Brown evokes feelings of comfort, stability, and connection to nature.`,
     relatedColors: getRelatedColors('pantone-brown'),
@@ -457,6 +498,8 @@ export const pantoneCategories: PantoneCategory[] = [
       { format: 'Pantone', value: '342 C' },
     ],
     description: `Pantone 342 C is a deep, rich green that symbolizes growth, stability, and natural harmony. This dark forest green is often associated with environmental consciousness and premium branding.`,
+    shortDescription:
+      'A deep forest green symbolizing growth and stability, ideal for environmental and premium branding.',
     usage: `Commonly used in financial institutions, environmental organizations, and luxury brands that want to convey trust and sustainability.`,
     psychology: `This deep green evokes feelings of stability, growth, and connection to nature while maintaining a sophisticated and professional appearance.`,
     relatedColors: getRelatedColors('pantone-342-c'),
@@ -471,6 +514,8 @@ export const pantoneCategories: PantoneCategory[] = [
     hsl: '175, 50%, 68%',
     hsv: '175, 40%, 85%',
     description: `Pantone 1837 C, famously known as Tiffany Blue, is the iconic robin's egg blue color associated with luxury jewelry brand Tiffany & Co. This distinctive shade was officially standardized by Pantone in 2001 as a private custom color, ensuring consistent reproduction across all brand materials.`,
+    shortDescription:
+      "The iconic Tiffany Blue, a luxurious robin's egg blue representing elegance and exclusivity.",
     conversions: [
       { format: 'HEX', value: '#81D8D0' },
       { format: 'RGB', value: '129, 216, 208' },

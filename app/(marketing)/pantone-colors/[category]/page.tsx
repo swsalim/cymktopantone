@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const config = {
     title: pantoneCategory.name,
-    description: pantoneCategory.description,
+    description: pantoneCategory.shortDescription,
     url: `/pantone-colors/${pantoneCategory.slug}`,
   };
 

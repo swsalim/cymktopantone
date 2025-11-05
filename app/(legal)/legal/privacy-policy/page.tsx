@@ -13,7 +13,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Privacy Policy',
   description:
-    'At CMYK Pantone, your privacy and the protection of your data is our top priority. All data collected, both personal and non-personal, is protected with the highest global standards.',
+    'This Privacy Policy explains how we use the personal information that CMYK Pantone collects or generates on the website.',
   url: '/legal/privacy-policy',
 };
 

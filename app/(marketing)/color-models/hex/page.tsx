@@ -16,7 +16,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'HEX Color Codes - The Essential Guide for Designers',
   description:
-    'Learn everything about HEX color codes in this in-depth guide. Discover how HEX works, how it compares to RGB and CMYK, and how to convert HEX to other color formats for web and print design.',
+    'Learn everything about HEX color codes in this in-depth guide. Discover how HEX works, and how to convert HEX to other color formats.',
   url: '/color-models/hex',
 };
 
