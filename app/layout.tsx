@@ -5,7 +5,6 @@ import { siteConfig } from '@/config/site';
 
 import { absoluteUrl, cn } from '@/lib/utils';
 
-import RotatingBanner from '@/components/ads/rotating-banner';
 import Footer from '@/components/footer';
 import { NavMobile } from '@/components/nav-mobile';
 import Navbar from '@/components/navbar';
@@ -110,7 +109,6 @@ export default function RootLayout({
           plusJakartaSans.variable,
         )}
         suppressHydrationWarning>
-        <RotatingBanner />
         <NavMobile />
         <Navbar />
         <main className="flex grow flex-col justify-center">{children}</main>
