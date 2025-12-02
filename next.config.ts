@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: 'https', hostname: 'ik.imagekit.io', port: '' }],
     formats: ['image/avif', 'image/webp'],
   },
+  compress: true,
+  poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+  },
   async redirects() {
     return [
       {
