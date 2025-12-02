@@ -11,6 +11,7 @@ import { tools } from '@/config/tools';
 import { cn } from '@/lib/utils';
 
 import { Logo } from '@/components/icons';
+import { ImageKit } from '@/components/image-kit';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -178,39 +179,12 @@ export default function Footer({ className, ...props }: FooterProps) {
           </div>
           <div className="shrink-0">
             <a href="https://launchboard.dev/?via=launchboardBadge" target="_blank" rel="noopener">
-              <Image
-                src="https://fjgjjrnzgpkltspdokof.supabase.co/storage/v1/object/public/assets//LaunchBoard%20Badge.png"
+              <ImageKit
+                directory="cymktopantone/logos"
+                src="badge-launch-badge.png"
                 alt="See us on LaunchBoard"
                 width="102"
                 height="34"
-                unoptimized
-              />
-            </a>
-          </div>
-          <div className="shrink-0">
-            <a href="https://liiinks.net" target="_blank">
-              <svg width="102" height="34" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-                <rect width="120" height="40" rx="8" fill="#667eea" />
-                <text
-                  x="60"
-                  y="25"
-                  fontFamily="Arial, sans-serif"
-                  fontSize="12"
-                  fill="white"
-                  textAnchor="middle">
-                  Liiinks
-                </text>
-              </svg>
-            </a>
-          </div>
-          <div className="shrink-0">
-            <a href="https://theindiewall.net" target="_blank">
-              <Image
-                src="https://theindiewall.net/indiewall.svg"
-                alt="IndieWall"
-                width="68"
-                height="34"
-                unoptimized
               />
             </a>
           </div>

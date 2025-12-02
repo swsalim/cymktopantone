@@ -201,6 +201,13 @@ function PantoneMatchGameContent({
 
       // Only update state if component is still mounted
       if (isMountedRef.current) {
+        // Capture values at the time of game completion to avoid stale closures
+        const isWin = gameState.isWin;
+        const moves = gameState.moves;
+        const currentGameTime = gameTime;
+        const currentTimeRemaining = timeRemaining;
+        const currentTimeLimit = gameState.timeLimit;
+
         // Open the modal immediately
         setIsModalOpen(true);
 
@@ -209,14 +216,14 @@ function PantoneMatchGameContent({
           // Check again if component is still mounted before the timeout executes
           if (!isMountedRef.current) return;
 
-          if (gameState.isWin) {
+          if (isWin) {
             // Register win in stats
             registerWin();
 
             // Track win event with game stats
             window.seline?.track(`game_win_${gameMode}_${difficulty}`);
-            window.seline?.track(`game_complete_time_${gameTime}s`);
-            window.seline?.track(`game_complete_moves_${gameState.moves}`);
+            window.seline?.track(`game_complete_time_${currentGameTime}s`);
+            window.seline?.track(`game_complete_moves_${moves}`);
 
             // Mark daily challenge as played if in daily mode
             if (gameMode === 'daily') {
@@ -229,7 +236,7 @@ function PantoneMatchGameContent({
 
             // Track loss event with reason
             const lossReason =
-              gameState.timeLimit && timeRemaining !== null && timeRemaining <= 0
+              currentTimeLimit && currentTimeRemaining !== null && currentTimeRemaining <= 0
                 ? 'timeout'
                 : 'max_moves';
             window.seline?.track(`game_loss_${gameMode}_${difficulty}_${lossReason}`);
@@ -243,21 +250,9 @@ function PantoneMatchGameContent({
         }, 100);
       }
     }
-  }, [
-    gameState.isGameOver,
-    gameState.isWin,
-    gameState.matchedPairs,
-    gameState.totalPairs,
-    gameMode,
-    registerWin,
-    registerLoss,
-    markAsPlayed,
-    gameTime,
-    gameState.moves,
-    timeRemaining,
-    difficulty,
-    gameState.timeLimit,
-  ]);
+    // Only depend on isGameOver to trigger the effect once when game completes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState.isGameOver]);
 
   // Format time display
   const formatTime = (seconds: number): string => {

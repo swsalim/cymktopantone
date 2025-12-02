@@ -2,7 +2,7 @@
 const NEXT_SSG_FILES = [
   '/*_buildManifest.js$',
   '/*_middlewareManifest.js$',
-  '/*_ssgManifest.js$'
+  '/*_ssgManifest.js$',
 ];
 
 const exclude = ['/dashboard*', '/404', '/api*', '/login', '/server-sitemap.xml'];
@@ -22,11 +22,12 @@ const config = {
   exclude,
   robotsTxtOptions: {
     policies: [{ userAgent: '*', disallow: NEXT_SSG_FILES }],
-    host: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-      ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
-      : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
-        ? process.env.NEXT_PUBLIC_VERCEL_URL
-        : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, ''),
+    host:
+      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+        ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+        : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
+          ? process.env.NEXT_PUBLIC_VERCEL_URL
+          : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, ''),
   },
   // Add explicit paths to ensure sitemap generation
   additionalPaths: async (config) => {
@@ -87,4 +88,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;

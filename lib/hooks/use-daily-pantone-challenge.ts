@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Using a date string as the key in the format YYYY-MM-DD
 const getDailyKey = (): string => {
@@ -19,7 +19,7 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
   const [dailyColors, setDailyColors] = useState<string[]>([]);
   const [hasPlayedToday, setHasPlayedToday] = useState(false);
 
-  const generateDailyColors = () => {
+  const generateDailyColors = useCallback(() => {
     if (!pantoneColors.length) return;
 
     // Create a deterministic but seemingly random set of colors based on the date
@@ -50,9 +50,9 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
     localStorage.setItem(`pantoneDaily-${dailyKey}`, JSON.stringify(dailyData));
     setDailyColors(selectedColors);
     setHasPlayedToday(false);
-  };
+  }, [pantoneColors]);
 
-  const markAsPlayed = () => {
+  const markAsPlayed = useCallback(() => {
     const dailyKey = getDailyKey();
     const savedData = localStorage.getItem(`pantoneDaily-${dailyKey}`);
 
@@ -66,9 +66,9 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
         console.error('Failed to mark daily challenge as played:', error);
       }
     }
-  };
+  }, []);
 
-  const resetDailyStatus = () => {
+  const resetDailyStatus = useCallback(() => {
     const dailyKey = getDailyKey();
     const savedData = localStorage.getItem(`pantoneDaily-${dailyKey}`);
 
@@ -82,7 +82,7 @@ export function useDailyPantoneChallenge(pantoneColors: string[]): {
         console.error('Failed to reset daily challenge status:', error);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!pantoneColors.length) return;

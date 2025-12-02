@@ -22,6 +22,21 @@ const nextConfig: NextConfig = {
         destination: '/legal/terms-and-conditions',
         permanent: true,
       },
+      {
+        source: '/convert-pantone-to-cmyk',
+        destination: '/convert-pantone-pms-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-rgb-to-pantone-pms',
+        destination: 'https://www.rgbtopantone.com/',
+        permanent: true,
+      },
+      {
+        source: '/color-models/test',
+        destination: '/color-models',
+        permanent: true,
+      },
     ];
   },
 };

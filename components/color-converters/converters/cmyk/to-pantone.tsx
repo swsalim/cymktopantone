@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
-
 import { Info } from 'lucide-react';
 
 import { cmykToRgb, findMatchingPMSColors, rgbToHex, rgbToHsl, rgbToHsv } from '@/lib/colors';
@@ -17,7 +15,6 @@ import { ColorValueDisplay } from '@/components/color-converters/shared/color-va
 import { PantoneColorCard } from '@/components/color-converters/shared/pantone-color-card';
 import { PantoneComparisonCard } from '@/components/color-converters/shared/pantone-comparison-card';
 import { Container } from '@/components/container';
-import { ImageKit } from '@/components/image-kit';
 import RelatedTools from '@/components/related-tools';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';

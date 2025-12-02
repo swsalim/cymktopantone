@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface GameStats {
   gamesPlayed: number;
@@ -43,7 +43,7 @@ export function usePantoneGameStats(): {
     localStorage.setItem('pantoneGameStats', JSON.stringify(stats));
   }, [stats]);
 
-  const registerWin = () => {
+  const registerWin = useCallback(() => {
     setStats((prevStats) => {
       const gamesPlayed = prevStats.gamesPlayed + 1;
       const gamesWon = prevStats.gamesWon + 1;
@@ -59,9 +59,9 @@ export function usePantoneGameStats(): {
         maxStreak,
       };
     });
-  };
+  }, []);
 
-  const registerLoss = () => {
+  const registerLoss = useCallback(() => {
     setStats((prevStats) => {
       const gamesPlayed = prevStats.gamesPlayed + 1;
       const winPercentage =
@@ -74,11 +74,11 @@ export function usePantoneGameStats(): {
         currentStreak: 0,
       };
     });
-  };
+  }, []);
 
-  const resetStats = () => {
+  const resetStats = useCallback(() => {
     setStats(DEFAULT_STATS);
-  };
+  }, []);
 
   return {
     stats,

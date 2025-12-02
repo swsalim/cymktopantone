@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { AlertTriangle, Shuffle, Timer, Trophy } from 'lucide-react';
 
@@ -55,7 +55,7 @@ export function GameCompleteModal({
   }, []);
 
   // Get loss reason for analytics
-  const getLossReasonType = () => {
+  const getLossReasonType = useCallback(() => {
     if (!isWin) {
       if (maxMoves && moves > maxMoves) {
         return 'out_of_moves';
@@ -65,7 +65,7 @@ export function GameCompleteModal({
       return 'other';
     }
     return '';
-  };
+  }, [isWin, maxMoves, moves, timeLimit, timeInSeconds]);
 
   // Track when modal is opened
   useEffect(() => {
