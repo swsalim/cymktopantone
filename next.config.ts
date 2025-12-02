@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [{ protocol: 'https', hostname: 'ik.imagekit.io', port: '' }],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 2678400,
   },
   compress: true,
   poweredByHeader: false,
