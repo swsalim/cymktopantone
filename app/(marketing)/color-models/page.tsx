@@ -81,9 +81,18 @@ export default function ColorModelsPage() {
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">
           <h1 className="mb-6">Color Models: CMYK, RGB, HEX, and HSL Explained</h1>
+          <p className="mb-4 text-lg">
+            Color models are the foundation of how we represent and work with colors in digital and
+            print media. Whether you're designing a website, preparing print materials, or creating
+            digital art, understanding these color systems is essential for achieving accurate,
+            consistent results.
+          </p>
           <p className="mb-8">
-            Learn about different color models and how they represent colors in various contexts.
-            Each model has its unique characteristics and applications in design and development.
+            Each color model—CMYK, RGB, HEX, and HSL—serves specific purposes and excels in different
+            contexts. From the subtractive CMYK system that powers professional printing to the
+            additive RGB model that creates vibrant screen displays, each approach offers unique
+            advantages. This comprehensive guide will help you understand when and how to use each
+            model effectively.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {colorModels.map((model) => (
