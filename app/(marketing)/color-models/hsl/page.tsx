@@ -15,7 +15,7 @@ import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
 const config = {
-  title: 'HSL Color Model: The Designer's Guide to Intuitive Color Control',
+  title: "HSL Color Model: The Designer's Guide to Intuitive Color Control",
   description:
     'Master HSL color model for intuitive color adjustments, design systems, and accessible interfaces. Learn how Hue, Saturation, and Lightness work together for professional design workflows.',
   url: '/color-models/hsl',
@@ -196,15 +196,14 @@ export default function ColorModelHsl() {
 
           <section>
             <h2>Converting HSL to Other Color Models</h2>
-            
+
             <p>
               Designers frequently need to convert between HSL and other color models for different
               applications. While HSL excels for design workflows, you'll often need to convert to{' '}
-              <Link href="/color-models/rgb">RGB</Link>,{' '}
-              <Link href="/color-models/hex">HEX</Link>, or{' '}
-              <Link href="/color-models/cmyk">CMYK</Link> depending on your output requirements.
+              <Link href="/color-models/rgb">RGB</Link>, <Link href="/color-models/hex">HEX</Link>,
+              or <Link href="/color-models/cmyk">CMYK</Link> depending on your output requirements.
             </p>
-            
+
             <h3>Common Conversion Needs</h3>
             <ul>
               <li>
@@ -216,16 +215,17 @@ export default function ColorModelHsl() {
                 styling and web development workflows where HEX codes are preferred
               </li>
               <li>
-                <Link href="/convert-hsl-to-cmyk">HSL to CMYK conversion</Link> – Critical for
-                print production, ensuring your HSL-designed colors translate accurately to printed
+                <Link href="/convert-hsl-to-cmyk">HSL to CMYK conversion</Link> – Critical for print
+                production, ensuring your HSL-designed colors translate accurately to printed
                 materials
               </li>
               <li>
-                <Link href="/convert-hsl-to-pantone-pms">HSL to Pantone conversion</Link> – Important
-                for professional branding where precise color matching across materials is required
+                <Link href="/convert-hsl-to-pantone-pms">HSL to Pantone conversion</Link> –
+                Important for professional branding where precise color matching across materials is
+                required
               </li>
             </ul>
-            
+
             <p>
               Professional conversion tools account for color gamut differences and use appropriate
               color profiles to ensure accurate results. Always use proper conversion tools rather
