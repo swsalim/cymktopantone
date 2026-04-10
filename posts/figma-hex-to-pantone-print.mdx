@@ -1,0 +1,109 @@
+---
+title: "How to Turn Figma HEX Colors into Pantone for Print (Honest Limitations)"
+metaTitle: "Figma HEX to Pantone for Print — Workflow & Tools"
+metaDescription: "Figma has no real Pantone ink model. Here’s how to export HEX, find closest PMS with a matcher, document RGB/CMYK, and hand off to print without surprises."
+summary: "Figma is RGB-first. Copy brand HEX from styles, run HEX→Pantone and palette export tools, then lock print specs with your printer—not with a plugin alone."
+publishedAt: '2026-04-08'
+author: 'Yuyu'
+status: 'published'
+---
+
+Figma is brilliant for **UI, design systems, and collaboration**. It is less brilliant for one specific packaging question: **“What Pantone is this fill?”**
+
+There is no built-in **PMS ink** model that matches a physical swatch book under press conditions. What Figma *does* give you is **sRGB HEX** (and sometimes other RGB definitions) that you can **translate** into Pantone candidates using the same matching approach as a serious converter.
+
+This guide is written for the query: **“How do I get Pantone from Figma for print?”**—with a workflow that holds up in production.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## What Figma can and cannot do
+
+**Can:**
+
+- Store **HEX** (and RGB) as **color styles** and variables.
+- Keep **one source of truth** for product, marketing, and dev.
+- Export assets for **web** with predictable sRGB values.
+
+**Cannot (today, in core product):**
+
+- Replace **Pantone Connect** or a **printed swatch book** for ink on paper.
+- Guarantee that a plugin’s “Pantone” label matches what your **flexo, offset, or screen** vendor will accept without proofing.
+
+Treat any Figma **Pantone plugin** as a **hint**, not a contract. Always confirm **PMS + book (C/U)** with the printer and, for hero brand colors, a **physical proof**.
+
+## Step 1 — Get clean HEX from Figma
+
+### From a selection
+
+1. Select a frame, shape, or text with the color applied.
+2. In the right sidebar, open the **Fill** section.
+3. Switch the color to **Hex** and **copy** the value (for example `#DA291C`).
+
+### From the design system
+
+1. Open **Assets** (or your library file).
+2. Find the **color style** (for example `Brand / Primary`).
+3. Copy the **HEX** shown in the style definition.
+
+**Tip:** Remove spaces and keep **#** or drop it—our tools accept both. If you use **variables**, copy the resolved HEX after it is bound to a mode (light/dark), not a half-resolved alias you cannot paste elsewhere.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Step 2 — Convert HEX to closest Pantone (matcher)
+
+Paste the HEX into <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link>. You will see **closest Pantone matches** with **match percentages** driven by the same **perceptual matching** logic used across the site’s Pantone tools.
+
+**How to read the results:**
+
+- **High match %** means the sRGB color is **close** to a coated library sRGB approximation—not that the ink will look identical on every substrate.
+- If the client already mandates a PMS (for example **185 C**), your job is often the **reverse check**: confirm how far the **Figma HEX** drifts from that swatch’s screen values using <Link href="/pantone">Pantone color lookup</Link>.
+
+## Step 3 — Document CMYK for “process build” discussions
+
+Printers sometimes ask, **“If we run this as 4CP instead of spot, what CMYK do you want?”** Figma will not hand you press-profiled CMYK, but you can generate a **starting process build** from HEX:
+
+- Use <Link href="/convert-hex-to-cmyk">HEX to CMYK</Link> for a **generic** CMYK split suitable for **internal estimates** and **rough proofs**.
+
+Label those numbers clearly as **“approximate / default profile”** so no one lithographs a million units from a single unprofiled conversion.
+
+## Step 4 — Multi-color brands (logo + secondary palette)
+
+When you have **three to six** core HEX values:
+
+1. Open <Link href="/brand-palette-to-pantone">Brand palette to Pantone</Link>.
+2. Paste all HEX values (one per line or comma-separated).
+3. Click **Build table**, then **Copy Markdown** or **CSV** for your **Notion / Confluence / PDF brand page**.
+
+Share the **same table** with print vendors so **creative, web, and press** reference one chart.
+
+## Step 5 — Handoff package that actually helps prepress
+
+Include in your ticket or folder:
+
+- **PMS codes + book** (for example `PANTONE 293 C`, coated).
+- **Figma HEX** used in product (source of truth for **digital**).
+- **Matcher output** (screenshot or CSV from CMYK Pantone) showing **closest PMS** when the brand is not already locked.
+- **Proof requirement** for new matches (“match to drawdown within ΔE agreed with printer”).
+
+## FAQ — quick answers
+
+**Should I design packaging in Figma?**  
+Many teams **start** in Figma for layout exploration, then move to **Illustrator / InDesign** for **spot ink, dielines, and separations**. Pick based on what your printer accepts as **master art**.
+
+**My plugin says a different Pantone than your site—who wins?**  
+The **printer + swatch book + proof** win. Compare both suggestions, then **measure once** on press if budget allows.
+
+**Can I skip Pantone and only use HEX?**  
+For **pure digital**, yes. For **brand-critical print**, no—HEX is **sRGB**, not ink.
+
+## Related reading
+
+- <Link href="/blog/pantone-digital-branding">Pantone in digital branding</Link>
+- <Link href="/blog/indesign-pantone-spot-color-pdf">Pantone spot setup in InDesign</Link>
+- Full tool list: <Link href="/convert-color">Color converters</Link>
+
+Figma is the **collaboration layer**. CMYK Pantone is the **translation layer** between **screen HEX** and **print PMS**—use both deliberately, and you will stop losing color in the handoff.

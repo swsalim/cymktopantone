@@ -1,0 +1,96 @@
+---
+title: "How to Set Up Pantone Spot Colors in InDesign (and Export a Print-Ready PDF)"
+metaTitle: "Pantone Spot Colors in InDesign — Swatches & Print PDFs"
+metaDescription: "Add Pantone as spot swatches in Adobe InDesign, avoid accidental CMYK conversion, and export PDFs that preserve PMS for your printer—plus how to verify HEX and CMYK with converters."
+summary: "Use InDesign swatches and PDF export so Pantone spot colors survive handoff. Cross-check brand HEX or CMYK with Pantone matchers and lookup tools before press."
+publishedAt: '2026-04-09'
+author: 'Yuyu'
+status: 'published'
+---
+
+InDesign is the bridge between **layout** and **print production**. If Pantone is specified on the estimate but your PDF only contains **process CMYK builds**, you can still get a decent print—but you will not get a true **spot ink** run unless the file, the swatches, and the export settings all agree.
+
+This article is for the common search: **“How do I set up Pantone in InDesign and export a PDF the printer will actually separate as PMS?”**
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Start with the printer’s language
+
+Before you touch Swatches, confirm:
+
+- **Which Pantone book?** Coated (**C**) and uncoated (**U**) are different specs.
+- **Spot or sim?** Some jobs use **Pantone + CMYK** (logo spot, photos process). Others simulate Pantone with **process builds** only.
+- **PDF version and output intent** your vendor prefers (often **PDF/X** variants).
+
+Write that into the **job folder** and the **first page** of the PDF if your studio uses slug lines—future you will thank present you.
+
+## Add a Pantone color as a **spot** swatch
+
+1. Open **Window → Color → Swatches**.
+2. From the Swatches panel menu, choose **New Color Swatch…** (or the **+** icon, depending on version).
+3. Set **Color Type** to **Spot** (not Process).
+4. For **Color Mode**, choose **PANTONE + Solid Coated** (or the book your printer named). Pick the exact **PMS number** from the list.
+
+**Tip:** Name the swatch exactly how the brand book names it (`PANTONE 293 C`). Consistency beats clever abbreviations when a prepress operator searches the PDF.
+
+If Pantone lists do not appear in your Adobe build, you may need **Pantone Connect** or an updated library package. While IT sorts that out, you can still **derive a working HEX or CMYK** from the brand guide, then run <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> or <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> to confirm the **closest PMS** before you manually assign the swatch name the client expects.
+
+## Apply spot color to text and frames
+
+- **Text:** Select characters or paragraphs, then choose the **spot swatch** as the **character color**.
+- **Frames:** Select the frame, set **Fill** or **Stroke** to the spot swatch.
+- **Images:** Spot color usually does **not** replace a full-color image. For duotones or spot channels, use **Object → Image Color Settings** or prepared TIFF/PSD with spot channels—outside the scope of a basic PMS swatch setup, but worth flagging with the printer.
+
+**Watch for overrides:** Local formatting or **[Registration]** can sneak in. Use **Window → Output → Separations Preview** (when available) to see whether your Pantone actually separates on its own plate.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Do not let InDesign “helpfully” convert your spot to process
+
+Common pitfalls:
+
+- **Transparency flattener** settings that convert spots to process during export.
+- **Color conversion** at export time (for example converting everything to a single CMYK profile) without preserving spot colors.
+- **Copy-paste** from RGB Illustrator or RGB PDF snippets that re-map colors into process builds.
+
+**Mitigation:** Use a **print PDF preset** supplied by the printer, or build your own with **spot colors preserved**. When in doubt, send a **low-res draft** early and ask, **“Do you see two spots + CMYK, or only four plates?”**
+
+## Export a PDF that preserves Pantone
+
+Exact dialogs move between versions, but the pattern is stable:
+
+1. **File → Adobe PDF Presets →** choose **PDF/X-1a** or the preset your vendor named (many packaging workflows still love **X-1a** for predictability).
+2. In **Export Adobe PDF** options, open **Output** (or **Ink Manager** in some flows).
+3. Confirm **spot colors** are **not** being converted to process unless that is intentional.
+4. Use **Ink Manager** if you must remap a duplicate spot name—do that **with the printer**, not solo, so you do not collapse two different inks into one.
+
+Export one page with a solid Pantone box and open it in **Acrobat → Print Production → Output Preview** (if available) to confirm separations.
+
+## Cross-check brand values with online tools
+
+When the client sends **HEX** from the website and **PMS** from the print guide, you should reconcile them:
+
+- **HEX → closest Pantone:** <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link>
+- **CMYK → closest Pantone:** <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link>
+- **Known PMS → screen values:** <Link href="/pantone">Pantone color lookup</Link> for **HEX, RGB, HSL**, and approximate **CMYK** for documentation.
+
+For **multi-color brand sheets**, <Link href="/brand-palette-to-pantone">Brand palette to Pantone</Link> exports a table you can paste into **Notion, Google Docs, or a brand wiki** next to your InDesign specs.
+
+## Handoff checklist
+
+- Spot swatch exists, named clearly, **Color Type = Spot**.
+- Printer confirmed **book** (C vs U) and **PDF preset**.
+- Separations preview (or vendor feedback) shows **PMS plates** where expected.
+- Internal doc lists **PMS + HEX/RGB** for digital teams—use converters above so numbers stay consistent.
+
+## Related posts
+
+- <Link href="/blog/illustrator-pantone-closest-match">Closest Pantone in Illustrator</Link> — vector prep that often feeds InDesign.
+- <Link href="/blog/spot-color-process-color">Spot color vs process color</Link> — when to use which.
+- All tools: <Link href="/convert-color">Color converters index</Link>.
+
+InDesign does the **job of keeping spot ink definitions alive through PDF export**. The converters on CMYK Pantone help you **align screen numbers with PMS** so creative, web, and print stop talking past each other.

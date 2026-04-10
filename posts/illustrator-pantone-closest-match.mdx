@@ -1,0 +1,91 @@
+---
+title: "How to Find the Closest Pantone in Adobe Illustrator (CMYK & HEX)"
+metaTitle: "Closest Pantone Match in Illustrator — CMYK & HEX Workflow"
+metaDescription: "Step-by-step: pick a color in Illustrator, open Pantone libraries, save spot swatches, and cross-check CMYK or HEX with a Pantone matcher before you send to press."
+summary: "Use Illustrator’s Color Libraries and Swatches to move from CMYK or HEX to the closest Pantone PMS, then validate with online converters before handoff."
+publishedAt: '2026-04-10'
+author: 'Yuyu'
+status: 'published'
+---
+
+Illustrator is where a lot of brand and packaging files are built before they become PDFs. The usual question from designers and production artists sounds like this: **“I have a CMYK (or HEX) color in my file—what’s the closest Pantone, and how do I save it as a real spot swatch?”**
+
+This guide walks through the in-app workflow, then shows where to **double-check the match** using the same logic as a dedicated converter so you are not guessing on a high-stakes print job.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Before you start: document color mode
+
+Illustrator can show **RGB, CMYK, or other** profiles depending on **File → Document Color Mode** and your color settings (**Edit → Color Settings** on Windows, **Illustrator → Settings → Color Settings** on Mac).
+
+- For **print and packaging**, work in **CMYK** when the final output is process or spot on press.
+- For **screen-first** art that must later go to print, you may start in RGB; that is fine as long as you **convert or redefine** colors with the final medium in mind.
+
+The Pantone libraries you pick (for example **Coated** vs **Uncoated**) should match what your printer specifies. If the brief says **“PMS 185 C”**, use the **C (coated)** book, not a random default.
+
+## Find the closest Pantone from the color you already have
+
+### Option A — You know the fill color (object on the artboard)
+
+1. Select the object whose color you want to match.
+2. Open the **Color** panel or double-click the **fill** in the **Tools** panel to open the **Color Picker**.
+3. Note your values (**CMYK**, **RGB**, or **HEX** depending on the picker mode). You will use these to sanity-check later.
+
+### Option B — Sample from artwork
+
+1. Select the **Eyedropper Tool** and click the area to sample.
+2. Open the **Color Picker** again so you can read consistent numbers.
+
+### Open Pantone libraries (closest match)
+
+1. With the color active, open the **Color Picker**.
+2. Click **Color Libraries…** (wording can vary slightly by version).
+3. In the library dropdown, choose the **Pantone book** your vendor expects (**PMS + Coated** is common for coated stock).
+
+Illustrator highlights a **closest library color** to the color you had open. That is a **book match inside the app**, not a guarantee on paper—profile, substrate, and ink film still change appearance.
+
+**Access note:** Recent Adobe versions often rely on **Pantone Connect** for full Pantone library access. If libraries are missing, skip ahead to the converter step: paste your **HEX** or **CMYK** into <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> or <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> on CMYK Pantone.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Save it as a Pantone **spot** swatch (not just a lookalike)
+
+Getting a visual match on screen is only half the job. Production needs a **named spot color** when the job is specified as Pantone.
+
+1. Open **Window → Swatches**.
+2. With your object selected and the Pantone color chosen from **Color Libraries**, click **New Swatch** in the Swatches panel (or use the panel menu).
+3. Set **Color Type** to **Spot Color** when the print spec calls for Pantone ink (not four-color process builds).
+4. Name the swatch clearly (for example `PANTONE 185 C`) so prepress can search PDFs and separations without guessing.
+
+If you leave the color as **process** CMYK that merely *looks* like Pantone, the printer may run it as **CMYK only**, which defeats the point of specifying PMS.
+
+## When Illustrator’s suggestion and a converter disagree
+
+Apps and online matchers can suggest **different “closest” codes** because they use **different color math, gamut limits, and rounding**. That is normal.
+
+**Practical rule:**
+
+1. Treat Illustrator’s **Color Libraries** pick as your **in-file** working swatch.
+2. Run the same starting color through <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> or <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> and compare the **top match** and **match percentage**.
+3. If the two disagree, **trust the physical swatch book + printer** over any screen. Order a **press proof** for brand-critical work.
+
+For several brand colors at once (for example a logo sheet with six HEX values), build a single table with <Link href="/brand-palette-to-pantone">Brand palette to Pantone</Link>, then copy **CSV or Markdown** into your brand guidelines draft.
+
+## Quick checklist before you export
+
+- **Correct book:** Coated vs uncoated matches the substrate and the client spec.
+- **Spot vs process:** Spot swatch when the estimate says Pantone; process when it says four-color.
+- **Numbers logged:** Save **HEX / RGB / CMYK** and **PMS** in your style guide. Use <Link href="/pantone">Pantone color lookup</Link> for fast **PMS → HEX/RGB** when you already know the code.
+- **One source of truth:** Put the agreed PMS on the **PDF layer**, in the **file name**, and in the **ticket** to the printer.
+
+## Related reading and tools
+
+- <Link href="/blog/cmyk-pantone-photoshop">CMYK to Pantone in Photoshop</Link> — same print problem, different app.
+- <Link href="/blog/convert-cmyk-pantone">How to convert CMYK to Pantone for printing</Link> — concepts without step-by-step UI.
+- Browse all converters from <Link href="/convert-color">Color converters</Link>.
+
+Illustrator gets you to a **structured swatch and a named spot**. The converters on this site help you **validate and document** those choices before ink hits paper.

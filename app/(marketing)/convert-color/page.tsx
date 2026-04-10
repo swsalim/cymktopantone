@@ -109,7 +109,8 @@ export default function ConvertColorsPage() {
             the <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> or{' '}
             <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> tools first. For a known
             PMS code, open the <Link href="/pantone">Pantone color lookup</Link> and copy HEX, RGB,
-            and CMYK in one place.
+            and CMYK in one place. For several brand colors at once, use the{' '}
+            <Link href="/brand-palette-to-pantone">brand palette to Pantone</Link> exporter.
           </p>
         </Container>
       </Wrapper>

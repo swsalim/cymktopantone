@@ -1,0 +1,99 @@
+---
+title: "How to Match a HEX Color to Pantone in Adobe Photoshop"
+metaTitle: "Photoshop HEX to Pantone — Color Picker & Libraries"
+metaDescription: "Switch Photoshop’s Color Picker to HEX, jump to Pantone Color Libraries for the closest PMS, and verify with HEX→Pantone online before print handoff."
+summary: "Use Photoshop’s HEX field and Color Libraries to find a Pantone neighbor, then cross-check with HEX to Pantone and Pantone lookup tools for consistent specs."
+publishedAt: '2026-04-06'
+author: 'Yuyu'
+status: 'published'
+---
+
+You may already know how to move **CMYK → Pantone** in Photoshop from our <Link href="/blog/cmyk-pantone-photoshop">CMYK to Pantone in Photoshop</Link> walkthrough. A different—and very common—search is:
+
+**“I have a HEX from the web or a style guide. How do I find the closest Pantone in Photoshop?”**
+
+Photoshop can get you **into Pantone libraries** from a picked color, but the **truth test** for brand work is still **HEX → matcher → swatch book → proof**. Below is the full loop.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## When HEX is the source of truth
+
+Web and product teams often ship **#RRGGBB** values. Print vendors still speak **PMS + coated/uncoated**. Your job in Photoshop is to:
+
+1. **Enter or sample** the HEX accurately in the document’s working color space.
+2. **Find the closest library color** (when Adobe’s Pantone data is available).
+3. **Log both HEX and PMS** so downstream files do not fork into mystery reds.
+
+## Step 1 — Put the HEX into the Color Picker
+
+### Type it directly
+
+1. Double-click the **foreground color swatch** in the toolbar.
+2. In the **Color Picker**, choose the **RGB** or **HEX** entry mode (depends on version; HEX is often visible as **`#`** field).
+3. Paste **#** plus six digits. Photoshop updates the **RGB** sliders to match.
+
+### Sample from a pixel layer
+
+1. Select the **Eyedropper Tool**.
+2. Set **Sample Size** to **Point Sample** when you need exact single-pixel values, or **3×3 Average** on noisy gradients.
+3. Click the pixel, then reopen the **Color Picker** to read **HEX**.
+
+**Caution:** **sRGB** HEX in a document that uses a different **RGB working space** will **not** magically become “more accurate Pantone.” For packaging handoffs, align **Edit → Color Settings** with what your studio agrees on, and **communicate the profile** on the ticket.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Step 2 — Jump to Pantone Color Libraries
+
+With the Color Picker open on your color:
+
+1. Click **Color Libraries…** (sometimes labeled similarly in older builds).
+2. Choose the **Pantone book** your printer named—usually **PANTONE + Solid Coated** for **C** specs.
+3. Read the **highlighted swatch** as Photoshop’s **closest book neighbor** to the RGB/HEX you entered.
+
+**If libraries are missing:** Current Adobe versions may require **Pantone Connect**. While access is sorted out, use <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> on CMYK Pantone—it stays available in the browser and uses the same family of **perceptual matching** as the rest of the site.
+
+## Step 3 — Save the swatch for reuse
+
+1. With the Pantone color active, open **Window → Swatches**.
+2. Click **New Swatch** and name it with the **PMS code** (example: `PANTONE 185 C`).
+
+That gives art directors a **one-click** swatch for touch-ups without re-typing HEX every time.
+
+## Step 4 — Verify with an online matcher (recommended)
+
+Photoshop’s library pick and an online matcher **usually agree**, but not always—different **rounding**, **library versions**, and **in-gamut mapping** cause small disagreements.
+
+**Workflow:**
+
+1. Copy **HEX without #** (for example `DA291C`).
+2. Open <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> and scan the **top matches** and **percentages**.
+3. If Photoshop and the site diverge, **do not guess**—hold a **physical swatch** next to a **calibrated proof** and let the printer advise.
+
+## Step 5 — Reverse check when Pantone is already specified
+
+If the brand bible says **PANTONE 293 C** but your **web HEX** feels off:
+
+1. Use <Link href="/pantone">Pantone color lookup</Link> for **HEX/RGB** approximations of **293 C**.
+2. Type those into Photoshop to see **on-screen alignment** with marketing’s CSS.
+
+Again: **screen ≠ ink**, but this stops teams from using **three different blues** that all claim to be “brand.”
+
+## HEX-only vs CMYK-first Photoshop workflows
+
+- **UI / web comps:** HEX and **sRGB** lead. Pantone is **documentation** for print partners.
+- **Print retouching:** **CMYK** or **spot channels** may lead. Use <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> when the brief gives **ink percentages** instead of HEX.
+
+We also publish a concept-first guide: <Link href="/blog/convert-cmyk-pantone">How to convert CMYK to Pantone for printing</Link>.
+
+## Related tools (one page)
+
+- <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link>
+- <Link href="/convert-hex-to-cmyk">HEX to CMYK</Link> — rough process builds for estimates
+- <Link href="/brand-palette-to-pantone">Brand palette to Pantone</Link> — multi-HEX export
+- <Link href="/convert-color">Browse all converters</Link>
+
+Photoshop is great for **pixel-level color work**. Pair it with **HEX → Pantone matching** and a **disciplined swatch list**, and your **web HEX** and **print PMS** finally show up on the same style sheet.

@@ -1,0 +1,94 @@
+---
+title: "How to Get a HEX Color Out of Canva and Match It to Pantone"
+metaTitle: "Canva HEX to Pantone — Match Brand Colors for Print"
+metaDescription: "Canva doesn’t replace a Pantone library. Learn where to read HEX, export consistent values, and find the closest PMS with HEX→Pantone and palette tools."
+summary: "Copy HEX from Canva’s color picker or brand kit, then use HEX to Pantone and multi-swatch export tools to build print-ready PMS specs your vendor can proof."
+publishedAt: '2026-04-07'
+author: 'Yuyu'
+status: 'published'
+---
+
+Canva is built for **speed**: social posts, decks, one-off flyers. It is **not** a replacement for **Adobe + Pantone Connect + a swatch book** when a packaging buyer asks, **“What Pantone is this orange?”**
+
+Still, thousands of teams **start** in Canva. The realistic workflow is:
+
+1. **Extract a reliable HEX** (or document the brand kit values).
+2. **Match HEX → closest Pantone** with a dedicated tool.
+3. **Confirm on press** with your printer—not with Canva’s preview alone.
+
+That is what this guide covers.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Where Canva shows color values
+
+### Default color picker (single design)
+
+1. Click the element whose color you need (shape, text, background).
+2. Open the **color tile** in the top or side toolbar.
+3. Switch to the **HEX** field if it is not already visible (UI varies slightly between **Canva Web** and **mobile**).
+
+Copy the **six-digit HEX** (with or without `#`). If you only see a **hue slider** and **palette chips**, use **Document colors** or the **+** under **Brand kit** (paid plans) to pin exact values.
+
+### Brand Kit (Teams / Pro workflows)
+
+If your organization uses **Brand Kit**:
+
+1. Open **Brand Hub** (wording may vary) and locate **Brand colors**.
+2. Copy each **HEX** as defined by the brand owner—**do not** re-sample from compressed JPEG exports; JPEG artifacts will lie to you.
+
+**Why HEX first?** Canva’s interface centers on **screen sRGB**. Pantone is an **ink system**. The honest bridge is: **sRGB HEX → closest PMS approximation → physical proof**.
+
+<div className="mx-auto">
+  <LazyAdsArticle />
+</div>
+
+## Match HEX to Pantone with a converter
+
+Paste your HEX into <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link>. You will get **ordered Pantone suggestions** with **match percentages**.
+
+**How to use the results in an email to a printer:**
+
+> “Our Canva brand orange is **#FF6600** on screen. Closest coated PMS candidates are **[codes from tool]**. Please confirm against **Pantone Solid Coated** before plating.”
+
+That sentence saves a round trip of guesswork.
+
+## If you have several Canva brand colors
+
+Do not repeat the workflow six times in a row unless you enjoy suffering.
+
+1. List all HEX values in a note (one per line).
+2. Open <Link href="/brand-palette-to-pantone">Brand palette to Pantone</Link>.
+3. Paste, click **Build table**, then **Copy CSV** or **Markdown** for your **style guide** or **vendor packet**.
+
+Share the **same export** with marketing so **social templates** and **print** stop inventing different oranges.
+
+## Export pitfalls that break color consistency
+
+- **PNG/JPEG downloads** recompress colors. Do not **eyedropper** the export to “recover” brand HEX unless you have no other choice.
+- **PDF from Canva** is handy for **soft proofing layout**, not for **final separations** on every press. Complex spot workflows still land in **InDesign / Illustrator** with explicit **spot swatches**—see <Link href="/blog/indesign-pantone-spot-color-pdf">Pantone spot colors in InDesign</Link>.
+- **Different monitors** change how you *feel* about a match. Numbers travel better than memory.
+
+## When the client says “use Pantone 185 C” but Canva looks wrong
+
+Do not fight the slider. **Lock to the spec:**
+
+1. Look up **185 C** in <Link href="/pantone">Pantone color lookup</Link> for **HEX/RGB** approximations you can type into Canva for **closer screen alignment**.
+2. Remember: **on-screen** is still **sRGB**, not ink. The **printer’s proof** is the referee.
+
+## Short checklist
+
+- HEX copied from **Brand Kit** or the **color panel**, not from a **compressed export**.
+- <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> run for **each new color** without an existing PMS spec.
+- **Palette table** exported when there are **three or more** primaries.
+- **Printer sign-off** for anything that ships to **shelves, apparel, or signage**.
+
+## Related posts
+
+- <Link href="/blog/figma-hex-to-pantone-print">Figma HEX to Pantone</Link> — same RGB-first limitation, different tool.
+- <Link href="/blog/illustrator-pantone-closest-match">Illustrator Pantone workflow</Link> — when art moves to vector print prep.
+- <Link href="/convert-color">All color converters</Link>
+
+Canva gets the creative out the door. CMYK Pantone helps you **finish the sentence** with a **PMS code your press vendor can quote and proof**.

@@ -52,14 +52,22 @@ export const navItems: {
   },
   {
     name: 'Convert Color',
-    childItems: converters
-      .filter((converter) => converter.sourceColor !== 'PANTONE')
-      .slice(0, 8)
-      .map((converter) => ({
-        title: converter.title,
-        href: converter.url,
-        description: converter.description,
-      })),
+    childItems: [
+      {
+        title: 'Brand palette to Pantone table',
+        href: '/brand-palette-to-pantone',
+        description:
+          'Paste several brand HEX colors and export closest Pantone matches as CSV or Markdown.',
+      },
+      ...converters
+        .filter((converter) => converter.sourceColor !== 'PANTONE')
+        .slice(0, 8)
+        .map((converter) => ({
+          title: converter.title,
+          href: converter.url,
+          description: converter.description,
+        })),
+    ],
     viewMore: {
       name: 'View All',
       href: '/convert-color',

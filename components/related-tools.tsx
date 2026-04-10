@@ -19,6 +19,12 @@ type Tool = {
 // External tools that are not part of our converter configuration
 const externalTools: Partial<ConverterConfig & { target: '_blank' | '_self' }>[] = [
   {
+    url: '/brand-palette-to-pantone',
+    sourceColor: 'HEX',
+    title: 'Brand palette to Pantone',
+    target: '_self',
+  },
+  {
     url: '/pantone',
     sourceColor: 'PANTONE',
     title: 'Pantone color lookup',
