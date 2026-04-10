@@ -83,7 +83,7 @@ export default function BlogPage() {
         <h1 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100">
           Blog
         </h1>
-        <p className="mb-6 text-lg text-gray-700 dark:text-gray-400">
+        <p className="mb-6 text-lg text-gray-700 dark:text-gray-300">
           Explore latest news, tips, and guides on color conversions, Pantone color of the year, and
           more.
         </p>
@@ -120,7 +120,7 @@ export default function BlogPage() {
                         alt="Yuyu"
                       />
                     </div>
-                    <span className="text-sm font-semibold text-gray-500">{formatted}</span>
+                    <span className="text-sm font-semibold text-gray-500 dark:text-gray-300">{formatted}</span>
                   </div>
                 </div>
               </Link>

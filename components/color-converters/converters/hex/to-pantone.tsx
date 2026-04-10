@@ -106,25 +106,8 @@ export default function HexPantoneConverter({ defaultValue }: { defaultValue?: s
   }, [hex, distance, sortOrder]);
 
   return (
-    <Wrapper size="lg" className="pb-0 md:pb-0">
+    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
       <Container>
-        {defaultValue && (
-          <h1 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100">
-            #{defaultValue}
-          </h1>
-        )}
-        {defaultValue && (
-          <p>
-            Transform #{defaultValue} into Pantone perfection with instant, accurate results. Find
-            the closest Pantone matches for #{defaultValue}.
-          </p>
-        )}
-        {!defaultValue && (
-          <p>
-            Transform your HEX values into Pantone perfection with instant, accurate results. Find
-            the closest Pantone matches for your HEX color.
-          </p>
-        )}
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <div>
             <Card>

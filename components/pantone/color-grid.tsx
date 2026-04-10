@@ -14,12 +14,12 @@ interface ColorGridProps {
 
 export function ColorGrid({ color }: ColorGridProps) {
   return (
-    <div className="rounded-lg border p-6">
+    <div className="rounded-lg border p-6 dark:border-gray-700">
       <div className="mb-4 h-48 w-full rounded-lg" style={{ backgroundColor: color.hex }} />
       <div className="space-y-3">
         <div>
           <h3 className="text-lg font-medium">{color.name}</h3>
-          <p className="text-sm text-gray-700">{color.pantone}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300">{color.pantone}</p>
         </div>
         <div className="space-y-1">
           <div className="flex items-center justify-start">

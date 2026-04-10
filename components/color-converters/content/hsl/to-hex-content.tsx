@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function HslHexContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSL to HEX Converter: Colors for Code</h1>
+      <h2>HSL to HEX Converter: Colors for Code</h2>
       <p>
         You've been working with HSL values, but now you need HEX codes for CSS. HSL is great for
         adjusting colors, but HEX is what goes in your stylesheet.

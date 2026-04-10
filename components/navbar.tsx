@@ -67,13 +67,18 @@ export const navItems: {
   },
   {
     name: 'Pantone Colors',
-    childItems: pantoneCategories
-      .map((category) => ({
+    childItems: [
+      {
+        title: 'Pantone color lookup',
+        href: '/pantone',
+        description: 'HEX, RGB, CMYK, HSL, and HSV for any PMS swatch—search by name.',
+      },
+      ...pantoneCategories.map((category) => ({
         title: category.name,
         href: `/pantone-colors/${category.slug}`,
         description: category.description,
-      }))
-      .slice(0, 10),
+      })),
+    ].slice(0, 11),
     viewMore: {
       name: 'View All',
       href: '/pantone-colors',
@@ -106,7 +111,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-violet-50 hover:text-violet-900 focus:bg-violet-50 focus:text-violet-900',
+            'block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-violet-50 hover:text-violet-900 focus:bg-violet-50 focus:text-violet-900',
             className,
           )}
           target={isExternal ? '_blank' : '_self'}
@@ -163,7 +168,7 @@ export default function Navbar() {
                           <NavigationMenuLink
                             data-active={isActive}
                             className={cn(
-                              'group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-700 focus:bg-violet-50 focus:text-violet-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-violet-50 data-[state=open]:bg-violet-50 data-[active=true]:text-violet-700 data-[state=open]:text-violet-700 data-[active=true]:hover:bg-violet-50 data-[state=open]:hover:bg-violet-50 data-[active=true]:focus:bg-violet-50 data-[state=open]:focus:bg-violet-50 dark:text-gray-300',
+                              'group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-700 focus:bg-violet-50 focus:text-violet-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-violet-50 data-[state=open]:bg-violet-50 data-[active=true]:text-violet-700 data-[state=open]:text-violet-700 data-[active=true]:hover:bg-violet-50 data-[state=open]:hover:bg-violet-50 data-[active=true]:focus:bg-violet-50 data-[state=open]:focus:bg-violet-50 dark:text-gray-300 cursor-pointer',
                             )}>
                             {name}
                           </NavigationMenuLink>

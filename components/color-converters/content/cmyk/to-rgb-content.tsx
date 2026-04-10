@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function CmykRgbContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>CMYK to RGB Converter: Print Colors for Screens</h1>
+      <h2>CMYK to RGB Converter: Print Colors for Screens</h2>
       <p>
         Print uses CMYK. Screens use RGB. They don't match perfectly, and that's why conversions
         matter.

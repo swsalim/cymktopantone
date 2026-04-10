@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function HslRgbContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSL to RGB Converter: Colors for Screens</h1>
+      <h2>HSL to RGB Converter: Colors for Screens</h2>
       <p>
         You've been working with HSL values, but now you need RGB. HSL is great for adjusting
         colors, but RGB is what screens actually use.

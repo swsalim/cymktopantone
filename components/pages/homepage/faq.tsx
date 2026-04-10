@@ -4,35 +4,36 @@ const faqs = [
   {
     id: 1,
     category: 'General',
-    question: 'What is this tool for?',
+    question: 'What does this site do?',
     answer:
-      "Not happy with your photo? Try flipping it! A quick horizontal or vertical flip can transform your image, adding a fresh perspective or creating an entirely new visual effect. It's an easy way to breathe new life into a shot that didn't quite work the first time.",
-  },
-  {
-    id: 6,
-    category: 'General',
-    question: 'When would you need to flip an image?',
-    answer:
-      "Have you ever looked at a photo and thought, \"Something just doesn't feel right\"? Sometimes, simply flipping an image can work magic. It's like giving your picture a quick makeover. When you flip a photo, you can change how it catches your eye. We naturally tend to scan images from left to right, so a flip can make the photo feel more balanced and interesting. It's almost like rearranging furniture - a small change that can completely transform the feel of the whole scene.",
+      'CMYK Pantone offers free color converters between CMYK, RGB, HEX, HSL, HSV, and Pantone (PMS). The homepage focuses on CMYK to Pantone matching for print and brand work.',
   },
   {
     id: 2,
     category: 'General',
-    question: 'Is the tool free to use?',
-    answer: 'Yes, this tool is completely free to use and requires no sign-up or login.',
+    question: 'Is a Pantone match from CMYK or HEX exact?',
+    answer:
+      'We show the closest Pantone color numerically. Ink, paper, and lighting still change appearance—always confirm with a physical swatch or press proof for final production.',
   },
   {
     id: 3,
     category: 'General',
-    question: 'What file formats are supported?',
-    answer: 'You can upload images in popular formats like JPEG, PNG, and WebP.',
+    question: 'Do I need an account?',
+    answer: 'No. Tools run in the browser and you can copy values without signing up.',
   },
   {
     id: 4,
     category: 'General',
-    question: 'Will my uploaded images be stored on the server?',
+    question: 'Where can I learn about color models?',
     answer:
-      'No, your images are processed in real-time and not stored on our servers to ensure your privacy.',
+      'Read our guides to CMYK, RGB, HEX, HSL, and HSV under Color models in the navigation, or open the full converter index from the menu.',
+  },
+  {
+    id: 5,
+    category: 'General',
+    question: 'Can I convert Pantone to CMYK or HEX?',
+    answer:
+      'Yes. Use the Pantone picker tools to jump from a swatch to CMYK, HEX, RGB, HSL, or HSV values for handoff to developers or printers.',
   },
 ];
 
@@ -42,13 +43,13 @@ export default function GeneralFaqs() {
       <FaqJsonLd questionListElement={faqs} />
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-base/7 font-medium text-violet-600 dark:text-violet-400">
-          You have full rights and ownership of your photos
+          Color conversion, explained
         </p>
-        <h2 className="mt-2 text-pretty text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
+        <h2 className="font-heading mt-2 text-pretty text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
           Frequently asked questions
         </h2>
         <p className="mt-6 text-base/7 text-gray-500 dark:text-gray-300">
-          Answers to common questions about our free image flipper.
+          Common questions about Pantone matching and our free converters.
         </p>
       </div>
       <div className="mt-20">

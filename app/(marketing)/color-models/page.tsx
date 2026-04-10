@@ -109,19 +109,19 @@ export default function ColorModelsPage() {
                   <CardDescription className={cn('space-y-2 text-base')}>
                     <p className="mb-4">{model.description}</p>
                     {model.bestFor && (
-                      <h3>
+                      <h3 className="font-sans">
                         <span className="font-bold text-gray-700 dark:text-gray-50">Best for:</span>{' '}
                         {model.bestFor}
                       </h3>
                     )}
                     {model.coverage && (
-                      <h3>
+                      <h3 className="font-sans">
                         <span className="font-bold text-gray-700 dark:text-gray-50">Coverage:</span>{' '}
                         {model.coverage}
                       </h3>
                     )}
                     {model.benefits && (
-                      <h3>
+                      <h3 className="font-sans">
                         <span className="font-bold text-gray-700 dark:text-gray-50">
                           Key Benefits:
                         </span>{' '}
@@ -129,7 +129,7 @@ export default function ColorModelsPage() {
                       </h3>
                     )}
                     {model.useCases && (
-                      <h3>
+                      <h3 className="font-sans">
                         <span className="font-bold text-gray-700 dark:text-gray-50">
                           Most common use:
                         </span>{' '}
@@ -138,7 +138,7 @@ export default function ColorModelsPage() {
                     )}
                     <Link
                       href={model.href}
-                      className={cn(buttonVariants({ variant: 'outline' }), '!mt-6')}>
+                      className={cn(buttonVariants({ variant: 'outline' }), '!mt-6 text-base')}>
                       Learn more about {model.title} color model
                     </Link>
                   </CardDescription>

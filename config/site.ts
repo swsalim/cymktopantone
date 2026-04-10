@@ -3,9 +3,9 @@ import { SiteConfig } from '@/types';
 import { absoluteUrl } from '@/lib/utils';
 
 export const siteConfig: SiteConfig = {
-  title: 'CMYK to Pantone Converter',
+  title: 'CMYK to Pantone Converter — Free PMS Match & Color Tools',
   description:
-    'Get instant, accurate Pantone matches for your CMYK colors. Perfect for designers, printers & creative professionals who need reliable color conversions.',
+    'Free CMYK to Pantone (PMS) matcher plus HEX, RGB, HSL, and HSV converters for designers and printers. Instant results, no account required.',
   siteName: 'CMYK Pantone',
   url: new URL(absoluteUrl()),
   openGraph: {

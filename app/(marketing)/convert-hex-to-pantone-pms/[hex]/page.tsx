@@ -12,6 +12,7 @@ import { absoluteUrl } from '@/lib/utils';
 
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { Container } from '@/components/container';
+import { ConverterPageIntro } from '@/components/converter-page-intro';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
@@ -316,6 +317,10 @@ export default async function HexPantonePage({ params }: HexPantonePageProps) {
         description={CONVERTER_CONFIG.description}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
+      <ConverterPageIntro
+        title={`Convert #${hex} to Pantone Color`}
+        description={`Convert HEX color #${hex} to its closest Pantone color match. Find the perfect Pantone equivalent for your HEX color code.`}
+      />
       <DynamicConverter componentName={CONVERTER_CONFIG.component} defaultValue={hex} />
       <Wrapper className="mx-auto text-center">
         <div className="mx-auto">

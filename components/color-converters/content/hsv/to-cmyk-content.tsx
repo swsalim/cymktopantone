@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function HsvCmykContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSV to CMYK Converter: Digital Colors for Print</h1>
+      <h2>HSV to CMYK Converter: Digital Colors for Print</h2>
       <p>
         You've been working with HSV values in digital design, but now you need to print them.
         Printers need CMYK, not HSV.

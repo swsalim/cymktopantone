@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function HsvHSLContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSV to HSL Converter: Similar but Different</h1>
+      <h2>HSV to HSL Converter: Similar but Different</h2>
       <p>
         HSV and HSL sound similar, but they handle brightness differently. Sometimes you need to
         convert between them.

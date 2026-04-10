@@ -19,9 +19,9 @@ interface BreadcrumbProps {
 
 const styles = {
   light: {
-    link: 'text-gray-500 dark:text-gray-400 hover:text-gray-700',
-    text: 'text-gray-700 dark:text-gray-400',
-    icon: 'text-brand-500 dark:text-brand-400',
+    link: 'text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300',
+    text: 'text-gray-700 dark:text-gray-300',
+    icon: 'text-brand-500 dark:text-brand-300',
   },
   dark: {
     link: 'text-brand hover:text-brand/80',
@@ -67,7 +67,7 @@ const Breadcrumb = ({ items, theme = 'light', routerCallback }: BreadcrumbProps)
             <Link
               href="/"
               className={cn(
-                'font-regular drop-shadow-xs text-sm capitalize transition-colors',
+                'font-regular drop-shadow-xs text-sm capitalize transition-colors dark:text-gray-300',
                 styles[theme].link,
               )}>
               <Home className="h-4 w-4" />
@@ -86,7 +86,7 @@ const Breadcrumb = ({ items, theme = 'light', routerCallback }: BreadcrumbProps)
                 <Link
                   href={item.url}
                   className={cn(
-                    'font-regular drop-shadow-xs ml-2 text-sm transition-colors',
+                    'font-regular drop-shadow-xs ml-2 text-sm transition-colors dark:text-gray-300',
                     styles[theme].link,
                   )}>
                   {item.name}
@@ -95,7 +95,7 @@ const Breadcrumb = ({ items, theme = 'light', routerCallback }: BreadcrumbProps)
                 <span
                   aria-current="page"
                   className={cn(
-                    'font-regular drop-shadow-xs ml-2 text-sm transition-colors',
+                    'font-regular drop-shadow-xs ml-2 text-sm transition-colors dark:text-gray-300',
                     styles[theme].text,
                   )}>
                   {item.name}

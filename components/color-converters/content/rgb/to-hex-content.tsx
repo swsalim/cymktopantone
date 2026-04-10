@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function RgbHexContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>RGB to Hex Converter: Colors for Code</h1>
+      <h2>RGB to Hex Converter: Colors for Code</h2>
       <p>
         You've got RGB values like (255, 87, 51), but you need a HEX code for CSS. RGB is
         intuitive, but HEX is what goes in your stylesheet.

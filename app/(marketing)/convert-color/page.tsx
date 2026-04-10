@@ -31,9 +31,9 @@ function groupConvertersBySource() {
 }
 
 const config = {
-  title: 'Color Converters',
+  title: 'Color Converters — CMYK, RGB, HEX, HSL, HSV & Pantone',
   description:
-    'Explore our comprehensive collection of color conversion tools. Convert between different color formats including CMYK, RGB, HEX, HSL, HSV, and Pantone.',
+    'Browse every free converter on CMYK Pantone: CMYK, RGB, HEX, HSL, HSV, and Pantone (PMS). Jump straight to the pair you need for print, web, or brand work.',
   url: '/convert-color',
 };
 
@@ -97,10 +97,19 @@ export default function ConvertColorsPage() {
         <Container as="div" className="prose dark:prose-invert">
           <h1>Color Converters</h1>
           <p>
-            Explore our comprehensive collection of color conversion tools. Convert between
-            different color formats including CMYK, RGB, HEX, HSL, HSV, and Pantone. Each converter
-            is designed to provide accurate and reliable results for your design and development
-            needs.
+            Explore our comprehensive collection of color conversion tools. Convert between CMYK,
+            RGB, HEX, HSL, HSV, and Pantone (PMS) in both directions—whether you are prepping print
+            files, shipping CSS tokens, or matching a screen swatch to a spot color.
+          </p>
+          <p>
+            Not sure which model to use? Start with the{' '}
+            <Link href="/color-models">color models overview</Link>, then dive into{' '}
+            <Link href="/color-models/cmyk">CMYK for print</Link> or{' '}
+            <Link href="/color-models/hex">HEX for the web</Link>. For brand-critical matches, try
+            the <Link href="/convert-cmyk-to-pantone-pms">CMYK to Pantone</Link> or{' '}
+            <Link href="/convert-hex-to-pantone-pms">HEX to Pantone</Link> tools first. For a known
+            PMS code, open the <Link href="/pantone">Pantone color lookup</Link> and copy HEX, RGB,
+            and CMYK in one place.
           </p>
         </Container>
       </Wrapper>

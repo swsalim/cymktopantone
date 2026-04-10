@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function CmykHexContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>CMYK to Hex Converter: From Print to Web</h1>
+      <h2>CMYK to Hex Converter: From Print to Web</h2>
       <p>
         Your logo looks perfect on that business card, but when you try to use it on your website,
         the colors don't match. That's the CMYK to HEX problem in a nutshell.

@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function HexHslContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>Hex to HSL Converter: Adjust Colors Easily</h1>
+      <h2>Hex to HSL Converter: Adjust Colors Easily</h2>
       <p>
         You've got a HEX code like #FF5733, but you need to make it lighter for a hover state or
         adjust the saturation. HEX doesn't make that easy.

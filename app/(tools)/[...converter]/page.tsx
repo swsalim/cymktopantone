@@ -8,6 +8,7 @@ import { siteConfig } from '@/config/site';
 import { absoluteUrl } from '@/lib/utils';
 
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
+import { ConverterPageIntro } from '@/components/converter-page-intro';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
@@ -110,6 +111,10 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
         description={converterConfig.description}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
+      <ConverterPageIntro
+        title={converterConfig.title}
+        description={converterConfig.description}
+      />
       <DynamicConverter componentName={converterConfig.component} />
       {converterConfig.sourceColor !== 'PANTONE' && (
         <Wrapper className="mx-auto text-center">

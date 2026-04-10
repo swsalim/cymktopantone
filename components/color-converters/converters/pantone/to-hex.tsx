@@ -2,8 +2,6 @@
 
 import { useRef, useState } from 'react';
 
-import Link from 'next/link';
-
 import { PMS } from '@/config/colors';
 
 import {
@@ -114,18 +112,8 @@ export default function PantoneHexConverter() {
   };
 
   return (
-    <Wrapper size="lg">
+    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
       <Container>
-        <div className="prose dark:prose-invert">
-          <h1>Pantone to HEX Converter</h1>
-          <p>
-            Our free converter gives you instant <Link href="/color-models/hex">HEX</Link>,{' '}
-            <Link href="/color-models/cmyk">CMYK</Link>, and{' '}
-            <Link href="/color-models/rgb">RGB</Link> values for any Pantone color – no Pantone
-            color chart needed. Just browse, click, and get precise color values for all your design
-            needs.
-          </p>
-        </div>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
             <CardContent>

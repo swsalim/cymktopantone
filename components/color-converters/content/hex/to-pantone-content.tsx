@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function HexPantoneContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>Hex to Pantone Converter: Web Colors for Print</h1>
+      <h2>Hex to Pantone Converter: Web Colors for Print</h2>
       <p>
         Your website uses HEX codes. Your printer needs Pantone numbers. They don't speak the same
         language.

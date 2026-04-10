@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function HexRgbContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>Hex to RGB Converter: Unpack Color Codes</h1>
+      <h2>Hex to RGB Converter: Unpack Color Codes</h2>
       <p>
         HEX codes like #FF5733 are compact, but sometimes you need RGB values. Maybe a design tool
         requires RGB, or you need to understand what the color actually is.

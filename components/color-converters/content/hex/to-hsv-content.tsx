@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function HexHsvContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>Hex to HSV Converter: Analyze and Adjust Colors</h1>
+      <h2>Hex to HSV Converter: Analyze and Adjust Colors</h2>
       <p>
         HEX codes like #FF5733 tell you what color it is, but not how to adjust it. HSV breaks it
         down differently.

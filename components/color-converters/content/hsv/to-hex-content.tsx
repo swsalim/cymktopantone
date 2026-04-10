@@ -1,9 +1,11 @@
+import Link from 'next/link';
+
 import { Container } from '@/components/container';
 
 export default function HsvHexContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSV to HEX Converter: Colors for Code</h1>
+      <h2>HSV to HEX Converter: Colors for Code</h2>
       <p>
         You've been working with HSV values, but now you need HEX codes for CSS. HSV is great for
         selecting and adjusting colors, but HEX is what goes in your stylesheet.
@@ -55,6 +57,23 @@ export default function HsvHexContent() {
       <p>
         Works anywhere. Convert HSV colors to HEX for your next web project, implement color
         palettes, or ensure consistency across digital platforms. All from your phone or laptop.
+      </p>
+      <p>
+        New to how these spaces relate? See our introduction to{' '}
+        <Link href="/color-models">color models</Link> and how{' '}
+        <Link href="/color-models/rgb">RGB</Link> connects to HEX in browsers.
+      </p>
+      <h2>Quick FAQ</h2>
+      <h3>Does HEX include alpha?</h3>
+      <p>
+        Classic HEX is six digits (RGB). Some tools use eight digits (#RRGGBBAA) for transparency; this
+        converter focuses on opaque web colors—add alpha in CSS if you need it.
+      </p>
+      <h3>When should I use HSV instead of HSL?</h3>
+      <p>
+        Both are cylindrical models; HSV &quot;value&quot; and HSL &quot;lightness&quot; behave
+        differently at extremes. Many image editors expose HSV—convert here when your stack wants
+        HEX. Compare with our <Link href="/convert-hsv-to-hsl">HSV to HSL</Link> tool if needed.
       </p>
     </Container>
   );

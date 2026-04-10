@@ -3,7 +3,7 @@ import { Container } from '@/components/container';
 export default function RgbPantoneContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>RGB to Pantone Converter: Screen Colors for Print</h1>
+      <h2>RGB to Pantone Converter: Screen Colors for Print</h2>
       <p>
         Your design looks perfect on screen, but when you send it to print, the colors don't match.
         That's the RGB to Pantone problem.

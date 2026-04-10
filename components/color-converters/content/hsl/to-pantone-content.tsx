@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function HslPantoneContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>HSL to Pantone Converter: Digital Colors for Print</h1>
+      <h2>HSL to Pantone Converter: Digital Colors for Print</h2>
       <p>
         You've been tweaking colors in HSL for your website, but now you need to print them. Printers
         need Pantone numbers, not HSL values.

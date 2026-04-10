@@ -39,6 +39,7 @@ const config = {
       await config.transform(config, '/color-models/hsl'),
       await config.transform(config, '/color-models/hex'),
       await config.transform(config, '/convert-color'),
+      await config.transform(config, '/pantone'),
       await config.transform(config, '/pantone-colors'),
       await config.transform(config, '/pantone-color-match'),
       await config.transform(config, '/pantone-color-match/challenge'),

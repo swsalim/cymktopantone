@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function CmykHslContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>CMYK to HSL Converter: Print Colors for Digital Design</h1>
+      <h2>CMYK to HSL Converter: Print Colors for Digital Design</h2>
       <p>
         You've got CMYK values from a print job, but now you need to tweak that color for a website.
         HSL makes that easy.

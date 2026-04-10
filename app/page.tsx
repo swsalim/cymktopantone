@@ -3,6 +3,7 @@ import { siteConfig } from '@/config/site';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import CmykPantoneContent from '@/components/color-converters/content/cmyk/to-pantone-content';
 import CmykPantoneConverter from '@/components/color-converters/converters/cmyk/to-pantone';
+import { ConverterPageIntro } from '@/components/converter-page-intro';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
 
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
 
+      <ConverterPageIntro title={siteConfig.title} description={siteConfig.description} />
       <CmykPantoneConverter />
       <Wrapper className="mx-auto text-center">
         <LazyAdsLeaderboard />

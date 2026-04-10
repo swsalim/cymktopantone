@@ -61,12 +61,8 @@ export default function HexHsvConverter() {
   };
 
   return (
-    <Wrapper size="lg" className="pb-0 md:pb-0">
+    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
       <Container>
-        <p>
-          Easily transform your HEX values into HSV values! Enter your HEX values below and get
-          instant, accurate results.
-        </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
             <h2 className="sr-only">Enter HEX Value</h2>

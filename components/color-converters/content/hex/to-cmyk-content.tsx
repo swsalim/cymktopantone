@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function HexCmykContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>Hex to CMYK Converter: Web Colors for Print</h1>
+      <h2>Hex to CMYK Converter: Web Colors for Print</h2>
       <p>
         Your website uses HEX codes like #FF5733. Your printer needs CMYK percentages. They're not
         the same thing.

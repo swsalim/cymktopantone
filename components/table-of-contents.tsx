@@ -42,7 +42,7 @@ function TocItem({ item }: TocItemProps) {
       <a
         href={item.url}
         onClick={handleClick}
-        className="block py-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
+        className="block py-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
         {item.title}
       </a>
       {item.items && item.items.length > 0 && (

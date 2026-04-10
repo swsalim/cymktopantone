@@ -23,6 +23,64 @@ interface PageProps {
   }>;
 }
 
+function CategoryUsageLinks({
+  hex,
+}: {
+  hex: string;
+}) {
+  const hexSlug = hex.replace('#', '');
+  return (
+    <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-50">
+      Pair this swatch with production workflows using our{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href="/convert-color">
+        color converters
+      </Link>{' '}
+      when you need HEX, RGB, CMYK, HSL, or HSV equivalents. For a closest Pantone match from a web code, jump to{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href={`/convert-hex-to-pantone-pms/${hexSlug}`}>
+        HEX to Pantone for this color
+      </Link>
+      . If you are briefing a printer, it helps to know whether the job uses{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href="/blog/spot-color-process-color">
+        spot (PMS) ink or process (CMYK) builds
+      </Link>
+      —specifications and proofs differ between the two.
+    </p>
+  );
+}
+
+function CategoryPsychologyLinks() {
+  return (
+    <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-50">
+      Perception shifts with lighting, adjacent colors, and culture—use psychology as a guide, not a rule. For how hue,
+      saturation, and brightness behave in design systems, read our{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href="/blog/color-theory-101">
+        color theory basics
+      </Link>
+      . When you need the same Pantone story on screens and in print, see{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href="/blog/pantone-digital-branding">
+        Pantone in digital branding
+      </Link>
+      , and our overview of{' '}
+      <Link
+        className="font-medium text-foreground underline-offset-4 hover:underline"
+        href="/color-models">
+        RGB, CMYK, HEX, HSL, and HSV
+      </Link>
+      .
+    </p>
+  );
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const category = (await params).category;
   const pantoneCategory = pantoneCategories.find((c) => c.slug === category);
@@ -107,13 +165,32 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd
         id={absoluteUrl(`/pantone-colors/${pantoneCategory.slug}`)}
-        description={`Find out more about ${pantoneCategory.name} and its meaning in the world of color.`}
+        description={`${pantoneCategory.shortDescription} See HEX, RGB, CMYK, HSL, and HSV values, usage ideas, and related Pantone hues.`}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
           <h1>{pantoneCategory.name}</h1>
           <p>{pantoneCategory.description}</p>
+          <p>
+            Use these values alongside our{' '}
+            <Link href="/convert-pantone-pms-to-hex">Pantone to HEX</Link>,{' '}
+            <Link href="/convert-pantone-pms-to-cmyk">Pantone to CMYK</Link>, and{' '}
+            <Link href="/convert-pantone-pms-to-rgb">Pantone to RGB</Link> converters when you need
+            to hand off exact numbers to developers or printers. Browse the full{' '}
+            <Link href="/pantone-colors">Pantone color library</Link> for more families.
+          </p>
+          <h2>Quick answers</h2>
+          <p>
+            <strong>Is this the same as my physical swatch?</strong> On-screen approximations depend
+            on your display calibration. Always confirm critical jobs with a printed Pantone guide or
+            press proof.
+          </p>
+          <p>
+            <strong>Which suffix do I use?</strong> &quot;C&quot; (coated) and &quot;U&quot;
+            (uncoated) refer to different ink films—follow your brand standards when specifying PMS
+            for vendors.
+          </p>
         </Container>
 
         <Container className="pb-10 md:pb-14">
@@ -132,14 +209,16 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
             <div className="flex flex-col gap-4">
               <Card>
                 <CardContent>
-                  <h2 className="text-2xl font-bold">Color Usage</h2>
-                  <p className="mt-4">{pantoneCategory.usage}</p>
+                  <h2 className="text-2xl font-bold">Color usage</h2>
+                  <p className="mt-4 leading-relaxed">{pantoneCategory.usage}</p>
+                  <CategoryUsageLinks hex={pantoneCategory.hex} />
                 </CardContent>
               </Card>
               <Card>
                 <CardContent>
-                  <h2 className="text-2xl font-bold">Color Psychology</h2>
-                  <p className="mt-4">{pantoneCategory.psychology}</p>
+                  <h2 className="text-2xl font-bold">Color psychology</h2>
+                  <p className="mt-4 leading-relaxed">{pantoneCategory.psychology}</p>
+                  <CategoryPsychologyLinks />
                 </CardContent>
               </Card>
             </div>
@@ -151,7 +230,7 @@ export default async function PantoneCategoryPage({ params }: PageProps) {
             <h2 className="text-2xl font-bold">Related Colors</h2>
             <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
               {pantoneCategory.relatedColors.map((color) => (
-                <div key={color.slug} className="rounded-lg border p-4">
+                <div key={color.slug} className="rounded-lg border p-4 dark:border-gray-700">
                   <Link
                     href={`/convert-hex-to-pantone-pms/${color.hex.replace('#', '')}`}
                     className="group">

@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function RgbCmykContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>RGB to CMYK Converter: Screen Colors for Print</h1>
+      <h2>RGB to CMYK Converter: Screen Colors for Print</h2>
       <p>
         Your design looks perfect on screen, but when you send it to print, the colors look wrong.
         That's the RGB to CMYK problem.

@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 export default function RgbHslContent() {
   return (
     <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
-      <h1>RGB to HSL Converter: Adjust Colors Easily</h1>
+      <h2>RGB to HSL Converter: Adjust Colors Easily</h2>
       <p>
         You've got RGB values like (255, 87, 51), but you need to make it lighter or adjust the
         saturation. RGB doesn't make that easy.

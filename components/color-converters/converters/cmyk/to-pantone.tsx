@@ -100,12 +100,8 @@ export default function CmykPantoneConverter() {
   }, [cmyk, distance, hex, sortOrder]);
 
   return (
-    <Wrapper size="lg" className="pb-0 md:pb-0">
+    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
       <Container>
-        <p>
-          Transform your CMYK values into Pantone perfection with instant, accurate results. Find
-          the closest Pantone matches for your CMYK color.
-        </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <div>
             <Card>

@@ -81,12 +81,8 @@ export default function HslHsvConverter() {
   // };
 
   return (
-    <Wrapper size="lg" className="pb-0 md:pb-0">
+    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
       <Container>
-        <p>
-          Easily transform your HSL values into HSV values! Enter your HSL values below and get
-          instant, accurate results.
-        </p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Card>
             <h2 className="sr-only">Enter HSL Value</h2>
