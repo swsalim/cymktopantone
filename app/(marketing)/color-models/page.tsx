@@ -18,9 +18,9 @@ import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/c
 import { Wrapper } from '@/components/wrapper';
 
 const config = {
-  title: 'Color Models Guide - CMYK, RGB, HEX & HSL Explained',
+  title: 'Color Models Guide - CMYK, RGB, HEX, HSL & HSV Explained',
   description:
-    'Learn the differences between CMYK, RGB, HEX, and HSL color models. Discover which model is best for print, web, and digital design.',
+    'Learn the differences between CMYK, RGB, HEX, HSL, and HSV color models. Discover which model is best for print, web, digital design, and color pickers.',
   url: '/color-models',
 };
 
@@ -80,7 +80,7 @@ export default function ColorModelsPage() {
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
         <Container as="section" className="prose dark:prose-invert">
-          <h1 className="mb-6">Color Models: CMYK, RGB, HEX, and HSL Explained</h1>
+          <h1 className="mb-6">Color Models: CMYK, RGB, HEX, HSL, and HSV Explained</h1>
           <p className="mb-4 text-lg">
             Color models are the foundation of how we represent and work with colors in digital and
             print media. Whether you're designing a website, preparing print materials, or creating
@@ -88,11 +88,11 @@ export default function ColorModelsPage() {
             consistent results.
           </p>
           <p className="mb-8">
-            Each color model—CMYK, RGB, HEX, and HSL—serves specific purposes and excels in different
-            contexts. From the subtractive CMYK system that powers professional printing to the
-            additive RGB model that creates vibrant screen displays, each approach offers unique
-            advantages. This comprehensive guide will help you understand when and how to use each
-            model effectively.
+            Each color model—CMYK, RGB, HEX, HSL, and HSV—serves specific purposes and excels in
+            different contexts. From the subtractive CMYK system that powers professional printing to
+            the additive RGB model that creates vibrant screen displays, and from HEX codes in CSS to
+            hue-based models in pickers, each approach offers unique advantages. This guide helps you
+            understand when and how to use each model effectively.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {colorModels.map((model) => (

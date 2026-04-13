@@ -2738,6 +2738,16 @@ export const colorModels: ColorModel[] = [
     benefits: 'Human-friendly color manipulation',
     useCases: 'Perfect for creating color palettes, maintaining brand consistency',
   },
+  {
+    title: 'HSV',
+    href: '/color-models/hsv',
+    description:
+      'HSV (Hue, Saturation, Value) describes colors the way many pickers and image editors do: rotate hue, dial intensity with saturation, and control brightness with value. It is ideal when you want predictable tweaks without juggling RGB channels.',
+    bestFor: 'Photo and video apps, classic color pickers, UI theming',
+    coverage: 'Hue (0-360°), Saturation (0-100%), Value (0-100%)',
+    benefits: 'Intuitive brightness control for digital workflows',
+    useCases: 'Grading, retouching, sampling colors for screens',
+  },
 ];
 
 export const colorModelFaqs: FAQItem[] = [
@@ -2745,7 +2755,7 @@ export const colorModelFaqs: FAQItem[] = [
   {
     question: 'What is a color model?',
     answer:
-      'A color model is a system for representing colors using numeric values. Different models like RGB, CMYK, HEX, and HSL are used depending on whether the design is for print, digital screens, or color adjustments.',
+      'A color model is a system for representing colors using numeric values. Different models like RGB, CMYK, HEX, HSL, and HSV are used depending on whether the design is for print, digital screens, or color adjustments.',
   },
   {
     question: 'Which color model is best for printing?',
@@ -2800,9 +2810,14 @@ export const colorModelFaqs: FAQItem[] = [
       'Use HEX when coding colors in CSS, HTML, or design systems, since HEX provides a shorter, universal representation of RGB values that ensures consistent rendering across devices and browsers.',
   },
   {
-    question: 'Can you convert between RGB, HEX, HSL, and CMYK?',
+    question: 'Can you convert between RGB, HEX, HSL, HSV, and CMYK?',
     answer:
-      'Yes. Colors can be converted between models using formulas or tools. For example, RGB can be converted to HEX or HSL for web use, and to CMYK for printing.',
+      'Yes. Colors can be converted between models using formulas or tools. For example, RGB can be converted to HEX, HSL, or HSV for web and UI work, and to CMYK for printing.',
+  },
+  {
+    question: 'What is the difference between HSV and HSL?',
+    answer:
+      'Both use hue and saturation, but the third axis differs: HSV uses <strong>Value</strong> (brightness toward the pure hue), while HSL uses <strong>Lightness</strong> (perceived light/dark between white and black). The same numeric inputs rarely look identical. See our <a href="/color-models/hsv" class="text-violet-600 dark:text-violet-400">HSV</a> and <a href="/color-models/hsl" class="text-violet-600 dark:text-violet-400">HSL</a> guides for when each shines.',
   },
 ];
 
@@ -2932,5 +2947,36 @@ export const hslFaqs: FAQItem[] = [
     question: 'Can HSL be converted to RGB or HEX?',
     answer:
       'Yes. HSL can be converted to RGB and then expressed as HEX. Many tools and CSS functions support direct conversion between these models.',
+  },
+];
+
+//
+// HSV FAQs
+//
+export const hsvFaqs: FAQItem[] = [
+  {
+    question: 'What does HSV stand for?',
+    answer:
+      'HSV stands for Hue, Saturation, and Value. Hue is the color angle on a wheel (0–360°), saturation is how vivid the color is, and value is how bright it is (often shown as 0–100%).',
+  },
+  {
+    question: 'Is HSV the same as HSB?',
+    answer:
+      'Yes. <strong>HSB</strong> (Hue, Saturation, Brightness) is another name for the same idea as HSV. Different apps use different labels, but the three dimensions work the same way.',
+  },
+  {
+    question: 'Why do Photoshop and other editors use HSV?',
+    answer:
+      'HSV maps well to how people adjust photos: pick a hue, push saturation for punch, and change value for exposure-like brightness without rebalancing RGB by hand.',
+  },
+  {
+    question: 'How is HSV different from HSL?',
+    answer:
+      'They share hue and saturation, but <strong>value</strong> (HSV) and <strong>lightness</strong> (HSL) are computed differently, so sliders do not behave the same at the extremes. Use HSV when your tool uses it natively; use HSL when writing CSS <code>hsl()</code> or building design tokens.',
+  },
+  {
+    question: 'Can HSV be converted to RGB, HEX, or CMYK?',
+    answer:
+      'Yes. HSV is converted to RGB first, then to HEX for the web or to CMYK for print (with gamut limits). Our site offers <a href="/convert-hsv-to-rgb" class="text-violet-600 dark:text-violet-400">HSV to RGB</a>, <a href="/convert-hsv-to-hex" class="text-violet-600 dark:text-violet-400">HSV to HEX</a>, and <a href="/convert-hsv-to-cmyk" class="text-violet-600 dark:text-violet-400">HSV to CMYK</a> converters.',
   },
 ];

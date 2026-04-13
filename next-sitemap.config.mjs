@@ -37,6 +37,7 @@ const config = {
       await config.transform(config, '/color-models/rgb'),
       await config.transform(config, '/color-models/cmyk'),
       await config.transform(config, '/color-models/hsl'),
+      await config.transform(config, '/color-models/hsv'),
       await config.transform(config, '/color-models/hex'),
       await config.transform(config, '/convert-color'),
       await config.transform(config, '/brand-palette-to-pantone'),
