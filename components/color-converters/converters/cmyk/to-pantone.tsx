@@ -100,7 +100,7 @@ export default function CmykPantoneConverter() {
   }, [cmyk, distance, hex, sortOrder]);
 
   return (
-    <Wrapper size="lg" className="!pt-4 md:!pt-6 pb-0 md:pb-0">
+    <Wrapper size="lg" className="!pt-4 pb-0 md:!pt-6 md:pb-0">
       <Container>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <div>
@@ -278,6 +278,13 @@ export default function CmykPantoneConverter() {
               )}
             </CardContent>
           </Card>
+        </div>
+      </Container>
+      <Container>
+        <div className="py-12 text-center text-sm text-gray-500 dark:text-gray-400">
+          Disclaimer: This site is not affiliated with or endorsed by Pantone LLC. Pantone® is a
+          registered trademark of Pantone LLC. The color values provided here are for reference
+          purposes only and may not be 100% accurate representations of official Pantone colors.
         </div>
       </Container>
       {matchingColors.length > 0 && (

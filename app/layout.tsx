@@ -3,6 +3,7 @@ import { Figtree, Fraunces } from 'next/font/google';
 
 import { siteConfig } from '@/config/site';
 
+import { isMaintenanceMode } from '@/lib/maintenance';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import Footer from '@/components/footer';
@@ -27,7 +28,18 @@ const fraunces = Fraunces({
   preload: true,
 });
 
-export const metadata: Metadata = {
+const maintenanceMetadata: Metadata = {
+  title: 'Temporarily unavailable',
+  description: 'This site is temporarily unavailable. Please check back later.',
+  robots: { index: false, follow: false },
+  icons: {
+    icon: '/icons/favicon-32x32.png',
+    shortcut: '/icons/apple-touch-icon.png',
+    apple: '/icons/apple-touch-icon.png',
+  },
+};
+
+const fullMetadata: Metadata = {
   title: {
     default: siteConfig.title,
     template: `%s · ${siteConfig.siteName}`,
@@ -75,11 +87,31 @@ export const metadata: Metadata = {
   },
 };
 
+export const metadata: Metadata = isMaintenanceMode() ? maintenanceMetadata : fullMetadata;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const maintenance = isMaintenanceMode();
+
+  if (maintenance) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={cn(
+            'flex min-h-screen flex-col font-sans antialiased dark:bg-gray-900 dark:text-gray-100',
+            figtree.variable,
+            fraunces.variable,
+          )}
+          suppressHydrationWarning>
+          <main className="flex grow flex-col justify-center">{children}</main>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

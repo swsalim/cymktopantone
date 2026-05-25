@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 
 import { withContentCollections } from '@content-collections/next';
 
+const isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true';
+
 const nextConfig: NextConfig = {
   images: {
     deviceSizes: [200, 350, 600, 900, 1200, 1800],
@@ -16,6 +18,18 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
+  ...(isMaintenanceMode
+    ? {
+        async headers() {
+          return [
+            {
+              source: '/:path*',
+              headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+            },
+          ];
+        },
+      }
+    : {}),
   async redirects() {
     return [
       {
