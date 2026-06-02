@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/api/og',
+        destination: '/images/og-default.png',
+        permanent: true,
+      },
+      {
         source: '/privacy',
         destination: '/legal/privacy-policy',
         permanent: true,

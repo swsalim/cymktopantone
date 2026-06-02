@@ -1,3 +1,5 @@
+import { cache } from 'react';
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -6,7 +8,7 @@ import { MDXContent } from '@content-collections/mdx/react';
 import { allPosts } from 'content-collections';
 import { format, parseISO } from 'date-fns';
 
-import { siteConfig } from '@/config/site';
+import { ogImages, siteConfig } from '@/config/site';
 
 import { getTableOfContents } from '@/lib/toc';
 import { absoluteUrl, cn } from '@/lib/utils';
@@ -29,12 +31,12 @@ type BlogPostPageProps = {
   }>;
 };
 
-async function getPost({ params }: BlogPostPageProps) {
+const getPost = cache(async ({ params }: BlogPostPageProps) => {
   const { slug } = await params;
   const post = allPosts.find((post) => post._meta.path === slug);
   if (!post) notFound();
   return post;
-}
+});
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const post = await getPost({ params });
@@ -50,13 +52,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.metaTitle || post.title,
       description: post.metaDescription || post.summary,
       url: absoluteUrl(`/blog/${post._meta.path}`),
-      images: [
-        {
-          url: absoluteUrl(`/api/og?title=${post.metaTitle || post.title}`),
-          width: 1200,
-          height: 630,
-        },
-      ],
+      images: ogImages(post.metaTitle || post.title),
       siteName: siteConfig.siteName,
       locale: 'en-US',
       type: 'website',
@@ -64,7 +60,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     twitter: {
       title: post.metaTitle || post.title,
       description: post.metaDescription || post.summary,
-      images: [absoluteUrl(`/api/og?title=${post.metaTitle || post.title}`)],
+      images: ogImages(post.metaTitle || post.title),
       card: 'summary_large_image',
       creator: siteConfig.creator,
     },
@@ -100,6 +96,8 @@ function PageHeading({
   );
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post._meta.path,
@@ -107,9 +105,10 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const tocPromise = getTableOfContents(slug);
   const post = await getPost({ params });
-
-  if (!post) notFound();
+  const toc = await tocPromise;
 
   const breadcrumbItems = [
     {
@@ -143,8 +142,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     LazyAdsSquare,
     LazyAdsArticle,
   };
-
-  const toc = await getTableOfContents(post._meta.path);
 
   return (
     <>

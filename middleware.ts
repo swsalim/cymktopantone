@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { GONE_RESPONSE_CACHE_CONTROL } from '@/lib/http-cache';
+
 const GONE_PREFIXES = [
   '/pantone-color-match/challenge/',
   '/pantone-color-match/classic/',
@@ -29,6 +31,7 @@ export function middleware(request: NextRequest) {
       headers: {
         'X-Robots-Tag': 'noindex, nofollow',
         'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': GONE_RESPONSE_CACHE_CONTROL,
       },
     });
   }

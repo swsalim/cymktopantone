@@ -18,3 +18,19 @@ export const siteConfig: SiteConfig = {
   },
   creator: '@swsalim',
 };
+
+/** Static OG image for Open Graph / Twitter / JSON-LD (public/images/og-default.png). */
+export function ogImageUrl() {
+  return absoluteUrl(siteConfig.openGraph.image);
+}
+
+export function ogImages(alt?: string) {
+  return [
+    {
+      url: ogImageUrl(),
+      width: siteConfig.openGraph.width,
+      height: siteConfig.openGraph.height,
+      alt: alt ?? siteConfig.openGraph.imageAlt,
+    },
+  ];
+}

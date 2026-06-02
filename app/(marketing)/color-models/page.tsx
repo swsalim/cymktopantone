@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ExternalLinkIcon } from 'lucide-react';
 
 import { colorModelFaqs, colorModels } from '@/config/colors';
-import { siteConfig } from '@/config/site';
+import { ogImages, siteConfig } from '@/config/site';
 
 import { absoluteUrl, cn } from '@/lib/utils';
 
@@ -34,14 +34,7 @@ export const metadata: Metadata = {
     title: config.title,
     description: config.description,
     url: config.url,
-    images: [
-      {
-        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
-        width: siteConfig.openGraph.width,
-        height: siteConfig.openGraph.height,
-        alt: config.title,
-      },
-    ],
+    images: ogImages(config.title),
     locale: 'en_US',
     type: 'website',
   },
@@ -50,14 +43,7 @@ export const metadata: Metadata = {
     description: config.description,
     card: 'summary_large_image',
     creator: siteConfig.creator,
-    images: [
-      {
-        url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${config.title}`),
-        width: siteConfig.openGraph.width,
-        height: siteConfig.openGraph.height,
-        alt: config.title,
-      },
-    ],
+    images: ogImages(config.title),
   },
 };
 

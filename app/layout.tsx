@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Figtree, Fraunces } from 'next/font/google';
 
-import { siteConfig } from '@/config/site';
+import { ogImages, siteConfig } from '@/config/site';
 
 import { absoluteUrl, cn } from '@/lib/utils';
 
@@ -9,6 +9,7 @@ import Footer from '@/components/footer';
 import { NavMobile } from '@/components/nav-mobile';
 import Navbar from '@/components/navbar';
 import LogoJsonLd from '@/components/structured-data/logo-json-ld';
+import { ThirdPartyScripts } from '@/components/third-party-scripts';
 import { Toaster } from '@/components/ui/toaster';
 
 import './globals.css';
@@ -47,14 +48,7 @@ const fullMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     url: siteConfig.url,
-    images: [
-      {
-        url: siteConfig.openGraph.image,
-        width: siteConfig.openGraph.width,
-        height: siteConfig.openGraph.height,
-        alt: siteConfig.openGraph.imageAlt,
-      },
-    ],
+    images: ogImages(),
     locale: 'en_US',
     type: 'website',
   },
@@ -68,7 +62,7 @@ const fullMetadata: Metadata = {
     description: siteConfig.description,
     card: 'summary_large_image',
     creator: siteConfig.creator,
-    images: [siteConfig.openGraph.image],
+    images: ogImages(),
   },
   robots: {
     index: true,
@@ -98,15 +92,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//cdn.apitiny.net" />
         <link rel="dns-prefetch" href="//app.tinyadz.com" />
         <LogoJsonLd logo={absoluteUrl('/icons/logo.png')} url={absoluteUrl()} />
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="iXowcFpFQHcttGSB1RVGPw"
-          defer></script>
-        <script
-          src="https://stats.colormapper.xyz/ennui.js"
-          data-api-host="https://stats.colormapper.xyz"
-          data-token="12198fc1305c777"
-          defer></script>
       </head>
       <body
         className={cn(
@@ -120,16 +105,7 @@ export default function RootLayout({
         <main className="flex grow flex-col justify-center">{children}</main>
         <Footer />
         <Toaster />
-
-        {/* <script
-          defer
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
-          crossOrigin="anonymous"></script> */}
-        <script
-          src="https://cdn.apitiny.net/scripts/v2.0/main.js"
-          data-site-id="6a1efc0c2429acc1401eef3e"
-          data-test-mode="false"
-          async></script>
+        <ThirdPartyScripts />
       </body>
     </html>
   );

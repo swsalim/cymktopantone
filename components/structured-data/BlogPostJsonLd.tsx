@@ -1,6 +1,6 @@
 import { Post } from '@/.content-collections/generated';
 
-import { siteConfig } from '@/config/site';
+import { ogImageUrl, siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
@@ -18,7 +18,7 @@ export default function BlogPostJsonLd({ post }: { post: Post }) {
         },
         headline: post.title,
         description: post.summary,
-        image: absoluteUrl(`/api/og?title=${post.title}`),
+        image: ogImageUrl(),
         author: {
           '@type': 'Organization',
           name: siteConfig.siteName,

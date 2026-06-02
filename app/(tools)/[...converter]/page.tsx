@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 
 import { ConverterConfig, getAllConverters, getConverterByUrl } from '@/config/converters';
-import { siteConfig } from '@/config/site';
+import { ogImages, siteConfig } from '@/config/site';
 
+import { getContentComponent } from '@/lib/dynamic-content-components';
 import { absoluteUrl } from '@/lib/utils';
 
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
@@ -20,6 +20,8 @@ interface ConverterPageProps {
     converter: string[];
   }>;
 }
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const converters = getAllConverters();
@@ -48,14 +50,7 @@ export async function generateMetadata({ params }: ConverterPageProps): Promise<
       title: converterConfig.title,
       description: converterConfig.description,
       url: converterConfig.url,
-      images: [
-        {
-          url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${converterConfig.title}`),
-          width: siteConfig.openGraph.width,
-          height: siteConfig.openGraph.height,
-          alt: converterConfig.title,
-        },
-      ],
+      images: ogImages(converterConfig.title),
       locale: 'en_US',
       type: 'website',
     },
@@ -64,14 +59,7 @@ export async function generateMetadata({ params }: ConverterPageProps): Promise<
       description: converterConfig.description,
       card: 'summary_large_image',
       creator: siteConfig.creator,
-      images: [
-        {
-          url: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${converterConfig.title}`),
-          width: siteConfig.openGraph.width,
-          height: siteConfig.openGraph.height,
-          alt: converterConfig.title,
-        },
-      ],
+      images: ogImages(converterConfig.title),
     },
   };
 }
@@ -85,12 +73,7 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
     notFound();
   }
 
-  // Dynamically import the content component if it exists
-  const ContentComponent = converterConfig.content
-    ? dynamic(() => import(`@/components/color-converters/content/${converterConfig.content}`), {
-        ssr: true,
-      })
-    : null;
+  const ContentComponent = getContentComponent(converterConfig.content);
 
   const JSONLDbreadcrumbs = [
     {
@@ -121,7 +104,7 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
           <LazyAdsLeaderboard />
         </div>
       </Wrapper>
-      {ContentComponent && <ContentComponent />}
+      {ContentComponent ? <ContentComponent /> : null}
     </>
   );
 }

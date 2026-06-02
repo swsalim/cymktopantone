@@ -1,11 +1,14 @@
 import { siteConfig } from '@/config/site';
 
+import { getContentComponent } from '@/lib/dynamic-content-components';
+
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
-import RgbCmykContent from '@/components/color-converters/content/rgb/to-cmyk-content';
 import { ConverterPageIntro } from '@/components/converter-page-intro';
 import { DynamicConverter } from '@/components/dynamic-converter';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
+
+const HomeContent = getContentComponent('rgb/to-cmyk-content');
 
 export default function Home() {
   return (
@@ -17,7 +20,7 @@ export default function Home() {
       <Wrapper className="mx-auto text-center">
         <LazyAdsLeaderboard />
       </Wrapper>
-      <RgbCmykContent />
+      {HomeContent ? <HomeContent /> : null}
     </>
   );
 }

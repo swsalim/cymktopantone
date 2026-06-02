@@ -1,15 +1,12 @@
 'use client';
 
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext } from 'react';
 
-import dynamic from 'next/dynamic';
-
+import { getConverterComponent } from '@/lib/dynamic-converter-components';
 import { ColorHistoryState, useColorHistory } from '@/lib/hooks/use-color-history';
 
 import { Container } from '@/components/container';
-import { Skeleton } from '@/components/ui/skeleton';
 
-// Context to share color history between parent and dynamically loaded component
 interface ColorHistoryContextType {
   colorHistory: ColorHistoryState;
 }
@@ -28,34 +25,27 @@ interface DynamicConverterProps {
   componentName: string;
 }
 
-export function DynamicConverter({ componentName }: DynamicConverterProps) {
-  // Create a converter-specific color history
-  const colorHistory = useColorHistory(componentName);
-
-  // Memoize the dynamic component to prevent re-loading on state changes
-  const ConverterComponent = useMemo(
-    () =>
-      dynamic(() => import(`@/components/color-converters/converters/${componentName}`), {
-        loading: () => <ConverterSkeleton />,
-        ssr: true,
-      }),
-    [componentName],
-  );
-
+function ConverterNotFound({ name }: { name: string }) {
   return (
-    <ColorHistoryContext.Provider value={{ colorHistory }}>
-      <ConverterComponent />
-    </ColorHistoryContext.Provider>
+    <Container>
+      <p className="mt-10 text-center text-gray-600 dark:text-gray-400">
+        Converter &ldquo;{name}&rdquo; is not available.
+      </p>
+    </Container>
   );
 }
 
-function ConverterSkeleton() {
+export function DynamicConverter({ componentName }: DynamicConverterProps) {
+  const colorHistory = useColorHistory(componentName);
+  const ConverterComponent = getConverterComponent(componentName);
+
   return (
-    <Container>
-      <div className="mt-10 grid gap-8 md:grid-cols-2">
-        <Skeleton className="h-[350px] w-full" />
-        <Skeleton className="h-[350px] w-full" />
-      </div>
-    </Container>
+    <ColorHistoryContext.Provider value={{ colorHistory }}>
+      {ConverterComponent ? (
+        <ConverterComponent />
+      ) : (
+        <ConverterNotFound name={componentName} />
+      )}
+    </ColorHistoryContext.Provider>
   );
 }

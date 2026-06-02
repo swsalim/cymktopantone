@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { allPosts } from 'content-collections';
 
-import { siteConfig } from '@/config/site';
+import { ogImages, siteConfig } from '@/config/site';
 
 import { absoluteUrl } from '@/lib/utils';
 
@@ -29,13 +29,7 @@ export const metadata = {
     title: seo.title,
     description: seo.description,
     url: seo.url,
-    images: [
-      {
-        url: absoluteUrl('/api/og?title=Blog'),
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: ogImages(seo.title),
     siteName: seo.company,
     locale: 'en-US',
     type: 'website',
@@ -43,7 +37,7 @@ export const metadata = {
   twitter: {
     title: seo.title,
     description: seo.description,
-    images: [absoluteUrl('/api/og?title=Blog')],
+    images: ogImages(seo.title),
     card: 'summary_large_image',
     creator: seo.creator,
   },
