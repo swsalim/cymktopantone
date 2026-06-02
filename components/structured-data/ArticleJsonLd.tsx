@@ -35,7 +35,7 @@ export default function ArticleJsonLd({
         ],
         publisher: {
           '@type': 'Organization',
-          name: 'RGB to CMYK',
+          name: 'Color Mapper',
           logo: {
             '@type': 'ImageObject',
             url: absoluteUrl('/icons/logo.png'),

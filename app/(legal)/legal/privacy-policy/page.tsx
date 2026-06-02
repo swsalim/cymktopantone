@@ -13,7 +13,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Privacy Policy',
   description:
-    'This Privacy Policy explains how we use the personal information that RGB to CMYK collects or generates on the website.',
+    'This Privacy Policy explains how we use the personal information that Color Mapper collects or generates on the website.',
   url: '/legal/privacy-policy',
 };
 
@@ -64,7 +64,7 @@ export default function Page() {
           <Prose className="rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm md:p-10 dark:border-gray-700 dark:bg-gray-900/75">
             <h1>Privacy Policy</h1>
             <p>
-              At rgbtocmyk.com, we are committed to protecting your privacy. This Privacy Policy
+              At colormapper.xyz, we are committed to protecting your privacy. This Privacy Policy
               outlines how we collect, use, and disclose information when you use our website.
             </p>
             <h2>Information We Collect</h2>
@@ -112,15 +112,15 @@ export default function Page() {
             <p>
               If you have any questions or concerns about this Privacy Policy, please contact us at{' '}
               <a
-                href="mailto:support@rgbtocmyk.com"
+                href="mailto:support@colormapper.xyz"
                 target="_blank"
                 className="text-violet-600 hover:text-violet-600 dark:text-violet-400 dark:hover:text-violet-500">
-                support@rgbtocmyk.com
+                support@colormapper.xyz
               </a>
               .
             </p>
 
-            <p>Thank you for using rgbtocmyk.com!</p>
+            <p>Thank you for using colormapper.xyz!</p>
 
             <p>All uploaded data is deleted instantly. We save no images</p>
           </Prose>

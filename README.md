@@ -1,6 +1,6 @@
-# rgbtocmyk
+# colormapper
 
-RGB to CMYK color converter website built with Next.js.
+Color Mapper (colormapper.xyz) — free RGB, CMYK, HEX, HSL, and HSV converters built with Next.js.
 
 ## Scripts
 

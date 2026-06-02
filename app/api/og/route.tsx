@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
+import { SITE_DOMAIN } from '@/lib/utils';
+
 export const runtime = 'edge';
 
 const font = fetch(new URL('../../../assets/fonts/CalSans-SemiBold.ttf', import.meta.url)).then(
@@ -233,7 +235,7 @@ export async function GET(req: NextRequest) {
                   {title}
                 </h1>
                 <p tw="text-violet-700 font-semibold capitalize mt-4 text-2xl text-center">
-                  rgbtocmyk.com
+                  {SITE_DOMAIN}
                 </p>
               </div>
             </div>

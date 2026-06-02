@@ -6,7 +6,7 @@ const faqs = [
     category: 'General',
     question: 'What does this site do?',
     answer:
-      'RGB to CMYK offers free color converters between CMYK, RGB, HEX, HSL, and HSV. The homepage focuses on RGB to CMYK conversion for print-ready output.',
+      'Color Mapper offers free converters between CMYK, RGB, HEX, HSL, and HSV. The homepage highlights RGB to CMYK for print-ready output.',
   },
   {
     id: 2,

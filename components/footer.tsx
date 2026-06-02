@@ -2,7 +2,6 @@
  * states: default · hover · focus · active · disabled · loading · error · success
  * Ft4 link-band · curated internal IA
  */
-
 import type { ComponentProps } from 'react';
 
 import Link from 'next/link';
@@ -43,19 +42,13 @@ const SITE_LINKS = [
 ] as const;
 
 const footerLinkClass =
-  'inline-block rounded-md text-gray-300 no-underline transition-colors duration-150 hover:text-violet-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-200';
+  'inline-block rounded-md text-gray-300 no-underline transition-colors duration-150 hover:text-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-700 dark:text-gray-600 dark:hover:text-violet-500';
 
 interface FooterProps extends ComponentProps<'footer'> {
   className?: string;
 }
 
-function FooterColumn({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="min-w-0">
       <h2 className="font-heading text-sm font-semibold tracking-tight text-white">{title}</h2>
@@ -141,7 +134,7 @@ export default function Footer({ className, ...props }: FooterProps) {
           <p className="text-sm leading-6 text-gray-400">
             &copy; {currentYear} {siteConfig.siteName}. Built by{' '}
             <a
-              href="https://www.yuurrific.com?ref=rgbtocmyk"
+              href="https://www.yuurrific.com?ref=colormapper"
               className={cn(footerLinkClass, 'text-sm')}
               target="_blank"
               rel="noopener noreferrer">

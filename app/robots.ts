@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+import { absoluteUrl, SITE_DOMAIN } from '@/lib/utils';
+
 const NEXT_SSG_FILES = ['/*_buildManifest.js$', '/*_middlewareManifest.js$', '/*_ssgManifest.js$'];
 
 export default function robots(): MetadataRoute.Robots {
@@ -8,6 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       disallow: NEXT_SSG_FILES,
     },
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/sitemap.xml`,
+    host: SITE_DOMAIN,
+    sitemap: absoluteUrl('/sitemap.xml'),
   };
 }

@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'RGB to CMYK Converter',
-    short_name: 'RGB to CMYK',
+    name: 'Color Mapper',
+    short_name: 'Color Mapper',
     description:
-      'Convert RGB to CMYK instantly with accurate values for print and digital workflows.',
+      'Convert between RGB, CMYK, HEX, HSL, and HSV with accurate values for print and digital workflows.',
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',

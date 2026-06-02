@@ -1,9 +1,11 @@
+import { siteConfig } from '@/config/site';
+
 import JsonLd from '@/components/structured-data/json-ld';
 
 export default function WebPageJsonLd({
   id,
   description,
-  reviewedBy = 'RGB to CMYK',
+  reviewedBy = siteConfig.siteName,
 }: {
   id: string;
   description: string;

@@ -5,7 +5,7 @@ import { ImageKit } from '@/components/image-kit';
 export default function BannerRandomnumber() {
   return (
     <a
-      href="https://www.randomnumberapp.com/?ref=rgbtocmyk"
+      href="https://www.randomnumberapp.com/?ref=colormapper"
       target="_blank"
       className="relative flex items-center px-6 py-4 text-left transition-all duration-150 ease-in-out md:flex-row"
       rel="noreferrer">

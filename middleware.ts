@@ -8,7 +8,19 @@ const GONE_PREFIXES = [
 ];
 const GONE_EXACT = new Set(['/pantone-color-match/daily']);
 
+const LEGACY_HOSTS = new Set(['rgbtocmyk.com', 'www.rgbtocmyk.com']);
+
 export function middleware(request: NextRequest) {
+  const host = request.headers.get('host')?.split(':')[0] ?? '';
+
+  if (LEGACY_HOSTS.has(host)) {
+    const url = request.nextUrl.clone();
+    url.hostname = 'colormapper.xyz';
+    url.port = '';
+    url.protocol = 'https';
+    return NextResponse.redirect(url, 308);
+  }
+
   const { pathname } = request.nextUrl;
 
   if (GONE_EXACT.has(pathname) || GONE_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {

@@ -5,7 +5,7 @@ Disallow: /*_middlewareManifest.js$
 Disallow: /*_ssgManifest.js$
 
 # Host
-Host: localhost:3000
+Host: colormapper.xyz
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://colormapper.xyz/sitemap.xml

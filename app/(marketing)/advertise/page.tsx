@@ -92,7 +92,7 @@ export default function AdvertisePage() {
 
           <p>
             Reach thousands of creative professionals with a highly visible sponsor slot featured on
-            every page of RGBtoCMYK.com.
+            every page of colormapper.xyz.
           </p>
           <p>
             With over 11,000 views each month from the US, Russia, and the UK, your sponsorship will
@@ -161,7 +161,7 @@ export default function AdvertisePage() {
           <ul>
             <li>Choose your slot and complete booking.</li>
             <li>Submit your sponsored message/banner.</li>
-            <li>Your brand goes live on RGBtoCMYK.com, visible on every page for 30 days.</li>
+            <li>Your brand goes live on colormapper.xyz, visible on every page for 30 days.</li>
           </ul>
 
           <h2>Audience Snapshot</h2>

@@ -5,14 +5,24 @@ const NEXT_SSG_FILES = [
   '/*_ssgManifest.js$',
 ];
 
-const exclude = ['/dashboard*', '/404', '/api*', '/login', '/server-sitemap.xml'];
+const SITE_DOMAIN = 'colormapper.xyz';
+
+const exclude = [
+  '/dashboard*',
+  '/404',
+  '/api*',
+  '/login',
+  '/server-sitemap.xml',
+  '/robots.txt',
+  '/manifest.webmanifest',
+];
 
 const siteUrl =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN}`
     : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_BASE_URL;
+      : process.env.NEXT_PUBLIC_BASE_URL ?? `https://${SITE_DOMAIN}`;
 
 const config = {
   siteUrl,
@@ -24,12 +34,11 @@ const config = {
     policies: [{ userAgent: '*', disallow: NEXT_SSG_FILES }],
     host:
       process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-        ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+        ? (process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN)
         : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
           ? process.env.NEXT_PUBLIC_VERCEL_URL
-          : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, ''),
+          : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, '') ?? SITE_DOMAIN,
   },
-  // Add explicit paths to ensure sitemap generation
   additionalPaths: async (config) => {
     return [
       await config.transform(config, '/'),
@@ -44,31 +53,11 @@ const config = {
       await config.transform(config, '/legal/terms-and-conditions'),
       await config.transform(config, '/advertise'),
       await config.transform(config, '/blog'),
+      await config.transform(config, '/blog/color-theory-101'),
+      await config.transform(config, '/blog/best-color-palettes-startup'),
     ];
   },
   transform: async (config, path) => {
-    // Fix robots.txt after generation
-    if (path === 'robots.txt') {
-      const fs = await import('fs');
-      const robotsPath = './public/robots.txt';
-
-      if (fs.existsSync(robotsPath)) {
-        let content = fs.readFileSync(robotsPath, 'utf8');
-
-        // Fix the comment syntax
-        content = content.replace('# *', '# All user agents');
-
-        // Fix the Host directive to only include hostname
-        const hostMatch = content.match(/Host: (https?:\/\/)?([^\/\s]+)/);
-        if (hostMatch) {
-          const hostname = hostMatch[2];
-          content = content.replace(/Host: https?:\/\/[^\/\s]+/, `Host: ${hostname}`);
-        }
-
-        fs.writeFileSync(robotsPath, content);
-      }
-    }
-
     return {
       loc: path,
       lastmod: new Date().toISOString(),

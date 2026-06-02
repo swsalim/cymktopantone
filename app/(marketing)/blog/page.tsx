@@ -13,11 +13,11 @@ import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 
 const seo = {
-  title: 'RGB to CMYK Blog: Color Conversion Guides and Tips',
+  title: 'Color Mapper Blog: Color Conversion Guides and Tips',
   description: 'Explore practical guides for RGB, CMYK, HEX, HSL, and HSV conversion workflows.',
   url: absoluteUrl('/blog'),
-  creator: '@rgbtocmyk',
-  company: 'RGB to CMYK',
+  creator: '@swsalim',
+  company: 'Color Mapper',
 };
 
 export const metadata = {

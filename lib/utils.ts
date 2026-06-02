@@ -1,13 +1,16 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+/** Canonical production hostname (no protocol). */
+export const SITE_DOMAIN = 'colormapper.xyz';
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function absoluteUrl(input = '') {
   return process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}${input}`
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN}${input}`
     : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${input}`
       : `${process.env.NEXT_PUBLIC_BASE_URL}${input}`;

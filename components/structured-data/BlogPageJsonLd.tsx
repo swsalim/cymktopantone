@@ -10,7 +10,7 @@ export default function BlogPageJsonLd({ posts }: { posts: Post[] }) {
       {{
         '@context': 'https://schema.org',
         '@type': 'BlogPage',
-        name: 'RGB to CMYK Blog',
+        name: 'Color Mapper Blog',
         url: absoluteUrl('/blog'),
         description:
           'Explore practical guides and tutorials for RGB, CMYK, HEX, HSL, and HSV color conversion.',
