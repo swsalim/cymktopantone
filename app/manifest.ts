@@ -2,10 +2,10 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'CMYK to Pantone Converter',
-    short_name: 'CMYK to Pantone',
+    name: 'RGB to CMYK Converter',
+    short_name: 'RGB to CMYK',
     description:
-      'Get instant, accurate Pantone matches for your CMYK colors. Perfect for designers, printers & creative professionals who need reliable color conversions.',
+      'Convert RGB to CMYK instantly with accurate values for print and digital workflows.',
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',

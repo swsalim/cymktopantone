@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 
 import { colorModels } from '@/config/colors';
 import { converters } from '@/config/converters';
-import { pantoneCategories } from '@/config/pantoneCategories';
 import { siteConfig } from '@/config/site';
 
 // import { tools } from '@/config/tools';
@@ -24,6 +23,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
 export const navItems: {
@@ -52,44 +52,14 @@ export const navItems: {
   },
   {
     name: 'Convert Color',
-    childItems: [
-      {
-        title: 'Brand palette to Pantone table',
-        href: '/brand-palette-to-pantone',
-        description:
-          'Paste several brand HEX colors and export closest Pantone matches as CSV or Markdown.',
-      },
-      ...converters
-        .filter((converter) => converter.sourceColor !== 'PANTONE')
-        .slice(0, 8)
-        .map((converter) => ({
-          title: converter.title,
-          href: converter.url,
-          description: converter.description,
-        })),
-    ],
+    childItems: converters.slice(0, 8).map((converter) => ({
+      title: converter.title,
+      href: converter.url,
+      description: converter.description,
+    })),
     viewMore: {
       name: 'View All',
       href: '/convert-color',
-    },
-  },
-  {
-    name: 'Pantone Colors',
-    childItems: [
-      {
-        title: 'Pantone color lookup',
-        href: '/pantone',
-        description: 'HEX, RGB, CMYK, HSL, and HSV for any PMS swatch—search by name.',
-      },
-      ...pantoneCategories.map((category) => ({
-        title: category.name,
-        href: `/pantone-colors/${category.slug}`,
-        description: category.description,
-      })),
-    ].slice(0, 11),
-    viewMore: {
-      name: 'View All',
-      href: '/pantone-colors',
     },
   },
   // {
@@ -119,7 +89,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-violet-50 hover:text-violet-900 focus:bg-violet-50 focus:text-violet-900',
+            'block cursor-pointer select-none space-y-1 rounded-md p-3 leading-none text-gray-900 no-underline outline-none transition-colors hover:bg-gray-100/90 hover:text-gray-900 focus-visible:bg-gray-100/90 focus-visible:text-gray-900 focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 dark:text-gray-100 dark:hover:bg-gray-800/90 dark:hover:text-gray-50 dark:focus-visible:bg-gray-800/90 dark:focus-visible:ring-violet-400 dark:focus-visible:ring-offset-gray-900',
             className,
           )}
           target={isExternal ? '_blank' : '_self'}
@@ -138,7 +108,9 @@ const ListItem = React.forwardRef<
               {title}
             </div>
           )}
-          <p className="line-clamp-2 text-sm leading-snug">{children}</p>
+          <p className="line-clamp-2 text-sm leading-snug text-gray-600 dark:text-gray-400">
+            {children}
+          </p>
         </a>
       </NavigationMenuLink>
     </li>
@@ -155,68 +127,65 @@ export default function Navbar() {
       <div
         className={`sticky top-[-1px] w-full ${
           scrolled
-            ? 'border-b border-gray-200 bg-white/50 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-900/50'
-            : 'bg-white/0'
+            ? 'border-b border-violet-200/70 bg-white/65 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-900/80'
+            : 'bg-transparent dark:text-gray-100'
         } z-30 transition-all`}>
         <Container className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-x-2 text-xl">
-            <Logo className="h-8 w-auto fill-violet-600" />
-            <span className="hidden text-base font-medium md:block">{siteConfig.siteName}</span>
+            <Logo className="h-8 w-auto fill-violet-600 dark:fill-violet-400" />
+            <span className="hidden font-heading text-base font-bold text-gray-900 md:block dark:text-gray-100">
+              {siteConfig.siteName}
+            </span>
           </Link>
-          <NavigationMenu className="hidden md:block">
+          <NavigationMenu className="hidden md:block" data-site-nav>
             <NavigationMenuList>
               {navItems.map(({ name, href, segments, childItems, viewMore }) => {
                 const isActive = segments?.some((segment) => pathname?.startsWith(segment));
+                const hasDropdown = childItems.length > 0;
 
                 return (
                   <NavigationMenuItem key={name}>
-                    <>
-                      {href && (
+                    {hasDropdown ? (
+                      <>
+                        <NavigationMenuTrigger data-active={isActive}>{name}</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[400px] gap-2 p-3 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                            {childItems.map((item) => (
+                              <ListItem
+                                key={item.title}
+                                title={item.title}
+                                href={item.href}
+                                logo={item.logo}
+                                isExternal={item.isExternal}
+                                data-active={pathname === item.href}
+                                className={cn(
+                                  pathname === item.href &&
+                                    'bg-gray-100/90 text-gray-900 dark:bg-gray-800/90 dark:text-gray-50',
+                                )}>
+                                {item.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                          {viewMore && (
+                            <Link
+                              href={viewMore.href}
+                              className="block border-t border-gray-200/80 bg-gray-50/90 py-3 text-center text-sm font-medium text-gray-700 no-underline transition-colors hover:bg-gray-100/90 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-50">
+                              {viewMore.name}
+                            </Link>
+                          )}
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      href && (
                         <Link href={href} legacyBehavior passHref>
                           <NavigationMenuLink
                             data-active={isActive}
-                            className={cn(
-                              'group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-700 focus:bg-violet-50 focus:text-violet-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-violet-50 data-[state=open]:bg-violet-50 data-[active=true]:text-violet-700 data-[state=open]:text-violet-700 data-[active=true]:hover:bg-violet-50 data-[state=open]:hover:bg-violet-50 data-[active=true]:focus:bg-violet-50 data-[state=open]:focus:bg-violet-50 dark:text-gray-300 cursor-pointer',
-                            )}>
+                            className={cn(navigationMenuTriggerStyle(), 'cursor-pointer')}>
                             {name}
                           </NavigationMenuLink>
                         </Link>
-                      )}
-                      {!href && (
-                        <>
-                          <NavigationMenuTrigger data-active={isActive}>
-                            {name}
-                          </NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                              {childItems.map((item) => {
-                                return (
-                                  <ListItem
-                                    key={item.title}
-                                    title={item.title}
-                                    href={item.href}
-                                    logo={item.logo}
-                                    isExternal={item.isExternal}
-                                    data-active={pathname === item.href}
-                                    className={cn(
-                                      pathname === item.href && 'bg-violet-50 text-violet-900',
-                                    )}>
-                                    {item.description}
-                                  </ListItem>
-                                );
-                              })}
-                            </ul>
-                            {viewMore && (
-                              <Link
-                                href={viewMore.href}
-                                className="block bg-violet-50 py-3 text-center text-sm font-medium text-violet-700">
-                                {viewMore.name}
-                              </Link>
-                            )}
-                          </NavigationMenuContent>
-                        </>
-                      )}
-                    </>
+                      )
+                    )}
                   </NavigationMenuItem>
                 );
               })}

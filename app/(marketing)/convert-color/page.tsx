@@ -31,9 +31,9 @@ function groupConvertersBySource() {
 }
 
 const config = {
-  title: 'Color Converter Hub — CMYK, RGB, HEX, HSL, HSV & Pantone',
+  title: 'Color Converter Hub — CMYK, RGB, HEX, HSL & HSV',
   description:
-    'Convert between CMYK, RGB, HEX, HSL, HSV, and Pantone (PMS) with free, fast tools for print production, web design, and brand color matching.',
+    'Convert between CMYK, RGB, HEX, HSL, and HSV with free, fast tools for print production, web design, and brand color work.',
   url: '/convert-color',
 };
 
@@ -87,24 +87,24 @@ const JSONLDbreadcrumbs = [
 
 const popularWorkflows = [
   {
-    href: '/convert-cmyk-to-pantone-pms',
-    label: 'CMYK to Pantone',
-    description: 'Best for print approvals and spot color matching.',
+    href: '/convert-rgb-to-cmyk',
+    label: 'RGB to CMYK',
+    description: 'Best for preparing digital colors for print.',
   },
   {
-    href: '/convert-hex-to-pantone-pms',
-    label: 'HEX to Pantone',
-    description: 'Bridge digital brand colors to Pantone guides.',
+    href: '/convert-cmyk-to-rgb',
+    label: 'CMYK to RGB',
+    description: 'Move print values into screen-ready RGB.',
   },
   {
-    href: '/pantone',
-    label: 'Pantone Lookup',
-    description: 'Find HEX, RGB, and CMYK from a PMS code.',
+    href: '/convert-hex-to-cmyk',
+    label: 'HEX to CMYK',
+    description: 'Turn web brand colors into print percentages.',
   },
   {
-    href: '/brand-palette-to-pantone',
-    label: 'Brand Palette Export',
-    description: 'Convert multiple brand colors in one pass.',
+    href: '/convert-rgb-to-hex',
+    label: 'RGB to HEX',
+    description: 'Convert channel values to copy-ready hex codes.',
   },
 ];
 
@@ -124,7 +124,7 @@ export default function ConvertColorsPage() {
       sectionBg: 'bg-yellow-50/60 dark:bg-yellow-500/10',
       headingText: 'text-yellow-800 dark:text-yellow-300',
       cardClass:
-        'border-yellow-300/70 bg-white hover:border-yellow-500 hover:bg-yellow-50/50 dark:border-yellow-800 dark:bg-yellow-500/10 dark:hover:bg-yellow-500/20',
+        'border-yellow-300/70 bg-white/80 hover:border-yellow-500 hover:bg-yellow-50/50 dark:border-yellow-800 dark:bg-yellow-500/10 dark:hover:bg-yellow-500/20',
       iconText: 'text-yellow-700 dark:text-yellow-300',
       badgeClass: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-200',
     },
@@ -132,7 +132,7 @@ export default function ConvertColorsPage() {
       sectionBg: 'bg-red-50/60 dark:bg-red-500/10',
       headingText: 'text-red-800 dark:text-red-300',
       cardClass:
-        'border-red-300/70 bg-white hover:border-red-500 hover:bg-red-50/50 dark:border-red-800 dark:bg-red-500/10 dark:hover:bg-red-500/20',
+        'border-red-300/70 bg-white/80 hover:border-red-500 hover:bg-red-50/50 dark:border-red-800 dark:bg-red-500/10 dark:hover:bg-red-500/20',
       iconText: 'text-red-700 dark:text-red-300',
       badgeClass: 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-200',
     },
@@ -140,7 +140,7 @@ export default function ConvertColorsPage() {
       sectionBg: 'bg-violet-50/60 dark:bg-violet-500/10',
       headingText: 'text-violet-800 dark:text-violet-300',
       cardClass:
-        'border-violet-300/70 bg-white hover:border-violet-500 hover:bg-violet-50/50 dark:border-violet-800 dark:bg-violet-500/10 dark:hover:bg-violet-500/20',
+        'border-violet-300/70 bg-white/80 hover:border-violet-500 hover:bg-violet-50/50 dark:border-violet-800 dark:bg-violet-500/10 dark:hover:bg-violet-500/20',
       iconText: 'text-violet-700 dark:text-violet-300',
       badgeClass: 'bg-violet-100 text-violet-800 dark:bg-violet-500/20 dark:text-violet-200',
     },
@@ -148,7 +148,7 @@ export default function ConvertColorsPage() {
       sectionBg: 'bg-blue-50/60 dark:bg-blue-500/10',
       headingText: 'text-blue-800 dark:text-blue-300',
       cardClass:
-        'border-blue-300/70 bg-white hover:border-blue-500 hover:bg-blue-50/50 dark:border-blue-800 dark:bg-blue-500/10 dark:hover:bg-blue-500/20',
+        'border-blue-300/70 bg-white/80 hover:border-blue-500 hover:bg-blue-50/50 dark:border-blue-800 dark:bg-blue-500/10 dark:hover:bg-blue-500/20',
       iconText: 'text-blue-700 dark:text-blue-300',
       badgeClass: 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-200',
     },
@@ -156,17 +156,9 @@ export default function ConvertColorsPage() {
       sectionBg: 'bg-green-50/60 dark:bg-green-500/10',
       headingText: 'text-green-800 dark:text-green-300',
       cardClass:
-        'border-green-300/70 bg-white hover:border-green-500 hover:bg-green-50/50 dark:border-green-800 dark:bg-green-500/10 dark:hover:bg-green-500/20',
+        'border-green-300/70 bg-white/80 hover:border-green-500 hover:bg-green-50/50 dark:border-green-800 dark:bg-green-500/10 dark:hover:bg-green-500/20',
       iconText: 'text-green-700 dark:text-green-300',
       badgeClass: 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-200',
-    },
-    pantone: {
-      sectionBg: 'bg-gray-50/80 dark:bg-gray-500/10',
-      headingText: 'text-gray-800 dark:text-gray-300',
-      cardClass:
-        'border-gray-300/70 bg-white hover:border-gray-500 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-500/10 dark:hover:bg-gray-500/20',
-      iconText: 'text-gray-700 dark:text-gray-300',
-      badgeClass: 'bg-gray-200 text-gray-800 dark:bg-gray-500/30 dark:text-gray-200',
     },
   };
 
@@ -177,7 +169,7 @@ export default function ConvertColorsPage() {
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper className="pb-8 md:pb-12">
         <Container as="section">
-          <div className="rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50 via-white to-blue-50 p-6 shadow-sm md:p-10 dark:border-violet-500/20 dark:from-violet-500/15 dark:via-gray-900 dark:to-blue-500/10">
+          <div className="rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50 via-white/90 to-blue-50 p-6 shadow-sm md:p-10 dark:border-violet-500/20 dark:from-violet-500/15 dark:via-gray-900 dark:to-blue-500/10">
             <p className="mb-4 inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-violet-700 dark:bg-violet-500/20 dark:text-violet-200">
               Free Color Conversion Toolkit
             </p>
@@ -185,9 +177,9 @@ export default function ConvertColorsPage() {
               Convert Colors Across Print and Digital, Fast
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg dark:text-gray-300">
-              Use accurate, no-login tools to convert CMYK, RGB, HEX, HSL, HSV, and Pantone (PMS).
-              Whether you are building a website, approving packaging proofs, or standardizing brand
-              palettes, start with the exact converter you need.
+              Use accurate, no-login tools to convert CMYK, RGB, HEX, HSL, and HSV. Whether you are
+              building a website, approving packaging proofs, or standardizing brand palettes, start
+              with the exact converter you need.
             </p>
             <p className="mt-3 max-w-3xl text-sm text-gray-600 md:text-base dark:text-gray-400">
               New to color systems? Read the <Link href="/color-models">color models guide</Link>,

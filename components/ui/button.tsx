@@ -6,16 +6,19 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-gray-50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-violet-600 text-violet-50 hover:bg-violet-600/90',
+        default:
+          'bg-violet-600 text-violet-50 shadow-sm hover:-translate-y-0.5 hover:bg-violet-600/90 hover:shadow-md',
         destructive: 'bg-red-600 text-red-50 hover:bg-red-600/90',
         outline:
-          'border border-gray-300 bg-gray-50 hover:bg-gray-100 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-900/80 dark:hover:bg-gray-800 dark:hover:text-gray-100',
-        secondary: 'bg-gray-200 text-gray-700 hover:bg-gray-300/80',
-        ghost: 'hover:bg-gray-100 hover:text-gray-900',
+          'border border-violet-200/80 bg-white/80 text-gray-700 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50/80 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100 dark:hover:border-violet-500/40 dark:hover:bg-violet-500/15 dark:hover:text-gray-100',
+        secondary:
+          'bg-violet-100/80 text-violet-900 hover:-translate-y-0.5 hover:bg-violet-200/85 dark:bg-violet-500/20 dark:text-violet-100 dark:hover:bg-violet-500/30',
+        ghost:
+          'hover:bg-violet-50 hover:text-violet-800 dark:hover:bg-violet-500/15 dark:hover:text-violet-200',
         link: 'text-violet-600 underline-offset-4 hover:underline',
       },
       size: {

@@ -1,5 +1,7 @@
 'use client';
 
+/* Hallmark · component: related-tools · genre: technical · theme: Violet Cyan Gradient */
+
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,47 +18,7 @@ type Tool = {
   targetFormat: string;
 };
 
-// External tools that are not part of our converter configuration
-const externalTools: Partial<ConverterConfig & { target: '_blank' | '_self' }>[] = [
-  {
-    url: '/brand-palette-to-pantone',
-    sourceColor: 'HEX',
-    title: 'Brand palette to Pantone',
-    target: '_self',
-  },
-  {
-    url: '/pantone',
-    sourceColor: 'PANTONE',
-    title: 'Pantone color lookup',
-    target: '_self',
-  },
-  {
-    url: '/pantone-colors',
-    sourceColor: 'PANTONE',
-    title: 'Pantone Colors Chart',
-    target: '_self',
-  },
-  {
-    url: 'https://www.rgbtopantone.com/',
-    sourceColor: 'RGB',
-    title: 'Convert RGB to Pantone',
-    target: '_blank',
-    isExternal: true,
-  },
-  {
-    url: 'https://www.rgbtopantone.com/convert-hsv-to-rgb',
-    sourceColor: 'HSV',
-    title: 'Convert HSV to RGB',
-    target: '_blank',
-    isExternal: true,
-  },
-  {
-    url: 'https://www.rgbtopantone.com/convert-hex-to-rgb',
-    sourceColor: 'HEX',
-    title: 'Convert HEX to RGB',
-    target: '_self',
-  },
-];
+const externalTools: Partial<ConverterConfig & { target: '_blank' | '_self' }>[] = [];
 
 function targetFormatFromConverter(converter: Partial<ConverterConfig>): string {
   if (converter.targetColor) return converter.targetColor;
@@ -72,7 +34,6 @@ function displayName(title: string): string {
   return title.replace(/\s+Color Converter$/i, '').replace(/\s+Converter$/i, '');
 }
 
-// Group converter tools by sourceColor
 const groupedConverterTools = [...converters, ...externalTools].reduce(
   (acc, converter) => {
     const sourceColor = converter.sourceColor;
@@ -95,47 +56,43 @@ const groupedConverterTools = [...converters, ...externalTools].reduce(
   {} as Record<string, Tool[]>,
 );
 
-/** Visual accent per source model — short gradient bars, not full-bleed rainbow. */
 const SOURCE_VISUAL: Record<
   ColorType,
-  { bar: string; ring: string; mono: string }
+  { bar: string; badge: string; ring: string; mono: string }
 > = {
   CMYK: {
     bar: 'linear-gradient(90deg, #0891b2 0%, #db2777 38%, #ca8a04 72%, #0c0a09 100%)',
-    ring: 'ring-cyan-600/25 dark:ring-cyan-400/20',
-    mono: 'text-cyan-800 dark:text-cyan-300',
+    badge: 'bg-yellow-100 text-yellow-900 dark:bg-yellow-500/20 dark:text-yellow-200',
+    ring: 'ring-yellow-600/30 dark:ring-yellow-400/25',
+    mono: 'text-yellow-800 dark:text-yellow-300',
   },
   RGB: {
     bar: 'linear-gradient(90deg, #dc2626 0%, #16a34a 50%, #2563eb 100%)',
-    ring: 'ring-red-600/20 dark:ring-red-400/15',
+    badge: 'bg-red-100 text-red-900 dark:bg-red-500/20 dark:text-red-200',
+    ring: 'ring-red-600/30 dark:ring-red-400/25',
     mono: 'text-red-800 dark:text-red-300',
   },
   HEX: {
     bar: 'linear-gradient(90deg, #5b21b6 0%, #7c3aed 55%, #c4b5fd 100%)',
-    ring: 'ring-violet-600/25 dark:ring-violet-400/20',
+    badge: 'bg-violet-100 text-violet-900 dark:bg-violet-500/20 dark:text-violet-200',
+    ring: 'ring-violet-600/30 dark:ring-violet-400/25',
     mono: 'text-violet-800 dark:text-violet-300',
   },
   HSL: {
     bar: 'linear-gradient(90deg, #ec4899 0%, #a855f7 35%, #0ea5e9 70%, #f59e0b 100%)',
-    ring: 'ring-fuchsia-600/20 dark:ring-fuchsia-400/15',
-    mono: 'text-fuchsia-800 dark:text-fuchsia-300',
+    badge: 'bg-green-100 text-green-900 dark:bg-green-500/20 dark:text-green-200',
+    ring: 'ring-green-600/30 dark:ring-green-400/25',
+    mono: 'text-green-800 dark:text-green-300',
   },
   HSV: {
     bar: 'linear-gradient(90deg, #1d4ed8 0%, #6366f1 50%, #8b5cf6 100%)',
-    ring: 'ring-blue-600/25 dark:ring-blue-400/20',
+    badge: 'bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-200',
+    ring: 'ring-blue-600/30 dark:ring-blue-400/25',
     mono: 'text-blue-800 dark:text-blue-300',
-  },
-  PANTONE: {
-    bar: 'linear-gradient(90deg, #ca8a04 0%, #1c1917 42%, #ca8a04 100%)',
-    ring: 'ring-amber-600/30 dark:ring-amber-400/25',
-    mono: 'text-amber-900 dark:text-amber-200',
   },
 };
 
-const SOURCE_ORDER: ColorType[] = ['HEX', 'RGB', 'CMYK', 'HSL', 'HSV', 'PANTONE'];
-
-/** Flip this to compare: `'editorial'` (gradient cards) · `'minimal'` (type + quiet list) */
-const RELATED_TOOLS_LAYOUT: 'editorial' | 'minimal' = 'minimal';
+const SOURCE_ORDER: ColorType[] = ['HEX', 'RGB', 'CMYK', 'HSL', 'HSV'];
 
 export default function RelatedTools() {
   const pathname = usePathname();
@@ -145,139 +102,99 @@ export default function RelatedTools() {
     return { source, tools };
   }).filter((s) => s.tools.length > 0);
 
-  if (RELATED_TOOLS_LAYOUT === 'minimal') {
-    return (
-      <div className="-mx-6 mt-12 border-t border-stone-200/90 px-6 pt-10 dark:border-stone-800 md:-mx-12 md:px-12 md:pt-12">
-        <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
-          More color converters
-        </h2>
-        <p className="mt-1 max-w-md text-base text-gray-500 dark:text-gray-400">
-          Grouped by the format you start from.
-        </p>
-
-        <div className="mt-8 space-y-9">
-          {sections.map(({ source, tools }) => (
-            <section key={source} aria-labelledby={`related-tools-${source}`}>
-              <h3
-                id={`related-tools-${source}`}
-                className="mb-3 text-lg font-semibold tracking-tight text-gray-700 dark:text-gray-300">
-                {source}
-              </h3>
-              <ul className="grid list-none gap-x-10 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
-                {tools.map((tool, index) => (
-                  <li key={`${tool.url}-${index}`}>
-                    <Link
-                      href={tool.url}
-                      target={tool.target}
-                      rel={tool.target === '_blank' ? 'noopener noreferrer' : undefined}
-                      className="group flex items-center justify-between gap-3 py-2.5 text-base text-gray-700 transition sm:-mx-2 sm:rounded-md sm:px-2 sm:py-1.5 sm:hover:bg-stone-50 dark:text-gray-300 dark:sm:hover:bg-stone-900/50 dark:sm:hover:text-gray-100">
-                      <span className="min-w-0 leading-snug">{tool.name}</span>
-                      <span className="flex shrink-0 items-center gap-1.5">
-                        {tool.targetFormat ? (
-                          <span className="font-sans text-sm tabular-nums text-gray-500 dark:text-gray-400">
-                            {tool.targetFormat}
-                          </span>
-                        ) : null}
-                        {tool.isExternal ? (
-                          <ArrowUpRight
-                            className="size-3.5 text-gray-300 transition group-hover:text-gray-500 dark:text-gray-600 dark:group-hover:text-gray-400"
-                            aria-hidden
-                          />
-                        ) : null}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-      </div>
-    );
+  if (sections.length === 0) {
+    return null;
   }
 
   return (
-    <div
+    <section
+      aria-labelledby="related-tools-heading"
       className={cn(
-        '-mx-6 mt-12 overflow-hidden rounded-none border-y border-stone-200/90 bg-gradient-to-b from-stone-50 via-white to-stone-50 px-6 py-10 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.8)] md:-mx-12 md:rounded-2xl md:border md:border-stone-200/80 md:py-12 md:shadow-sm',
-        'dark:border-stone-800 dark:from-stone-950 dark:via-stone-950 dark:to-zinc-950 dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]',
+        '-mx-6 mt-14 overflow-hidden rounded-none border-y border-violet-200/80 bg-gradient-to-br from-violet-100/90 via-white/95 to-cyan-100/80 px-6 py-10 shadow-lg md:-mx-12 md:rounded-3xl md:border md:py-12',
+        'dark:border-violet-500/25 dark:from-violet-500/20 dark:via-gray-900/95 dark:to-cyan-500/15 dark:shadow-[0_20px_50px_-24px_rgba(124,58,237,0.55)]',
       )}>
-      <header className="mb-10 max-w-2xl">
-        <p className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
-          Toolkit
+      <header className="mb-10 max-w-3xl border-b border-violet-200/60 pb-8 dark:border-gray-700">
+        <p className="inline-flex rounded-full bg-violet-600 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white dark:bg-violet-500 dark:text-violet-50">
+          Explore more tools
         </p>
-        <h2 className="mt-2 font-heading text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-50 md:text-4xl">
+        <h2
+          id="related-tools-heading"
+          className="mt-4 font-heading text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 md:text-4xl">
           More color converters
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          Jump between formats in one click—organized by what you&apos;re converting{' '}
-          <span className="whitespace-nowrap">from</span>.
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 dark:text-gray-300">
+          Jump between formats in one click — grouped by the color model you start from.
         </p>
       </header>
 
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-10 md:gap-12">
         {sections.map(({ source, tools }) => {
           const visual = SOURCE_VISUAL[source];
           return (
-            <section key={source} aria-labelledby={`related-tools-${source}`}>
-              <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-                <div className="flex min-w-0 flex-1 items-center gap-4">
+            <div key={source} aria-labelledby={`related-tools-${source}`}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 flex-1 items-center gap-3">
                   <div
-                    className="h-10 w-1.5 shrink-0 rounded-full shadow-sm"
+                    className="h-11 w-1.5 shrink-0 rounded-full shadow-sm"
                     style={{ background: visual.bar }}
                     aria-hidden
                   />
                   <div className="min-w-0">
                     <h3
                       id={`related-tools-${source}`}
-                      className="font-heading text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 md:text-2xl">
-                      <span className={cn('font-sans text-base font-bold', visual.mono)}>
+                      className="flex flex-wrap items-center gap-2 font-heading text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 md:text-2xl">
+                      <span className={cn('rounded-md px-2 py-0.5 text-sm font-bold', visual.badge)}>
                         {source}
                       </span>
-                      <span className="text-gray-400 dark:text-gray-500"> · </span>
-                      <span className="font-normal text-gray-600 dark:text-gray-400">converters</span>
+                      <span className="text-gray-600 dark:text-gray-400">converters</span>
                     </h3>
                   </div>
                 </div>
-                <span className="font-sans text-xs tabular-nums text-gray-400 dark:text-gray-500">
-                  {tools.length} link{tools.length === 1 ? '' : 's'}
+                <span
+                  className={cn(
+                    'rounded-full px-3 py-1 text-xs font-semibold tabular-nums',
+                    visual.badge,
+                  )}>
+                  {tools.length} tool{tools.length === 1 ? '' : 's'}
                 </span>
               </div>
 
               <ul className="grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {tools.map((tool, index) => (
-                  <li key={`${tool.url}-${index}`}>
+                  <li key={`${tool.url}-${index}`} className="min-w-0">
                     <Link
                       href={tool.url}
                       target={tool.target}
                       rel={tool.target === '_blank' ? 'noopener noreferrer' : undefined}
                       className={cn(
-                        'group flex h-full flex-col justify-between rounded-xl border border-stone-200/90 bg-white/80 p-4 shadow-sm transition duration-200',
-                        'hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md',
-                        'dark:border-stone-800 dark:bg-stone-900/40 dark:hover:border-stone-600',
+                        'group flex h-full min-w-0 flex-col justify-between rounded-xl border border-violet-200/70 bg-white/90 p-4 shadow-sm transition duration-200',
+                        'hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2',
+                        'dark:border-gray-700 dark:bg-gray-900/70 dark:hover:border-violet-500/40',
+                        'dark:focus-visible:ring-offset-gray-900',
                         visual.ring,
                         'hover:ring-2',
                       )}>
                       <div className="flex items-start justify-between gap-2">
-                        <span className="line-clamp-2 text-sm font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                        <span className="line-clamp-2 text-sm font-semibold leading-snug text-gray-900 no-underline dark:text-gray-100">
                           {tool.name}
                         </span>
                         {tool.isExternal ? (
                           <ArrowUpRight
-                            className="size-4 shrink-0 text-gray-400 transition group-hover:text-gray-600 dark:text-gray-500 dark:group-hover:text-gray-300"
+                            className="size-4 shrink-0 text-gray-400 transition group-hover:text-gray-700 dark:text-gray-500 dark:group-hover:text-gray-200"
                             aria-hidden
                           />
                         ) : null}
                       </div>
-                      <div className="mt-3 flex items-center justify-between gap-2 border-t border-stone-100 pt-3 dark:border-stone-800">
+                      <div className="mt-3 flex items-center justify-between gap-2 border-t border-gray-200/80 pt-3 dark:border-gray-700">
                         <span
                           className={cn(
-                            'font-sans text-[10px] font-semibold uppercase tracking-wider',
+                            'text-[10px] font-bold uppercase tracking-wider no-underline',
                             visual.mono,
                           )}>
                           → {tool.targetFormat || '…'}
                         </span>
-                        <span className="text-xs font-medium text-gray-400 opacity-0 transition group-hover:opacity-100 dark:text-gray-500">
+                        <span className="text-xs font-semibold text-violet-600 opacity-0 transition group-hover:opacity-100 dark:text-violet-300">
                           Open
                         </span>
                       </div>
@@ -285,10 +202,10 @@ export default function RelatedTools() {
                   </li>
                 ))}
               </ul>
-            </section>
+            </div>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

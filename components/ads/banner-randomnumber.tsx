@@ -5,7 +5,7 @@ import { ImageKit } from '@/components/image-kit';
 export default function BannerRandomnumber() {
   return (
     <a
-      href="https://www.randomnumberapp.com/?ref=cmyktopantone"
+      href="https://www.randomnumberapp.com/?ref=rgbtocmyk"
       target="_blank"
       className="relative flex items-center px-6 py-4 text-left transition-all duration-150 ease-in-out md:flex-row"
       rel="noreferrer">
@@ -14,7 +14,7 @@ export default function BannerRandomnumber() {
           <div className="mb-3 hidden w-12 sm:block md:mb-0 md:py-3">
             <div className="h-18 w-18 relative">
               <ImageKit
-                directory="cymktopantone/logos"
+                directory="rgbtocmyk/logos"
                 src="randomnumberapp.png"
                 width={150}
                 height={150}

@@ -3,7 +3,6 @@ import { Figtree, Fraunces } from 'next/font/google';
 
 import { siteConfig } from '@/config/site';
 
-import { isMaintenanceMode } from '@/lib/maintenance';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import Footer from '@/components/footer';
@@ -27,17 +26,6 @@ const fraunces = Fraunces({
   display: 'swap',
   preload: true,
 });
-
-const maintenanceMetadata: Metadata = {
-  title: 'Temporarily unavailable',
-  description: 'This site is temporarily unavailable. Please check back later.',
-  robots: { index: false, follow: false },
-  icons: {
-    icon: '/icons/favicon-32x32.png',
-    shortcut: '/icons/apple-touch-icon.png',
-    apple: '/icons/apple-touch-icon.png',
-  },
-};
 
 const fullMetadata: Metadata = {
   title: {
@@ -87,43 +75,25 @@ const fullMetadata: Metadata = {
   },
 };
 
-export const metadata: Metadata = isMaintenanceMode() ? maintenanceMetadata : fullMetadata;
+export const metadata: Metadata = fullMetadata;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const maintenance = isMaintenanceMode();
-
-  if (maintenance) {
-    return (
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            'flex min-h-screen flex-col font-sans antialiased dark:bg-gray-900 dark:text-gray-100',
-            figtree.variable,
-            fraunces.variable,
-          )}
-          suppressHydrationWarning>
-          <main className="flex grow flex-col justify-center">{children}</main>
-        </body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="//ik.imagekit.io" />
         <link rel="preconnect" href="//analytics.ahrefs.com" />
-        <link rel="preconnect" href="//stats.cmyktopantone.com" />
+        <link rel="preconnect" href="//stats.rgbtocmyk.com" />
         <link rel="preconnect" href="//pagead2.googlesyndication.com" />
         <link rel="preconnect" href="//cdn.apitiny.net" />
         <link rel="preconnect" href="//app.tinyadz.com" />
         <link rel="dns-prefetch" href="//analytics.ahrefs.com" />
         <link rel="dns-prefetch" href="//ik.imagekit.io" />
-        <link rel="dns-prefetch" href="//stats.cmyktopantone.com" />
+        <link rel="dns-prefetch" href="//stats.rgbtocmyk.com" />
         <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="//cdn.apitiny.net" />
         <link rel="dns-prefetch" href="//app.tinyadz.com" />
@@ -133,8 +103,8 @@ export default function RootLayout({
           data-key="A4fGgmSmJA2sliYbhrITCA"
           defer></script>
         <script
-          src="https://stats.cmyktopantone.com/ennui.js"
-          data-api-host="https://stats.cmyktopantone.com"
+          src="https://stats.rgbtocmyk.com/ennui.js"
+          data-api-host="https://stats.rgbtocmyk.com"
           data-token="a9e4cfbdd5cd10a"
           defer></script>
       </head>

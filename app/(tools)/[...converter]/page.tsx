@@ -116,13 +116,11 @@ export default async function ConverterPage({ params }: ConverterPageProps) {
         description={converterConfig.description}
       />
       <DynamicConverter componentName={converterConfig.component} />
-      {converterConfig.sourceColor !== 'PANTONE' && (
-        <Wrapper className="mx-auto text-center">
-          <div className="mx-auto">
-            <LazyAdsLeaderboard />
-          </div>
-        </Wrapper>
-      )}
+      <Wrapper className="mx-auto text-center">
+        <div className="mx-auto">
+          <LazyAdsLeaderboard />
+        </div>
+      </Wrapper>
       {ContentComponent && <ContentComponent />}
     </>
   );

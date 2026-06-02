@@ -1,10 +1,62 @@
+/* Hallmark · macrostructure: Technical Knowledge Hub · tone: technical · anchor hue: violet-cyan */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-base: #f3f4ff;
+    --bg-overlay:
+      radial-gradient(circle at 12% 8%, rgb(167 139 250 / 22%), transparent 42%),
+      radial-gradient(circle at 86% 12%, rgb(56 189 248 / 18%), transparent 38%),
+      radial-gradient(circle at 70% 88%, rgb(244 114 182 / 14%), transparent 42%);
+    --text-base: #1f2937;
+    --surface-soft: #ffffffcc;
+    --surface-soft-border: #c4b5fd;
+    --link-accent: #6d28d9;
+  }
+
+  .dark {
+    --bg-base: #0b1020;
+    --bg-overlay:
+      radial-gradient(circle at 14% 10%, rgb(124 58 237 / 26%), transparent 44%),
+      radial-gradient(circle at 84% 14%, rgb(14 165 233 / 20%), transparent 40%),
+      radial-gradient(circle at 70% 86%, rgb(236 72 153 / 15%), transparent 44%);
+    --text-base: #e5e7eb;
+    --surface-soft: #111827bf;
+    --surface-soft-border: #334155;
+    --link-accent: #c4b5fd;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-base: #0b1020;
+      --bg-overlay:
+        radial-gradient(circle at 14% 10%, rgb(124 58 237 / 26%), transparent 44%),
+        radial-gradient(circle at 84% 14%, rgb(14 165 233 / 20%), transparent 40%),
+        radial-gradient(circle at 70% 86%, rgb(236 72 153 / 15%), transparent 44%);
+      --text-base: #e5e7eb;
+      --surface-soft: #111827bf;
+      --surface-soft-border: #334155;
+      --link-accent: #c4b5fd;
+    }
+  }
+}
+
+@layer base {
   html {
     @apply font-medium antialiased;
+    background-color: var(--bg-base);
+    background-image: var(--bg-overlay);
+    background-attachment: fixed;
+    color: var(--text-base);
+    overflow-x: clip;
+  }
+
+  body {
+    color: var(--text-base);
+    background: transparent;
+    overflow-x: clip;
   }
 
   h1,
@@ -15,9 +67,36 @@
   h6 {
     @apply font-heading;
   }
+
+  a {
+    color: var(--link-accent);
+  }
+
+  a:hover {
+    filter: brightness(1.05);
+  }
+
+  a:focus-visible {
+    outline: 2px solid #7c3aed;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  [data-site-nav] a {
+    color: inherit;
+  }
+
+  [data-site-nav] a:hover {
+    filter: none;
+  }
 }
 
 @layer utilities {
+  .surface-soft {
+    background-color: var(--surface-soft);
+    border-color: var(--surface-soft-border);
+  }
+
   .perspective-1000 {
     perspective: 1000px;
   }

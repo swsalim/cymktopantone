@@ -9,8 +9,6 @@ import { ColorHistoryState, useColorHistory } from '@/lib/hooks/use-color-histor
 import { Container } from '@/components/container';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import HexPantoneConverter from './color-converters/converters/hex/to-pantone';
-
 // Context to share color history between parent and dynamically loaded component
 interface ColorHistoryContextType {
   colorHistory: ColorHistoryState;
@@ -28,10 +26,9 @@ export function useColorHistoryContext() {
 
 interface DynamicConverterProps {
   componentName: string;
-  defaultValue?: string;
 }
 
-export function DynamicConverter({ componentName, defaultValue }: DynamicConverterProps) {
+export function DynamicConverter({ componentName }: DynamicConverterProps) {
   // Create a converter-specific color history
   const colorHistory = useColorHistory(componentName);
 
@@ -47,7 +44,7 @@ export function DynamicConverter({ componentName, defaultValue }: DynamicConvert
 
   return (
     <ColorHistoryContext.Provider value={{ colorHistory }}>
-      {defaultValue ? <HexPantoneConverter defaultValue={defaultValue} /> : <ConverterComponent />}
+      <ConverterComponent />
     </ColorHistoryContext.Provider>
   );
 }

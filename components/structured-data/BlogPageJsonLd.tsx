@@ -10,10 +10,10 @@ export default function BlogPageJsonLd({ posts }: { posts: Post[] }) {
       {{
         '@context': 'https://schema.org',
         '@type': 'BlogPage',
-        name: 'CMYK Pantone Blog',
+        name: 'RGB to CMYK Blog',
         url: absoluteUrl('/blog'),
         description:
-          'Explore the latest news, tips, and guides on color conversions, Pantone color of the year, and more.',
+          'Explore practical guides and tutorials for RGB, CMYK, HEX, HSL, and HSV color conversion.',
         blogPosts: posts.map((post) => ({
           '@type': 'BlogPosting',
           headline: post.title,

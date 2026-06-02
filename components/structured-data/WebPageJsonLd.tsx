@@ -3,7 +3,7 @@ import JsonLd from '@/components/structured-data/json-ld';
 export default function WebPageJsonLd({
   id,
   description,
-  reviewedBy = 'CMYK Pantone',
+  reviewedBy = 'RGB to CMYK',
 }: {
   id: string;
   description: string;

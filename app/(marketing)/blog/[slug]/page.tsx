@@ -155,12 +155,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         description={post.metaDescription || post.summary}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
-      <main className="container mx-auto max-w-7xl space-y-16 px-4 py-8 md:py-16">
+      <main className="container mx-auto max-w-7xl space-y-10 px-4 py-8 md:space-y-12 md:py-16">
         <Breadcrumb items={breadcrumbItems} />
-        <PageHeading title={post.title} publishedAt={post.publishedAt} author={post.author} />
+        <section className="to-cyan-50/80 dark:to-cyan-500/10 rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50/90 via-white/90 p-6 shadow-sm md:p-10 dark:border-violet-500/30 dark:from-violet-500/15 dark:via-gray-900/80">
+          <PageHeading title={post.title} publishedAt={post.publishedAt} author={post.author} />
+        </section>
 
         <div className="mt-6 sm:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-16 xl:gap-x-24">
-          <article className="mt-12 lg:col-span-8 lg:mt-0">
+          <article className="mt-12 rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm lg:col-span-8 lg:mt-0 lg:p-8 dark:border-gray-700 dark:bg-gray-900/75">
             {post.coverImage && (
               <ImageKit
                 src={post.coverImage}

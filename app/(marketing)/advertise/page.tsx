@@ -85,12 +85,14 @@ export default function AdvertisePage() {
       <WebsiteJsonLd company={siteConfig.siteName} />
       <WebPageJsonLd id={absoluteUrl('/advertise')} description={config.description} />
       <Wrapper>
-        <Container as="section" className="prose pb-12 dark:prose-invert md:pb-24">
+        <Container
+          as="section"
+          className="prose rounded-3xl border border-violet-200/70 bg-white/80 p-6 pb-12 shadow-sm dark:prose-invert md:p-10 md:pb-24 dark:border-gray-700 dark:bg-gray-900/75">
           <h1>Promote Your Brand to Designers Worldwide</h1>
 
           <p>
             Reach thousands of creative professionals with a highly visible sponsor slot featured on
-            every page of CMYKtoPantone.com.
+            every page of RGBtoCMYK.com.
           </p>
           <p>
             With over 11,000 views each month from the US, Russia, and the UK, your sponsorship will
@@ -100,7 +102,7 @@ export default function AdvertisePage() {
 
           <p>
             Visit our{' '}
-            <a href="https://dub.sh/sln/cmykpantone" target="_blank" rel="noopener noreferrer">
+            <a href="https://dub.sh/sln/rgbtocmyk" target="_blank" rel="noopener noreferrer">
               analytics dashboard
             </a>{' '}
             powered by{' '}
@@ -159,7 +161,7 @@ export default function AdvertisePage() {
           <ul>
             <li>Choose your slot and complete booking.</li>
             <li>Submit your sponsored message/banner.</li>
-            <li>Your brand goes live on CMYKtoPantone.com, visible on every page for 30 days.</li>
+            <li>Your brand goes live on RGBtoCMYK.com, visible on every page for 30 days.</li>
           </ul>
 
           <h2>Audience Snapshot</h2>

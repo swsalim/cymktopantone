@@ -1,34 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { isMaintenanceMode, maintenanceHeaders } from '@/lib/maintenance';
-
-function withMaintenanceHeaders(response: NextResponse): NextResponse {
-  Object.entries(maintenanceHeaders).forEach(([key, value]) => {
-    response.headers.set(key, value);
-  });
-  return response;
-}
+const GONE_PREFIXES = [
+  '/pantone-color-match/challenge/',
+  '/pantone-color-match/classic/',
+  '/pantone-colors/',
+  '/pantone/',
+];
+const GONE_EXACT = new Set(['/pantone-color-match/daily']);
 
 export function middleware(request: NextRequest) {
-  if (!isMaintenanceMode()) {
-    return NextResponse.next();
-  }
-
   const { pathname } = request.nextUrl;
 
-  if (pathname === '/maintenance' || pathname === '/gone') {
-    return withMaintenanceHeaders(NextResponse.next());
+  if (GONE_EXACT.has(pathname) || GONE_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
+    return new NextResponse('Gone', {
+      status: 410,
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow',
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
+    });
   }
 
-  if (pathname === '/') {
-    const url = request.nextUrl.clone();
-    url.pathname = '/maintenance';
-    return withMaintenanceHeaders(NextResponse.rewrite(url));
-  }
-
-  const url = request.nextUrl.clone();
-  url.pathname = '/gone';
-  return withMaintenanceHeaders(NextResponse.rewrite(url, { status: 410 }));
+  return NextResponse.next();
 }
 
 export const config = {

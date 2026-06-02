@@ -19,9 +19,10 @@ interface BreadcrumbProps {
 
 const styles = {
   light: {
-    link: 'text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300',
-    text: 'text-gray-700 dark:text-gray-300',
-    icon: 'text-brand-500 dark:text-brand-300',
+    link:
+      'rounded-sm text-gray-600 dark:text-gray-300 hover:text-violet-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 dark:hover:text-violet-300',
+    text: 'text-gray-800 dark:text-gray-200',
+    icon: 'text-violet-500 dark:text-violet-300',
   },
   dark: {
     link: 'text-brand hover:text-brand/80',

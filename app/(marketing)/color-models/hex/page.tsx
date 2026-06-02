@@ -75,7 +75,9 @@ export default function ColorModelHex() {
       <WebPageJsonLd id={absoluteUrl('/color-models/hex')} description={config.description} />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
-        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
+        <Container
+          as="section"
+          className="prose max-w-4xl rounded-3xl border border-violet-200/70 bg-white/80 p-6 pb-12 shadow-sm dark:prose-invert md:p-10 md:pb-24 dark:border-gray-700 dark:bg-gray-900/75">
           <h1>HEX Color Codes: The Essential Guide for Web Designers and Developers</h1>
 
           <p className="lead">
@@ -86,9 +88,9 @@ export default function ColorModelHex() {
 
           <p>
             HEX codes are the most widely used format for defining colors in web development and
-            digital design. But how do HEX colors work? How do they compare to RGB and CMYK? And
-            how can you convert HEX to other color formats? This comprehensive guide covers
-            everything you need to know about HEX color codes.
+            digital design. But how do HEX colors work? How do they compare to RGB and CMYK? And how
+            can you convert HEX to other color formats? This comprehensive guide covers everything
+            you need to know about HEX color codes.
           </p>
 
           <h2>What is a HEX Color Code?</h2>
@@ -124,10 +126,11 @@ export default function ColorModelHex() {
           </ul>
 
           <p>
-            This HEX system provides access to <strong>16.7 million possible color combinations</strong>{' '}
-            (256 × 256 × 256), matching RGB's full color range while offering a more compact,
-            web-friendly format. The hexadecimal system's efficiency makes HEX codes ideal for CSS
-            and HTML, where brevity and universal browser support are essential.
+            This HEX system provides access to{' '}
+            <strong>16.7 million possible color combinations</strong> (256 × 256 × 256), matching
+            RGB's full color range while offering a more compact, web-friendly format. The
+            hexadecimal system's efficiency makes HEX codes ideal for CSS and HTML, where brevity
+            and universal browser support are essential.
           </p>
 
           <h2>How HEX Colors Work: Understanding Hexadecimal</h2>
@@ -141,9 +144,9 @@ export default function ColorModelHex() {
           </p>
 
           <p>
-            The hexadecimal system works like this: after 9 comes A (10), B (11), C (12), D (13),
-            E (14), and F (15). So FF represents 15×16 + 15 = 255 in decimal. This compact
-            notation makes HEX codes much shorter than decimal RGB values while maintaining the same
+            The hexadecimal system works like this: after 9 comes A (10), B (11), C (12), D (13), E
+            (14), and F (15). So FF represents 15×16 + 15 = 255 in decimal. This compact notation
+            makes HEX codes much shorter than decimal RGB values while maintaining the same
             precision.
           </p>
 
@@ -179,8 +182,8 @@ export default function ColorModelHex() {
 
           <p>
             HEX colors are widely used in web development because they are compact, easy to read,
-            universally supported across all browsers, and directly compatible with CSS. They
-            also work seamlessly with modern design tools and design systems.
+            universally supported across all browsers, and directly compatible with CSS. They also
+            work seamlessly with modern design tools and design systems.
           </p>
 
           <h2>HEX vs. RGB: What’s the Difference?</h2>
@@ -300,9 +303,9 @@ export default function ColorModelHex() {
               Always convert before printing to avoid color shifts.
             </li>
             <li>
-              <Link href="/convert-hex-to-pantone-pms">Convert HEX to Pantone</Link> – Essential
-              for professional branding and print production where precise color matching is
-              required across different materials and vendors.
+              <Link href="/convert-hex-to-pantone-pms">Convert HEX to Pantone</Link> – Essential for
+              professional branding and print production where precise color matching is required
+              across different materials and vendors.
             </li>
             <li>
               <Link href="/convert-hex-to-hsl">Convert HEX to HSL</Link> – Useful for design
@@ -328,9 +331,9 @@ export default function ColorModelHex() {
 
           <p>
             <strong>Solution:</strong> Three-digit HEX codes (e.g., #F00 for red) are valid CSS
-            shorthand for six-digit codes (#FF0000), where each digit is duplicated. However,
-            always use six-digit codes for consistency and clarity. Never forget the hash symbol (#)
-            at the beginning—it's required for CSS to recognize HEX values.
+            shorthand for six-digit codes (#FF0000), where each digit is duplicated. However, always
+            use six-digit codes for consistency and clarity. Never forget the hash symbol (#) at the
+            beginning—it's required for CSS to recognize HEX values.
           </p>
 
           <h3>2. Color Inconsistency Across Devices</h3>
@@ -350,16 +353,15 @@ export default function ColorModelHex() {
           <h3>3. Forgetting to Convert HEX to CMYK for Print</h3>
 
           <p>
-            <strong>Problem:</strong> HEX colors print differently than they appear on screen,
-            often appearing muted, shifted, or completely different from expectations.
+            <strong>Problem:</strong> HEX colors print differently than they appear on screen, often
+            appearing muted, shifted, or completely different from expectations.
           </p>
 
           <p>
             <strong>Solution:</strong> Always convert HEX colors to CMYK before printing using
-            professional{' '}
-            <Link href="/convert-hex-to-cmyk">HEX to CMYK conversion tools</Link> that account for
-            color gamut differences. Preview CMYK colors in design software before finalizing print
-            files to avoid costly reprints.
+            professional <Link href="/convert-hex-to-cmyk">HEX to CMYK conversion tools</Link> that
+            account for color gamut differences. Preview CMYK colors in design software before
+            finalizing print files to avoid costly reprints.
           </p>
 
           <h3>4. Case Sensitivity Confusion</h3>
@@ -414,7 +416,7 @@ export default function ColorModelHex() {
         </Container>
       </Wrapper>
 
-      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+      <Wrapper className="rounded-3xl bg-violet-50/70 pb-20 md:pb-24 dark:bg-gray-800/70">
         <Container>
           <Faqs
             tagline="A list of questions we get asked often"

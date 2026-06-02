@@ -233,7 +233,7 @@ export async function GET(req: NextRequest) {
                   {title}
                 </h1>
                 <p tw="text-violet-700 font-semibold capitalize mt-4 text-2xl text-center">
-                  cmyktopantone.com
+                  rgbtocmyk.com
                 </p>
               </div>
             </div>

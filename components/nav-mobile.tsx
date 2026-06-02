@@ -27,7 +27,7 @@ export function NavMobile() {
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          'fixed right-3 top-3 z-40 rounded-full p-2 transition-colors duration-200 hover:bg-gray-50 focus:outline-none active:bg-gray-100 md:hidden dark:hover:bg-white/20 dark:active:bg-white/30',
+          'fixed right-3 top-3 z-40 rounded-full border border-violet-200/70 bg-white/80 p-2 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-violet-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 active:bg-violet-100 md:hidden dark:border-gray-700 dark:bg-gray-900/80 dark:hover:bg-gray-800 dark:active:bg-gray-700 dark:focus-visible:ring-offset-gray-900',
         )}>
         {open ? (
           <X className="text-neutral-600 h-5 w-5 dark:text-white/70" />
@@ -36,8 +36,9 @@ export function NavMobile() {
         )}
       </button>
       <nav
+        data-site-nav
         className={cn(
-          'fixed inset-0 z-20 hidden max-h-screen w-full overflow-y-auto bg-white px-5 py-16 lg:hidden dark:bg-black dark:text-white/70',
+          'fixed inset-0 z-20 hidden max-h-screen w-full overflow-y-auto bg-white/95 px-5 py-16 backdrop-blur-md lg:hidden dark:bg-gray-950/95 dark:text-gray-100',
           open && 'block',
         )}>
         <ul className="grid divide-y divide-gray-100 dark:divide-white/[0.15]">
@@ -111,17 +112,17 @@ const MobileNavItem = ({
                   key={href}
                   href={href}
                   onClick={handleLinkClick}
-                  className="flex w-full gap-3">
+                  className="flex w-full gap-3 rounded-md p-2 transition-colors hover:bg-gray-100/90 dark:hover:bg-gray-800/90">
                   {Icon && (
-                    <div className="border-neutral-200 from-neutral-100 flex size-10 items-center justify-center rounded-lg border bg-gradient-to-t">
-                      <Icon className="text-neutral-700 size-5" />
+                    <div className="flex size-10 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
+                      <Icon className="size-5 text-gray-700 dark:text-gray-300" />
                     </div>
                   )}
                   <div>
                     <div className="flex items-center gap-2">
-                      <h2 className="text-neutral-900 text-sm font-medium">{title}</h2>
+                      <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">{title}</h2>
                     </div>
-                    <p className="text-neutral-500 text-sm">{description}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
                   </div>
                 </Link>
               ))}
@@ -129,7 +130,7 @@ const MobileNavItem = ({
                 <Link
                   href={viewMore.href}
                   onClick={handleLinkClick}
-                  className="block bg-violet-50 py-3 text-center text-sm font-medium text-violet-700">
+                  className="block rounded-md bg-gray-100/90 py-3 text-center text-sm font-medium text-gray-700 no-underline dark:bg-gray-800/90 dark:text-gray-200">
                   {viewMore.name}
                 </Link>
               )}
@@ -146,7 +147,10 @@ const MobileNavItem = ({
 
   return (
     <li className="py-3">
-      <Link href={href} onClick={handleLinkClick} className="flex w-full font-semibold capitalize">
+      <Link
+        href={href}
+        onClick={handleLinkClick}
+        className="flex w-full font-semibold capitalize text-gray-900 no-underline dark:text-gray-100">
         {name}
       </Link>
     </li>

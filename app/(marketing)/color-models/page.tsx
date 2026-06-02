@@ -79,7 +79,9 @@ export default function ColorModelsPage() {
       <WebPageJsonLd id={absoluteUrl('/color-models')} description={config.description} />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
-        <Container as="section" className="prose dark:prose-invert">
+        <Container
+          as="section"
+          className="prose rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm dark:prose-invert md:p-10 dark:border-gray-700 dark:bg-gray-900/75">
           <h1 className="mb-6">Color Models: CMYK, RGB, HEX, HSL, and HSV Explained</h1>
           <p className="mb-4 text-lg">
             Color models are the foundation of how we represent and work with colors in digital and
@@ -89,16 +91,18 @@ export default function ColorModelsPage() {
           </p>
           <p className="mb-8">
             Each color model—CMYK, RGB, HEX, HSL, and HSV—serves specific purposes and excels in
-            different contexts. From the subtractive CMYK system that powers professional printing to
-            the additive RGB model that creates vibrant screen displays, and from HEX codes in CSS to
-            hue-based models in pickers, each approach offers unique advantages. This guide helps you
-            understand when and how to use each model effectively.
+            different contexts. From the subtractive CMYK system that powers professional printing
+            to the additive RGB model that creates vibrant screen displays, and from HEX codes in
+            CSS to hue-based models in pickers, each approach offers unique advantages. This guide
+            helps you understand when and how to use each model effectively.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {colorModels.map((model) => (
               <Card
                 key={model.title}
-                className={cn('not-prose relative h-auto transition-colors hover:bg-gray-100/80')}>
+                className={cn(
+                  'not-prose relative h-auto border-violet-200/70 bg-white/85 transition-all hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50/60 dark:border-gray-700 dark:bg-gray-900/70 dark:hover:bg-violet-500/15',
+                )}>
                 <CardContent className={cn('group relative text-base font-medium')}>
                   <Link
                     href={model.href}

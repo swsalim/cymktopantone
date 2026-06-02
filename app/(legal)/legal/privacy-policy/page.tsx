@@ -13,7 +13,7 @@ import { Wrapper } from '@/components/wrapper';
 const config = {
   title: 'Privacy Policy',
   description:
-    'This Privacy Policy explains how we use the personal information that CMYK Pantone collects or generates on the website.',
+    'This Privacy Policy explains how we use the personal information that RGB to CMYK collects or generates on the website.',
   url: '/legal/privacy-policy',
 };
 
@@ -61,10 +61,10 @@ export default function Page() {
       <WebPageJsonLd id={absoluteUrl('/legal/privacy-policy')} description={config.description} />
       <Wrapper className="my-12 md:my-20">
         <Container>
-          <Prose>
+          <Prose className="rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm md:p-10 dark:border-gray-700 dark:bg-gray-900/75">
             <h1>Privacy Policy</h1>
             <p>
-              At cmyktopantone.com, we are committed to protecting your privacy. This Privacy Policy
+              At rgbtocmyk.com, we are committed to protecting your privacy. This Privacy Policy
               outlines how we collect, use, and disclose information when you use our website.
             </p>
             <h2>Information We Collect</h2>
@@ -112,15 +112,15 @@ export default function Page() {
             <p>
               If you have any questions or concerns about this Privacy Policy, please contact us at{' '}
               <a
-                href="mailto:support@cmyktopantone.com"
+                href="mailto:support@rgbtocmyk.com"
                 target="_blank"
                 className="text-violet-600 hover:text-violet-600 dark:text-violet-400 dark:hover:text-violet-500">
-                support@cmyktopantone.com
+                support@rgbtocmyk.com
               </a>
               .
             </p>
 
-            <p>Thank you for using cmyktopantone.com!</p>
+            <p>Thank you for using rgbtocmyk.com!</p>
 
             <p>All uploaded data is deleted instantly. We save no images</p>
           </Prose>

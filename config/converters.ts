@@ -10,7 +10,7 @@ export interface ConverterConfig {
   isExternal?: boolean;
 }
 
-export type ColorType = 'CMYK' | 'RGB' | 'HEX' | 'HSL' | 'HSV' | 'PANTONE';
+export type ColorType = 'CMYK' | 'RGB' | 'HEX' | 'HSL' | 'HSV';
 
 /**
  * Complete configuration of all color converters.
@@ -51,18 +51,6 @@ export const converters: ConverterConfig[] = [
     component: 'cmyk/to-rgb',
     content: 'cmyk/to-rgb-content',
   },
-  {
-    id: 'cmyk-to-pantone-pms',
-    sourceColor: 'CMYK',
-    targetColor: 'PANTONE',
-    title: 'CMYK to Pantone Color Converter',
-    description:
-      'Find the closest Pantone PMS match from CMYK builds. Great for moving press proofs toward spot-color brand standards.',
-    url: '/convert-cmyk-to-pantone-pms',
-    component: 'cmyk/to-pantone',
-    content: 'cmyk/to-pantone-content',
-  },
-
   // HEX Converters
   {
     id: 'hex-to-cmyk',
@@ -108,18 +96,6 @@ export const converters: ConverterConfig[] = [
     component: 'hex/to-rgb',
     content: 'hex/to-rgb-content',
   },
-  {
-    id: 'hex-to-pantone-pms',
-    sourceColor: 'HEX',
-    targetColor: 'PANTONE',
-    title: 'HEX to Pantone Color Converter',
-    description:
-      'Match screen HEX swatches to nearest Pantone coated colors. Useful when dev handoff needs a print spot equivalent.',
-    url: '/convert-hex-to-pantone-pms',
-    component: 'hex/to-pantone',
-    content: 'hex/to-pantone-content',
-  },
-
   // HSL Converters
   {
     id: 'hsl-to-cmyk',
@@ -154,18 +130,6 @@ export const converters: ConverterConfig[] = [
     component: 'hsl/to-rgb',
     content: 'hsl/to-rgb-content',
   },
-  {
-    id: 'hsl-to-pantone-pms',
-    sourceColor: 'HSL',
-    targetColor: 'PANTONE',
-    title: 'HSL to Pantone Color Converter',
-    description:
-      'Approximate Pantone PMS from HSL picks. Helpful when a design system starts in HSL but production needs spot inks.',
-    url: '/convert-hsl-to-pantone-pms',
-    component: 'hsl/to-pantone',
-    content: 'hsl/to-pantone-content',
-  },
-
   // HSV Converters
   {
     id: 'hsv-to-cmyk',
@@ -211,18 +175,6 @@ export const converters: ConverterConfig[] = [
     component: 'hsv/to-rgb',
     content: 'hsv/to-rgb-content',
   },
-  {
-    id: 'hsv-to-pantone-pms',
-    sourceColor: 'HSV',
-    targetColor: 'PANTONE',
-    title: 'HSV to Pantone Color Converter',
-    description:
-      'Find Pantone neighbors from HSV selections. Use when video or 3D HSV picks must align with corporate spot libraries.',
-    url: '/convert-hsv-to-pantone-pms',
-    component: 'hsv/to-pantone',
-    content: 'hsv/to-pantone-content',
-  },
-
   // RGB Converters
   {
     id: 'rgb-to-cmyk',
@@ -268,70 +220,6 @@ export const converters: ConverterConfig[] = [
   //   component: 'rgb-hsv-converter',
   //   content: 'rgb-hsv-content',
   // },
-  {
-    id: 'rgb-to-pantone-pms',
-    sourceColor: 'RGB',
-    targetColor: 'PANTONE',
-    title: 'RGB to Pantone Color Converter',
-    description:
-      'Closest Pantone matches from RGB values—ideal when UI colors must translate to packaging or uniforms.',
-    url: 'https://www.rgbtopantone.com/',
-    component: 'rgb/to-pantone',
-    content: 'rgb/to-pantone-content',
-    isExternal: true,
-  },
-
-  // PANTONE Converters
-  {
-    id: 'pantone-pms-to-cmyk',
-    sourceColor: 'PANTONE',
-    targetColor: 'CMYK',
-    title: 'Pantone to CMYK Color Converter',
-    description:
-      'Derive CMYK percentages from Pantone swatches for estimating ink usage and press profiles. Click a chip, export process values.',
-    url: '/convert-pantone-pms-to-cmyk',
-    component: 'pantone/to-cmyk',
-  },
-  {
-    id: 'pantone-pms-to-hex',
-    sourceColor: 'PANTONE',
-    targetColor: 'HEX',
-    title: 'Pantone to HEX Color Converter',
-    description:
-      'Generate HEX approximations of Pantone solids for websites while noting print vs screen variance. Fast lookup grid.',
-    url: '/convert-pantone-pms-to-hex',
-    component: 'pantone/to-hex',
-  },
-  {
-    id: 'pantone-pms-to-hsl',
-    sourceColor: 'PANTONE',
-    targetColor: 'HSL',
-    title: 'Pantone to HSL Color Converter',
-    description:
-      'Express Pantone colors as HSL for CSS variables and animation-friendly palettes. Great for bridging brand books to code.',
-    url: '/convert-pantone-pms-to-hsl',
-    component: 'pantone/to-hsl',
-  },
-  {
-    id: 'pantone-pms-to-hsv',
-    sourceColor: 'PANTONE',
-    targetColor: 'HSV',
-    title: 'Pantone to HSV Color Converter',
-    description:
-      'Output HSV from Pantone picks for editors that prefer value-based sliders. Keeps hue consistent across pipelines.',
-    url: '/convert-pantone-pms-to-hsv',
-    component: 'pantone/to-hsv',
-  },
-  {
-    id: 'pantone-pms-to-rgb',
-    sourceColor: 'PANTONE',
-    targetColor: 'RGB',
-    title: 'Pantone to RGB Color Converter',
-    description:
-      'Get sRGB coordinates for Pantone colors to drop into Figma, Keynote, or AR filters. Includes live preview chips.',
-    url: '/convert-pantone-pms-to-rgb',
-    component: 'pantone/to-rgb',
-  },
 ];
 
 // Helper functions to work with converters

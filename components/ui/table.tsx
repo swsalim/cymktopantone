@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
-    <div className="w-full overflow-auto">
+    <div className="w-full overflow-auto rounded-xl border border-violet-200/70 bg-white/70 shadow-sm dark:border-gray-700 dark:bg-gray-900/60">
       <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
     </div>
   ),
@@ -19,7 +19,10 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn('bg-gray-50 dark:bg-gray-900 [&_tr]:border-b', className)}
+    className={cn(
+      'bg-violet-50/70 dark:bg-violet-500/10 [&_tr]:border-b [&_tr]:border-violet-200/70 dark:[&_tr]:border-gray-700',
+      className,
+    )}
     {...props}
   />
 ));
@@ -31,7 +34,10 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn('divide-y divide-gray-200 bg-white dark:bg-gray-900', className)}
+    className={cn(
+      'divide-y divide-violet-200/60 bg-white/70 dark:divide-gray-700 dark:bg-gray-900/40',
+      className,
+    )}
     {...props}
   />
 ));
@@ -50,7 +56,7 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
     <tr
       ref={ref}
       className={cn(
-        'hover:bg-gray-50 data-[state=selected]:bg-gray-100 dark:hover:bg-gray-800 dark:data-[state=selected]:bg-gray-700',
+        'transition-colors hover:bg-violet-50/70 data-[state=selected]:bg-violet-100/70 dark:hover:bg-violet-500/10 dark:data-[state=selected]:bg-violet-500/20',
         className,
       )}
       {...props}

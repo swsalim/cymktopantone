@@ -76,7 +76,9 @@ export default function ColorModelHsl() {
       <WebPageJsonLd id={absoluteUrl('/color-models/hsl')} description={config.description} />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
-        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
+        <Container
+          as="section"
+          className="prose max-w-4xl rounded-3xl border border-violet-200/70 bg-white/80 p-6 pb-12 shadow-sm dark:prose-invert md:p-10 md:pb-24 dark:border-gray-700 dark:bg-gray-900/75">
           <h1>HSL Color Model: The Designer's Guide to Intuitive Color Control</h1>
 
           <p className="lead">
@@ -289,7 +291,7 @@ export default function ColorModelHsl() {
         </Container>
       </Wrapper>
 
-      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+      <Wrapper className="rounded-3xl bg-violet-50/70 pb-20 md:pb-24 dark:bg-gray-800/70">
         <Container>
           <Faqs
             tagline="A list of questions we get asked often"

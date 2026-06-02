@@ -2,8 +2,6 @@ import type { NextConfig } from 'next';
 
 import { withContentCollections } from '@content-collections/next';
 
-const isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true';
-
 const nextConfig: NextConfig = {
   images: {
     deviceSizes: [200, 350, 600, 900, 1200, 1800],
@@ -18,18 +16,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
-  ...(isMaintenanceMode
-    ? {
-        async headers() {
-          return [
-            {
-              source: '/:path*',
-              headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
-            },
-          ];
-        },
-      }
-    : {}),
   async redirects() {
     return [
       {
@@ -44,12 +30,67 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/convert-pantone-to-cmyk',
-        destination: '/convert-pantone-pms-to-cmyk',
+        destination: '/convert-rgb-to-cmyk',
         permanent: true,
       },
       {
-        source: '/convert-rgb-to-pantone-pms',
-        destination: 'https://www.rgbtopantone.com/',
+        source: '/convert-cmyk-to-pantone-pms',
+        destination: '/convert-rgb-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-hex-to-pantone-pms',
+        destination: '/convert-hex-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-hsl-to-pantone-pms',
+        destination: '/convert-hsl-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-hsv-to-pantone-pms',
+        destination: '/convert-hsv-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-pantone-pms-to-cmyk',
+        destination: '/convert-rgb-to-cmyk',
+        permanent: true,
+      },
+      {
+        source: '/convert-pantone-pms-to-hex',
+        destination: '/convert-rgb-to-hex',
+        permanent: true,
+      },
+      {
+        source: '/convert-pantone-pms-to-hsl',
+        destination: '/convert-rgb-to-hsl',
+        permanent: true,
+      },
+      {
+        source: '/convert-pantone-pms-to-hsv',
+        destination: '/convert-hsv-to-hsl',
+        permanent: true,
+      },
+      {
+        source: '/convert-pantone-pms-to-rgb',
+        destination: '/convert-cmyk-to-rgb',
+        permanent: true,
+      },
+      {
+        source: '/pantone-color-match',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/pantone-colors',
+        destination: '/convert-color',
+        permanent: true,
+      },
+      {
+        source: '/pantone',
+        destination: '/convert-color',
         permanent: true,
       },
       {

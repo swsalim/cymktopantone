@@ -76,7 +76,9 @@ export default function ColorModelHsv() {
       <WebPageJsonLd id={absoluteUrl('/color-models/hsv')} description={config.description} />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <Wrapper>
-        <Container as="section" className="prose max-w-4xl pb-12 dark:prose-invert md:pb-24">
+        <Container
+          as="section"
+          className="prose max-w-4xl rounded-3xl border border-violet-200/70 bg-white/80 p-6 pb-12 shadow-sm dark:prose-invert md:p-10 md:pb-24 dark:border-gray-700 dark:bg-gray-900/75">
           <h1>HSV Color Model: Hue, Saturation &amp; Value Explained</h1>
 
           <p className="lead">
@@ -100,17 +102,17 @@ export default function ColorModelHsv() {
             </p>
             <ul>
               <li>
-                <strong>Hue (H)</strong> — the &quot;which color&quot; angle on a 360° wheel (red near
-                0°, green near 120°, blue near 240°, and so on).
+                <strong>Hue (H)</strong> — the &quot;which color&quot; angle on a 360° wheel (red
+                near 0°, green near 120°, blue near 240°, and so on).
               </li>
               <li>
-                <strong>Saturation (S)</strong> — how intense the hue is, from a neutral gray axis at
-                0% to full chroma at 100%.
+                <strong>Saturation (S)</strong> — how intense the hue is, from a neutral gray axis
+                at 0% to full chroma at 100%.
               </li>
               <li>
-                <strong>Value (V)</strong> — brightness, often 0–100%. At 0% you get black; with full
-                saturation, 100% value is the brightest display of that hue. When saturation is 0%,
-                value alone sweeps from black to white.
+                <strong>Value (V)</strong> — brightness, often 0–100%. At 0% you get black; with
+                full saturation, 100% value is the brightest display of that hue. When saturation is
+                0%, value alone sweeps from black to white.
               </li>
             </ul>
 
@@ -127,8 +129,8 @@ export default function ColorModelHsv() {
             </figure>
 
             <p>
-              Many apps label the same space <strong>HSB</strong> (Hue, Saturation, Brightness).
-              HSV and HSB refer to the same family of models; only the naming differs.
+              Many apps label the same space <strong>HSB</strong> (Hue, Saturation, Brightness). HSV
+              and HSB refer to the same family of models; only the naming differs.
             </p>
           </section>
 
@@ -141,9 +143,9 @@ export default function ColorModelHsv() {
           <section>
             <h2>HSV vs HSL: same letters, different math</h2>
             <p>
-              <Link href="/color-models/hsl">HSL</Link> also uses hue and saturation, but it replaces
-              value with <strong>lightness</strong>. Lightness is defined as the midpoint between the
-              minimum and maximum of RGB channels, which feels natural in CSS{' '}
+              <Link href="/color-models/hsl">HSL</Link> also uses hue and saturation, but it
+              replaces value with <strong>lightness</strong>. Lightness is defined as the midpoint
+              between the minimum and maximum of RGB channels, which feels natural in CSS{' '}
               <code>hsl()</code> and many design-system palettes. Value in HSV behaves differently
               near white and black, so <code>hsv(200, 80%, 90%)</code> and{' '}
               <code>hsl(200, 80%, 90%)</code> are not the same color.
@@ -165,7 +167,8 @@ export default function ColorModelHsv() {
               </li>
               <li>
                 <strong>Prototyping UI states</strong> — you can nudge value for hover/disabled
-                states, then convert to <Link href="/color-models/hex">HEX</Link> for production CSS.
+                states, then convert to <Link href="/color-models/hex">HEX</Link> for production
+                CSS.
               </li>
               <li>
                 <strong>Handoff to print</strong> — screens stay in RGB; print uses{' '}
@@ -183,8 +186,8 @@ export default function ColorModelHsv() {
             </p>
             <ul>
               <li>
-                <Link href="/convert-hsv-to-rgb">HSV to RGB</Link> — for APIs, shaders, and apps that
-                expect 0–255 channels
+                <Link href="/convert-hsv-to-rgb">HSV to RGB</Link> — for APIs, shaders, and apps
+                that expect 0–255 channels
               </li>
               <li>
                 <Link href="/convert-hsv-to-hex">HSV to HEX</Link> — for stylesheets and design
@@ -218,7 +221,7 @@ export default function ColorModelHsv() {
         </Container>
       </Wrapper>
 
-      <Wrapper className="bg-gray-50 pb-20 md:pb-24 dark:bg-gray-800">
+      <Wrapper className="rounded-3xl bg-violet-50/70 pb-20 md:pb-24 dark:bg-gray-800/70">
         <Container>
           <Faqs
             tagline="A list of questions we get asked often"

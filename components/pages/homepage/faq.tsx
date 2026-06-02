@@ -6,14 +6,14 @@ const faqs = [
     category: 'General',
     question: 'What does this site do?',
     answer:
-      'CMYK Pantone offers free color converters between CMYK, RGB, HEX, HSL, HSV, and Pantone (PMS). The homepage focuses on CMYK to Pantone matching for print and brand work.',
+      'RGB to CMYK offers free color converters between CMYK, RGB, HEX, HSL, and HSV. The homepage focuses on RGB to CMYK conversion for print-ready output.',
   },
   {
     id: 2,
     category: 'General',
-    question: 'Is a Pantone match from CMYK or HEX exact?',
+    question: 'Is RGB to CMYK conversion always exact?',
     answer:
-      'We show the closest Pantone color numerically. Ink, paper, and lighting still change appearance—always confirm with a physical swatch or press proof for final production.',
+      'RGB and CMYK use different color gamuts, so some screen colors shift when printed. Always review a print proof for final production work.',
   },
   {
     id: 3,
@@ -31,9 +31,9 @@ const faqs = [
   {
     id: 5,
     category: 'General',
-    question: 'Can I convert Pantone to CMYK or HEX?',
+    question: 'Can I convert between multiple color formats?',
     answer:
-      'Yes. Use the Pantone picker tools to jump from a swatch to CMYK, HEX, RGB, HSL, or HSV values for handoff to developers or printers.',
+      'Yes. You can convert between RGB, CMYK, HEX, HSL, and HSV with the tools in the converter hub.',
   },
 ];
 
@@ -49,7 +49,7 @@ export default function GeneralFaqs() {
           Frequently asked questions
         </h2>
         <p className="mt-6 text-base/7 text-gray-500 dark:text-gray-300">
-          Common questions about Pantone matching and our free converters.
+          Common questions about RGB, CMYK, and our free converter tools.
         </p>
       </div>
       <div className="mt-20">
