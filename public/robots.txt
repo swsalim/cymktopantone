@@ -8,4 +8,4 @@ Disallow: /*_ssgManifest.js$
 Host: colormapper.xyz
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://colormapper.xyz/sitemap.xml
