@@ -18,7 +18,7 @@ export function ThirdPartyScripts() {
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
         crossOrigin="anonymous"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         src="https://cdn.apitiny.net/scripts/v2.0/main.js"
