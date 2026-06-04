@@ -15,6 +15,12 @@ export function ThirdPartyScripts() {
         strategy="afterInteractive"
       />
       <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3799479098488751"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
+      <Script
         src="https://cdn.apitiny.net/scripts/v2.0/main.js"
         data-site-id="6a1efc0c2429acc1401eef3e"
         data-test-mode="false"
