@@ -77,11 +77,11 @@ export const tools: Tool[] = [
       "Tomorrow's Weather Forecast, Today's Advantage - Plan Your Day Right, Come Rain or Shine",
     isExternal: true,
   },
+  // Internal color tools (also in config/tools-internal.ts)
   // {
   //   title: 'Color Palette Generator',
   //   href: '/palettes',
   //   description: 'Generate beautiful color palettes with a click.',
-  //   icon: undefined,
   // },
   {
     title: 'Aesthetic Clinics Malaysia 🇲🇾',

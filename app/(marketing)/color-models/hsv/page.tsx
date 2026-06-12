@@ -186,7 +186,7 @@ export default function ColorModelHsv() {
                 <Link href="/convert-hsv-to-cmyk">HSV to CMYK</Link> — for layout PDFs and press
               </li>
               <li>
-                <Link href="/convert-hsv-to-pantone-pms">HSV to Pantone</Link> — approximate matches
+                <Link href="/convert-hsv-to-hex">HSV to HEX</Link> — quick web handoff
                 for brand libraries
               </li>
             </ul>

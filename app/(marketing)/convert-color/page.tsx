@@ -168,8 +168,10 @@ export default function ConvertColorsPage() {
               with the exact converter you need.
             </p>
             <p className="mt-3 max-w-3xl text-sm text-gray-600 md:text-base dark:text-gray-400">
-              New to color systems? Read the <Link href="/color-models">color models guide</Link>,
-              then jump into <Link href="/color-models/cmyk">CMYK for print</Link> or{' '}
+              Need palettes, gradients, or accessibility checks? Browse{' '}
+              <Link href="/tools">free color tools</Link>, read the{' '}
+              <Link href="/color-models">color models guide</Link>, then jump into{' '}
+              <Link href="/color-models/cmyk">CMYK for print</Link> or{' '}
               <Link href="/color-models/hex">HEX for web design</Link>.
             </p>
           </div>

@@ -4,36 +4,37 @@ const faqs = [
   {
     id: 1,
     category: 'General',
-    question: 'What does this site do?',
+    question: 'What does Color Mapper do?',
     answer:
-      'Color Mapper offers free converters between CMYK, RGB, HEX, HSL, and HSV. The homepage highlights RGB to CMYK for print-ready output.',
+      'Color Mapper is a free color toolkit: a palette generator, interactive color wheel, gradient generator, WCAG contrast checker, print gamut checker, color comparator, tint and shade scale builder, image palette extractor, color blindness simulator, and 18 converters between RGB, CMYK, HEX, HSL, and HSV.',
   },
   {
     id: 2,
     category: 'General',
-    question: 'Is RGB to CMYK conversion always exact?',
+    question: 'Do I need an account?',
     answer:
-      'RGB and CMYK use different color gamuts, so some screen colors shift when printed. Always review a print proof for final production work.',
+      'No. Every tool runs in the browser and you can copy values or export code without signing up.',
   },
   {
     id: 3,
     category: 'General',
-    question: 'Do I need an account?',
-    answer: 'No. Tools run in the browser and you can copy values without signing up.',
+    question: 'How is this different from other palette generators?',
+    answer:
+      'Every swatch shows its CMYK values and warns you when a color sits outside the print gamut, so palettes survive the jump from screen to press. Exports come as CSS variables, Tailwind config, or JSON tokens.',
   },
   {
     id: 4,
     category: 'General',
-    question: 'Where can I learn about color models?',
+    question: 'Is RGB to CMYK conversion always exact?',
     answer:
-      'Read our guides to CMYK, RGB, HEX, HSL, and HSV under Color models in the navigation, or open the full converter index from the menu.',
+      'RGB and CMYK use different color gamuts, so some screen colors shift when printed. The converters flag out-of-gamut colors — but always review a print proof for final production work.',
   },
   {
     id: 5,
     category: 'General',
-    question: 'Can I convert between multiple color formats?',
+    question: 'Where can I learn about color models?',
     answer:
-      'Yes. You can convert between RGB, CMYK, HEX, HSL, and HSV with the tools in the converter hub.',
+      'Read our guides to CMYK, RGB, HEX, HSL, and HSV under Color models in the navigation, or start with the blog articles on contrast, print-safe palettes, and Tailwind scales.',
   },
 ];
 
@@ -43,13 +44,13 @@ export default function GeneralFaqs() {
       <FaqJsonLd questionListElement={faqs} />
       <div className="mx-auto max-w-2xl text-center">
         <p className="text-base/7 font-medium text-violet-600 dark:text-violet-400">
-          Color conversion, explained
+          Color tools, explained
         </p>
         <h2 className="font-heading mt-2 text-pretty text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
           Frequently asked questions
         </h2>
         <p className="mt-6 text-base/7 text-gray-500 dark:text-gray-300">
-          Common questions about RGB, CMYK, and our free converter tools.
+          Common questions about the palette, contrast, and conversion tools.
         </p>
       </div>
       <div className="mt-20">

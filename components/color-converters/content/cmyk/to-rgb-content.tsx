@@ -67,7 +67,7 @@ export default function CmykRgbContent() {
       </p>
       <p>
         Works on any device. Convert print colors for web projects, verify color accuracy, or{' '}
-        <Link href="/convert-hex-to-pantone-pms">match colors across formats</Link>. Whether you're
+        <Link href="/palettes">match colors across formats</Link>. Whether you're
         at your desk or showing a client options on your phone, this tool gets you the right RGB
         values.
       </p>

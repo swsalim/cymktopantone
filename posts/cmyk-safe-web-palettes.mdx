@@ -1,0 +1,95 @@
+---
+title: "Neon HEX colors lie on screen. They shift on press."
+metaTitle: "CMYK-Safe Web Palettes — Print-Ready Color Systems"
+metaDescription: "Build web palettes that survive CMYK print conversion. Gamut warnings, HEX to CMYK workflow, and tools for designers who ship both digital and print."
+summary: "RGB palettes look great in Figma and dull on a press proof. Learn why gamut mismatch happens, how to spot risky swatches early, and how to document CMYK alongside web tokens."
+publishedAt: '2026-06-02'
+author: 'Yuyu'
+status: 'published'
+---
+
+The website launched with a vivid cyan accent. The business cards came back gray-green. Reprint. Rush fee. Slack thread about "why doesn't print match the brand?"
+
+Screens emit light. Paper absorbs ink. No converter fixes that physics problem. You can still build palettes that survive the handoff if you check gamut before the PDF goes to the vendor.
+
+## What is print gamut (and why HEX lies to you)?
+
+**Gamut** is the range of colors a medium can reproduce. sRGB on a monitor covers bright cyans, electric greens, and deep saturated blues that four-color process (CMYK) cannot hit.
+
+When you convert `#00FF00` to CMYK, the engine finds the *closest printable mix* of cyan, magenta, yellow, and black. Closest is not identical. Sometimes it is not even close.
+
+That is not a bug in your converter. It is the gap between additive (RGB) and subtractive (CMYK) color.
+
+## Why web palette generators skip this problem
+
+Most [palette tools](/palettes) output HEX and RGB. Enough for CSS. Not enough for packaging, stationery, or event booths where the brand must match the site.
+
+If your workflow stops at HEX, print teams reverse-engineer CMYK in Illustrator at the last minute. That is where shifts show up.
+
+## How to spot CMYK-risky colors before production
+
+A practical signal: convert RGB → CMYK → RGB and measure the round-trip. If the color drifts noticeably, treat it as **print-risky**.
+
+On Color Mapper, palette swatches show a **CMYK gamut warning** when that drift crosses a threshold. It is a heads-up, not a ban. Use the accent on the website. Just do not promise the same pop on a matte brochure without a proof.
+
+Quick audit:
+
+1. Generate a palette from your brand seed in the [palette generator](/palettes).
+2. Read the CMYK column on each swatch.
+3. Paste the whole palette into the [print gamut checker](/print-gamut) for a side-by-side screen vs press preview of every color.
+4. Open the [HEX to CMYK converter](/convert-hex-to-cmyk) for vendor-ready percentages on critical colors.
+5. Soft-proof with your print shop's ICC profile when the job is high stakes (luxury packaging, large format, brand launches).
+
+## What to put in a brand sheet that both teams can use
+
+One document beats parallel "web" and "print" palettes that drift apart.
+
+Include:
+
+- **HEX and RGB** for Figma, CSS, and email
+- **CMYK percentages** for offset and digital print specs
+- **Contrast notes** from the [WCAG contrast checker](/contrast-checker) for text pairs
+- **Screen-only accents** flagged explicitly when gamut warnings fire
+
+Monochromatic and analogous harmonies from a mid-saturation seed tend to survive CMYK more predictably than neon triads built from pure RGB primaries. If print is core to the business (CPG, retail, events), bias the seed color slightly muted. You can still punch up on screen with gradients.
+
+## Harmony rules and print reality
+
+| Scheme | Print behavior | When to use |
+| --- | --- | --- |
+| Monochromatic | Most predictable | Packaging, corporate systems |
+| Analogous | Usually stable | Editorial, soft consumer brands |
+| Complementary | High contrast, one side often out of gamut | Digital-first campaigns |
+| Triadic | Three hues, multiple gamut risks | Web and social, verify before print |
+
+Complementary pairs often mean one swatch is screen-only. Document which one.
+
+## A workflow that connects photo, web, and print
+
+1. Extract dominant colors from reference photography with [palette from image](/palette-from-image) (runs in the browser, no upload to a server).
+2. Refine harmonies and lock brand anchors in the palette generator.
+3. Validate accessibility in the contrast checker.
+4. Export Tailwind or CSS variables for engineering.
+5. Attach CMYK columns for production.
+
+You are not maintaining a spreadsheet on the side. The same swatch carries web and print values.
+
+## FAQ
+
+**Should I design in CMYK or RGB?**
+
+Design for the primary medium first. Web-first brands work in RGB and verify CMYK before print. Print-first brands may start in CMYK and accept web compromises on neon accents.
+
+**Does "convert to CMYK" mean it will print exactly?**
+
+No. It means you have a printable build. Paper stock, coating, and press calibration still change the result. Always proof.
+
+**Can I use Pantone instead of CMYK?**
+
+Spot colors (Pantone) sit outside CMYK gamut for many brand hues. They cost more per run but match better for logos. Color Mapper focuses on process CMYK conversion, not spot color matching.
+
+**Why do my gradients look banded in print?**
+
+Gradients are continuous on screen and stepped on press. For print, simplify to flat fills or limit stops. See the [CSS gradients guide](/blog/css-gradients-guide) for screen vs print trade-offs.
+
+If your next project spans web and print, generate the palette once, read the gamut warnings, and send CMYK values with the creative brief. The reprint conversation is expensive. The five-minute check is not.

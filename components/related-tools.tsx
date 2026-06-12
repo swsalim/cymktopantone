@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { type ColorType, ConverterConfig, converters } from '@/config/converters';
+import { internalTools } from '@/config/tools-internal';
 
 import { cn } from '@/lib/utils';
 
@@ -97,12 +98,14 @@ const SOURCE_ORDER: ColorType[] = ['HEX', 'RGB', 'CMYK', 'HSL', 'HSV'];
 export default function RelatedTools() {
   const pathname = usePathname();
 
+  const colorTools = internalTools.filter((t) => t.href !== pathname);
+
   const sections = SOURCE_ORDER.map((source) => {
     const tools = (groupedConverterTools[source] ?? []).filter((t) => t.url !== pathname);
     return { source, tools };
   }).filter((s) => s.tools.length > 0);
 
-  if (sections.length === 0) {
+  if (sections.length === 0 && colorTools.length === 0) {
     return null;
   }
 
@@ -120,12 +123,36 @@ export default function RelatedTools() {
         <h2
           id="related-tools-heading"
           className="mt-4 font-heading text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 md:text-4xl">
-          More color converters
+          More color tools
         </h2>
         <p className="mt-3 max-w-2xl text-base leading-relaxed text-gray-700 dark:text-gray-300">
-          Jump between formats in one click — grouped by the color model you start from.
+          Palettes, gradients, accessibility checks, and format converters — all free.
         </p>
       </header>
+
+      {colorTools.length > 0 && (
+        <div className="mb-10">
+          <h3 className="mb-4 font-heading text-xl font-bold text-gray-900 dark:text-gray-100">
+            Generators & checkers
+          </h3>
+          <ul className="grid list-none gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {colorTools.slice(0, 6).map((tool) => (
+              <li key={tool.id}>
+                <Link
+                  href={tool.href}
+                  className="group flex h-full flex-col rounded-xl border border-violet-200/70 bg-white/90 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900/70">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {tool.title}
+                  </span>
+                  <span className="mt-2 line-clamp-2 text-xs text-gray-600 dark:text-gray-400">
+                    {tool.description}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="flex flex-col gap-10 md:gap-12">
         {sections.map(({ source, tools }) => {

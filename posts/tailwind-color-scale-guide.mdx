@@ -1,0 +1,110 @@
+---
+title: "One brand HEX is not a design system. You need a 50–950 ramp."
+metaTitle: "Tailwind Color Scale Generator — Brand HEX to 50–950"
+metaDescription: "Turn one brand color into a Tailwind 50–950 scale with WCAG contrast badges. Export theme.extend.colors and CSS variables for design systems."
+summary: "Tailwind expects numbered color steps, not a single primary. This guide explains how to build a 50–950 ramp, pick accessible steps, and export config you can paste into production."
+publishedAt: '2026-06-03'
+author: 'Yuyu'
+status: 'published'
+---
+
+Your `tailwind.config.js` has `brand: '#6D39AC'`. That works until you need a hover state, a disabled border, a subtle table stripe, and accessible link text. Now you are hand-picking five related purples in a spreadsheet, and they do not match each other.
+
+Tailwind's numbered scale (50 through 950) exists because UI needs more than one swatch. Here is how to generate that ramp from a single brand HEX without muddy tints or contrast surprises.
+
+## What is a Tailwind color scale?
+
+Tailwind maps semantic utility classes to numbered steps: `bg-brand-500`, `text-brand-700`, `border-brand-200`. The numbers are not arbitrary. They imply lightness progression.
+
+- **50–200**: backgrounds, subtle borders, table stripes
+- **300–400**: hover fills, secondary buttons
+- **500–600**: primary actions, default links
+- **700–950**: headings, emphasis, dark mode surfaces
+
+If your design system only documents `#6D39AC`, engineers guess. Designers pick one-off HEX values. The product slowly stops looking like one brand.
+
+## Why hand-mixing tints and shades goes wrong
+
+Lightening a color in HSL can shift hue (a blue tint turns cyan). Mixing in Photoshop without a system produces steps that look uneven on different monitors.
+
+Linear RGB mixing toward white and black is predictable: each step is mathematically consistent. That is what most scale generators use, including the [tint and shade tool](/color-scale) on Color Mapper.
+
+The trade-off: linear ramps are not always the most *beautiful* ramps. Some design teams tweak 400 and 600 by eye after generation. Starting from a generated base saves hours.
+
+## How to generate a 50–950 scale from one HEX
+
+1. Paste your brand color into the [color scale generator](/color-scale).
+2. Review the grid: 50, 100, 200 … 950 with live swatches.
+3. Check the **contrast on white** and **contrast on black** badge on each step.
+4. Copy the **Tailwind config** export or **CSS variables**.
+
+Example export shape:
+
+```js
+// tailwind.config.js (extend.colors)
+brand: {
+  50: '#F5F0FA',
+  100: '#EBE0F5',
+  // ...
+  500: '#6D39AC',
+  // ...
+  950: '#1A0F2E',
+},
+```
+
+Paste, run your build, use `bg-brand-500` and `text-brand-50` in components. No ad-hoc HEX in JSX.
+
+## Which steps to use for text vs fills
+
+Do not assume `500` works for both button background and body text on white.
+
+| Combination | Typical result | What to do |
+| --- | --- | --- |
+| `text-brand-500` on white | Often fails WCAG | Use `700` or `800` for text |
+| `bg-brand-500` with white text | Usually passes | Verify with contrast checker |
+| `text-brand-400` on `bg-brand-50` | Frequently fails | Matrix-check in [contrast checker](/contrast-checker) |
+
+Run non-standard pairs through the checker if your design system combines steps creatively (e.g. tinted cards with mid-tone labels).
+
+## CMYK columns for brand guidelines
+
+Each step in the scale generator includes CMYK values. Useful when the same brand ships web and print.
+
+Steps at 400–500 often trigger **gamut warnings** on neon seeds. Mark those as digital-first in your PDF brand guide. Use 700+ for print-adjacent dark text specs.
+
+## Connecting scales to palettes and gradients
+
+A common pipeline:
+
+1. Explore harmonies in the [palette generator](/palettes).
+2. Promote one swatch to the scale generator for the full ramp.
+3. Feed 200/500/800 into the [gradient generator](/gradients) for marketing heroes.
+4. Matrix-check text pairs in the contrast checker.
+
+One seed HEX becomes tokens for engineering, specs for print, and stops for CSS gradients. You are not rebuilding the ramp in three tools.
+
+## What this approach does not solve
+
+- **Perceptually uniform scales (OKLCH).** Tailwind 50–950 in linear RGB is good enough for most products. High-end brand systems may refine in OKLCH afterward.
+- **Dark mode as inverted light mode.** You may need a separate dark ramp, not a reuse of the same numbers.
+- **Automatic semantic naming.** The generator outputs numbered steps. Your team still maps `brand-600` → "primary button" in docs.
+
+## FAQ
+
+**Why 11 steps (50–950) and not 10?**
+
+Tailwind v3+ standardized on 50–950 including 950 for near-black shades. Matching that convention keeps copy-paste into `theme.extend` frictionless.
+
+**Can I rename `brand` to my product name?**
+
+Yes. Replace `brand` with `acme` in the export. Class names become `bg-acme-500`, etc.
+
+**Should 500 always be the input HEX?**
+
+The generator anchors 500 at your seed color. If your Figma "primary" is lighter than mid-tone, consider whether 400 or 600 should be the anchor instead.
+
+**Do I need both Tailwind export and CSS variables?**
+
+Use Tailwind export for Tailwind projects. CSS variables work for vanilla CSS, other frameworks, or design tokens pipelines.
+
+Open the [color scale generator](/color-scale), paste your production primary, and export the config. Your next PR can replace scattered HEX literals with `brand-*` utilities in one pass.

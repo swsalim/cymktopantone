@@ -1,0 +1,114 @@
+---
+title: "Stop hand-writing linear-gradient() at 11pm"
+metaTitle: "CSS Gradient Guide — Linear, Radial & Conic Generators"
+metaDescription: "Practical guide to CSS gradients with live generator, 3-color modes, presets, and import from palettes. Copy production-ready background code."
+summary: "CSS gradients are simple in theory and tedious in practice. Learn linear, radial, and conic types, when each fits, and how to go from palette to copy-paste code without banding surprises."
+publishedAt: '2026-06-04'
+author: 'Yuyu'
+status: 'published'
+---
+
+You need a hero background by tomorrow. You know the three brand HEX values. You still spend twenty minutes getting the angle, stop positions, and `-webkit-` prefix right, then notice banding on a coworker's MacBook.
+
+CSS gradients are not hard. Tweaking them blind is. A live preview plus copy-paste output beats guessing in DevTools.
+
+## What is a CSS gradient?
+
+A CSS gradient is a **smooth transition between two or more colors** defined as a paint server for `background` (or `border-image`, etc.). The browser interpolates between **color stops** at specified positions.
+
+Unlike image backgrounds, gradients scale cleanly and weigh almost nothing in the bundle. They also fail accessibility checks if you put text directly on them without checking contrast at every point.
+
+Three types cover most product and marketing UI:
+
+## Linear gradients: angles and stop positions
+
+`linear-gradient()` transitions colors along a line. The angle controls direction:
+
+- `0deg` → upward
+- `90deg` → toward the right
+- `135deg` → common diagonal for hero sections
+
+```css
+background: linear-gradient(135deg, #5B21B6 0%, #7C3AED 50%, #C4B5FD 100%);
+```
+
+Use linear gradients for page heroes, section dividers, and card overlays. If text sits on top, pick stops that leave a region dark or light enough for legible copy, or place text on a solid card.
+
+Try the [linear gradient generator](/gradients/linear) or switch types in the main [CSS gradient tool](/gradients).
+
+## Radial gradients: glows and spotlights
+
+`radial-gradient()` radiates from a center point. Good for circular badges, spotlight effects, and soft vignettes.
+
+```css
+background: radial-gradient(circle, #FFFFFF 0%, #7C3AED 100%);
+```
+
+Center position and ellipse vs circle matter for non-square containers. Preview beats memorizing syntax.
+
+## Conic gradients: sweeps and charts
+
+`conic-gradient()` rotates hues around a center. Pie charts, loading indicators, and angular brand motifs use this.
+
+```css
+background: conic-gradient(from 90deg, #FF512F, #F09819, #FF512F);
+```
+
+Less common in marketing pages, more common in dashboards and data UI.
+
+Dedicated pages: [radial](/gradients/radial) and [conic](/gradients/conic) generators.
+
+## Two-color vs three-color gradients
+
+Two stops are enough for minimal heroes. Three stops (popularized by tools like MyColor.space) add a mid-tone so the transition does not look muddy between distant hues.
+
+Color Mapper supports **2-color mode**, **3-color mode**, and up to **five stops** with position sliders when you need fine control.
+
+## From palette to gradient without retyping HEX
+
+Manual copy-paste between tools is where typos happen.
+
+1. Build colors in the [palette generator](/palettes).
+2. Click **Open in Gradient**, or append `?colors=5B21B6,7C3AED,C4B5FD` to the gradient URL.
+3. Adjust angle and stop positions with live preview.
+4. Copy the full CSS block including vendor prefixes for older WebKit.
+
+Starting from a photo? Extract dominant colors with [palette from image](/palette-from-image), then pass the same query string to the gradient tool.
+
+## Gradients, accessibility, and print
+
+**Accessibility:** WCAG contrast is measured between two solid colors. A gradient background means the ratio changes across the text box. Test the lightest and darkest areas your copy might sit on using the [contrast checker](/contrast-checker). If either fails, move text to a solid card or simplify the gradient behind it.
+
+**Print:** Gradients are a screen medium. Continuous blends posterize on press. For print deliverables, extract flat fills from key stops and verify in the [HEX to CMYK converter](/convert-hex-to-cmyk). Do not send a CSS gradient screenshot and expect it to match on coated stock.
+
+## Vendor prefixes and Tailwind arbitrary values
+
+Modern browsers handle standard syntax well. Older Safari sometimes needed `-webkit-linear-gradient`. The [gradient generator](/gradients) includes prefixes in the copy output when relevant.
+
+In Tailwind v3+, arbitrary values work for one-offs:
+
+```html
+<div class="bg-[linear-gradient(135deg,#5B21B6_0%,#C4B5FD_100%)]">...</div>
+```
+
+For repeated patterns, put the generated rule in `@layer utilities` or your global CSS instead of long arbitrary classes.
+
+## FAQ
+
+**Why does my gradient look banded?**
+
+Banding shows up when stops are too far apart in similar hues, or on 8-bit displays. Add a mid-stop or slightly adjust saturation between endpoints.
+
+**Can I animate a CSS gradient?**
+
+Yes, but animating `background-position` on a large gradient or cross-fading stops can be GPU-heavy. Test on low-end mobile.
+
+**Linear vs radial for hero sections?**
+
+Linear is the default choice for full-width heroes. Radial works when you want a focal glow behind a product shot.
+
+**Do gradients hurt performance?**
+
+Single CSS gradients are cheap compared to large PNG backgrounds. Multiple stacked gradients on scroll-heavy pages can add paint cost. Profile if you stack more than two.
+
+Open the [CSS gradient generator](/gradients), import your palette, tweak until the preview looks clean on your target devices, and paste the CSS. The hero section is the easy part again.

@@ -289,7 +289,7 @@ export default function ColorModelHex() {
               Always convert before printing to avoid color shifts.
             </li>
             <li>
-              <Link href="/convert-hex-to-pantone-pms">Convert HEX to Pantone</Link> – Essential for
+              <Link href="/convert-hex-to-cmyk">Convert HEX to CMYK</Link> – Essential for
               professional branding and print production where precise color matching is required
               across different materials and vendors.
             </li>
@@ -394,7 +394,7 @@ export default function ColorModelHex() {
               <Link href="/convert-hex-to-cmyk">Convert HEX to CMYK</Link>
             </li>
             <li>
-              <Link href="/convert-hex-to-pantone-pms">Convert HEX to Pantone</Link>
+              <Link href="/convert-hex-to-cmyk">Convert HEX to CMYK</Link>
             </li>
           </ul>
 

@@ -208,7 +208,7 @@ export default function ColorModelHsl() {
                 materials
               </li>
               <li>
-                <Link href="/convert-hsl-to-pantone-pms">HSL to Pantone conversion</Link> –
+                <Link href="/convert-hsl-to-hex">HSL to HEX conversion</Link> –
                 Important for professional branding where precise color matching across materials is
                 required
               </li>
@@ -240,7 +240,7 @@ export default function ColorModelHsl() {
               <strong>Pantone and HSL</strong> are possible. Imagine you’re working on a digital
               project where your brand’s Pantone colors need to be represented on a website.
               Understanding how to{' '}
-              <Link href="/convert-pantone-pms-to-hsl">convert Pantone to an HSL model</Link>{' '}
+              <Link href="/convert-hex-to-hsl">convert HEX to an HSL model</Link>{' '}
               ensures fidelity across both digital and print realms.
             </p>
           </section>

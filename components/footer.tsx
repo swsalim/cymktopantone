@@ -1,71 +1,55 @@
-/* Hallmark · component: footer · genre: modern-minimal · theme: Violet Cyan Gradient
- * states: default · hover · focus · active · disabled · loading · error · success
- * Ft4 link-band · curated internal IA
+/* Hallmark · component: footer · archetype: Ft5 Statement (sentence ~38ch · wordmark in meta row · hairline rule)
+ * genre: modern-minimal · theme: Violet Cyan Gradient (locked)
+ * states: default · hover · focus · active — links + CTA
  */
 import type { ComponentProps } from 'react';
 
 import Link from 'next/link';
 
-import { colorModels } from '@/config/colors';
+import {
+  footerColorTools,
+  footerLearnLinks,
+  footerSiteLinks,
+  POPULAR_CONVERTERS,
+} from '@/config/navigation';
 import { siteConfig } from '@/config/site';
 
 import { cn } from '@/lib/utils';
 
 import { Logo } from '@/components/icons';
 
-/** High-intent converters — short labels, no duplicate long SEO titles. */
-const POPULAR_CONVERTERS = [
-  { name: 'RGB to CMYK', href: '/convert-rgb-to-cmyk' },
-  { name: 'HEX to CMYK', href: '/convert-hex-to-cmyk' },
-  { name: 'CMYK to RGB', href: '/convert-cmyk-to-rgb' },
-  { name: 'HEX to RGB', href: '/convert-hex-to-rgb' },
-  { name: 'CMYK to HEX', href: '/convert-cmyk-to-hex' },
-  { name: 'RGB to HEX', href: '/convert-rgb-to-hex' },
-] as const;
-
-const LEARN_LINKS = [
-  { name: 'Color models overview', href: '/color-models' },
-  ...colorModels.map((model) => ({
-    name: `${model.title} explained`,
-    href: model.href,
-  })),
-  { name: 'Blog', href: '/blog' },
-  { name: 'Color theory basics', href: '/blog/color-theory-101' },
-  { name: 'Startup color palettes', href: '/blog/best-color-palettes-startup' },
-] as const;
-
-const SITE_LINKS = [
-  { name: 'All converters', href: '/convert-color' },
-  { name: 'Advertise', href: '/advertise' },
-  { name: 'Terms of service', href: '/legal/terms-and-conditions' },
-  { name: 'Privacy policy', href: '/legal/privacy-policy' },
-] as const;
-
 const footerLinkClass =
-  'inline-block rounded-md text-gray-300 no-underline transition-colors duration-150 hover:text-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-700 dark:text-gray-600 dark:hover:text-violet-500';
+  'inline-block whitespace-nowrap rounded-md text-sm text-gray-400 no-underline transition-colors duration-150 hover:text-violet-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-200';
 
 interface FooterProps extends ComponentProps<'footer'> {
   className?: string;
 }
 
-function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+function LinkRow({
+  label,
+  links,
+}: {
+  label: string;
+  links: ReadonlyArray<{ name: string; href: string }>;
+}) {
   return (
     <div className="min-w-0">
-      <h2 className="font-heading text-sm font-semibold tracking-tight text-white">{title}</h2>
-      <ul role="list" className="mt-4 space-y-3">
-        {children}
+      <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</h2>
+      <ul role="list" className="mt-2 flex flex-wrap gap-x-2 gap-y-2">
+        {links.map((link, i) => (
+          <li key={link.href} className="flex items-center gap-x-2">
+            {i > 0 && (
+              <span aria-hidden className="text-gray-700">
+                ·
+              </span>
+            )}
+            <Link href={link.href} className={footerLinkClass}>
+              {link.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
-  );
-}
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <li>
-      <Link href={href} className={footerLinkClass}>
-        {children}
-      </Link>
-    </li>
   );
 }
 
@@ -75,73 +59,73 @@ export default function Footer({ className, ...props }: FooterProps) {
   return (
     <footer
       data-site-nav
-      className={cn(
-        'border-t border-violet-500/20 bg-gray-950 text-gray-100',
-        'dark:border-violet-400/15 dark:bg-gray-950',
-        className,
-      )}
+      className={cn('bg-gray-950 text-gray-100', className)}
       {...props}>
-      <div className="mx-auto max-w-7xl px-6 pb-10 pt-14 sm:pt-16 lg:px-8 lg:pt-20">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] lg:gap-16">
-          {/* Brand + primary CTA */}
-          <div className="min-w-0 space-y-5">
+      {/* Theme signature: thin violet→cyan band instead of a border */}
+      <div
+        aria-hidden
+        className="h-1 w-full bg-gradient-to-r from-violet-700 via-violet-500 to-cyan-400"
+      />
+
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 lg:px-8 lg:pt-24">
+        {/* Statement */}
+        <p className="max-w-[16ch] font-heading text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+          One palette, from{' '}
+          <span className="bg-gradient-to-r from-violet-400 to-cyan-300 bg-clip-text text-transparent">
+            screen to press
+          </span>
+          .
+        </p>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link
+            href="/tools"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-violet-600 px-6 py-2.5 text-sm font-semibold text-white no-underline transition-colors duration-150 hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-300 active:bg-violet-700">
+            Start with a color
+          </Link>
+          <Link
+            href="/convert-color"
+            className="inline-flex items-center text-sm font-semibold text-gray-300 underline decoration-gray-600 underline-offset-4 transition-colors duration-150 hover:text-violet-300 hover:decoration-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-200">
+            or just convert one
+          </Link>
+        </div>
+
+        {/* Compact link band — rows, not columns */}
+        <div className="mt-16 space-y-7 lg:mt-20">
+          <LinkRow label="Tools" links={footerColorTools} />
+          <LinkRow label="Convert" links={POPULAR_CONVERTERS} />
+          <LinkRow label="Learn" links={footerLearnLinks} />
+        </div>
+
+        {/* Meta row */}
+        <div className="mt-14 flex flex-col gap-4 border-t border-gray-800 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
             <Link
               href="/"
               className="inline-flex rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400">
-              <Logo className="size-9 text-white" />
+              <Logo className="size-7 text-white" />
               <span className="sr-only">{siteConfig.siteName} home</span>
             </Link>
-            <p className="max-w-sm text-pretty text-base/7 text-gray-300">
-              Free color conversion between RGB, CMYK, HEX, HSL, and HSV — built for print handoffs
-              and digital workflows.
+            <p className="text-sm text-gray-400">
+              &copy; {currentYear} {siteConfig.siteName}. Built by{' '}
+              <a
+                href="https://www.yuurrific.com?ref=colormapper"
+                className={cn(footerLinkClass, 'whitespace-normal')}
+                target="_blank"
+                rel="noopener noreferrer">
+                Yuurrific
+              </a>
+              .
             </p>
-            <Link
-              href="/convert-color"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white no-underline transition-colors duration-150 hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-300 active:bg-violet-700">
-              Open converter hub
-            </Link>
           </div>
-
-          {/* Curated link bands */}
-          <div className="grid min-w-0 gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            <FooterColumn title="Popular converters">
-              {POPULAR_CONVERTERS.map((item) => (
-                <FooterLink key={item.href} href={item.href}>
-                  {item.name}
-                </FooterLink>
-              ))}
-            </FooterColumn>
-
-            <FooterColumn title="Learn">
-              {LEARN_LINKS.map((item) => (
-                <FooterLink key={item.href} href={item.href}>
-                  {item.name}
-                </FooterLink>
-              ))}
-            </FooterColumn>
-
-            <FooterColumn title="Site">
-              {SITE_LINKS.map((item) => (
-                <FooterLink key={item.href} href={item.href}>
-                  {item.name}
-                </FooterLink>
-              ))}
-            </FooterColumn>
-          </div>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-4 border-t border-gray-800 pt-8 sm:mt-14 lg:mt-16">
-          <p className="text-sm leading-6 text-gray-400">
-            &copy; {currentYear} {siteConfig.siteName}. Built by{' '}
-            <a
-              href="https://www.yuurrific.com?ref=colormapper"
-              className={cn(footerLinkClass, 'text-sm')}
-              target="_blank"
-              rel="noopener noreferrer">
-              Yuurrific
-            </a>
-            .
-          </p>
+          <ul role="list" className="flex flex-wrap gap-x-5 gap-y-2">
+            {footerSiteLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={footerLinkClass}>
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

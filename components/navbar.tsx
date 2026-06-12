@@ -1,16 +1,20 @@
 'use client';
 
-import React, { ElementType } from 'react';
+import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { colorModels } from '@/config/colors';
-import { converters } from '@/config/converters';
+import {
+  getNavDropdownItems,
+  isNavItemActive,
+  navItems,
+  type NavChildItem,
+  type NavItem,
+} from '@/config/navigation';
 import { siteConfig } from '@/config/site';
 
-// import { tools } from '@/config/tools';
 import useScroll from '@/lib/hooks/use-scroll';
 import { cn } from '@/lib/utils';
 
@@ -26,58 +30,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
-export const navItems: {
-  name: string;
-  href?: string;
-  segments?: string[];
-  viewMore?: {
-    name: string;
-    href: string;
-  };
-  childItems: {
-    title: string;
-    href: string;
-    description: string;
-    isExternal?: boolean;
-    icon?: ElementType;
-    iconClassName?: string;
-    logo?: string;
-  }[];
-}[] = [
-  {
-    name: 'Color Models',
-    childItems: colorModels,
-    href: '/color-models',
-    segments: ['/color-models'],
-  },
-  {
-    name: 'Convert Color',
-    childItems: converters.slice(0, 8).map((converter) => ({
-      title: converter.title,
-      href: converter.url,
-      description: converter.description,
-    })),
-    viewMore: {
-      name: 'View All',
-      href: '/convert-color',
-    },
-  },
-  // {
-  //   name: 'More Tools',
-  //   childItems: tools,
-  // },
-  {
-    name: 'Blog',
-    childItems: [],
-    href: '/blog',
-    segments: ['/blog'],
-  },
-  {
-    name: 'Advertise',
-    childItems: [],
-    href: '/advertise',
-  },
-];
+export { navItems };
 
 const ListItem = React.forwardRef<
   React.ElementRef<'a'>,
@@ -118,82 +71,139 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = 'ListItem';
 
+function NavDropdownLink({
+  item,
+  pathname,
+}: {
+  item: NavChildItem;
+  pathname: string | null;
+}) {
+  return (
+    <ListItem
+      title={item.title}
+      href={item.href}
+      isExternal={item.isExternal}
+      data-active={pathname === item.href}
+      className={cn(
+        pathname === item.href &&
+          'bg-gray-100/90 text-gray-900 dark:bg-gray-800/90 dark:text-gray-50',
+      )}>
+      {item.description}
+    </ListItem>
+  );
+}
+
+function NavDropdownContent({ item, pathname }: { item: NavItem; pathname: string | null }) {
+  if (item.sections?.length) {
+    return (
+      <div className="w-[520px] p-3 lg:w-[640px]">
+        <div className="grid gap-4 md:grid-cols-2">
+          {item.sections.map((section) => (
+            <div key={section.label}>
+              <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">
+                {section.label}
+              </p>
+              <ul className="grid gap-1">
+                {section.items.map((child) => (
+                  <NavDropdownLink key={child.href} item={child} pathname={pathname} />
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {item.href && (
+          <Link
+            href={item.href}
+            className="mt-3 block rounded-md border border-violet-200/70 bg-violet-50/80 px-3 py-2.5 text-center text-sm font-medium text-violet-800 no-underline transition-colors hover:bg-violet-100/90 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-200 dark:hover:bg-violet-500/20">
+            Open tools hub →
+          </Link>
+        )}
+        {item.viewMore && item.viewMore.href !== item.href && (
+          <Link
+            href={item.viewMore.href}
+            className="mt-2 block py-2 text-center text-xs font-medium text-gray-600 no-underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">
+            {item.viewMore.name}
+          </Link>
+        )}
+      </div>
+    );
+  }
+
+  const items = getNavDropdownItems(item);
+
+  return (
+    <>
+      <ul className="grid w-[400px] gap-2 p-3 md:w-[500px] md:grid-cols-2 lg:w-[560px]">
+        {items.map((child) => (
+          <NavDropdownLink key={child.href} item={child} pathname={pathname} />
+        ))}
+      </ul>
+      {item.viewMore && (
+        <Link
+          href={item.viewMore.href}
+          className="block border-t border-gray-200/80 bg-gray-50/90 py-3 text-center text-sm font-medium text-gray-700 no-underline transition-colors hover:bg-gray-100/90 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-50">
+          {item.viewMore.name}
+        </Link>
+      )}
+    </>
+  );
+}
+
 export default function Navbar() {
   const scrolled = useScroll(50);
   const pathname = usePathname();
 
   return (
-    <>
-      <div
-        className={`sticky top-[-1px] w-full ${
-          scrolled
-            ? 'border-b border-violet-200/70 bg-white/65 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-900/80'
-            : 'bg-transparent dark:text-gray-100'
-        } z-30 transition-all`}>
-        <Container className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-x-2 text-xl">
-            <Logo className="h-8 w-auto fill-violet-600 dark:fill-violet-400" />
-            <span className="hidden font-heading text-base font-bold text-gray-900 md:block dark:text-gray-100">
-              {siteConfig.siteName}
-            </span>
-          </Link>
-          <NavigationMenu className="hidden md:block" data-site-nav>
-            <NavigationMenuList>
-              {navItems.map(({ name, href, segments, childItems, viewMore }) => {
-                const isActive = segments?.some((segment) => pathname?.startsWith(segment));
-                const hasDropdown = childItems.length > 0;
+    <div
+      className={cn(
+        'sticky top-[-1px] z-30 w-full transition-all',
+        scrolled
+          ? 'border-b border-violet-200/70 bg-white/65 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-900/80'
+          : 'bg-transparent dark:text-gray-100',
+      )}>
+      <Container className="flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-x-2 text-xl">
+          <Logo className="h-8 w-auto fill-violet-600 dark:fill-violet-400" />
+          <span className="hidden font-heading text-base font-bold text-gray-900 md:block dark:text-gray-100">
+            {siteConfig.siteName}
+          </span>
+        </Link>
+        <NavigationMenu className="hidden md:block" data-site-nav>
+          <NavigationMenuList>
+            {navItems.map((item) => {
+              const isActive = isNavItemActive(pathname, item);
+              const dropdownItems = getNavDropdownItems(item);
+              const hasDropdown = dropdownItems.length > 0;
 
-                return (
-                  <NavigationMenuItem key={name}>
-                    {hasDropdown ? (
-                      <>
-                        <NavigationMenuTrigger data-active={isActive}>{name}</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <ul className="grid w-[400px] gap-2 p-3 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                            {childItems.map((item) => (
-                              <ListItem
-                                key={item.title}
-                                title={item.title}
-                                href={item.href}
-                                logo={item.logo}
-                                isExternal={item.isExternal}
-                                data-active={pathname === item.href}
-                                className={cn(
-                                  pathname === item.href &&
-                                    'bg-gray-100/90 text-gray-900 dark:bg-gray-800/90 dark:text-gray-50',
-                                )}>
-                                {item.description}
-                              </ListItem>
-                            ))}
-                          </ul>
-                          {viewMore && (
-                            <Link
-                              href={viewMore.href}
-                              className="block border-t border-gray-200/80 bg-gray-50/90 py-3 text-center text-sm font-medium text-gray-700 no-underline transition-colors hover:bg-gray-100/90 hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-50">
-                              {viewMore.name}
-                            </Link>
-                          )}
-                        </NavigationMenuContent>
-                      </>
-                    ) : (
-                      href && (
-                        <Link href={href} legacyBehavior passHref>
-                          <NavigationMenuLink
-                            data-active={isActive}
-                            className={cn(navigationMenuTriggerStyle(), 'cursor-pointer')}>
-                            {name}
-                          </NavigationMenuLink>
-                        </Link>
-                      )
-                    )}
-                  </NavigationMenuItem>
-                );
-              })}
-            </NavigationMenuList>
-          </NavigationMenu>
-          <div className="hidden w-[180] md:block"></div>
-        </Container>
-      </div>
-    </>
+              return (
+                <NavigationMenuItem key={item.name}>
+                  {hasDropdown ? (
+                    <>
+                      <NavigationMenuTrigger data-active={isActive}>
+                        {item.name}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <NavDropdownContent item={item} pathname={pathname} />
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    item.href && (
+                      <Link href={item.href} legacyBehavior passHref>
+                        <NavigationMenuLink
+                          data-active={isActive}
+                          className={cn(navigationMenuTriggerStyle(), 'cursor-pointer')}>
+                          {item.name}
+                        </NavigationMenuLink>
+                      </Link>
+                    )
+                  )}
+                </NavigationMenuItem>
+              );
+            })}
+          </NavigationMenuList>
+        </NavigationMenu>
+        <div className="hidden w-[180px] md:block" aria-hidden />
+      </Container>
+    </div>
   );
 }

@@ -1,0 +1,99 @@
+---
+title: "Your brand purple probably fails WCAG. Here's how to check."
+metaTitle: "WCAG Contrast for Brand Colors — Step-by-Step Guide"
+metaDescription: "Learn how to check WCAG 2.1 contrast for brand colors. AA and AAA thresholds, palette matrix checks, and free tools for accessible design."
+summary: "Brand colors that fail contrast checks exclude users and create compliance risk. This guide covers WCAG ratios, palette audits, and how to fix failing pairs without throwing away your palette."
+publishedAt: '2026-06-01'
+author: 'Yuyu'
+status: 'published'
+---
+
+Your brand purple looked perfect in Figma. On the live site, body text on that hero background scores 2.8:1. WCAG AA requires 4.5:1 for normal text. Users with low vision already bounced before they read the headline.
+
+Contrast is a number, not a vibe. Here is how to audit a brand palette without guessing.
+
+## What is WCAG color contrast?
+
+WCAG (Web Content Accessibility Guidelines) defines **contrast ratio** as the difference in relative luminance between two colors. The formula uses sRGB values, not how "different" the hues look.
+
+Two colors can feel distinct and still fail if their lightness is too close. A saturated orange on a red background might look fine to you and score 2.1:1.
+
+**Minimum ratios for WCAG 2.1:**
+
+| Text type | AA | AAA |
+| --- | --- | --- |
+| Normal body text | 4.5:1 | 7:1 |
+| Large text (18pt+ regular, or 14pt+ bold) | 3:1 | 4.5:1 |
+| UI components and graphical objects | 3:1 | — |
+
+Most product teams target **AA** for body copy. AAA is worth chasing for long-form reading or regulated industries, but AA is the baseline most audits expect.
+
+## Why brand palettes fail contrast checks
+
+Brand guidelines usually specify one primary, one secondary, and an accent. Marketing picks colors for emotion. Accessibility needs colors for legibility. Those goals overlap sometimes, not always.
+
+Common failure patterns:
+
+- **Light gray on white.** `#767676` on `#FFFFFF` is a classic. It looks "subtle" and lands around 4.5:1 on the edge, then fails on uncalibrated monitors.
+- **Brand color as text on brand-tinted backgrounds.** `primary-500` text on `primary-50` often fails because both swatches share similar luminance.
+- **Gradients behind copy.** The ratio changes per pixel. You might pass at the top of the hero and fail where the gradient darkens.
+
+The fix is rarely "pick a new brand color." Usually you need a darker text variant, a solid card behind copy, or a dedicated accessible step in your scale.
+
+## How to test a single foreground/background pair
+
+Start with the pairs you ship today: body text on page background, links on default surface, button label on button fill.
+
+1. Grab the exact HEX codes from your design tokens (not the swatch you remember).
+2. Plug them into a [contrast checker](/contrast-checker).
+3. Read the ratio and the AA/AAA pass/fail badges for normal and large text.
+4. If AA fails, try the suggested lighter/darker variant before redesigning the whole system.
+
+On Color Mapper, the checker also shows a live text preview so you are not interpreting a ratio number in isolation.
+
+## How to audit an entire palette at once
+
+One passing pair is not enough. Buttons, alerts, badges, and sidebar states mix colors constantly.
+
+Use **palette matrix mode**: paste every HEX in your system (comma-separated) and scan the grid. Any cell below 4.5:1 is a combination you should not use for text without a redesign.
+
+Flag these explicitly in your design system docs: "decorative only" or "requires white label on solid fill."
+
+## When contrast passes but the UI still breaks
+
+Contrast ratio does not cover color vision deficiency. Red/green success and error states can both pass WCAG on white and still be indistinguishable for someone with deuteranopia.
+
+Preview your palette under [protanopia, deuteranopia, and tritanopia simulation](/color-blindness). Pair that with icons, labels, or patterns. Never rely on hue alone for state.
+
+## Building accessible variants without a rebrand
+
+When `#6D39AC` fails on white, you do not need a new brand. You need a step on the ramp that passes.
+
+The [tint and shade generator](/color-scale) builds a Tailwind-style 50–950 scale from one HEX. Each step shows contrast against white and black. Pick `700` or `800` for text, keep `500` for fills, document both in your tokens.
+
+Workflow that holds up in review:
+
+1. Generate harmonies in the [palette generator](/palettes).
+2. Matrix-check all swatches in the contrast checker.
+3. Export CSS variables or Tailwind config from passing steps.
+4. Hand print specs through the [HEX to CMYK converter](/convert-hex-to-cmyk) when packaging joins the project.
+
+## FAQ
+
+**Does WCAG contrast apply to logos?**
+
+Logos are generally exempt from text contrast rules, but any text *inside* a logo (wordmarks) should still meet minimums if it conveys information.
+
+**Is 4.5:1 enough for placeholder text?**
+
+Placeholders are still text. Treat them like body copy or use a visible label outside the field.
+
+**Can I use opacity to fix contrast?**
+
+Opacity changes effective luminance against the background. Check the computed color, not the base HEX with an alpha slider guess.
+
+**What about dark mode?**
+
+Re-run the matrix for your dark theme tokens. A pair that passes on white often fails on `#121212`.
+
+Run your current tokens through the [contrast checker](/contrast-checker) now. If the matrix has red cells, you already know what to fix before the next accessibility audit.

@@ -27,7 +27,7 @@ export default function HexCmykContent() {
         Converting HEX to CMYK ensures your brand colors translate from screen to paper. That blue
         that looks perfect on your website will print correctly on business cards, brochures, and
         packaging. It's essential for{' '}
-        <Link href="/blog/convert-cmyk-pantone">
+        <Link href="/color-models/cmyk">
           <strong>print-ready designs</strong>
         </Link>
         .

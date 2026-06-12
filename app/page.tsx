@@ -1,26 +1,37 @@
 import { siteConfig } from '@/config/site';
 
-import { getContentComponent } from '@/lib/dynamic-content-components';
-
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
-import { ConverterPageIntro } from '@/components/converter-page-intro';
-import { DynamicConverter } from '@/components/dynamic-converter';
+import { Container } from '@/components/container';
+import { HomeBento, HomeFeatures, HomeGuides } from '@/components/pages/homepage/home-bento';
+import { HomeHero } from '@/components/pages/homepage/home-hero';
+import GeneralFaqs from '@/components/pages/homepage/faq';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
 import { Wrapper } from '@/components/wrapper';
-
-const HomeContent = getContentComponent('rgb/to-cmyk-content');
 
 export default function Home() {
   return (
     <>
       <WebsiteJsonLd company={siteConfig.siteName} />
 
-      <ConverterPageIntro title={siteConfig.title} description={siteConfig.description} />
-      <DynamicConverter componentName="rgb/to-cmyk" />
-      <Wrapper className="mx-auto text-center">
+      <HomeHero />
+
+      <Container>
+        <Wrapper size="sm" className="space-y-16 md:space-y-24">
+          <HomeBento />
+          <HomeFeatures />
+        </Wrapper>
+      </Container>
+
+      <Container className="text-center">
         <LazyAdsLeaderboard />
-      </Wrapper>
-      {HomeContent ? <HomeContent /> : null}
+      </Container>
+
+      <Container>
+        <Wrapper size="sm" className="space-y-16 md:space-y-24">
+          <HomeGuides />
+          <GeneralFaqs />
+        </Wrapper>
+      </Container>
     </>
   );
 }
