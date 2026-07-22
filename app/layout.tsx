@@ -67,6 +67,9 @@ const fullMetadata: Metadata = {
   robots: {
     index: true,
   },
+  verification: {
+    yandex: 'efa73e877348afc0',
+  },
 };
 
 export const metadata: Metadata = fullMetadata;
