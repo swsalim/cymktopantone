@@ -72,6 +72,11 @@ const DIRECTORY_BADGES = [
     src: 'https://easydofollow.dev/badge/easydofollow-badge-light.svg',
     alt: 'Featured on EasyDoFollow',
   },
+  {
+    href: 'https://launchstreak.dev/design/color-mapper',
+    src: 'https://launchstreak.dev/badge/launch-streak-badge-light.svg',
+    alt: 'Launched on Launch Streak',
+  },
 ] as const;
 
 interface FooterProps extends ComponentProps<'footer'> {
