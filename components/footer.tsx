@@ -21,6 +21,59 @@ import { Logo } from '@/components/icons';
 const footerLinkClass =
   'inline-block whitespace-nowrap rounded-md text-sm text-gray-400 no-underline transition-colors duration-150 hover:text-violet-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-200';
 
+const DIRECTORY_BADGES = [
+  {
+    href: 'https://launchpadly.co/startup/color-mapper?ref=badge',
+    src: 'https://launchpadly.co/embed/badges/startup/color-mapper.svg?variant=listed-on',
+    alt: 'Launchpadly Startup Directory',
+    attrs: {
+      'data-launchpadly-badge': 'color-mapper',
+      'data-launchpadly-badge-variant': 'listed-on',
+    },
+  },
+  {
+    href: 'https://buildlist.io',
+    src: 'https://buildlist.io/badge.svg',
+    alt: 'Featured on Buildlist',
+  },
+  {
+    href: 'https://www.listbulb.com/tools/colormapper',
+    src: 'https://www.listbulb.com/featured-on-listbulb-light.svg',
+    alt: 'Featured on ListBulb',
+  },
+  {
+    href: 'https://www.tinyshelf.co/?ref=colormapper.xyz',
+    src: 'https://www.tinyshelf.co/badge/tinyshelf-badge-dark-f4d1216a.svg',
+    alt: 'Featured on tinyshelf',
+    title: 'Featured on tinyshelf',
+  },
+  {
+    href: 'https://nicklaunches.com/products/color-mapper/?utm_source=colormapper.xyz&utm_medium=badge&utm_campaign=featured',
+    src: 'https://nicklaunches.com/badges/featured.png',
+    alt: 'Color Mapper on Nick Launches',
+  },
+  {
+    href: 'https://twelve.tools',
+    src: 'https://twelve.tools/badge0-white.svg',
+    alt: 'Featured on Twelve Tools',
+  },
+  {
+    href: 'https://easylaunch.dev/design/color-mapper',
+    src: 'https://easylaunch.dev/badge/easylaunch-badge-light.svg',
+    alt: 'Featured on EasyLaunch',
+  },
+  {
+    href: 'https://lemonlaunch.dev/design/color-mapper',
+    src: 'https://lemonlaunch.dev/badge/lemonlaunch-badge-light.svg',
+    alt: 'Featured on LemonLaunch',
+  },
+  {
+    href: 'https://easydofollow.dev/design/color-mapper',
+    src: 'https://easydofollow.dev/badge/easydofollow-badge-light.svg',
+    alt: 'Featured on EasyDoFollow',
+  },
+] as const;
+
 interface FooterProps extends ComponentProps<'footer'> {
   className?: string;
 }
@@ -49,6 +102,51 @@ function LinkRow({
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function DirectoryBadgeTrack({ hidden = false }: { hidden?: boolean }) {
+  return (
+    <ul
+      role="list"
+      aria-hidden={hidden || undefined}
+      className="flex shrink-0 items-center gap-5 pr-5">
+      {DIRECTORY_BADGES.map((badge) => (
+        <li key={badge.href} className="shrink-0">
+          <a
+            href={badge.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={hidden ? -1 : undefined}
+            title={'title' in badge ? badge.title : undefined}
+            className="inline-flex rounded-md opacity-80 transition-opacity duration-150 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
+            {...('attrs' in badge ? badge.attrs : {})}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- third-party directory badges from many hosts */}
+            <img
+              src={badge.src}
+              alt={badge.alt}
+              height={28}
+              className="h-7 w-auto max-w-[140px] object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function DirectoryBadgeMarquee() {
+  return (
+    <div
+      className="mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+      aria-label="Featured on directories">
+      <div className="flex w-max motion-safe:animate-marquee motion-safe:hover:[animation-play-state:paused]">
+        <DirectoryBadgeTrack />
+        <DirectoryBadgeTrack hidden />
+      </div>
     </div>
   );
 }
@@ -95,6 +193,8 @@ export default function Footer({ className, ...props }: FooterProps) {
           <LinkRow label="Convert" links={POPULAR_CONVERTERS} />
           <LinkRow label="Learn" links={footerLearnLinks} />
         </div>
+
+        <DirectoryBadgeMarquee />
 
         {/* Meta row */}
         <div className="mt-14 flex flex-col gap-4 border-t border-gray-800 pt-8 sm:flex-row sm:items-center sm:justify-between">

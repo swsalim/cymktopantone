@@ -46,9 +46,14 @@ export default {
             'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'bounce-left': 'bounce-left 1s infinite',
+        marquee: 'marquee 45s linear infinite',
       },
     },
   },
