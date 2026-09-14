@@ -16,68 +16,11 @@ import { siteConfig } from '@/config/site';
 
 import { cn } from '@/lib/utils';
 
+import { BadgeRelaySite } from '@/components/badge-relay-site';
 import { Logo } from '@/components/icons';
 
 const footerLinkClass =
   'inline-block whitespace-nowrap rounded-md text-sm text-gray-400 no-underline transition-colors duration-150 hover:text-violet-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400 active:text-violet-200';
-
-const DIRECTORY_BADGES = [
-  {
-    href: 'https://launchpadly.co/startup/color-mapper?ref=badge',
-    src: 'https://launchpadly.co/embed/badges/startup/color-mapper.svg?variant=listed-on',
-    alt: 'Launchpadly Startup Directory',
-    attrs: {
-      'data-launchpadly-badge': 'color-mapper',
-      'data-launchpadly-badge-variant': 'listed-on',
-    },
-  },
-  {
-    href: 'https://buildlist.io',
-    src: 'https://buildlist.io/badge.svg',
-    alt: 'Featured on Buildlist',
-  },
-  {
-    href: 'https://www.listbulb.com/tools/colormapper',
-    src: 'https://www.listbulb.com/featured-on-listbulb-light.svg',
-    alt: 'Featured on ListBulb',
-  },
-  {
-    href: 'https://www.tinyshelf.co/?ref=colormapper.xyz',
-    src: 'https://www.tinyshelf.co/badge/tinyshelf-badge-dark-f4d1216a.svg',
-    alt: 'Featured on tinyshelf',
-    title: 'Featured on tinyshelf',
-  },
-  {
-    href: 'https://nicklaunches.com/products/color-mapper/?utm_source=colormapper.xyz&utm_medium=badge&utm_campaign=featured',
-    src: 'https://nicklaunches.com/badges/featured.png',
-    alt: 'Color Mapper on Nick Launches',
-  },
-  {
-    href: 'https://twelve.tools',
-    src: 'https://twelve.tools/badge0-white.svg',
-    alt: 'Featured on Twelve Tools',
-  },
-  {
-    href: 'https://easylaunch.dev/design/color-mapper',
-    src: 'https://easylaunch.dev/badge/easylaunch-badge-light.svg',
-    alt: 'Featured on EasyLaunch',
-  },
-  {
-    href: 'https://lemonlaunch.dev/design/color-mapper',
-    src: 'https://lemonlaunch.dev/badge/lemonlaunch-badge-light.svg',
-    alt: 'Featured on LemonLaunch',
-  },
-  {
-    href: 'https://easydofollow.dev/design/color-mapper',
-    src: 'https://easydofollow.dev/badge/easydofollow-badge-light.svg',
-    alt: 'Featured on EasyDoFollow',
-  },
-  {
-    href: 'https://launchstreak.dev/design/color-mapper',
-    src: 'https://launchstreak.dev/badge/launch-streak-badge-light.svg',
-    alt: 'Launched on Launch Streak',
-  },
-] as const;
 
 interface FooterProps extends ComponentProps<'footer'> {
   className?: string;
@@ -111,47 +54,14 @@ function LinkRow({
   );
 }
 
-function DirectoryBadgeTrack({ hidden = false }: { hidden?: boolean }) {
-  return (
-    <ul
-      role="list"
-      aria-hidden={hidden || undefined}
-      className="flex shrink-0 items-center gap-5 pr-5">
-      {DIRECTORY_BADGES.map((badge) => (
-        <li key={badge.href} className="shrink-0">
-          <a
-            href={badge.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={hidden ? -1 : undefined}
-            title={'title' in badge ? badge.title : undefined}
-            className="inline-flex rounded-md opacity-80 transition-opacity duration-150 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400"
-            {...('attrs' in badge ? badge.attrs : {})}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- third-party directory badges from many hosts */}
-            <img
-              src={badge.src}
-              alt={badge.alt}
-              height={28}
-              className="h-7 w-auto max-w-[140px] object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function DirectoryBadgeMarquee() {
   return (
-    <div
-      className="mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
-      aria-label="Featured on directories">
-      <div className="flex w-max motion-safe:animate-marquee motion-safe:hover:[animation-play-state:paused]">
-        <DirectoryBadgeTrack />
-        <DirectoryBadgeTrack hidden />
-      </div>
+    <div className="mt-12" aria-label="Featured on directories">
+      <BadgeRelaySite
+        siteKey="site_live_6W2thwbb2e9kpGDhx9y1Jg"
+        apiBase="https://badgerelay.com"
+        revalidateSeconds={30}
+      />
     </div>
   );
 }
@@ -160,21 +70,18 @@ export default function Footer({ className, ...props }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer
-      data-site-nav
-      className={cn('bg-gray-950 text-gray-100', className)}
-      {...props}>
+    <footer data-site-nav className={cn('bg-gray-950 text-gray-100', className)} {...props}>
       {/* Theme signature: thin violet→cyan band instead of a border */}
       <div
         aria-hidden
-        className="h-1 w-full bg-gradient-to-r from-violet-700 via-violet-500 to-cyan-400"
+        className="to-cyan-400 h-1 w-full bg-gradient-to-r from-violet-700 via-violet-500"
       />
 
       <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 lg:px-8 lg:pt-24">
         {/* Statement */}
-        <p className="max-w-[16ch] font-heading text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+        <p className="max-w-[16ch] text-balance font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
           One palette, from{' '}
-          <span className="bg-gradient-to-r from-violet-400 to-cyan-300 bg-clip-text text-transparent">
+          <span className="to-cyan-300 bg-gradient-to-r from-violet-400 bg-clip-text text-transparent">
             screen to press
           </span>
           .
