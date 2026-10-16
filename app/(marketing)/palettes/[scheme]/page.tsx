@@ -13,42 +13,42 @@ const SCHEME_COPY: Record<
   { title: string; description: string; intro: string }
 > = {
   complementary: {
-    title: 'Complementary Palette Generator — Free Online | Color Mapper',
+    title: 'Complementary Palette Generator — Free Online',
     description:
       'Generate complementary color palettes from one seed color — base, opposite, and tints/shades. High-contrast schemes with CMYK and export options.',
     intro:
       'Complementary colors sit opposite on the color wheel. This generator adds lighter and darker steps so you get a full five-swatch palette, not just a pair.',
   },
   analogous: {
-    title: 'Analogous Palette Generator — Free Online | Color Mapper',
+    title: 'Analogous Palette Generator — Free Online',
     description:
       'Create analogous color schemes from a single hue. Neighboring colors for cohesive UI, packaging, and brand systems.',
     intro:
       'Analogous palettes use hues next to each other on the wheel — naturally harmonious for backgrounds, illustrations, and soft brand systems.',
   },
   triadic: {
-    title: 'Triadic Palette Generator — Free Online | Color Mapper',
+    title: 'Triadic Palette Generator — Free Online',
     description:
       'Build triadic color palettes with three evenly spaced hues. Vibrant, balanced schemes for startups and marketing sites.',
     intro:
       'Triadic schemes use three colors 120° apart. They feel energetic while staying balanced — popular for tech branding and campaign creative.',
   },
   'split-complementary': {
-    title: 'Split Complementary Palette Generator | Color Mapper',
+    title: 'Split Complementary Palette Generator',
     description:
       'Generate split complementary palettes — a base color plus two hues adjacent to its complement. Softer contrast than pure complementary pairs.',
     intro:
       'Split complementary offers contrast without the tension of a direct complement — great for accessible UI with visual interest.',
   },
   monochromatic: {
-    title: 'Monochromatic Palette Generator — Free Online | Color Mapper',
+    title: 'Monochromatic Palette Generator — Free Online',
     description:
       'Create monochromatic palettes from one hue with varied lightness. Clean, unified schemes for design systems and dashboards.',
     intro:
       'Monochromatic palettes vary lightness and saturation of a single hue — the fastest path to a cohesive, professional look.',
   },
   tetradic: {
-    title: 'Tetradic Palette Generator — Free Online | Color Mapper',
+    title: 'Tetradic Palette Generator — Free Online',
     description:
       'Generate tetradic (rectangle) color schemes with four related hues. Rich palettes for complex brand and editorial design.',
     intro:

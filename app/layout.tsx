@@ -36,7 +36,7 @@ const fullMetadata: Metadata = {
   description: siteConfig.description,
   metadataBase: siteConfig.url,
   alternates: {
-    canonical: '/',
+    canonical: absoluteUrl(),
   },
   authors: [
     {

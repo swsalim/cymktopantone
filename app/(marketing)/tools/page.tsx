@@ -16,7 +16,7 @@ import { Card, CardContent, CardDescription } from '@/components/ui/card';
 import { Wrapper } from '@/components/wrapper';
 
 const config = {
-  title: 'Free Color Tools — Palettes, Gradients, Contrast & More | Color Mapper',
+  title: 'Free Color Tools — Palettes, Gradients, Contrast & More',
   description:
     'Free online color tools for designers and developers: palette generator, CSS gradients, WCAG contrast checker, tint/shade scales, image extraction, and format converters.',
   url: '/tools',

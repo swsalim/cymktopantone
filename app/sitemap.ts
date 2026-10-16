@@ -10,7 +10,7 @@ import {
   internalTools,
 } from '@/config/tools-internal';
 
-import { absoluteUrl } from '@/lib/utils';
+import { canonicalUrl } from '@/lib/utils';
 
 const STATIC_PATHS = [
   '/',
@@ -30,7 +30,7 @@ const STATIC_PATHS = [
 
 function sitemapEntry(path: string, priority = 0.7): MetadataRoute.Sitemap[number] {
   return {
-    url: absoluteUrl(path),
+    url: canonicalUrl(path),
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: path === '/' ? 1 : priority,

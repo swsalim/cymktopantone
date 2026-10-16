@@ -16,6 +16,15 @@ export function absoluteUrl(input = '') {
       : `${process.env.NEXT_PUBLIC_BASE_URL}${input}`;
 }
 
+/** Canonical/sitemap URLs: homepage is the origin without a trailing slash. */
+export function canonicalUrl(path = '') {
+  if (!path || path === '/') {
+    return absoluteUrl();
+  }
+  const normalized = path.startsWith('/') ? path : `/${path}`;
+  return absoluteUrl(normalized);
+}
+
 export function imageKitLoader({
   src,
   width,
