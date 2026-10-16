@@ -4,6 +4,7 @@ metaTitle: "CSS Gradient Guide — Linear, Radial & Conic Generators"
 metaDescription: "Practical guide to CSS gradients with live generator, 3-color modes, presets, and import from palettes. Copy production-ready background code."
 summary: "CSS gradients are simple in theory and tedious in practice. Learn linear, radial, and conic types, when each fits, and how to go from palette to copy-paste code without banding surprises."
 publishedAt: '2026-06-04'
+updatedAt: '2026-10-16'
 author: 'Yuyu'
 status: 'published'
 ---
@@ -58,6 +59,26 @@ Less common in marketing pages, more common in dashboards and data UI.
 
 Dedicated pages: [radial](/gradients/radial) and [conic](/gradients/conic) generators.
 
+## Choosing gradient color stops
+
+A stop is a color plus an optional position along the gradient line. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient" target="_blank" rel="noreferrer">MDN's linear-gradient reference</a> is the syntax. <a href="https://www.w3.org/TR/css-images-4/#gradients" target="_blank" rel="noreferrer">CSS Images Level 4</a> is the rule for what the browser does when you leave positions out. Picking stops is where gradients go muddy or fail contrast.
+
+1. **Decide where text will sit before you pick colors.** If a headline crosses the whole hero, every stop under those glyphs has to be dark enough or light enough. If you cannot make that true, put the type on a solid card and let the gradient be decoration. WCAG contrast is defined between text and the background behind it (<a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum" target="_blank" rel="noreferrer">understanding 1.4.3</a>). A gradient is many backgrounds. Check the lightest and darkest point the text can occupy in the <Link href="/contrast-checker">contrast checker</Link>.
+2. **Put the first and last stops at the ends unless you want a solid band.** `0%` and `100%` use the whole element. A first stop at `20%` paints a solid color from the start edge until that stop, then blends. That is useful for a header bar. It is accidental when you meant a full fade.
+3. **Let the spec fill in missing positions, and know the fixup.** If you omit positions, CSS Images 4 spaces the missing stops evenly between the ones you did set. If a later stop is positioned before an earlier one, the earlier stop is moved forward so positions never go backwards — the transition becomes a hard edge. `linear-gradient(red 20px, white 0px, blue 40px)` is treated as white at 20px, not at 0. Do not rely on that fixup to design a stripe. Set the positions you mean.
+4. **Add a middle stop when the endpoints are far apart in hue.** Two saturated colors on opposite sides of the wheel, interpolated in sRGB, often pass through a dull gray in the middle. A third stop near 50%, chosen by eye, keeps a hue in that region. Three stops are enough for most heroes. Five is for a mesh you are willing to maintain.
+5. **Change the interpolation space when the midpoint must stay vivid.** By default the blend is in sRGB. CSS Images 4 allows a color interpolation method on the gradient, and <a href="https://www.w3.org/TR/css-color-4/#interpolation-space" target="_blank" rel="noreferrer">CSS Color Level 4</a> defines the spaces, including Oklch. `linear-gradient(in oklch, #5B21B6, #F59E0B)` keeps a more even path than the sRGB blend of the same two hex values. Older browsers that do not understand the `in` syntax ignore the rule if you do not also provide a plain gradient as a fallback. Put the fallback first:
+
+```css
+background: linear-gradient(135deg, #5B21B6, #F59E0B);
+background: linear-gradient(in oklch, #5B21B6, #F59E0B);
+```
+
+6. **Match stops to a palette instead of sampling the hero.** Build the colors in the <Link href="/palettes">palette generator</Link>, then open them in the <Link href="/gradients">gradient tool</Link>. Stops taken from steps 700, 500, and 200 of one scale stay in one family. Stops sampled from three unrelated brands do not.
+7. **For print, throw stops away until a few flat colors remain.** A CSS gradient will not survive a press as a continuous blend. Pick the stops that matter, convert those hex values, and read the <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe palettes guide</Link>. Do not send a screenshot of the hero as the print file.
+
+The same stop list works for radial and conic gradients. What changes is the shape of the line, not the decision about which colors are allowed to sit under text.
+
 ## Two-color vs three-color gradients
 
 Two stops are enough for minimal heroes. Three stops (popularized by tools like MyColor.space) add a mid-tone so the transition does not look muddy between distant hues.
@@ -95,20 +116,33 @@ For repeated patterns, put the generated rule in `@layer utilities` or your glob
 
 ## FAQ
 
-**Why does my gradient look banded?**
+<BlogFaq
+  items={[
+    {
+      question: "How many color stops should a hero gradient have?",
+      answer: "Two stops are enough when the hues are close. Add a third when the endpoints are far apart on the hue wheel, because an sRGB blend can turn muddy in the middle. More than five stops is rarely worth maintaining. Build them in the <a href=\"/gradients\">gradient generator</a> so you can see the midpoint before you commit.",
+    },
+    {
+      question: "What happens if I omit stop positions?",
+      answer: "<a href=\"https://www.w3.org/TR/css-images-4/#gradients\" target=\"_blank\" rel=\"noreferrer\">CSS Images Level 4</a> spaces the missing stops evenly between the positions you did set. The first and last stops default to the start and end of the gradient line. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient\" target=\"_blank\" rel=\"noreferrer\">MDN</a> shows the syntax.",
+    },
+    {
+      question: "Why does the middle of my gradient look gray?",
+      answer: "sRGB interpolation between two saturated, distant hues often passes through a dull color. Add a middle stop, or interpolate in Oklch. The color spaces are defined in <a href=\"https://www.w3.org/TR/css-color-4/#interpolation-space\" target=\"_blank\" rel=\"noreferrer\">CSS Color Level 4</a>. Keep a plain `linear-gradient` line first so older browsers still paint something.",
+    },
+    {
+      question: "Can text sit directly on a gradient?",
+      answer: "Only if the lightest and darkest areas under the glyphs both meet the contrast ratio you need. <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 1.4.3</a> is about the background behind the text, and a gradient is not one background. If either sample fails, move the text onto a solid card and check that pair in the <a href=\"/contrast-checker\">contrast checker</a>.",
+    },
+    {
+      question: "Why does my gradient look banded?",
+      answer: "Banding shows up when stops are far apart in similar hues, or on 8-bit displays. Add a mid-stop or separate the saturation of the endpoints slightly.",
+    },
+    {
+      question: "Can I animate a CSS gradient?",
+      answer: "Yes. Animating `background-position` on a large gradient, or cross-fading many stops, can be expensive to paint. Test on a low-end phone before you ship it.",
+    },
+  ]}
+/>
 
-Banding shows up when stops are too far apart in similar hues, or on 8-bit displays. Add a mid-stop or slightly adjust saturation between endpoints.
-
-**Can I animate a CSS gradient?**
-
-Yes, but animating `background-position` on a large gradient or cross-fading stops can be GPU-heavy. Test on low-end mobile.
-
-**Linear vs radial for hero sections?**
-
-Linear is the default choice for full-width heroes. Radial works when you want a focal glow behind a product shot.
-
-**Do gradients hurt performance?**
-
-Single CSS gradients are cheap compared to large PNG backgrounds. Multiple stacked gradients on scroll-heavy pages can add paint cost. Profile if you stack more than two.
-
-Open the [CSS gradient generator](/gradients), import your palette, tweak until the preview looks clean on your target devices, and paste the CSS. The hero section is the easy part again.
+Open the <Link href="/gradients">CSS gradient generator</Link>, import your palette, tweak until the preview looks clean on your target devices, and paste the CSS. The hero section is the easy part again.

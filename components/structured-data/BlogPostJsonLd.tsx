@@ -33,7 +33,7 @@ export default function BlogPostJsonLd({ post }: { post: Post }) {
           },
         },
         datePublished: post.publishedAt,
-        dateModified: post.publishedAt,
+        dateModified: post.updatedAt ?? post.publishedAt,
       }}
     </JsonLd>
   );

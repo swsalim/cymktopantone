@@ -20,7 +20,7 @@ export default function BlogPageJsonLd({ posts }: { posts: Post[] }) {
           description: post.summary,
           url: absoluteUrl(`/blog/${post._meta.path}`),
           datePublished: post.publishedAt,
-          dateModified: post.publishedAt,
+          dateModified: post.updatedAt ?? post.publishedAt,
           author: {
             '@type': 'Person',
             name: post.author,

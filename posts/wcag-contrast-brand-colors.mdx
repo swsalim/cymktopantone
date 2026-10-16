@@ -4,6 +4,7 @@ metaTitle: "WCAG Contrast for Brand Colors — Step-by-Step Guide"
 metaDescription: "Learn how to check WCAG 2.1 contrast for brand colors. AA and AAA thresholds, palette matrix checks, and free tools for accessible design."
 summary: "Brand colors that fail contrast checks exclude users and create compliance risk. This guide covers WCAG ratios, palette audits, and how to fix failing pairs without throwing away your palette."
 publishedAt: '2026-06-01'
+updatedAt: '2026-10-16'
 author: 'Yuyu'
 status: 'published'
 ---
@@ -18,15 +19,37 @@ WCAG (Web Content Accessibility Guidelines) defines **contrast ratio** as the di
 
 Two colors can feel distinct and still fail if their lightness is too close. A saturated orange on a red background might look fine to you and score 2.1:1.
 
-**Minimum ratios for WCAG 2.1:**
+**Minimum ratios in WCAG 2.1 and 2.2:**
 
 | Text type | AA | AAA |
 | --- | --- | --- |
 | Normal body text | 4.5:1 | 7:1 |
-| Large text (18pt+ regular, or 14pt+ bold) | 3:1 | 4.5:1 |
+| Large text (at least 18pt, or 14pt bold) | 3:1 | 4.5:1 |
 | UI components and graphical objects | 3:1 | — |
 
+Those numbers are Success Criterion <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noreferrer">1.4.3 Contrast (Minimum)</a> at Level AA and <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" target="_blank" rel="noreferrer">1.4.6 Contrast (Enhanced)</a> at Level AAA. Non-text contrast is <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" target="_blank" rel="noreferrer">1.4.11</a>, Level AA only, which is why the AAA cell is empty. WCAG 2.2 did not change these three criteria. The same thresholds are in <a href="https://www.w3.org/TR/WCAG21/#contrast-minimum" target="_blank" rel="noreferrer">WCAG 2.1</a>.
+
 Most product teams target **AA** for body copy. AAA is worth chasing for long-form reading or regulated industries, but AA is the baseline most audits expect.
+
+## How to check contrast against WCAG 2.1 and 2.2
+
+The ratio is a formula, so the check is a sequence, not a glance at two swatches.
+
+1. **Name the pair you actually ship.** Body text on the page background, the link color on that same background, the button label on the button fill, the icon on its chip. A brand purple measured against white does not answer any of those if the purple never sits on white.
+2. **Use the rendered color.** Opacity, a scrim, or a token that is not the hex in the brand PDF all change the channels. Copy the computed hex from the browser, or the token that CSS will resolve to. Do not guess the mix.
+3. **Convert each sRGB channel to relative luminance.** WCAG defines <a href="https://www.w3.org/TR/WCAG22/#dfn-relative-luminance" target="_blank" rel="noreferrer">relative luminance</a> from the sRGB values: each 8-bit channel is divided by 255, linearized (divide by 12.92 if the value is 0.04045 or below, otherwise apply the 2.4 gamma curve), then combined as `0.2126 R + 0.7152 G + 0.0722 B`.
+4. **Compute the ratio.** `(L1 + 0.05) / (L2 + 0.05)`, where L1 is the lighter luminance and L2 is the darker one. The ratio runs from 1:1 (identical colors) to 21:1 (black and white).
+5. **Pick the threshold for that text.** Under 1.4.3, normal text needs 4.5:1 for AA. Large-scale text needs 3:1. Under 1.4.6, those bars rise to 7:1 and 4.5:1. Under 1.4.11, a control boundary or a meaningful icon needs 3:1 against the adjacent color. The <Link href="/contrast-checker">contrast checker</Link> reports the ratio and the AA/AAA results so you are not doing the gamma step by hand.
+6. **Apply the large-text rule only when the type qualifies.** WCAG's definition of large-scale text is at least 18 point, or at least 14 point bold. W3C technique <a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G18" target="_blank" rel="noreferrer">G18</a> notes that 1pt equals 1.333 CSS pixels, so those sizes are about 24px and about 18.5px. The <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum" target="_blank" rel="noreferrer">understanding document for 1.4.3</a> adds that very thin or unusual fonts may still be hard to read at the lower ratio. If the type is a hairline display face, do not use the large-text exception to excuse a 3:1 pair.
+7. **Sample gradients in more than one place.** The criterion is about the background behind the text. On a gradient, check the lightest and darkest region the glyphs can occupy. Passing at the top of a hero does not cover the line that sits on the lighter stop.
+8. **Record the decision.** "Decorative only," "large text only," or "text color is the 800 step" belongs in the token docs. The next person will otherwise put `primary-500` on white because the swatch looks dark.
+
+Two worked examples, using that formula:
+
+- `#767676` on `#FFFFFF` is **4.54:1**. It passes AA for normal text and fails AAA. It is not "about 4.5:1 and then it fails on an uncalibrated monitor." The ratio is a property of the code values. A dim monitor can make the pair look worse. It does not change the 4.54:1 the checker returns. The same gray on black is 4.62:1, also AA and not AAA.
+- `#6D39AC` on white is **7.42:1**, which passes AAA. On black it is **2.83:1**, which fails even the 3:1 large-text bar. A lighter purple, `#7C3AED`, is 5.70:1 on white (AA, not AAA) and 3.69:1 on black (large text only). "Our purple is dark enough" is not a check. The pair is the check.
+
+Logotypes are exempt from 1.4.3 and 1.4.6. Text that is not part of the logo is not. A wordmark can be low contrast. The button next to it cannot.
 
 ## Why brand palettes fail contrast checks
 
@@ -34,7 +57,7 @@ Brand guidelines usually specify one primary, one secondary, and an accent. Mark
 
 Common failure patterns:
 
-- **Light gray on white.** `#767676` on `#FFFFFF` is a classic. It looks "subtle" and lands around 4.5:1 on the edge, then fails on uncalibrated monitors.
+- **Light gray on white.** `#767676` on `#FFFFFF` is 4.54:1. It passes AA and fails AAA. Teams often lighten it further for a "subtle" label and drop under 4.5:1 without noticing.
 - **Brand color as text on brand-tinted backgrounds.** `primary-500` text on `primary-50` often fails because both swatches share similar luminance.
 - **Gradients behind copy.** The ratio changes per pixel. You might pass at the top of the hero and fail where the gradient darkens.
 
@@ -67,7 +90,7 @@ Preview your palette under [protanopia, deuteranopia, and tritanopia simulation]
 
 ## Building accessible variants without a rebrand
 
-When `#6D39AC` fails on white, you do not need a new brand. You need a step on the ramp that passes.
+When a brand hex fails on the background you ship, you do not need a new brand. You need a step on the ramp that passes. `#6D39AC` already passes AAA on white (7.42:1) and fails on black (2.83:1), so the fix might be a lighter label in dark mode rather than a darker purple in light mode.
 
 The [tint and shade generator](/color-scale) builds a Tailwind-style 50–950 scale from one HEX. Each step shows contrast against white and black. Pick `700` or `800` for text, keep `500` for fills, document both in your tokens.
 
@@ -80,20 +103,33 @@ Workflow that holds up in review:
 
 ## FAQ
 
-**Does WCAG contrast apply to logos?**
+<BlogFaq
+  items={[
+    {
+      question: "Did WCAG 2.2 change the contrast ratios?",
+      answer: "No. Success Criteria 1.4.3 (4.5:1 for normal text, 3:1 for large text), 1.4.6 (7:1 and 4.5:1), and 1.4.11 (3:1 for non-text contrast) are the same in <a href=\"https://www.w3.org/TR/WCAG21/#contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 2.1</a> and <a href=\"https://www.w3.org/TR/WCAG22/#contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 2.2</a>.",
+    },
+    {
+      question: "What counts as large text?",
+      answer: "WCAG defines large-scale text as at least 18 point, or at least 14 point bold. Technique <a href=\"https://www.w3.org/WAI/WCAG22/Techniques/general/G18\" target=\"_blank\" rel=\"noreferrer\">G18</a> equates those to about 24px and about 18.5px, because 1pt is 1.333 CSS pixels. Very thin fonts can still be hard to read at the lower ratio. The understanding doc for <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">1.4.3</a> says so directly.",
+    },
+    {
+      question: "Does WCAG contrast apply to logos?",
+      answer: "Text that is part of a logo or brand name is exempt from 1.4.3 and 1.4.6. The criteria say that in the \"Logotypes\" exception. Text outside the logo is not exempt.",
+    },
+    {
+      question: "Is 4.5:1 enough for placeholder text?",
+      answer: "Placeholder text is still text if a person has to read it. Treat it like body copy, or put a visible label outside the field.",
+    },
+    {
+      question: "Can I use opacity to fix contrast?",
+      answer: "Opacity changes the color that is actually painted. Check the computed color against the real background. Do not estimate from the base hex and a slider.",
+    },
+    {
+      question: "What about dark mode?",
+      answer: "Re-run the pairs for the dark theme. `#6D39AC` passes AAA on white at 7.42:1 and fails on black at 2.83:1. A pair that passes on white often fails on a near-black surface.",
+    },
+  ]}
+/>
 
-Logos are generally exempt from text contrast rules, but any text *inside* a logo (wordmarks) should still meet minimums if it conveys information.
-
-**Is 4.5:1 enough for placeholder text?**
-
-Placeholders are still text. Treat them like body copy or use a visible label outside the field.
-
-**Can I use opacity to fix contrast?**
-
-Opacity changes effective luminance against the background. Check the computed color, not the base HEX with an alpha slider guess.
-
-**What about dark mode?**
-
-Re-run the matrix for your dark theme tokens. A pair that passes on white often fails on `#121212`.
-
-Run your current tokens through the [contrast checker](/contrast-checker) now. If the matrix has red cells, you already know what to fix before the next accessibility audit.
+Run your current tokens through the <Link href="/contrast-checker">contrast checker</Link> now. If a pair is under 4.5:1, you already know what to fix before the next accessibility audit.

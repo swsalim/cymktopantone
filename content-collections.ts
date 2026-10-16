@@ -13,6 +13,7 @@ const posts = defineCollection({
     metaTitle: z.string().optional(),
     metaDescription: z.string().optional(),
     publishedAt: z.string(),
+    updatedAt: z.string().optional(),
     coverImage: z.string().optional(),
     author: z.string(),
     status: z.enum(['draft', 'published']),
