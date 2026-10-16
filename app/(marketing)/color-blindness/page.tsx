@@ -5,7 +5,7 @@ import { ColorBlindnessSimulator } from '@/components/color-tools/color-blindnes
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Color Blindness Simulator — Protanopia, Deuteranopia, Tritanopia | Color Mapper',
+  title: 'Color Blindness Simulator — Protanopia, Deuteranopia, Tritanopia',
   description:
     'Simulate how colors appear with protanopia, deuteranopia, and tritanopia. Preview palettes before launch — free accessibility tool.',
   url: '/color-blindness',

@@ -13,11 +13,8 @@ if (existsSync(robotsPath)) {
   // Fix the comment syntax
   content = content.replace(/^# \*$/m, '# All user agents');
 
-  // Host must be hostname only (no protocol)
-  const prodDomain =
-    process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL?.replace(/^https?:\/\//, '') ??
-    'colormapper.xyz';
-  content = content.replace(/Host: .+/, `Host: ${prodDomain}`);
+  // Remove non-standard Host directive (not part of robots.txt spec)
+  content = content.replace(/\n# Host\nHost: .+\n?/, '\n');
 
   writeFileSync(robotsPath, content);
   console.log('robots.txt fixed!');

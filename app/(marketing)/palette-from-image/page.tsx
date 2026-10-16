@@ -5,7 +5,7 @@ import { ImagePaletteExtractor } from '@/components/color-tools/image-palette-ex
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Extract Colors from Image — Free Palette Tool | Color Mapper',
+  title: 'Extract Colors from Image — Free Palette Tool',
   description:
     'Upload a photo to extract dominant colors into a palette. Runs entirely in your browser — private, free, with CMYK values and converter links.',
   url: '/palette-from-image',

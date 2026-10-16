@@ -5,7 +5,7 @@ import { PrintGamutChecker } from '@/components/color-tools/print-gamut-checker'
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Print Gamut Checker — Will Your Color Survive CMYK? | Color Mapper',
+  title: 'Print Gamut Checker — Will Your Color Survive CMYK?',
   description:
     'Check if an RGB or HEX color can print accurately in CMYK. Side-by-side screen vs press preview with shift warnings — free, no signup.',
   url: '/print-gamut',

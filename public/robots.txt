@@ -4,8 +4,5 @@ Disallow: /*_buildManifest.js$
 Disallow: /*_middlewareManifest.js$
 Disallow: /*_ssgManifest.js$
 
-# Host
-Host: colormapper.xyz
-
 # Sitemaps
 Sitemap: https://colormapper.xyz/sitemap.xml

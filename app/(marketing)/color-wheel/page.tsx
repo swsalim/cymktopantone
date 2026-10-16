@@ -5,7 +5,7 @@ import { ColorWheel } from '@/components/color-tools/color-wheel';
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Interactive Color Wheel — Pick Harmonies Online | Color Mapper',
+  title: 'Interactive Color Wheel — Pick Harmonies Online',
   description:
     'Free interactive color wheel. Drag to pick a hue, see complementary, triadic, and analogous harmonies instantly — with HEX, RGB, and CMYK values.',
   url: '/color-wheel',

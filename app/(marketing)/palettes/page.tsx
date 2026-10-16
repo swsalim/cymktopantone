@@ -5,7 +5,7 @@ import { PaletteGenerator } from '@/components/color-tools/palette-generator';
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Color Palette Generator — Free Online Color Schemes | Color Mapper',
+  title: 'Color Palette Generator — Free Online Color Schemes',
   description:
     'Generate harmonious color palettes from one seed color. Complementary, triadic, analogous, and more — with CMYK values, print gamut warnings, and CSS/Tailwind export.',
   url: '/palettes',

@@ -1,0 +1,81 @@
+# Color Mapper (colormapper.xyz)
+
+> Free color tools for designers, printers, and developers: palettes, gradients, WCAG contrast, Tailwind scales, print gamut checks, and converters between RGB, CMYK, HEX, HSL, and HSV. No account required.
+
+Color Mapper is a static toolkit site. Each page is an interactive tool or guide with copy-ready values (HEX, RGB, CMYK, HSL, HSV) and short educational copy.
+
+## Main pages
+
+- https://colormapper.xyz — Homepage and overview of all tools
+- https://colormapper.xyz/tools — Directory of free color tools
+- https://colormapper.xyz/convert-color — Hub for all color format converters
+- https://colormapper.xyz/blog — Articles on color workflows and accessibility
+
+## Color tools
+
+- https://colormapper.xyz/palettes — Color palette generator (harmony schemes, CMYK values, print gamut warnings)
+- https://colormapper.xyz/palettes/complementary — Complementary palette generator
+- https://colormapper.xyz/palettes/analogous — Analogous palette generator
+- https://colormapper.xyz/palettes/triadic — Triadic palette generator
+- https://colormapper.xyz/palettes/split-complementary — Split complementary palette generator
+- https://colormapper.xyz/palettes/monochromatic — Monochromatic palette generator
+- https://colormapper.xyz/palettes/tetradic — Tetradic palette generator
+- https://colormapper.xyz/gradients — CSS gradient generator (linear, radial, conic)
+- https://colormapper.xyz/gradients/linear — Linear CSS gradient generator
+- https://colormapper.xyz/gradients/radial — Radial CSS gradient generator
+- https://colormapper.xyz/gradients/conic — Conic CSS gradient generator
+- https://colormapper.xyz/contrast-checker — WCAG 2.1 color contrast checker (AA and AAA)
+- https://colormapper.xyz/color-scale — Tint and shade generator (Tailwind-style 50–950 scale)
+- https://colormapper.xyz/palette-from-image — Extract a color palette from an image (in-browser)
+- https://colormapper.xyz/color-blindness — Color blindness simulator (protanopia, deuteranopia, tritanopia)
+- https://colormapper.xyz/color-wheel — Interactive color wheel
+- https://colormapper.xyz/color-wheel/complementary — Complementary color wheel
+- https://colormapper.xyz/color-wheel/analogous — Analogous color wheel
+- https://colormapper.xyz/color-wheel/triadic — Triadic color wheel
+- https://colormapper.xyz/color-wheel/split-complementary — Split complementary color wheel
+- https://colormapper.xyz/color-wheel/monochromatic — Monochromatic color wheel
+- https://colormapper.xyz/color-wheel/tetradic — Tetradic color wheel
+- https://colormapper.xyz/print-gamut — Print gamut checker (screen RGB vs CMYK shift)
+- https://colormapper.xyz/compare-colors — Compare two colors (Delta E 2000)
+
+## Color converters
+
+- https://colormapper.xyz/convert-cmyk-to-hex — CMYK to HEX
+- https://colormapper.xyz/convert-cmyk-to-hsl — CMYK to HSL
+- https://colormapper.xyz/convert-cmyk-to-rgb — CMYK to RGB
+- https://colormapper.xyz/convert-hex-to-cmyk — HEX to CMYK
+- https://colormapper.xyz/convert-hex-to-hsl — HEX to HSL
+- https://colormapper.xyz/convert-hex-to-hsv — HEX to HSV
+- https://colormapper.xyz/convert-hex-to-rgb — HEX to RGB
+- https://colormapper.xyz/convert-hsl-to-cmyk — HSL to CMYK
+- https://colormapper.xyz/convert-hsl-to-hex — HSL to HEX
+- https://colormapper.xyz/convert-hsl-to-rgb — HSL to RGB
+- https://colormapper.xyz/convert-hsv-to-cmyk — HSV to CMYK
+- https://colormapper.xyz/convert-hsv-to-hex — HSV to HEX
+- https://colormapper.xyz/convert-hsv-to-hsl — HSV to HSL
+- https://colormapper.xyz/convert-hsv-to-rgb — HSV to RGB
+- https://colormapper.xyz/convert-rgb-to-cmyk — RGB to CMYK
+- https://colormapper.xyz/convert-rgb-to-hex — RGB to HEX
+- https://colormapper.xyz/convert-rgb-to-hsl — RGB to HSL
+
+## Color model guides
+
+- https://colormapper.xyz/color-models — Overview of RGB, CMYK, HEX, HSL, and HSV
+- https://colormapper.xyz/color-models/rgb — RGB color model guide
+- https://colormapper.xyz/color-models/cmyk — CMYK color model guide
+- https://colormapper.xyz/color-models/hex — HEX color codes guide
+- https://colormapper.xyz/color-models/hsl — HSL color model guide
+- https://colormapper.xyz/color-models/hsv — HSV color model guide
+
+## Blog posts
+
+- https://colormapper.xyz/blog/best-color-palettes-startup — Best color palettes for tech and startup branding
+- https://colormapper.xyz/blog/cmyk-safe-web-palettes — CMYK-safe web palettes and print-ready color systems
+- https://colormapper.xyz/blog/color-theory-101 — Color theory 101: hue, saturation, and value
+- https://colormapper.xyz/blog/css-gradients-guide — CSS gradients guide (linear, radial, conic)
+- https://colormapper.xyz/blog/tailwind-color-scale-guide — Tailwind color scale from a single brand HEX
+- https://colormapper.xyz/blog/wcag-contrast-brand-colors — WCAG contrast for brand colors
+
+## Optional
+
+- https://colormapper.xyz/sitemap.xml — Full URL list for crawlers

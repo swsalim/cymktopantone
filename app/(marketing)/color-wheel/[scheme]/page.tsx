@@ -10,42 +10,42 @@ import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-
 
 const SCHEME_COPY: Record<HarmonyScheme, { title: string; description: string; intro: string }> = {
   complementary: {
-    title: 'Complementary Color Wheel — Find Opposite Colors | Color Mapper',
+    title: 'Complementary Color Wheel — Find Opposite Colors',
     description:
       'Interactive color wheel for complementary pairs. Drag to a hue and see its exact opposite — with HEX, RGB, and CMYK values.',
     intro:
       'Complementary colors sit 180° apart on the wheel. Drag the marker to any hue and the wheel shows its opposite instantly.',
   },
   analogous: {
-    title: 'Analogous Color Wheel — Neighboring Hues | Color Mapper',
+    title: 'Analogous Color Wheel — Neighboring Hues',
     description:
       'Interactive color wheel for analogous schemes. Pick a hue and see its neighbors — cohesive palettes with HEX, RGB, and CMYK values.',
     intro:
       'Analogous colors are neighbors on the wheel. Pick a base hue and the markers show the adjacent hues that pair naturally with it.',
   },
   triadic: {
-    title: 'Triadic Color Wheel — Three Balanced Hues | Color Mapper',
+    title: 'Triadic Color Wheel — Three Balanced Hues',
     description:
       'Interactive color wheel for triadic schemes. Three hues 120° apart — vibrant, balanced palettes with HEX, RGB, and CMYK values.',
     intro:
       'Triadic schemes place three hues 120° apart. Drag the marker and watch the triangle rotate with your base color.',
   },
   'split-complementary': {
-    title: 'Split Complementary Color Wheel | Color Mapper',
+    title: 'Split Complementary Color Wheel',
     description:
       'Interactive color wheel for split complementary schemes — a base hue plus the two colors flanking its opposite.',
     intro:
       'Split complementary softens a direct complement: your base hue plus the two colors flanking its opposite — contrast without tension.',
   },
   monochromatic: {
-    title: 'Monochromatic Color Wheel — One Hue, Many Shades | Color Mapper',
+    title: 'Monochromatic Color Wheel — One Hue, Many Shades',
     description:
       'Interactive color wheel for monochromatic schemes. One hue across light and dark steps — clean, unified palettes.',
     intro:
       'Monochromatic schemes keep one hue and vary the lightness. Use the lightness slider to walk the shade range of your base color.',
   },
   tetradic: {
-    title: 'Tetradic Color Wheel — Four-Hue Rectangle | Color Mapper',
+    title: 'Tetradic Color Wheel — Four-Hue Rectangle',
     description:
       'Interactive color wheel for tetradic schemes — four hues forming a rectangle. Rich palettes with HEX, RGB, and CMYK values.',
     intro:

@@ -5,7 +5,7 @@ import { ColorComparator } from '@/components/color-tools/color-comparator';
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Compare Colors — Delta E Color Difference Calculator | Color Mapper',
+  title: 'Compare Colors — Delta E Color Difference Calculator',
   description:
     'Compare two colors side by side with ΔE2000 perceptual difference, match percentage, and HEX, RGB, CMYK, HSL values for both. Free, no signup.',
   url: '/compare-colors',

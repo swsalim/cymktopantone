@@ -1,4 +1,4 @@
-import { absoluteUrl } from '@/lib/utils';
+import { canonicalUrl } from '@/lib/utils';
 
 import JsonLd from '@/components/structured-data/json-ld';
 
@@ -9,7 +9,7 @@ export default function WebsiteJsonLd({ company }: { company: string }) {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: company,
-        url: absoluteUrl('/'),
+        url: canonicalUrl(),
         inLanguage: 'en-US',
       }}
     </JsonLd>

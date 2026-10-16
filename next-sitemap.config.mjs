@@ -32,12 +32,6 @@ const config = {
   exclude,
   robotsTxtOptions: {
     policies: [{ userAgent: '*', disallow: NEXT_SSG_FILES }],
-    host:
-      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-        ? (process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN)
-        : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
-          ? process.env.NEXT_PUBLIC_VERCEL_URL
-          : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, '') ?? SITE_DOMAIN,
   },
   additionalPaths: async (config) => {
     return [

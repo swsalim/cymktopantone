@@ -5,7 +5,7 @@ import { GradientGenerator } from '@/components/color-tools/gradient-generator';
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'CSS Gradient Generator — Free Linear, Radial & Conic | Color Mapper',
+  title: 'CSS Gradient Generator — Free Linear, Radial & Conic',
   description:
     'Create CSS gradients with live preview. Linear, radial, and conic types with 2–5 color stops, presets, and one-click copy — free, no signup.',
   url: '/gradients',

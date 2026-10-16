@@ -5,7 +5,7 @@ import { ContrastChecker } from '@/components/color-tools/contrast-checker';
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'WCAG Color Contrast Checker — AA & AAA Free Tool | Color Mapper',
+  title: 'WCAG Color Contrast Checker — AA & AAA Free Tool',
   description:
     'Check color contrast ratios against WCAG 2.1 AA and AAA standards. Live text preview, auto-fix suggestions, and palette contrast matrix — free online.',
   url: '/contrast-checker',

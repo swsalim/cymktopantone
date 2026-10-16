@@ -13,21 +13,21 @@ const TYPE_COPY: Record<
   { title: string; description: string; intro: string }
 > = {
   linear: {
-    title: 'Linear Gradient Generator — Free CSS Tool | Color Mapper',
+    title: 'Linear Gradient Generator — Free CSS Tool',
     description:
       'Create linear CSS gradients with custom angles and color stops. Live preview and instant copy — free online tool.',
     intro:
       'Linear gradients transition colors along a line. Adjust the angle from 0° to 360° for horizontal, vertical, or diagonal effects.',
   },
   radial: {
-    title: 'Radial Gradient Generator — Free CSS Tool | Color Mapper',
+    title: 'Radial Gradient Generator — Free CSS Tool',
     description:
       'Build radial CSS gradients for glows, spotlights, and circular fades. Copy ready-to-use CSS instantly.',
     intro:
       'Radial gradients spread from a center point outward — perfect for hero backgrounds, buttons, and soft vignettes.',
   },
   conic: {
-    title: 'Conic Gradient Generator — Free CSS Tool | Color Mapper',
+    title: 'Conic Gradient Generator — Free CSS Tool',
     description:
       'Generate conic CSS gradients for pie charts, color wheels, and angular transitions. Free with live preview.',
     intro:

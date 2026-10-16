@@ -5,7 +5,7 @@ import { ColorScaleGenerator } from '@/components/color-tools/color-scale-genera
 import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
 
 const config = {
-  title: 'Tint & Shade Generator — Tailwind Color Scale | Color Mapper',
+  title: 'Tint & Shade Generator — Tailwind Color Scale',
   description:
     'Generate tints and shades from one brand HEX. Tailwind 50–950 scale with WCAG contrast badges and CMYK values for print handoff.',
   url: '/color-scale',
