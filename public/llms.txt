@@ -49,6 +49,7 @@ Color Mapper is a static toolkit site. Each page is an interactive tool or guide
 - https://colormapper.xyz/convert-hex-to-rgb — HEX to RGB
 - https://colormapper.xyz/convert-hsl-to-cmyk — HSL to CMYK
 - https://colormapper.xyz/convert-hsl-to-hex — HSL to HEX
+- https://colormapper.xyz/convert-hsl-to-hsv — HSL to HSV
 - https://colormapper.xyz/convert-hsl-to-rgb — HSL to RGB
 - https://colormapper.xyz/convert-hsv-to-cmyk — HSV to CMYK
 - https://colormapper.xyz/convert-hsv-to-hex — HSV to HEX
@@ -79,6 +80,14 @@ Color Mapper is a static toolkit site. Each page is an interactive tool or guide
 - https://colormapper.xyz/blog/hex-vs-rgb-vs-hsl — HEX vs RGB vs HSL
 - https://colormapper.xyz/blog/accessible-dark-mode-color-palettes — Accessible color palettes for dark mode
 - https://colormapper.xyz/blog/oklch-for-designers — OKLCH for designers
+- https://colormapper.xyz/blog/the-complete-guide-to-managing-color-from-screen-to-press — Managing color from screen to press
+- https://colormapper.xyz/blog/7-practical-ways-to-choose-css-gradient-color-stops — Choosing CSS gradient color stops
+- https://colormapper.xyz/blog/color-blindness-simulation-common-design-questions-answered — Color blindness simulation questions
+
+## Color pages
+
+- https://colormapper.xyz/colors — Index of CSS named colors and common neutrals
+- https://colormapper.xyz/color/FF0000 — Example per-color page (red). Other catalog colors use /color/{HEX}
 
 ## Optional
 

@@ -31,7 +31,18 @@ const config = {
   sitemapSize: 7000,
   exclude,
   robotsTxtOptions: {
-    policies: [{ userAgent: '*', disallow: NEXT_SSG_FILES }],
+    policies: [
+      { userAgent: '*', allow: '/', disallow: NEXT_SSG_FILES },
+      { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'CCBot', allow: '/' },
+      { userAgent: 'Bytespider', allow: '/' },
+      { userAgent: 'Amazonbot', allow: '/' },
+      { userAgent: 'FacebookBot', allow: '/' },
+      { userAgent: 'meta-externalagent', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: '/' },
+      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: 'Google-Extended', allow: '/' },
+    ],
   },
   additionalPaths: async (config) => {
     return [

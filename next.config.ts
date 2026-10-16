@@ -49,6 +49,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/convert-hex-to-pantone-pms/:hex',
+        destination: '/convert-hex-to-cmyk',
+        permanent: true,
+      },
+      {
         source: '/convert-hsl-to-pantone-pms',
         destination: '/convert-hsl-to-cmyk',
         permanent: true,

@@ -62,7 +62,9 @@ export default function PalettesPage() {
               Check each swatch&apos;s CMYK column before handing colors to a print vendor. Use the{' '}
               <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> for precise percentages,
               or open the <Link href="/contrast-checker">contrast checker</Link> to validate text
-              pairings for accessibility.
+              pairings for accessibility. When a swatch is a CSS named color or one of the catalog
+              neutrals, its hex links to a{' '}
+              <Link href="/colors">color page</Link> with the other conversions and harmony palettes.
             </p>
             <h2>Color harmony rules explained</h2>
             <ul>

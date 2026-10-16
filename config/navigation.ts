@@ -91,6 +91,8 @@ export const navItems: NavItem[] = [
       '/color-wheel',
       '/print-gamut',
       '/compare-colors',
+      '/colors',
+      '/color',
     ],
     viewMore: { name: 'Browse all color tools', href: '/tools' },
     sections: [
@@ -119,7 +121,7 @@ export const navItems: NavItem[] = [
     name: 'Convert',
     href: '/convert-color',
     segments: ['/convert-color', '/convert-'],
-    viewMore: { name: 'All 18 converters', href: '/convert-color' },
+    viewMore: { name: `All ${converters.length} converters`, href: '/convert-color' },
     childItems: FEATURED_CONVERTER_IDS.map((id) => {
       const c = converters.find((x) => x.id === id)!;
       return {
@@ -166,6 +168,7 @@ export const footerColorTools = [
 
 export const footerLearnLinks = [
   { name: 'Color models', href: '/color-models' },
+  { name: 'Named colors', href: '/colors' },
   { name: 'Color theory basics', href: '/blog/color-theory-101' },
   { name: 'WCAG contrast guide', href: '/blog/wcag-contrast-brand-colors' },
   { name: 'Blog', href: '/blog' },

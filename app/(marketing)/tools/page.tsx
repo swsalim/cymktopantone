@@ -9,6 +9,8 @@ import { ogImages, siteConfig } from '@/config/site';
 import { absoluteUrl, cn } from '@/lib/utils';
 
 import { Container } from '@/components/container';
+import Faqs from '@/components/faq';
+import { Prose } from '@/components/prose';
 import BreadcrumbJsonLd from '@/components/structured-data/BreadcrumbJsonLd';
 import WebPageJsonLd from '@/components/structured-data/WebPageJsonLd';
 import WebsiteJsonLd from '@/components/structured-data/WebsiteJsonLd';
@@ -110,13 +112,98 @@ export default function ToolsHubPage() {
             </div>
           ))}
 
+          <div className="mt-12 max-w-3xl">
+            <Prose>
+              <h2>How the tools fit one color workflow</h2>
+              <p>
+                Start with a role, not a hex. A signature color, a body-text color, a surface, and
+                a chart series are different jobs. The{' '}
+                <Link href="/color-wheel">color wheel</Link> and the{' '}
+                <Link href="/palettes">palette generator</Link> propose hues from a harmony rule.
+                The <Link href="/colors">named color index</Link> is the place to look up a CSS
+                keyword or a common neutral and see the same color as HEX, RGB, HSL, HSV, CMYK, and
+                OKLCH.
+              </p>
+              <p>
+                After the hues exist, check the pairs you will actually ship. The{' '}
+                <Link href="/contrast-checker">contrast checker</Link> reports WCAG ratios for text
+                on a background. The <Link href="/color-blindness">color blindness simulator</Link>{' '}
+                previews protanopia, deuteranopia, and tritanopia so you can see hues that collapse.
+                Simulation is not a diagnosis and it does not replace a label when meaning depends
+                on color. The <Link href="/compare-colors">compare colors</Link> tool reports a
+                Delta E 2000 distance when you need a number for two close swatches.
+              </p>
+              <p>
+                Gradients are a separate step. Build stops in the{' '}
+                <Link href="/gradients">CSS gradient generator</Link>, then read the{' '}
+                <Link href="/blog/css-gradients-guide">CSS gradients guide</Link> and{' '}
+                <Link href="/blog/7-practical-ways-to-choose-css-gradient-color-stops">
+                  how to choose color stops
+                </Link>
+                . A gradient does not have one contrast ratio. Sample the light and dark ends under
+                the text.
+              </p>
+              <p>
+                Screen numbers and print numbers are not interchangeable. The{' '}
+                <Link href="/print-gamut">print gamut checker</Link> and the format converters show
+                a simple CMYK conversion so you can see a shift before you talk to a printer. They
+                do not apply a press profile. The{' '}
+                <Link href="/blog/the-complete-guide-to-managing-color-from-screen-to-press">
+                  screen-to-press guide
+                </Link>{' '}
+                is the workflow around those tools. Scales for an interface live in the{' '}
+                <Link href="/color-scale">tint and shade generator</Link>. Photos can be sampled
+                with <Link href="/palette-from-image">palette from image</Link>, which runs in the
+                browser and returns the most frequent color buckets, not a brand match.
+              </p>
+              <p>
+                Hue relationships — complementary, analogous, triadic, and the rest — are explained
+                in <Link href="/blog/color-theory-101">color theory 101</Link>. Use that article
+                when the wheel markers are clear and the reason to pick one scheme is not.
+              </p>
+            </Prose>
+          </div>
+
+          <div className="mt-16">
+            <Faqs
+              tagline="FAQ"
+              description="How the color tools relate, and what they do not decide for you."
+              data={[
+                {
+                  question: 'Do I need an account?',
+                  answer:
+                    'No. The palette, gradient, contrast, scale, image, simulation, wheel, gamut, compare, and converter tools run without an account.',
+                },
+                {
+                  question: 'Which tool should I open first?',
+                  answer:
+                    'If you have one brand hex, start with the <a href="/palettes">palette generator</a> or the <a href="/color-wheel">color wheel</a>. If you have a photo, start with <a href="/palette-from-image">palette from image</a>. If you already know the CSS name, open the <a href="/colors">color index</a>.',
+                },
+                {
+                  question: 'Are the CMYK values a press proof?',
+                  answer:
+                    'No. Converters and the <a href="/print-gamut">print gamut checker</a> use a channel conversion so you can see a shift. The printer’s profile, paper, and proof decide the ink.',
+                },
+                {
+                  question: 'Does a passing contrast check mean the page is accessible?',
+                  answer:
+                    'It means that pair meets the ratio you tested. It does not cover focus, keyboard use, or information that depends on color alone. Preview hues in the <a href="/color-blindness">color blindness simulator</a> and add a second cue when color carries meaning.',
+                },
+                {
+                  question: 'Where are the format converters?',
+                  answer: `The <a href="/convert-color">converter hub</a> lists all ${converters.length} tools between CMYK, RGB, HEX, HSL, and HSV, including <a href="/convert-hsl-to-hsv">HSL to HSV</a>.`,
+                },
+              ]}
+            />
+          </div>
+
           <div className="mt-12">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               Format converters
             </h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               <Link href="/convert-color" className="font-medium text-violet-600 hover:underline dark:text-violet-400">
-                View all 17 converters →
+                View all {converters.length} converters →
               </Link>
             </p>
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
