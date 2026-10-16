@@ -180,6 +180,11 @@ export default function ConvertColorsPage() {
             <h2 className="text-xl font-semibold tracking-tight md:text-2xl">Popular workflows</h2>
             <p className="text-muted-foreground mt-2 text-sm md:text-base">
               Start with these high-traffic tools for brand, packaging, and web handoff work.
+              Looking up a known swatch? Browse{' '}
+              <Link href="/colors" className="font-medium text-violet-700 hover:underline dark:text-violet-300">
+                named colors
+              </Link>{' '}
+              for HEX, RGB, HSL, HSV, CMYK, and OKLCH on one page.
             </p>
             <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
               {popularWorkflows.map((workflow) => (

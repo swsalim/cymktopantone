@@ -10,6 +10,7 @@ import {
   internalTools,
 } from '@/config/tools-internal';
 
+import { colorCatalog } from '@/lib/color-catalog';
 import { canonicalUrl } from '@/lib/utils';
 
 const STATIC_PATHS = [
@@ -26,6 +27,7 @@ const STATIC_PATHS = [
   '/legal/terms-and-conditions',
   '/advertise',
   '/blog',
+  '/colors',
 ] as const;
 
 function sitemapEntry(path: string, priority = 0.7): MetadataRoute.Sitemap[number] {
@@ -44,7 +46,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const gradientEntries = gradientSubpages.map((p) => sitemapEntry(`/gradients/${p.slug}`, 0.75));
   const wheelEntries = colorWheelSubpages.map((p) => sitemapEntry(`/color-wheel/${p.slug}`, 0.75));
   const converterEntries = getAllConverters().map((c) => sitemapEntry(c.url));
-  const blogEntries = allPosts.map((post) => ({
+  const colorEntries = colorCatalog.map((color) => sitemapEntry(`/color/${color.hex}`, 0.6));
+  const blogEntries = allPosts
+    .filter((post) => post.status === 'published')
+    .map((post) => ({
     url: canonicalUrl(`/blog/${post._meta.path}`),
     lastModified: new Date(post.updatedAt ?? post.publishedAt),
     changeFrequency: 'weekly' as const,
@@ -58,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...gradientEntries,
     ...wheelEntries,
     ...converterEntries,
+    ...colorEntries,
     ...blogEntries,
   ];
 }

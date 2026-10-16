@@ -18,9 +18,11 @@ export function NavMobile() {
   const pathname = usePathname();
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : 'auto';
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = previous;
     };
   }, [open]);
 

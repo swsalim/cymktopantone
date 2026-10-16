@@ -56,7 +56,10 @@
   body {
     color: var(--text-base);
     background: transparent;
-    overflow-x: clip;
+    /* overflow-x: clip on body computes to overflow: auto and becomes the sticky
+       scrollport, so a sidebar cannot stick to the viewport. Clip the document
+       on html instead. */
+    overflow-x: visible;
   }
 
   h1,

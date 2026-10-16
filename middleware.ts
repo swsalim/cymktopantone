@@ -25,6 +25,16 @@ export function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
+  const colorPath = pathname.match(/^\/color\/([0-9a-fA-F]{6})\/?$/);
+  if (colorPath) {
+    const hex = colorPath[1];
+    if (hex !== hex.toUpperCase() || pathname.endsWith('/')) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/color/${hex.toUpperCase()}`;
+      return NextResponse.redirect(url, 308);
+    }
+  }
+
   if (GONE_EXACT.has(pathname) || GONE_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
     return new NextResponse('Gone', {
       status: 410,

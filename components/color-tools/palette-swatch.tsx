@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Lock, LockOpen, AlertTriangle } from 'lucide-react';
 
+import { isCatalogHex } from '@/lib/color-catalog';
 import { formatCmykString, rgbToCmyk } from '@/lib/colors';
 import { gamutWarningMessage, isOutOfPrintGamut } from '@/lib/gamut';
 import { normalizeHex, hexToRgbTuple } from '@/lib/palette-harmony';
@@ -77,9 +78,17 @@ export function PaletteSwatch({
       </div>
       <div className="space-y-2 p-3">
         <div className="flex items-center justify-between gap-2">
-          <span className="font-mono text-sm font-semibold text-gray-900 dark:text-gray-100">
-            {normalized}
-          </span>
+          {isCatalogHex(normalized) ? (
+            <Link
+              href={`/color/${normalized.replace('#', '')}`}
+              className="font-mono text-sm font-semibold text-gray-900 hover:text-violet-700 hover:underline dark:text-gray-100 dark:hover:text-violet-300">
+              {normalized}
+            </Link>
+          ) : (
+            <span className="font-mono text-sm font-semibold text-gray-900 dark:text-gray-100">
+              {normalized}
+            </span>
+          )}
           <CopyButton text={normalized} label="" className="h-7 px-2" />
         </div>
         <p className="font-mono text-xs text-gray-600 dark:text-gray-400">

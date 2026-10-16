@@ -120,6 +120,17 @@ export const converters: ConverterConfig[] = [
     content: 'hsl/to-hex-content',
   },
   {
+    id: 'hsl-to-hsv',
+    sourceColor: 'HSL',
+    targetColor: 'HSV',
+    title: 'HSL to HSV Color Converter',
+    description:
+      'Convert HSL lightness into HSV value for pickers, photo tools, and pipelines that use hue, saturation, and value.',
+    url: '/convert-hsl-to-hsv',
+    component: 'hsl/to-hsv',
+    content: 'hsl/to-hsv-content',
+  },
+  {
     id: 'hsl-to-rgb',
     sourceColor: 'HSL',
     targetColor: 'RGB',
