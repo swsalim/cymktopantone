@@ -49,6 +49,10 @@ const config = {
       await config.transform(config, '/blog'),
       await config.transform(config, '/blog/color-theory-101'),
       await config.transform(config, '/blog/best-color-palettes-startup'),
+      await config.transform(config, '/blog/pantone-to-hex-rgb'),
+      await config.transform(config, '/blog/hex-vs-rgb-vs-hsl'),
+      await config.transform(config, '/blog/accessible-dark-mode-color-palettes'),
+      await config.transform(config, '/blog/oklch-for-designers'),
     ];
   },
   transform: async (config, path) => {
