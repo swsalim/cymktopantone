@@ -44,7 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const gradientEntries = gradientSubpages.map((p) => sitemapEntry(`/gradients/${p.slug}`, 0.75));
   const wheelEntries = colorWheelSubpages.map((p) => sitemapEntry(`/color-wheel/${p.slug}`, 0.75));
   const converterEntries = getAllConverters().map((c) => sitemapEntry(c.url));
-  const blogEntries = allPosts.map((post) => sitemapEntry(`/blog/${post._meta.path}`));
+  const blogEntries = allPosts.map((post) => ({
+    url: canonicalUrl(`/blog/${post._meta.path}`),
+    lastModified: new Date(post.updatedAt ?? post.publishedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
 
   return [
     ...staticEntries,

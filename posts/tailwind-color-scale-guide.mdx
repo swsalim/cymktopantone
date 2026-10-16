@@ -4,6 +4,7 @@ metaTitle: "Tailwind Color Scale Generator — Brand HEX to 50–950"
 metaDescription: "Turn one brand color into a Tailwind 50–950 scale with WCAG contrast badges. Export theme.extend.colors and CSS variables for design systems."
 summary: "Tailwind expects numbered color steps, not a single primary. This guide explains how to build a 50–950 ramp, pick accessible steps, and export config you can paste into production."
 publishedAt: '2026-06-03'
+updatedAt: '2026-10-16'
 author: 'Yuyu'
 status: 'published'
 ---
@@ -31,28 +32,55 @@ Linear RGB mixing toward white and black is predictable: each step is mathematic
 
 The trade-off: linear ramps are not always the most *beautiful* ramps. Some design teams tweak 400 and 600 by eye after generation. Starting from a generated base saves hours.
 
-## How to generate a 50–950 scale from one HEX
+## How to build a 50–950 scale
 
-1. Paste your brand color into the [color scale generator](/color-scale).
-2. Review the grid: 50, 100, 200 … 950 with live swatches.
-3. Check the **contrast on white** and **contrast on black** badge on each step.
-4. Copy the **Tailwind config** export or **CSS variables**.
+Tailwind's default palettes use eleven steps, 50 through 950. The customizing-colors guide is where you add your own under `theme.extend.colors` without replacing the defaults. Sources: <a href="https://tailwindcss.com/docs/colors" target="_blank" rel="noreferrer">Tailwind colors</a> and <a href="https://v3.tailwindcss.com/docs/customizing-colors" target="_blank" rel="noreferrer">customizing colors (v3)</a>. The <Link href="/color-scale">color scale generator</Link> builds that shape from one hex. Here is the sequence, including what to do if you are laying the ramp out by hand.
 
-Example export shape:
+1. **Lock the seed as step 500.** The color people already recognize — the logo, the primary button — is 500. Do not let a mix replace it. For the worked example below, the seed is `#6D39AC`.
+2. **Mix toward white in sRGB for 50–400.** Take the red, green, and blue channels and interpolate them toward 255. Do this in sRGB, not by dragging HSL lightness. Lightness-only edits are how a blue tint turns cyan. The generator does the channel mix for you. Paste the seed into the <Link href="/color-scale">color scale tool</Link> and read the lighter swatches instead of inventing them.
+3. **Mix toward black for 600–950.** Same idea, toward 0. Leave a gap between steps that your eye can see at a glance. If 700 and 800 look identical on your laptop, the ramp is too compressed to be useful as borders versus text.
+4. **Read contrast on white and on black for every step.** The badges use the WCAG relative-luminance ratio from <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noreferrer">Success Criterion 1.4.3</a>. For `#6D39AC` the linear mixes come out like this (ratios against white, then black):
+
+| Step | HEX | On white | On black |
+| --- | --- | --- | --- |
+| 50 | `#F8F5FB` | 1.08:1 | 19.45:1 |
+| 100 | `#E9E1F3` | 1.27:1 | 16.53:1 |
+| 200 | `#D3C4E6` | 1.64:1 | 12.81:1 |
+| 300 | `#BDA6DA` | 2.18:1 | 9.63:1 |
+| 400 | `#A788CD` | 2.98:1 | 7.05:1 |
+| 500 | `#6D39AC` | 7.42:1 | 2.83:1 |
+| 600 | `#5D3092` | 9.12:1 | 2.30:1 |
+| 700 | `#4C2878` | 11.16:1 | 1.88:1 |
+| 800 | `#3C1F5F` | 13.52:1 | 1.55:1 |
+| 900 | `#2C1745` | 15.96:1 | 1.32:1 |
+| 950 | `#0D0715` | 19.84:1 | 1.06:1 |
+
+Step 400 at 2.98:1 on white fails even the 3:1 large-text bar. Step 500 passes AAA on white and fails on black. Those two facts are why the ramp exists: one hex cannot be both the pale surface and the text.
+
+5. **Assign roles before anyone uses the numbers.** 50–200 for surfaces and stripes. 600–900 for text on white. 500 for fills where white text also clears 4.5:1 — here white on `#6D39AC` is the same 7.42:1, so it does. Write the rule down. "Primary" is not a step number until you say which step.
+6. **Export one key per step.** Copy the Tailwind config or the CSS variables from the generator, then make sure each of 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, and 950 appears once. A duplicated key is invalid as a design token even if a JS object happens to keep the last one.
 
 ```js
-// tailwind.config.js (extend.colors)
+// tailwind.config.js — theme.extend.colors
+// sRGB mixes of #6D39AC, 500 held at the seed
 brand: {
-  50: '#F5F0FA',
-  100: '#EBE0F5',
-  // ...
+  50: '#F8F5FB',
+  100: '#E9E1F3',
+  200: '#D3C4E6',
+  300: '#BDA6DA',
+  400: '#A788CD',
   500: '#6D39AC',
-  // ...
-  950: '#1A0F2E',
+  600: '#5D3092',
+  700: '#4C2878',
+  800: '#3C1F5F',
+  900: '#2C1745',
+  950: '#0D0715',
 },
 ```
 
-Paste, run your build, use `bg-brand-500` and `text-brand-50` in components. No ad-hoc HEX in JSX.
+Paste, run the build, and use `bg-brand-500` and `text-brand-800` in components. No ad-hoc hex in JSX.
+
+7. **Stop, then decide if the ramp needs a perceptual pass.** Linear sRGB is predictable and it is not perfectly even to the eye. If 200 and 300 feel too far apart, adjust those two steps. Björn Ottosson's <a href="https://bottosson.github.io/posts/oklab/" target="_blank" rel="noreferrer">Oklab</a> write-up is the reference for a space built to be more even. Do that after the contrast table is green for the pairs you ship, not before. A beautiful OKLCH curve that fails 4.5:1 is still a failed text color.
 
 ## Which steps to use for text vs fills
 
@@ -91,20 +119,33 @@ One seed HEX becomes tokens for engineering, specs for print, and stops for CSS 
 
 ## FAQ
 
-**Why 11 steps (50–950) and not 10?**
+<BlogFaq
+  items={[
+    {
+      question: "Why 11 steps from 50 to 950?",
+      answer: "<a href=\"https://tailwindcss.com/docs/colors\" target=\"_blank\" rel=\"noreferrer\">Tailwind's default palettes</a> use 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, and 950. Matching that list keeps a custom color pasteable into `theme.extend.colors`, as described in the <a href=\"https://v3.tailwindcss.com/docs/customizing-colors\" target=\"_blank\" rel=\"noreferrer\">v3 customizing-colors guide</a>.",
+    },
+    {
+      question: "Should I build the ramp in HSL or in sRGB?",
+      answer: "Mix the sRGB channels toward white and black. Changing only HSL lightness often shifts hue, so a blue tint drifts toward cyan. The <a href=\"/color-scale\">color scale generator</a> does the channel mix. Check the result by eye after it.",
+    },
+    {
+      question: "Should 500 always be the input HEX?",
+      answer: "Yes if that hex is the color you need to reproduce exactly. If the Figma \"primary\" is a light tint, do not pretend it is a mid step. Put the real brand color on 500 and let the lighter mixes occupy 50\u2013400.",
+    },
+    {
+      question: "Can I use step 400 as text on white?",
+      answer: "Not in the `#6D39AC` example. Step 400, `#A788CD`, is 2.98:1 on white, which is under the 3:1 large-text minimum and under the 4.5:1 body-text minimum in <a href=\"https://www.w3.org/TR/WCAG22/#contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 2.2</a>.",
+    },
+    {
+      question: "Do I need both a Tailwind export and CSS variables?",
+      answer: "Use the Tailwind export for a Tailwind project. CSS variables fit vanilla CSS, other frameworks, or a token pipeline. The hex values should match either way.",
+    },
+    {
+      question: "Is a linear ramp the same as an OKLCH ramp?",
+      answer: "No. Linear sRGB mixes are even in channel values, not in perception. <a href=\"https://bottosson.github.io/posts/oklab/\" target=\"_blank\" rel=\"noreferrer\">Oklab</a> is the reference for a more even space. Either ramp still has to pass contrast for the pairs you ship.",
+    },
+  ]}
+/>
 
-Tailwind v3+ standardized on 50–950 including 950 for near-black shades. Matching that convention keeps copy-paste into `theme.extend` frictionless.
-
-**Can I rename `brand` to my product name?**
-
-Yes. Replace `brand` with `acme` in the export. Class names become `bg-acme-500`, etc.
-
-**Should 500 always be the input HEX?**
-
-The generator anchors 500 at your seed color. If your Figma "primary" is lighter than mid-tone, consider whether 400 or 600 should be the anchor instead.
-
-**Do I need both Tailwind export and CSS variables?**
-
-Use Tailwind export for Tailwind projects. CSS variables work for vanilla CSS, other frameworks, or design tokens pipelines.
-
-Open the [color scale generator](/color-scale), paste your production primary, and export the config. Your next PR can replace scattered HEX literals with `brand-*` utilities in one pass.
+Open the <Link href="/color-scale">color scale generator</Link>, paste your production primary, and export the config. Your next PR can replace scattered hex literals with `brand-*` utilities in one pass.

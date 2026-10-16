@@ -16,6 +16,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
+import BlogFaq from '@/components/blog-faq';
 import { BlogNavigation } from '@/components/blog-navigation';
 import { ImageKit } from '@/components/image-kit';
 import BlogPostJsonLd from '@/components/structured-data/BlogPostJsonLd';
@@ -74,23 +75,33 @@ function PageHeading({
   title,
   author,
   publishedAt,
+  updatedAt,
 }: {
   title: string;
   author: string;
   publishedAt: string;
+  updatedAt?: string;
 }) {
   return (
     <div className="mb-6 max-w-3xl text-gray-500">
       <h1 className="mb-4 text-3xl font-semibold !leading-tight tracking-tight text-gray-950 sm:text-4xl md:text-5xl md:font-bold dark:text-gray-50">
         {title}
       </h1>
-      <div className="flex flex-row items-center justify-start gap-3 md:gap-6">
+      <div className="flex flex-row flex-wrap items-center justify-start gap-3 md:gap-6">
         <span className="text-base capitalize sm:block dark:text-gray-300">by {author}</span>
         <span className="text-base capitalize text-gray-900 dark:text-gray-100">
           <time dateTime={publishedAt} className="font-bold">
             {format(parseISO(publishedAt), 'MMMM dd, yyyy')}
           </time>
         </span>
+        {updatedAt ? (
+          <span className="text-base text-gray-900 dark:text-gray-100">
+            Updated{' '}
+            <time dateTime={updatedAt} className="font-bold">
+              {format(parseISO(updatedAt), 'MMMM dd, yyyy')}
+            </time>
+          </span>
+        ) : null}
       </div>
     </div>
   );
@@ -138,6 +149,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const components = {
     ImageKit,
     Link,
+    BlogFaq,
     LazyAdsLeaderboard,
     LazyAdsSquare,
     LazyAdsArticle,
@@ -155,7 +167,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <main className="container mx-auto max-w-7xl space-y-10 px-4 py-8 md:space-y-12 md:py-16">
         <Breadcrumb items={breadcrumbItems} />
         <section className="to-cyan-50/80 dark:to-cyan-500/10 rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50/90 via-white/90 p-6 shadow-sm md:p-10 dark:border-violet-500/30 dark:from-violet-500/15 dark:via-gray-900/80">
-          <PageHeading title={post.title} publishedAt={post.publishedAt} author={post.author} />
+          <PageHeading
+            title={post.title}
+            publishedAt={post.publishedAt}
+            updatedAt={post.updatedAt}
+            author={post.author}
+          />
         </section>
 
         <div className="mt-6 sm:mt-10 lg:grid lg:grid-cols-12 lg:gap-x-16 xl:gap-x-24">
@@ -176,7 +193,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 'prose-pre:font-mono prose prose-gray dark:prose-invert prose-pre:rounded-lg prose-pre:bg-gray-900 prose-pre:p-4 prose-pre:text-sm prose-pre:leading-relaxed prose-pre:tracking-wide prose-pre:text-gray-100',
                 'prose-h3:text-xl',
                 'prose-strong:font-bold',
-              )}>
+              )}
+            >
               <MDXContent code={post.mdx} components={{ ...components }} />
             </div>
 

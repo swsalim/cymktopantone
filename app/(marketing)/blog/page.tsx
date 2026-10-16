@@ -90,11 +90,20 @@ export default function BlogPage() {
               day: 'numeric', // "23"
               year: 'numeric', // "2025"
             }).format(new Date(post.publishedAt));
+            const updatedLabel = post.updatedAt
+              ? new Intl.DateTimeFormat('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric',
+                  timeZone: 'UTC',
+                }).format(new Date(post.updatedAt))
+              : null;
             return (
               <Link
                 key={post._meta.path}
                 href={`/blog/${post._meta.path}`}
-                className="group overflow-hidden rounded-2xl border border-violet-200/70 bg-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900/75 dark:hover:border-violet-500/40">
+                className="group overflow-hidden rounded-2xl border border-violet-200/70 bg-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900/75 dark:hover:border-violet-500/40"
+              >
                 {post.coverImage && (
                   <ImageKit
                     src={post.coverImage}
@@ -120,6 +129,7 @@ export default function BlogPage() {
                     </div>
                     <span className="text-sm font-semibold text-gray-500 dark:text-gray-300">
                       {formatted}
+                      {updatedLabel ? ` · Updated ${updatedLabel}` : ''}
                     </span>
                   </div>
                 </div>

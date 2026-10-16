@@ -4,6 +4,7 @@ metaTitle: "CMYK-Safe Web Palettes — Print-Ready Color Systems"
 metaDescription: "Build web palettes that survive CMYK print conversion. Gamut warnings, HEX to CMYK workflow, and tools for designers who ship both digital and print."
 summary: "RGB palettes look great in Figma and dull on a press proof. Learn why gamut mismatch happens, how to spot risky swatches early, and how to document CMYK alongside web tokens."
 publishedAt: '2026-06-02'
+updatedAt: '2026-10-16'
 author: 'Yuyu'
 status: 'published'
 ---
@@ -18,7 +19,36 @@ Screens emit light. Paper absorbs ink. No converter fixes that physics problem. 
 
 When you convert `#00FF00` to CMYK, the engine finds the *closest printable mix* of cyan, magenta, yellow, and black. Closest is not identical. Sometimes it is not even close.
 
-That is not a bug in your converter. It is the gap between additive (RGB) and subtractive (CMYK) color.
+That is not a bug in your converter. It is the gap between additive (RGB) and subtractive (CMYK) color. The <Link href="/color-models/cmyk">CMYK model page</Link> walks through the four inks. The rest of this guide is about deciding which screen colors are worth sending to those inks.
+
+## RGB vs CMYK: choosing colors that survive print
+
+RGB and CMYK are not two spellings of the same color.
+
+- **RGB is additive.** A display emits red, green, and blue light. A web hex value is an sRGB code: three channels that a browser paints on a screen. `#00FF00` is the green corner of that encoding. It is allowed on a monitor. It is not a recipe for ink.
+- **CMYK is subtractive.** A press lays cyan, magenta, yellow, and black ink on paper, and the paper reflects whatever light the ink does not absorb. The set of colors that ink can make is smaller than sRGB, especially in saturated greens, cyans, and blues.
+
+Adobe's color-mode documentation makes the practical split: RGB for on-screen work, CMYK when you are preparing a process-color print file. Source: <a href="https://helpx.adobe.com/photoshop/using/color-modes.html" target="_blank" rel="noreferrer">Adobe, "Color modes"</a>.
+
+Choosing a color that survives means picking an sRGB value whose printable neighbor is still the color you meant.
+
+1. Stay off the edges of sRGB when print is part of the job. Pure `#00FF00` is inside the screen encoding and outside what four-color process can hit. A slightly darker, slightly less saturated green usually moves less.
+2. Prefer a mid-saturation seed if the same hue has to appear on a package and a website. You can still use a brighter accent on screen. Mark it as screen-only.
+3. Compare the screen color to the press preview before you fall in love with it. The <Link href="/print-gamut">print gamut checker</Link> converts to CMYK and back and shows the shift. A large round trip means the press will substitute a duller color.
+4. Do not promise a match you have not proofed. Paper, coating, and the press change the result even when the percentages are right.
+
+An ICC profile is what makes "these CMYK percentages" mean a specific device. The International Color Consortium defines the profile file format that connects color encodings, and that specification was published as ISO 15076-1. Source: <a href="https://www.color.org/icc_specs2/" target="_blank" rel="noreferrer">ICC specifications</a>. Offset process control for four-color printing is a separate standard, ISO 12647-2. A percentage without the profile your printer named (a FOGRA or GRACoL characterization, for example) is not yet a press specification. The ICC's own FAQ is the short version of why profiles exist: <a href="https://www.color.org/faqs/" target="_blank" rel="noreferrer">ICC frequently asked questions</a>.
+
+## Converting HEX to CMYK for print
+
+A hex code does not contain cyan. Something has to calculate it, and the method matters.
+
+1. **Confirm the hex is the sRGB value you ship.** Sample the token, not a screenshot that a browser has already color-managed.
+2. **Get a percentage estimate.** The <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> maps the red, green, and blue channels through the common algebraic formula: black from the strongest channel, then cyan, magenta, and yellow from what remains. That is a useful number to write next to the hex in a draft brand sheet.
+3. **Treat that number as naive.** <a href="https://www.w3.org/TR/css-color-5/#device-cmyk" target="_blank" rel="noreferrer">CSS Color Level 5</a> (a W3C Working Draft) defines `device-cmyk()` and says these colors have no colorimetric meaning by themselves. The precise conversion depends on the output device. With no ICC profile, the spec falls back to a naive algorithm and says that algorithm is approximate because it does not know the inks, the dot gain, or the colorimetry of the RGB space. The converter on this site is in that naive category. It is not a FOGRA or GRACoL conversion.
+4. **Look at the shift.** Paste the same hex into the <Link href="/print-gamut">print gamut checker</Link>. If the press preview is a different color, the percentages are a substitute, not a match. Read the <Link href="/color-models/cmyk">CMYK model</Link> if the four channels themselves are unfamiliar.
+5. **For production, convert with the printer's profile.** In Photoshop or the RIP, convert from the document's RGB profile to the ICC profile the vendor specified, then proof on the stock you will print. ISO 12647-2 is the process-control reference for offset lithography (<a href="https://www.iso.org/standard/57814.html" target="_blank" rel="noreferrer">ISO catalogue entry</a>). The proof, not the website, is the acceptance test.
+6. **Write both values down.** HEX and RGB for the site. CMYK percentages plus the profile name for the printer. One column without the other is how the business cards come back the wrong green.
 
 ## Why web palette generators skip this problem
 
@@ -76,20 +106,33 @@ You are not maintaining a spreadsheet on the side. The same swatch carries web a
 
 ## FAQ
 
-**Should I design in CMYK or RGB?**
+<BlogFaq
+  items={[
+    {
+      question: "Should I design in CMYK or RGB?",
+      answer: "Design for the primary medium first. Web-first brands work in sRGB and check CMYK before anything is printed. Print-first brands can start from the printer profile and accept that a neon screen accent will not match the sheet.",
+    },
+    {
+      question: "Does converting HEX to CMYK mean it will print exactly?",
+      answer: "No. A naive RGB-to-CMYK formula, including the converter on this site, does not know the inks or the paper. <a href=\"https://www.w3.org/TR/css-color-5/#device-cmyk\" target=\"_blank\" rel=\"noreferrer\">CSS Color Level 5</a> says that kind of conversion is approximate. Production files should use the printer's ICC profile, and you should still proof.",
+    },
+    {
+      question: "What is an ICC profile?",
+      answer: "It is the file format the International Color Consortium defines for connecting color encodings between devices. The specification was also published as ISO 15076-1. See the <a href=\"https://www.color.org/icc_specs2/\" target=\"_blank\" rel=\"noreferrer\">ICC specifications</a>. Without the profile your printer names, a CMYK percentage is not tied to a specific press.",
+    },
+    {
+      question: "Can I use Pantone instead of CMYK?",
+      answer: "Spot colors sit outside four-color process for many brand hues. They cost more per run and can match a logo more closely. This site converts to process CMYK. It does not match Pantone libraries.",
+    },
+    {
+      question: "Why do gradients look banded in print?",
+      answer: "A CSS gradient is continuous light. A press reproduces tone with dots. For print, use flat fills or very few stops, and convert those stops with the printer profile. See the <a href=\"/blog/css-gradients-guide\">CSS gradients guide</a> for the screen side of that trade-off.",
+    },
+    {
+      question: "Which greens are risky on a web palette that also prints?",
+      answer: "The corner of sRGB, such as `#00FF00`, is a screen color. Four-color process cannot hit it. Prefer a darker, less saturated green and confirm the shift in the <a href=\"/print-gamut\">print gamut checker</a> before you lock the brand sheet.",
+    },
+  ]}
+/>
 
-Design for the primary medium first. Web-first brands work in RGB and verify CMYK before print. Print-first brands may start in CMYK and accept web compromises on neon accents.
-
-**Does "convert to CMYK" mean it will print exactly?**
-
-No. It means you have a printable build. Paper stock, coating, and press calibration still change the result. Always proof.
-
-**Can I use Pantone instead of CMYK?**
-
-Spot colors (Pantone) sit outside CMYK gamut for many brand hues. They cost more per run but match better for logos. Color Mapper focuses on process CMYK conversion, not spot color matching.
-
-**Why do my gradients look banded in print?**
-
-Gradients are continuous on screen and stepped on press. For print, simplify to flat fills or limit stops. See the [CSS gradients guide](/blog/css-gradients-guide) for screen vs print trade-offs.
-
-If your next project spans web and print, generate the palette once, read the gamut warnings, and send CMYK values with the creative brief. The reprint conversation is expensive. The five-minute check is not.
+If the project spans web and print, generate the palette once, read the gamut warnings, and send CMYK values with the profile name.
