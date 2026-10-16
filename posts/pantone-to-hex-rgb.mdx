@@ -1,0 +1,129 @@
+---
+title: "How to convert Pantone to HEX and RGB, and where the number stops being real"
+metaTitle: "Pantone to HEX and RGB: What the Conversion Can and Cannot Do"
+metaDescription: "Convert a Pantone code to HEX and RGB without treating the screen value as the ink. Coated vs uncoated, M1 vs M2, and what to check before you publish a brand hex."
+summary: "A Pantone code names a physical color standard. HEX and RGB name a screen color. This guide explains how to get a defensible digital value, why two official numbers can disagree, and how to check the result before it goes into a design system."
+publishedAt: '2026-10-16'
+updatedAt: '2026-10-16'
+author: 'Yuyu'
+status: 'published'
+---
+
+A brand PDF says "Pantone 185 C" and the website needs a hex code by Friday. That request is reasonable. The mistake is treating the hex that comes back as the Pantone color. It is a simulation of a physical standard, measured under one condition, then encoded for an sRGB screen. Two careful people can publish two different hex values for the same code and both can be tracing their number to Pantone.
+
+This guide is the workflow we use when a spot color has to live on the web: where the number is allowed to come from, what it cannot promise, and which checks to run before the hex is written into a token file. Color Mapper is not affiliated with Pantone LLC. Pantone and PMS are trademarks of Pantone LLC. The converters on this site take HEX, RGB, HSL, HSV, and CMYK. They do not replace a Pantone library or a physical fan deck.
+
+## What a Pantone code actually specifies
+
+The Pantone Matching System is a set of named color standards, printed as physical swatches and used so that a designer, a brand team, and a printer can point at the same chip. A code such as "185 C" is a name in that system. The letter is part of the name. **C** is the coated library. **U** is uncoated. The same hue number on coated and uncoated stock is not a promise that the two chips match. Ink film, paper absorbency, and optical brighteners change what you see.
+
+Spot color and process color are different production methods. A spot color is a pre-mixed ink (or a dedicated plate) identified by the Pantone code. Process color builds a picture from cyan, magenta, yellow, and black. Pantone also publishes Color Bridge references, which pair a spot standard with a process build and with digital values. Those process builds are recommended approximations. They are still four-color ink recipes, and they still depend on the printing condition. The <Link href="/blog/cmyk-safe-web-palettes">guide to CMYK-safe web palettes</Link> covers what happens when an sRGB color is forced through a process conversion. A Pantone code adds a prior step: you have to decide which physical standard you are simulating before any CMYK or HEX number means anything.
+
+Pantone's own conversion help says you can convert HEX, RGB, CMYK, and L\*a\*b\* values to the closest Pantone colors, and convert between Pantone libraries with a cross-reference. "Closest" is the word they use. The <a href="https://support.pantone.com/en/can-i-convert-hex-rgb-cmyk-and-lab-values-to-and-from-pantone-colors" target="_blank" rel="noreferrer">Pantone Connect conversion FAQ</a> does not describe an identity function. Pantone Connect itself shows this notice: on-screen digital color simulations may not match the physical PANTONE Color Standards, and you should refer to PANTONE Color publications for the actual physical standards.
+
+## What HEX and RGB can hold
+
+HEX and RGB, in CSS and in most design tools, are notations for sRGB. A six-digit hex code is three 8-bit channels. `#7C3AED` is red 124, green 58, blue 237, which you can confirm by splitting the pairs and reading them as base 16. The <Link href="/convert-hex-to-rgb">HEX to RGB converter</Link> does that split for you. The <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB, and HSL guide</Link> walks through why those three notations can name one screen color and still fail as a description of ink on paper.
+
+An sRGB value has no paper, no varnish, and no illuminant. It is a code a display will interpret through its own profile, brightness, and white point. Two monitors that both claim to show `#C8102E` can disagree with each other and with a coated chip under D50 booth light. That disagreement is ordinary. It is why a brand guide that only ships a hex code has already thrown away the information a printer needs, and why a guide that only ships a Pantone code has not yet given engineering a screen color.
+
+## Why two official RGB values can both be right
+
+Pantone publishes RGB and HEX in more than one place, and the numbers are not required to match. The support article <a href="https://support.pantone.com/en/why-do-the-rgb-and-hex-values-differ-in-physical-pantone-color-bridge-guides-and-color-bridge-libraries-found-in-pantone-connect" target="_blank" rel="noreferrer">"Why do the RGB and Hex values differ"</a> states the split directly:
+
+- Values in **Pantone Connect** are based on **M2** measurement conditions.
+- Values in the **physical Color Bridge guides** are **M1**.
+- M1 standardizes the ultraviolet component so the effect of optical brightening agents in paper is controlled. Pantone describes this as the condition printers use, and calls it the industry standard for that printed guide.
+- M2 cuts the effect of those brighteners. Pantone says design applications such as Adobe use M2 because the designer often does not yet know whether the stock contains optical brighteners.
+
+So a hex copied from Connect and a hex copied from the printed Color Bridge can differ for the same color name, and both can be the number Pantone published for that measurement condition. A third number from a random website is a different kind of object. It may be a decade-old export, a conversion through an unrelated CMYK profile, or a photograph of a chip. None of those is a second official measurement.
+
+If you already have two hex values and you need to know whether the disagreement is small, paste them into the <Link href="/compare-colors">color comparator</Link>. It reports CIEDE2000 (ΔE2000) between the two sRGB colors, plus HEX, RGB, CMYK, and HSL for each. ΔE2000 is a color-difference number. It tells you how far apart the two screen codes are. It does not tell you which one matches the chip in a light booth.
+
+## A conversion you can defend
+
+Use this order. Skipping to a converter is how teams end up with three hex codes in three files.
+
+1. **Write down the full code, including the library.** "185" is not a specification. "Pantone 185 C" is a coated spot standard. If the job is an uncoated label, the code you need may be the U library, and you should get that from the brand owner or from Pantone's cross-reference, not by reusing the C hex.
+2. **Take the digital value from a source you can name.** Prefer the value in the current brand guidelines if they cite a source. Otherwise use Pantone Connect or the Color Bridge book, and write down which one. Connect's on-screen values are simulations. The book is the physical reference for print.
+3. **Keep M1 and M2 from being silently mixed.** If design is in Adobe and production is reading the printed Bridge, expect the RGB columns to differ. Record both, and label them. Do not average them.
+4. **Turn the chosen hex into the other screen forms with a converter that only does that job.** <Link href="/convert-hex-to-rgb">HEX to RGB</Link> and <Link href="/convert-rgb-to-hex">RGB to HEX</Link> are exact for 8-bit sRGB. <Link href="/convert-hex-to-hsl">HEX to HSL</Link> is the same color in cylindrical form. None of these steps consults a Pantone library. They only restate the screen code you already accepted.
+5. **Separate the screen token from the print build.** Run the hex through the <Link href="/print-gamut">print gamut checker</Link> and the <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link>. A large round-trip shift means process ink will not hold the screen color. The spot ink might still match the chip, because spot ink is not limited to the CMYK gamut. Document the spot code, the chosen sRGB simulation, and the process build as three fields.
+6. **Proof the physical color on the real stock.** A website can check arithmetic. It cannot certify a press. Pantone's own notice tells you to use the physical publications for the actual standard.
+
+The <Link href="/convert-color">converter index</Link> is the map of the screen and process pairs this site does support: CMYK, RGB, HEX, HSL, and HSV. If a URL elsewhere on the web promises a universal Pantone-to-hex table, read it as an unofficial lookup, then compare its output with the value from Connect or the Bridge before anyone treats it as the brand.
+
+## Coated, uncoated, and the process column
+
+Brand guidelines often list one code and then a CMYK recipe "for when you cannot print spot." Those are different instructions.
+
+- **Spot on coated stock** follows the C standard and the printer's ability to hit that ink.
+- **Spot on uncoated stock** follows the U standard. Do not assume the C simulation is close enough. Specify the suffix.
+- **Four-color process** follows a CMYK build under an agreed profile. The Bridge recipe is a starting point. Your printer's profile can move it. The <Link href="/color-models/cmyk">CMYK color model page</Link> is the short version of why those four percentages are not a hex code in another outfit.
+
+When the same campaign needs a website, a coated brochure, and an uncoated carton, the honest brand sheet has one row per condition. A single hex labeled "the Pantone color" collapses those rows and makes the next person wrong no matter which file they open.
+
+## When all you have is a photo of the chip
+
+Photographing a fan deck and sampling the JPEG is a way to start a mood board. It is a poor way to set a brand token. The camera, the lighting, the paper's brighteners, and the JPEG compression all sit between you and the standard. If that photo is genuinely the only reference, extract candidates with <Link href="/palette-from-image">palette from image</Link>. The tool runs in the browser, samples the picture down, and returns up to eight dominant colors. Then replace those samples with a value you can name. A sampled swatch is a reading of a photograph. The <Link href="/color-models/hex">HEX guide</Link> and the <Link href="/color-models/rgb">RGB guide</Link> describe what you can store after you have decided which reading to keep.
+
+## What to put in the file the team will reuse
+
+A durable record looks like this:
+
+| Field | Example of what belongs there |
+| --- | --- |
+| Spot name | The full code, including C or U |
+| Source of the screen value | "Pantone Connect, M2" or "Color Bridge book, M1" |
+| sRGB HEX | The value from that source, unchanged |
+| RGB | The same color, split into 0–255 channels |
+| Process build | CMYK percentages, with the profile name if you have it |
+| Proof status | "Screen only" until a physical proof is signed |
+
+Store the hex in the design tokens. Store the spot name in the brand guidelines. Link them. When someone later asks why the website and the carton differ, the table answers the question without a new argument.
+
+Check the screen pairs you will actually ship. A saturated simulation that looks correct next to the chip can fail as text. Run the hex against the page background in the <Link href="/contrast-checker">contrast checker</Link>. WCAG contrast is a property of the sRGB codes, which is useful here: it will not drift just because a monitor is dim, and it will not tell you anything about the printed chip. The <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast guide</Link> is the procedure for that check.
+
+## Limits worth stating in the guidelines
+
+Write these next to the hex so the next conversion does not restart the argument.
+
+- The hex is an sRGB simulation of a named physical standard, valid for the measurement condition you recorded.
+- Connect (M2) and the printed Color Bridge (M1) are allowed to disagree. Pick one for digital files and say which.
+- Coated and uncoated are different standards. The suffix stays in the name.
+- A CMYK build is a process approximation. Spot ink can go outside that gamut. The print gamut checker flags the process problem. It does not approve the spot color.
+- A photo of a chip, a screenshot of a logo, and an old blog table are not sources. If you must start there, say so, and replace the number when the brand owner confirms it.
+- Nothing on a screen retires the need for a physical standard when the deliverable is ink.
+
+## FAQ
+
+<BlogFaq
+  items={[
+    {
+      question: "Can Pantone be converted to HEX exactly?",
+      answer: "No. Pantone Connect states that on-screen simulations may not match the physical PANTONE Color Standards, and it points you to the physical publications for the actual standards. A HEX value is an sRGB code. Treat it as the digital simulation you chose, and record whether it came from Connect or from the Color Bridge.",
+    },
+    {
+      question: "Why does Pantone Connect show a different HEX than the Color Bridge book?",
+      answer: "Pantone's support article says Connect publishes RGB and HEX from M2 measurements, which cut the effect of optical brighteners, while the physical Color Bridge guides publish M1 values for print. Both are published Pantone numbers for different measurement conditions. Label the one you store.",
+    },
+    {
+      question: "Is a coated Pantone the same color as the uncoated code with the same number?",
+      answer: "Do not treat them as interchangeable. Coated (C) and uncoated (U) are different libraries. Specify the suffix your guidelines require, and proof on the stock you will print.",
+    },
+    {
+      question: "Which Color Mapper tool converts a Pantone code?",
+      answer: "None of the live converters take a Pantone name as input. They convert HEX, RGB, HSL, HSV, and CMYK. Once you have an sRGB value from Pantone Connect or the Color Bridge, use <a href=\"/convert-hex-to-rgb\">HEX to RGB</a>, <a href=\"/convert-hex-to-cmyk\">HEX to CMYK</a>, the <a href=\"/print-gamut\">print gamut checker</a>, and <a href=\"/compare-colors\">compare colors</a> to inspect that simulation.",
+    },
+    {
+      question: "Can I sample a photo of a fan deck instead?",
+      answer: "You can extract colors from a photo with <a href=\"/palette-from-image\">palette from image</a>, and you should label the result as a sample of that photograph. Camera, lighting, and paper brighteners sit between the photo and the physical standard.",
+    },
+    {
+      question: "Does a passing WCAG contrast check mean the Pantone color is correct?",
+      answer: "No. Contrast compares two sRGB colors using the WCAG relative-luminance formula. It says whether text in the simulation is legible on a screen. It says nothing about a match to the chip.",
+    },
+  ]}
+/>
+
+Pick the source, name the measurement, and only then run the hex through <Link href="/convert-hex-to-rgb">HEX to RGB</Link> and the <Link href="/print-gamut">print gamut checker</Link>. The screen code is ready for CSS when you can say where it came from. The spot color is ready for press when someone has looked at the physical standard on the real stock.

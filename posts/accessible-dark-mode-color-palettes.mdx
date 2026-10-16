@@ -1,0 +1,144 @@
+---
+title: "How to choose an accessible color palette for dark mode"
+metaTitle: "Accessible Dark Mode Color Palettes: A Practical Guide"
+metaDescription: "Build a dark-mode palette that passes WCAG contrast. How to set surfaces, text, and brand colors, with worked ratios and the tools to check them."
+summary: "Dark mode is a second set of color pairs, not an inverted light theme. This guide shows how to choose surfaces and text colors that stay legible, with contrast ratios computed from the WCAG formula and a checklist you can run on the live tools."
+publishedAt: '2026-10-16'
+updatedAt: '2026-10-16'
+author: 'Yuyu'
+status: 'published'
+---
+
+A dark theme fails in a predictable way. The team takes the light palette, swaps white for near-black, and leaves the brand purple where it was. On white, `#7C3AED` is 5.70:1, which passes WCAG AA for normal text. On black it is 3.69:1, which is large text only. On a slightly lifted surface such as `#121212` it is 3.29:1, which misses even that bar. The color did not change. The pair did.
+
+This is a palette guide, not a second copy of the contrast formula. The ratios, the large-text rule, and the procedure for a single pair are in the <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast guide</Link>. What follows is how to choose the colors that go into a dark theme so those checks have a chance of passing, and how to run the checks on the tools already on this site.
+
+The ratios below are WCAG 2.2 contrast, computed from sRGB relative luminance and rounded to two decimal places. They are properties of the hex codes, not of a particular monitor.
+
+## What you are designing
+
+A dark palette is a small set of surfaces plus the inks that sit on them.
+
+- **Page surface.** The base background.
+- **Raised surface.** Cards, sheets, menus, and anything that sits above the page.
+- **Ink.** Primary text, secondary text, and text that must work on the brand fill.
+- **Brand fill.** Buttons and highlights, which need their own label color.
+- **Status colors.** Success, warning, and error, each tested on the surfaces where they appear.
+
+Apple's dark-mode guidance is a useful picture of the structure even if you are designing for the web. In the WWDC 2019 session <a href="https://developer.apple.com/videos/play/wwdc2019/808/" target="_blank" rel="noreferrer">What's New in iOS Design</a>, the system background is pure white in light mode and pure black in dark mode, and secondary and tertiary backgrounds build hierarchy on top of that. The same talk suggests thinking of the lights as having been dimmed, rather than everything being flipped inside out. In <a href="https://developer.apple.com/videos/play/wwdc2019/214/" target="_blank" rel="noreferrer">Implementing Dark Mode on iOS</a>, elevated surfaces use a lighter gray than the black base so a sheet is visible against the page.
+
+Material has moved the same idea into named surface roles. The Material 3 article on <a href="https://m3.material.io/blog/tone-based-surface-color-m3" target="_blank" rel="noreferrer">tone-based surfaces</a> separates the base surface from container roles (lowest, low, container, high, highest) and says those roles are no longer tied to elevation. An earlier Material dark-theme write-up, <a href="https://m3.material.io/blog/android-dark-theme-tutorial" target="_blank" rel="noreferrer">Building a Material Dark Theme on Android</a>, makes the practical point that still holds: if a surface lightens as it rises, you test the foreground against each surface you actually use, because the pair changed.
+
+You do not have to adopt either system. You do have to name more than one background.
+
+## Why inversion fails
+
+Inverting a light palette feels symmetrical and produces the wrong inks.
+
+`#7C3AED` is a typical brand purple. The HSL readout is about `hsl(262 83% 58%)`. It is dark enough for white and too dark for black, which is exactly what the ratios say. A lighter step of a similar hue, `#A78BFA`, flips the problem: 2.72:1 on white, and 7.22:1 on `#0B0B0F`. The light theme wants the deeper purple for text. The dark theme wants the lighter one. One token named `brand` cannot be both, unless the only place it appears is a large wordmark you are willing to exempt.
+
+Gray text fails in the other direction. `#94A3B8` on white is 2.56:1. The same gray on `#0F172A` is 6.96:1, which passes AA for normal text and sits just under the 7:1 AAA bar. A muted label that was illegal on a white page can be legal on a slate page, and a "subtle" gray you lighten further for dark mode can become a glarey, low-quality secondary without failing the ratio. Passing is the floor. You still have to read the screen.
+
+Pure white text on pure black is 21:1. That passes every WCAG text threshold. It is also the highest-glare pair you can paint. You are allowed to use a softer ink. `#E8E6E3` on `#121212` is 15.04:1, still AAA, and it looks less like a terminal. The point of the number is that you can come down from 21:1 a long way before you threaten 4.5:1. Spend that room on a surface system, not on a brand color that was never meant to be a paragraph.
+
+## Set the surfaces first
+
+Pick two or three backgrounds and freeze them before you pick text colors. A workable starting set, using colors you can paste straight into the checker:
+
+| Role | Hex | Notes |
+| --- | --- | --- |
+| Page | `#0F172A` | A slate page, not pure black |
+| Raised | `#1E1B2E` | A violet-tinted card, distinct from the page |
+| Inverse page | `#FFFFFF` | The light theme, kept so you do not design only one mode |
+
+`#0F172A` against `#1E1B2E` will not produce a large contrast ratio. Surfaces are allowed to be close. Text on each surface is not. If the card edge disappears, add a border that itself meets the 3:1 non-text contrast rule in <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" target="_blank" rel="noreferrer">Success Criterion 1.4.11</a> where the boundary is required to understand the control. A decorative shadow does not need to pass. A border that is the only sign of a text field does.
+
+Material's elevation-overlay note is the failure mode to remember. A white scrim of a few percent on a dark surface creates a new color. If your modal is "the page color plus a tint," sample the composited result and test against that. Testing the token and shipping the tint is how a passing pair becomes a failing one. The <Link href="/contrast-checker">contrast checker</Link> will take the composited hex. It cannot see a scrim you forgot to flatten.
+
+## Choose inks that pass on those surfaces
+
+Here is a compact dark palette and the ratios that justify it. Every figure is the WCAG ratio of that foreground on that background.
+
+| Ink | On `#0F172A` | On `#1E1B2E` | Role it can play |
+| --- | --- | --- | --- |
+| `#F8FAFC` | 17.06:1 | — | Primary text on the slate page. AAA. |
+| `#CBD5E1` | 12.02:1 | — | Secondary text on the slate page. AAA. |
+| `#94A3B8` | 6.96:1 | — | Muted text. AA for normal text, short of AAA. |
+| `#DDD6FE` | — | 12.09:1 | Primary text on the violet card. AAA. |
+| `#C4B5FD` | — | 9.09:1 | Secondary text on the violet card. AAA. |
+| `#38BDF8` | 8.33:1 | — | Link or accent on the slate page. AAA. |
+| `#7C3AED` | 3.13:1 | — | Brand purple as text on this page. Large text only. |
+| `#A78BFA` | 6.56:1 | — | Lighter purple as text. AA, short of AAA. |
+
+`#7C3AED` on `#0F172A` is 3.13:1. That is above 3:1 and below 4.5:1, so it is a large-text color on this page, not a body color. The same purple as a button fill is a different pair: put `#F8FAFC` on `#7C3AED` and you are testing the label, not the brand-as-text problem. Do that test. A button that looks on-brand can still fail because the label was an afterthought.
+
+Build the ramp with the <Link href="/color-scale">tint and shade generator</Link> so you are not inventing twelve purples by dragging a slider. The scale is a set of candidates. The table above is the filter. The <Link href="/blog/tailwind-color-scale-guide">Tailwind scale guide</Link> explains how a 50–950 ramp maps onto fills versus text. Read the dark end of that article as the light theme. In dark mode the text steps are the light end of the ramp, and you still verify each pair. A step named 200 is not automatically a dark-mode body color.
+
+## Brand, status, and focus
+
+Keep the brand hue. Change the job it is allowed to do.
+
+- **Brand as fill.** Use the saturated step as a button or a selected chip. Put a light label on it and check that pair. On a near-black page, a saturated fill also has to be distinguishable from the page. If the only difference is hue, confirm the boundary or the label does the work.
+- **Brand as text.** Use a lighter step, then check it on every surface. `#A78BFA` can be body text on `#0B0B0F` at 7.22:1 and still be the wrong choice on a raised card that is lighter than the page. Re-measure.
+- **Links.** Underline them, or otherwise stop relying on color alone. A blue that passes contrast can still be invisible as a link to someone who does not see the hue difference. The <Link href="/color-blindness">color blindness simulator</Link> previews protanopia, deuteranopia, and tritanopia. Run the palette through it after the contrast table is green. Contrast and color vision are different failures.
+- **Focus.** A focus ring is non-text contrast when it is the indicator of focus. Check it at 3:1 against the adjacent colors, on both the page and the card.
+- **Status.** A bright green that passed on white often blooms on black, and a dark green that passed as text on white disappears. Build status as pairs. "Green" is not a status color. "Green text on the page" is.
+
+The <Link href="/palettes">palette generator</Link> and the <Link href="/color-wheel">color wheel</Link> are useful once the neutrals exist. Generate a harmony from the brand hex, then throw away any swatch that fails the surface it will sit on. A triadic scheme that ignores the background is a poster, not a UI palette.
+
+## Images, gradients, and theme switching
+
+Text on a photograph or a gradient is text on a varying background. Sample the lightest and darkest region the glyphs can occupy, the same way the contrast guide says to sample a hero. If you cannot guarantee the region, put the text on a solid scrim and test the scrim. The <Link href="/gradients">gradient generator</Link> is the place to build the decorative layer. It is not a contrast proof.
+
+Switching themes is a token problem. Name the roles (`color-text`, `color-text-muted`, `color-surface`, `color-surface-raised`, `color-accent`) and give each role a value per theme. Do not name the token `purple-500` and then ask every component to know whether 500 is the text color this week. The component asks for `color-text`. The theme answers.
+
+If you author the ramp in OKLCH so the steps look even, convert the shipped colors back to the hex or `rgb()` you will test. WCAG contrast does not read OKLCH lightness. The <Link href="/blog/oklch-for-designers">OKLCH guide</Link> covers that handoff. The <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB, and HSL guide</Link> covers why an HSL lightness of 50 percent was never a promise about the dark theme.
+
+## What the current standard actually requires
+
+Ship against <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noreferrer">WCAG 2.2 Success Criterion 1.4.3</a>: 4.5:1 for normal text and 3:1 for large text, at Level AA. Enhanced contrast, 1.4.6, raises those to 7:1 and 4.5:1. Non-text contrast, 1.4.11, is 3:1 for the boundaries and icons that carry meaning.
+
+<a href="https://www.w3.org/TR/wcag-3.0/" target="_blank" rel="noreferrer">WCAG 3.0</a> is a W3C Working Draft. The 10 September 2026 draft says it is a work in progress and that citing it as anything else is inappropriate. The <a href="https://www.w3.org/WAI/standards-guidelines/wcag/wcag3-intro/" target="_blank" rel="noreferrer">W3C introduction</a> says WCAG 3 is not expected to be a finished standard for a few more years, and that WCAG 2 will not be deprecated for several years after WCAG 3 is finalized. A dark-mode palette you ship this year is still a WCAG 2.2 palette. If you also track newer perceptual contrast methods, keep them as extra information and record the 2.2 result next to them.
+
+## A checklist you can finish in one sitting
+
+1. Write down the page hex and the raised-surface hex. Flatten any scrim first.
+2. Pick primary, secondary, and muted inks for each surface. Paste each pair into the <Link href="/contrast-checker">contrast checker</Link>. Keep normal text at or above 4.5:1 unless you have a documented large-text exception.
+3. Generate the brand ramp in the <Link href="/color-scale">scale tool</Link>. Assign light steps to dark-theme text and darker steps to fills. Check the label on each fill.
+4. Run the set through the <Link href="/color-blindness">color blindness simulator</Link>. Add a non-color cue anywhere hue was doing the only work.
+5. Check focus rings and field borders at 3:1 where they convey meaning.
+6. Repeat the pairs for the light theme. A token that passes in one theme is unfinished until you have the other column.
+7. Record the hex values and the ratios in the token docs so the next person does not "clean up" a passing muted gray into a failing one.
+
+## FAQ
+
+<BlogFaq
+  items={[
+    {
+      question: "Does dark mode have a different WCAG contrast ratio?",
+      answer: "No. Success Criterion <a href=\"https://www.w3.org/TR/WCAG22/#contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">1.4.3</a> is 4.5:1 for normal text and 3:1 for large text in both themes. The colors in the pair change. The threshold does not.",
+    },
+    {
+      question: "Should dark-mode text be pure white on pure black?",
+      answer: "White on black is 21:1, which passes AAA. A softer ink can also pass. #E8E6E3 on #121212 is 15.04:1. Choose the pair for readability and glare, then confirm the ratio.",
+    },
+    {
+      question: "Can I reuse my light-mode brand purple as dark-mode text?",
+      answer: "Often no. #7C3AED is 5.70:1 on white and 3.69:1 on black. On #0F172A it is 3.13:1, which is large text only. Use a lighter step for text and keep the saturated step for fills, then recheck the label.",
+    },
+    {
+      question: "How many surface colors does a dark theme need?",
+      answer: "At least a page and a raised surface, because sheets and cards need to be distinguishable. Apple documents elevated grays above a black base. Material 3 uses a set of surface container roles. Test text on each surface you ship.",
+    },
+    {
+      question: "Does WCAG 3 replace this?",
+      answer: "Not for work you ship now. The 10 September 2026 WCAG 3 publication is a Working Draft, and W3C says WCAG 2 will remain in use for years after WCAG 3 is finished. Keep measuring 1.4.3 and 1.4.11.",
+    },
+    {
+      question: "Which tools should I use to check the palette?",
+      answer: "Build candidates in the <a href=\"/color-scale\">tint and shade generator</a> or the <a href=\"/palettes\">palette generator</a>, measure pairs in the <a href=\"/contrast-checker\">contrast checker</a>, and preview color-vision deficiencies in the <a href=\"/color-blindness\">simulator</a>.",
+    },
+  ]}
+/>
+
+Start with two surfaces and three inks, and put them through the <Link href="/contrast-checker">contrast checker</Link> before you name them tokens. Dark mode is finished when every pair you ship has a ratio you have already read, including the light theme you still have to support.

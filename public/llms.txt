@@ -75,6 +75,10 @@ Color Mapper is a static toolkit site. Each page is an interactive tool or guide
 - https://colormapper.xyz/blog/css-gradients-guide — CSS gradients guide (linear, radial, conic)
 - https://colormapper.xyz/blog/tailwind-color-scale-guide — Tailwind color scale from a single brand HEX
 - https://colormapper.xyz/blog/wcag-contrast-brand-colors — WCAG contrast for brand colors
+- https://colormapper.xyz/blog/pantone-to-hex-rgb — Pantone to HEX and RGB, and the limits of the conversion
+- https://colormapper.xyz/blog/hex-vs-rgb-vs-hsl — HEX vs RGB vs HSL
+- https://colormapper.xyz/blog/accessible-dark-mode-color-palettes — Accessible color palettes for dark mode
+- https://colormapper.xyz/blog/oklch-for-designers — OKLCH for designers
 
 ## Optional
 

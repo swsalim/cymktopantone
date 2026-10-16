@@ -1,0 +1,129 @@
+---
+title: "OKLCH for designers: lightness that matches what you see"
+metaTitle: "OKLCH for Designers: A Practical CSS Color Guide"
+metaDescription: "What OKLCH is, how oklch() differs from HSL, where colors leave the sRGB gamut, and how to check the hex you actually ship for contrast and print."
+summary: "OKLCH is the CSS form of Oklab, a perceptual color space. This guide explains the three channels, why HSL lightness misleads, what gamut mapping does to an out-of-range color, and how to check the sRGB result with the tools on this site."
+publishedAt: '2026-10-16'
+updatedAt: '2026-10-16'
+author: 'Yuyu'
+status: 'published'
+---
+
+HSL lets you hold a hue and push lightness. The push does not look even. CSS Color Level 4 uses the example directly: `hsl(240deg 100% 50%)` is sRGB blue and `hsl(60deg 100% 50%)` is sRGB yellow. Both claim 50 percent lightness. Yellow is obviously lighter. In OKLCH those colors are `oklch(0.452 0.313 264.1)` and `oklch(0.968 0.211 109.8)`. The lightness numbers, 0.452 and 0.968, finally agree with your eyes.
+
+That is the whole reason a designer should learn OKLCH. It is a way to specify and adjust color so that "lighter," "duller," and "around the hue wheel" behave more like perception. It is not a new brand color, it is not a print standard, and it does not replace a contrast check. This guide is the practical version: the channels, the syntax browsers actually implement, the gamut problem, and the point where you copy a hex back into the tools you already use.
+
+## Where OKLCH comes from
+
+Björn Ottosson introduced Oklab on 23 December 2020 in <a href="https://bottosson.github.io/posts/oklab/" target="_blank" rel="noreferrer">"A perceptual color space for image processing."</a> He designed it to predict perceived lightness, chroma, and hue well enough for image processing, while staying simple to compute. Oklab is a Lab-shaped space: a lightness axis and two opponent axes. OKLCH is the same space in polar form. Lightness stays lightness. The two opponent axes become chroma (how far the color sits from gray) and a hue angle.
+
+CSS Color Module Level 4 standardizes both `oklab()` and `oklch()`. The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch" target="_blank" rel="noreferrer">MDN reference for `oklch()`</a> marks the feature Baseline, widely available, and says it has been available across browsers since May 2023. "Widely available" still has an asterisk on MDN for some parts of the feature. Relative color syntax (`oklch(from …)`) is specified in CSS Color Level 5, so treat that form as something you verify in the browsers you support, even if absolute `oklch()` is fine.
+
+You do not need Ottosson's matrices to use the CSS function. You do need his goal in mind. He was fitting a space for blends and image work, not issuing a new corporate palette. When a brand color is a Pantone standard or a printed ink, OKLCH is how you might explore screen variants. The standard remains the physical color. The <Link href="/blog/pantone-to-hex-rgb">Pantone conversion guide</Link> is the boundary.
+
+## How to read the three numbers
+
+The absolute syntax is:
+
+```css
+oklch(L C H)
+oklch(L C H / A)
+```
+
+MDN defines the pieces this way:
+
+- **L** is perceived lightness. A number from 0 to 1, or a percentage from 0 to 100. Here 0 and 1 line up with 0 percent and 100 percent. Black and white live at the ends.
+- **C** is chroma, the amount of color. The useful minimum is 0, which is gray. The maximum is not capped by the syntax. In practice MDN says it does not exceed about 0.5. There is a percentage trap: for chroma, 100 percent equals 0.4, not 1. `oklch(50% 100% 20)` is a very colorful color. `oklch(50% 0.4 20)` is that same chroma written as a number.
+- **H** is a hue angle. The angles are not the HSL angles. MDN notes that `hsl()` hue 0 is red, while in OKLCH red sits near 41 degrees and 0 degrees is closer to magenta. Do not copy an HSL hue number into `oklch()` and expect the same paint.
+- **A**, after a slash, is alpha. Omit it and the color is opaque.
+
+The spec also says that if chroma is 0, the hue is powerless. A gray does not have a meaningful hue, and a conversion that leaves a tiny leftover chroma can still be treated as gray. If lightness is 0 or 1 (0 percent or 100 percent), gamut mapping displays the color as black or white.
+
+A relative form exists for design-system math:
+
+```css
+oklch(from var(--brand) calc(l + 0.08) c h)
+```
+
+MDN's worked example starts from `hsl(0 100% 50%)`, which is `red`, and shows the browser resolving it to about `oklch(0.628 0.258 29.23)` before any math. You can then replace lightness and keep the hue. That is the operation HSL promised and only sometimes delivered. Because the origin is converted into OKLCH first, the `l` you add to is perceptual lightness, not the HSL percentage.
+
+The <Link href="/blog/hex-vs-rgb-vs-hsl">HEX vs RGB vs HSL guide</Link> shows why the HSL percentage was a weak stand-in. CSS Color Level 4 gives a second pair, beyond blue and yellow, for hue spacing. Two colors 30 degrees apart in HSL can look similar in the blue range and very different in the yellow-green range. The spec prints the OKLCH hue gaps for those same colors as about 6.3 degrees and about 35.7 degrees. The point for a designer is modest: if you are building a hue ramp, step in OKLCH and look at the result, instead of assuming every 30 degrees of HSL is the same kind of step.
+
+## What the browser does when the color cannot fit
+
+sRGB cannot hold every OKLCH color. A high chroma at a lightness the gamut does not support is out of gamut. CSS Color Level 4 says the color used for display is then a less intense color produced by gamut mapping. The spec's mapping discussion prefers to reduce chroma and protect hue, because a hue shift is the change people notice first. It also says implementations choose among specified algorithms. You should not assume two browsers map an extreme color to the identical 8-bit hex, even when both paints look close.
+
+The practical consequence:
+
+- Stay in a chroma range you have already seen survive on an sRGB screen if the token has to be the same bytes everywhere.
+- For a color you will store as a design token, resolve it. In browser devtools, inspect the computed color and copy the sRGB hex or `rgb()` the engine settled on. Put that value in the token file if the product is still shipped as sRGB.
+- Use `oklch()` in the stylesheet when you want the source to stay perceptual, and still screenshot the critical browsers. The source and the used color are allowed to differ at the gamut edge.
+
+Ottosson has a separate note on sRGB gamut clipping from January 2021, linked from his site, if you want the geometry. You do not need it to use the CSS function responsibly. You need the habit of looking at the mapped color.
+
+## Where designers actually use it
+
+**Even ramps.** Holding hue and chroma and stepping lightness produces a ramp that looks more even than stepping HSL lightness. The <Link href="/color-scale">tint and shade generator</Link> on this site builds a Tailwind-style 50–950 ramp in sRGB, with a contrast badge on each step. That ramp is predictable and it is not an OKLCH ramp. The <Link href="/blog/tailwind-color-scale-guide">Tailwind scale guide</Link> says so, and it points at Oklab as a later pass. A sensible order is: generate the sRGB scale, check contrast, then if two steps look uneven, adjust those steps in OKLCH and paste the resulting hex back into the scale. A beautiful curve that fails 4.5:1 is still a failed text color.
+
+**Gradients.** A blend in sRGB between a deep purple and a warm accent often goes gray and muddy in the middle. CSS can interpolate in OKLCH. The syntax and the fallback are already written up in the <Link href="/blog/css-gradients-guide">CSS gradients guide</Link>, including `linear-gradient(in oklch, …)` with a plain gradient first for older parsers. Use that guide for the CSS. The point to add here is why the midpoint moves: the interpolation happens in a space where lightness and hue are better behaved, so the middle stop is less of an accident. After you like the gradient, sample any text that sits on it. Contrast is still computed from the painted sRGB pixels.
+
+**Theme variants.** Lighten a brand color for dark-mode text by raising L, not by switching to a different hue you happened to have in a picker. Then convert to hex and run the pair through the <Link href="/contrast-checker">contrast checker</Link>. The <Link href="/blog/accessible-dark-mode-color-palettes">dark-mode palette guide</Link> has worked ratios for why the light-theme purple and the dark-theme text color are usually different steps.
+
+**Comparing two candidates.** If you are deciding whether two mapped hex values are close enough to merge, use the <Link href="/compare-colors">comparator</Link>. It reports CIEDE2000 between two sRGB colors. That is a different number from OKLCH chroma, and it answers a different question: how far apart are these two screen colors, not how you generated them.
+
+## What OKLCH does not decide
+
+**Contrast.** WCAG 2.2 relative luminance is computed from linearized sRGB channels. An OKLCH lightness of 0.8 is not a contrast ratio. Two colors with a large lightness gap can still fail if you put the wrong one in front, and two colors with a modest gap can pass. The procedure is in the <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast guide</Link>. The checker wants the hex you are shipping.
+
+**Print.** OKLCH does not know your press profile. A high-chroma screen color is a common gamut problem in CMYK as well as in sRGB, and the two gamuts are not the same shape. Run the resolved hex through the <Link href="/print-gamut">print gamut checker</Link> and read the <Link href="/blog/cmyk-safe-web-palettes">CMYK guide</Link> before a brand sheet lists one value for both.
+
+**Spot color.** A Pantone code is a physical standard. An `oklch()` exploration of "a lighter version for the app" is a new screen color. Name it as a variant. Do not overwrite the spot code.
+
+**HSL hue numbers.** They do not transfer. Convert with the browser or with a tool that implements the CSS conversion, then read the new hue. The <Link href="/color-models/hsl">HSL model page</Link> remains the right reference for `hsl()` itself. <Link href="/convert-hex-to-hsl">HEX to HSL</Link> is the sRGB cylinder. It will not emit `oklch()`.
+
+**A guarantee that every step is equally different.** Oklab is a strong engineering approximation Ottosson fit for image processing. CSS then defines how those coordinates are parsed and mapped. Neither document says that a 0.05 lightness step is a unit of brand meaning. Look at the ramp.
+
+## A workflow that stays in sRGB at the end
+
+1. Start from the hex you already trust. If you only have HSL, convert it with <Link href="/convert-hsl-to-hex">HSL to HEX</Link> first so you know the bytes.
+2. In a browser that supports `oklch()`, wrap it: `oklch(from #7C3AED l c h)`. Read the resolved L, C, and H in devtools.
+3. Make one change. For a lighter text step, add to `l` and leave `c` and `h` alone. If the result looks neon, chroma was already near the gamut edge and the lighter color cannot keep it. Lower `c` until the mapped color stops shifting hue.
+4. Copy the computed sRGB hex.
+5. Check that hex on the real backgrounds in the <Link href="/contrast-checker">contrast checker</Link>. For a reference point, `#7C3AED` itself is 5.70:1 on white and 3.69:1 on black. A lighter OKLCH step is a new pair. Measure it.
+6. If the color is part of a scale, drop the hex onto the <Link href="/color-scale">scale tool</Link> or replace one step in an existing ramp and recheck the neighbors.
+7. If print is in scope, run <Link href="/print-gamut">print gamut</Link> on the hex you stored, not on the pre-mapping OKLCH.
+
+Store both lines in the token comment if the team is still learning the space: the `oklch()` source, and the sRGB hex that contrast and the older browsers will use. When they disagree, the shipped pixels are the hex.
+
+## FAQ
+
+<BlogFaq
+  items={[
+    {
+      question: "What is the difference between Oklab and OKLCH?",
+      answer: "Oklab is the rectangular form: lightness plus two opponent axes. OKLCH is the same space written as lightness, chroma, and hue. CSS provides oklab() and oklch(). Designers usually want oklch() because hue and chroma match the way palettes are edited.",
+    },
+    {
+      question: "Is OKLCH the same as HSL?",
+      answer: "No. HSL lightness is the mean of the gamma-encoded sRGB channels. CSS Color Level 4 points out that blue and yellow can both be hsl lightness 50% while their OKLCH lightnesses are about 0.452 and 0.968. The hue angles differ too. Red is 0 degrees in HSL and near 41 degrees in OKLCH.",
+    },
+    {
+      question: "Why does 100% chroma not mean 1?",
+      answer: "MDN documents the oklch() chroma percentage as a scale where 100% equals 0.4, not 1. The number form and the percent form are easy to mix. Read the computed value in devtools if a color looks stronger than you expected.",
+    },
+    {
+      question: "What happens if the color is outside sRGB?",
+      answer: "CSS Color Level 4 says the displayed color is gamut-mapped to a less intense color. Hue is the component the spec tries hardest to preserve. Copy the computed sRGB value if you need stable bytes in a token file, and check that value in more than one browser when the color sits on the gamut edge.",
+    },
+    {
+      question: "Does a higher OKLCH lightness mean the color passes WCAG?",
+      answer: "No. WCAG contrast uses relative luminance of the sRGB channels of the two painted colors. Convert to hex and use the <a href=\"/contrast-checker\">contrast checker</a>. The <a href=\"/blog/wcag-contrast-brand-colors\">contrast guide</a> has the thresholds.",
+    },
+    {
+      question: "Can I build an OKLCH ramp in Color Mapper?",
+      answer: "The <a href=\"/color-scale\">tint and shade generator</a> builds an sRGB 50–950 ramp and badges each step with WCAG contrast. Use it for that job. For an OKLCH adjustment, change L or C in CSS, copy the computed hex, and bring that hex back to the scale tool, the contrast checker, or <a href=\"/compare-colors\">compare colors</a>.",
+    },
+  ]}
+/>
+
+Use OKLCH when you are deciding how a color should move. Use hex when you are deciding what you shipped. The <Link href="/contrast-checker">contrast checker</Link> and the <Link href="/print-gamut">print gamut checker</Link> both want that second number, which is the color a person will actually see.

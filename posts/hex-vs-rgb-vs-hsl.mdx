@@ -1,0 +1,132 @@
+---
+title: "HEX vs RGB vs HSL: three ways to write one screen color"
+metaTitle: "HEX vs RGB vs HSL Explained for Design and CSS"
+metaDescription: "HEX, RGB, and HSL can name the same sRGB color. Learn what each notation stores, why HSL lightness is not visual lightness, and which converter to use."
+summary: "HEX, RGB, and HSL are notations for sRGB, not three different colors. This guide shows how the channels line up, why equal HSL lightness still looks uneven, and when to store each form in a design system."
+publishedAt: '2026-10-16'
+updatedAt: '2026-10-16'
+author: 'Yuyu'
+status: 'published'
+---
+
+A Figma swatch, a CSS variable, and a Slack message can describe one brand color three ways: `#7C3AED`, `rgb(124, 58, 237)`, and something like `hsl(262 83% 58%)`. Those are the same 8-bit sRGB color written in three notations, within the rounding a design tool applies to the hue and the percentages. They are not three pigments, and they are not a print recipe.
+
+If you only need the number changed from one notation to another, use the converters and move on: <Link href="/convert-hex-to-rgb">HEX to RGB</Link>, <Link href="/convert-rgb-to-hex">RGB to HEX</Link>, <Link href="/convert-hex-to-hsl">HEX to HSL</Link>, <Link href="/convert-hsl-to-hex">HSL to HEX</Link>, <Link href="/convert-rgb-to-hsl">RGB to HSL</Link>, and <Link href="/convert-hsl-to-rgb">HSL to RGB</Link>. The rest of this guide is about what the conversion is allowed to mean, and where people get hurt by treating HSL lightness as if it were brightness you can see.
+
+## One color, three notations
+
+In CSS, HEX, `rgb()`, and `hsl()` specify sRGB colors. The <a href="https://www.w3.org/TR/css-color-4/" target="_blank" rel="noreferrer">CSS Color Module Level 4</a> defines all three, and it defines HSL as a cylindrical rearrangement of the same sRGB components. Converting among them does not change the color the way a CMYK conversion can. It changes the spelling.
+
+Take `#7C3AED`. Split the hex into pairs and read each pair as a base-16 integer:
+
+- `7C` is 124
+- `3A` is 58
+- `ED` is 237
+
+So the color is `rgb(124 58 237)`. The legacy form with commas, `rgb(124, 58, 237)`, is the same three channels. Many design tools then show HSL rounded to whole numbers, about `hsl(262 83% 58%)`. Rounding the hue to a degree and the saturation and lightness to a percent can shift the channels by one when you convert back. If the brand token is the hex, keep the hex as the source of truth and treat the HSL readout as a view.
+
+The model pages go deeper on each spelling: <Link href="/color-models/hex">HEX</Link>, <Link href="/color-models/rgb">RGB</Link>, and <Link href="/color-models/hsl">HSL</Link>. The <Link href="/convert-color">converter index</Link> lists every pair this site implements, including the paths through HSV and CMYK, which are different models and can change the color.
+
+## What HEX stores
+
+A six-digit hex color is three bytes. Each byte is two hexadecimal digits, 00 through FF, which is 0 through 255 in decimal. CSS also allows a three-digit shorthand: `#abc` means `#aabbcc`. An eight-digit form adds alpha as a fourth byte, `#RRGGBBAA`. The alpha byte is opacity, not a fourth color channel. `#7C3AEDCC` is the same purple at about 80 percent opacity, because `CC` in hex is 204, and 204 / 255 is about 0.80.
+
+Hex is a good storage form for tokens because it is compact, it round-trips through 8-bit sRGB without a percent, and every browser understands it. It is an awkward editing form. Changing the hue of `#7C3AED` by hand means you already know how the three bytes interact. People who "nudge the hex" are usually guessing.
+
+Hex does not know about paper. A value you copied from a Pantone simulation is still just three bytes. The <Link href="/blog/pantone-to-hex-rgb">Pantone to HEX guide</Link> is about where that value is allowed to come from. The bytes themselves are ordinary sRGB once you have accepted them.
+
+## What RGB stores
+
+`rgb()` writes the same three channels in decimal, or as percentages of the 0–255 range. `rgb(124 58 237)` and `rgb(48.6% 22.7% 92.9%)` are two writings of those bytes, with the percentages rounded. In modern CSS the alpha channel is a slash: `rgb(124 58 237 / 0.8)`. The older `rgba()` function is the same idea.
+
+RGB is the form you want when you are in a canvas, a shader, or any API that asks for 0–255. It is also the form the WCAG contrast formula starts from. Relative luminance, defined in <a href="https://www.w3.org/TR/WCAG22/#dfn-relative-luminance" target="_blank" rel="noreferrer">WCAG 2.2</a>, linearizes each sRGB channel and weights them: 0.2126 R + 0.7152 G + 0.0722 B. The weights are why green carries most of the luminance and blue carries little. That fact matters as soon as you look at HSL.
+
+RGB is a poor way to ask for "the same hue, a bit lighter." Raising all three channels moves the color toward white, and it also changes the relationships that made the hue. Designers reach for HSL because the request is about hue, saturation, and lightness. The catch is what CSS means by lightness.
+
+## What HSL stores, and what it does not
+
+HSL writes a hue angle, a saturation, and a lightness. In the CSS model, hue 0 is red, 120 is green, and 240 is blue. Saturation 0 is a gray. Lightness 0 is black and lightness 100 percent is white, for any hue. The spec's own description of the advantage is fair: people can guess a color and then tweak it, and a family of greens can be made by holding the hue and varying the other two arguments.
+
+The same section of CSS Color Level 4 states the disadvantage. HSL lightness is the mean of the gamma-encoded red, green, and blue components. It does not match visual lightness across hues. The spec's example is the one to memorize:
+
+- Blue is `hsl(240deg 100% 50%)`, which is `rgb(0 0 255)`, which is `#0000FF`.
+- Yellow is `hsl(60deg 100% 50%)`, which is `rgb(255 255 0)`, which is `#FFFF00`.
+- Both have HSL lightness of 50 percent. Yellow looks much lighter than blue.
+
+The spec gives the OkLCh readings that match that appearance: sRGB blue is `oklch(0.452 0.313 264.1)` and sRGB yellow is `oklch(0.968 0.211 109.8)`. Lightness 0.452 versus 0.968 is the perceptual gap that HSL's shared "50%" hides. The <Link href="/blog/oklch-for-designers">OKLCH guide</Link> picks up from that gap.
+
+You can see the same split in WCAG contrast, which uses relative luminance of the sRGB channels. Computed with that formula and rounded to two decimals:
+
+| Pair | Contrast |
+| --- | --- |
+| `#FFFF00` on `#FFFFFF` | 1.07:1 |
+| `#0000FF` on `#FFFFFF` | 8.59:1 |
+| `#FFFF00` on `#000000` | 19.56:1 |
+| `#0000FF` on `#000000` | 2.44:1 |
+
+Both colors are "50% lightness" in HSL. Yellow on white fails every contrast threshold in the table. Blue on white passes AAA for normal text (7:1) under <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noreferrer">Success Criterion 1.4.3</a> and the enhanced criterion 1.4.6. Blue on black fails even the 3:1 large-text bar. If you build a ramp by stepping HSL lightness and assuming each step is equally readable, the yellow ramp and the blue ramp will not behave alike. Check the pairs in the <Link href="/contrast-checker">contrast checker</Link> after you convert back to hex.
+
+HSL saturation has a related quirk. At lightness 0 or 100 percent the color is black or white regardless of hue and saturation. Near those ends, saturation stops meaning "more colorful" in the way a picker diagram suggests. HSV, which is what a lot of design software still shows, is a different cylinder. Hue can match HSL, and the other two axes do not. <Link href="/blog/color-theory-101">Color theory 101</Link> and the <Link href="/color-models/hsv">HSV model page</Link> cover that model. <Link href="/convert-hsl-to-hsv">HSL to HSV</Link> and <Link href="/convert-hsv-to-hsl">HSV to HSL</Link> are there when a file and a picker disagree.
+
+## Which notation to keep
+
+Use the notation that matches the job, and convert at the boundary.
+
+- **Design tokens and CSS variables.** Store 6-digit hex or modern `rgb()` with integer channels. Both round-trip. Hex is what most existing systems already use. The <Link href="/color-scale">tint and shade generator</Link> builds a 50–950 ramp from one hex and shows a contrast badge on each step, which is the right moment to find out that a mid step is pretty and unreadable.
+- **Exploration.** HSL is a good scratchpad for "warmer," "duller," or "lighter" as long as you convert the candidate back to hex and check contrast and, if the color will be printed, gamut. The <Link href="/color-wheel">color wheel</Link> and the <Link href="/palettes">palette generator</Link> are built for that exploration across harmonies.
+- **Code that already speaks in channels.** Canvas pixel data, some animation libraries, and CSV exports want RGB integers. Convert from the token at the edge. Do not let the export become a second source of truth.
+- **Alpha.** Prefer a separate opacity token, or the slash syntax, and check contrast on the color that is actually painted. An 80 percent purple on white is a different pair from the opaque purple.
+
+A practical rule: the token file holds one spelling. Reviews and pull requests compare that spelling. HSL is how you thought your way to the color. RGB is how some APIs consume it. Hex is how the stylesheet remembers it.
+
+## Where the three notations stop being enough
+
+HEX, RGB, and HSL all assume sRGB. They do not describe:
+
+- **A Pantone standard.** The screen value is a simulation. Record the source. See the Pantone guide linked above.
+- **A CMYK build.** Process conversion leaves the sRGB gamut and depends on a profile. The <Link href="/print-gamut">print gamut checker</Link> shows the round-trip shift. The <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> gives you the percentages to discuss with a printer. The <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe palettes guide</Link> is the longer version.
+- **Perceptual uniformity.** Equal steps in HSL lightness are equal steps in a simple average of encoded channels. They are not equal steps in perceived lightness. OKLCH is the CSS notation built for that problem. After an `oklch()` color is painted, the used color on an sRGB screen is still something you can copy out as hex and run through the contrast checker. Contrast does not read the OKLCH lightness channel. It reads the sRGB channels of the color that was displayed.
+- **Accessibility by itself.** A harmonious HSL set can fail WCAG. The <Link href="/blog/wcag-contrast-brand-colors">contrast guide</Link> is the audit. The <Link href="/blog/accessible-dark-mode-color-palettes">dark-mode palette guide</Link> is what changes when the background stops being white.
+
+## A short worked edit
+
+Suppose the token is `#7C3AED` and you want a lighter tint for a dark-mode label.
+
+1. Convert it with <Link href="/convert-hex-to-hsl">HEX to HSL</Link> so you can see the cylinder: hue near 262, saturation near 83 percent, lightness near 58 percent.
+2. Raise lightness in your editor. Do not raise it and ship the HSL string without looking. A lighter purple can fail on white and pass on a near-black surface, or the reverse.
+3. Convert the candidate back with <Link href="/convert-hsl-to-hex">HSL to HEX</Link>.
+4. Measure the pair you will ship in the <Link href="/contrast-checker">contrast checker</Link>. For reference, the original `#7C3AED` is 5.70:1 on white (AA for normal text, short of AAA) and 3.69:1 on black (large text only). Those two results are why a single HSL lightness does not give you a theme.
+5. If the color also goes to print, run the final hex through <Link href="/print-gamut">print gamut</Link> before the guidelines freeze it.
+
+## FAQ
+
+<BlogFaq
+  items={[
+    {
+      question: "Are HEX and RGB the same color?",
+      answer: "For 8-bit sRGB, yes. A six-digit hex code is the same three channels written in base 16. #7C3AED is rgb(124 58 237). The <a href=\"/convert-hex-to-rgb\">HEX to RGB converter</a> does this without changing the color.",
+    },
+    {
+      question: "Is HSL a different color model from RGB?",
+      answer: "In CSS, hsl() is a cylindrical way to write an sRGB color. CSS Color Level 4 says HSL lightness is the mean of the gamma-encoded red, green, and blue channels, so it does not match perceived lightness across hues. Blue and yellow can both be 50% HSL lightness and look very different.",
+    },
+    {
+      question: "Why is yellow at 50% lightness brighter than blue at 50%?",
+      answer: "Because HSL lightness averages the encoded channels, and yellow is mostly red and green, which dominate relative luminance. The CSS Color 4 example is hsl(60deg 100% 50%) for yellow and hsl(240deg 100% 50%) for blue. On white, those colors are about 1.07:1 and 8.59:1.",
+    },
+    {
+      question: "Should design tokens be stored as HEX, RGB, or HSL?",
+      answer: "Store one 8-bit spelling, usually hex, and convert at the edges. HSL is useful while you are adjusting a color. Convert back to hex and check contrast before the value becomes a token.",
+    },
+    {
+      question: "Does converting HEX to HSL change contrast?",
+      answer: "An exact conversion does not change the sRGB channels, so the WCAG ratio stays the same. Rounding HSL to whole numbers and converting back can nudge a channel. Keep the hex as the value you test.",
+    },
+    {
+      question: "Where does OKLCH fit?",
+      answer: "OKLCH is a different space, standardized in CSS Color Level 4, whose lightness tracks appearance more closely than HSL. The <a href=\"/blog/oklch-for-designers\">OKLCH guide</a> covers the syntax, the gamut limit, and what still has to be checked in sRGB.",
+    },
+  ]}
+/>
+
+HEX, RGB, and HSL are three spellings of sRGB. Use <Link href="/convert-color">the converter index</Link> to move between them, and use the <Link href="/contrast-checker">contrast checker</Link> whenever the spelling was a way of making the color lighter, darker, or more saturated. The notation can be exact. The step you took in HSL still has to survive the pair of colors you will actually paint.
