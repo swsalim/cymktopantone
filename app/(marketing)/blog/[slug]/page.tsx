@@ -200,7 +200,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
 
             {/* Previous/Next Post Navigation */}
-            <BlogNavigation prev={post.prev} next={post.next} />
+            <BlogNavigation
+              prev={
+                post.prev ? { title: post.prev.title, _meta: { path: post.prev._meta.path } } : null
+              }
+              next={
+                post.next ? { title: post.next.title, _meta: { path: post.next._meta.path } } : null
+              }
+            />
           </article>
 
           {/* Table of Contents Sidebar */}
