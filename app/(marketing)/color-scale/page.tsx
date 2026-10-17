@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ColorScaleGenerator } from '@/components/color-tools/color-scale-generator';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Tint & Shade Generator — Tailwind Color Scale',
@@ -21,12 +21,12 @@ const config = {
     {
       question: 'Does this match Tailwind naming?',
       answer:
-        'Yes. The scale uses steps 50, 100, 200 … 950 matching Tailwind CSS conventions. Export directly into <code>tailwind.config.js</code>.',
+        'Yes. The scale uses steps 50, 100, 200 … 950 matching Tailwind CSS conventions. Export directly into `tailwind.config.js`.',
     },
     {
       question: 'How do I pick accessible text colors?',
       answer:
-        'Check the /white and /black contrast badges on each swatch, or run pairs through the <Link href="/contrast-checker">WCAG contrast checker</Link>.',
+        'Check the /white and /black contrast badges on each swatch, or run pairs through the [WCAG contrast checker](/contrast-checker).',
     },
   ],
 };
@@ -40,12 +40,13 @@ export default function ColorScalePage() {
         ...config,
         content: (
           <p>
-            Learn how color models work in our{' '}
-            <Link href="/color-models/hsl">HSL color guide</Link>, then convert any swatch with the{' '}
+            Learn how color models work in our <Link href="/color-models/hsl">HSL color guide</Link>
+            , then convert any swatch with the{' '}
             <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> for vendor handoffs.
           </p>
         ),
-      }}>
+      }}
+    >
       <ColorScaleGenerator />
     </ToolPageShell>
   );

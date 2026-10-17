@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { harmonySubpages } from '@/config/tools-internal';
+
 import { HarmonyScheme } from '@/lib/palette-harmony';
 
 import { ColorWheel } from '@/components/color-tools/color-wheel';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const SCHEME_COPY: Record<HarmonyScheme, { title: string; description: string; intro: string }> = {
   complementary: {
@@ -68,22 +69,22 @@ const SCHEME_NOTES: Record<
       {
         question: 'What is a complementary color?',
         answer:
-          'It is the hue opposite your base color on the wheel, 180 degrees away. The <a href="/blog/color-theory-101">color theory guide</a> explains hue, saturation, and value before you rely on the pair.',
+          'It is the hue opposite your base color on the wheel, 180 degrees away. The [color theory guide](/blog/color-theory-101) explains hue, saturation, and value before you rely on the pair.',
       },
       {
         question: 'Why do complementary colors sometimes look like they flicker?',
         answer:
-          'Equal areas of two saturated opposites compete. Reduce the area or the saturation of one hue, or separate them with a neutral. Neutrals are listed on the <a href="/colors">named colors index</a>.',
+          'Equal areas of two saturated opposites compete. Reduce the area or the saturation of one hue, or separate them with a neutral. Neutrals are listed on the [named colors index](/colors).',
       },
       {
         question: 'Does a complementary pair pass WCAG automatically?',
         answer:
-          'No. Contrast is a luminance ratio between text and its background, not a hue relationship. Check the pair in the <a href="/contrast-checker">contrast checker</a>.',
+          'No. Contrast is a luminance ratio between text and its background, not a hue relationship. Check the pair in the [contrast checker](/contrast-checker).',
       },
       {
         question: 'Where do I turn the wheel colors into a palette?',
         answer:
-          'Open the <a href="/palettes/complementary">complementary palette generator</a>. It keeps the opposite hue and adds tints and shades you can export.',
+          'Open the [complementary palette generator](/palettes/complementary). It keeps the opposite hue and adds tints and shades you can export.',
       },
     ],
   },
@@ -98,7 +99,7 @@ const SCHEME_NOTES: Record<
       {
         question: 'What is an analogous color scheme?',
         answer:
-          'Hues that sit next to each other on the wheel. The <a href="/blog/color-theory-101">color theory guide</a> covers why neighboring hues feel related.',
+          'Hues that sit next to each other on the wheel. The [color theory guide](/blog/color-theory-101) covers why neighboring hues feel related.',
       },
       {
         question: 'How many analogous hues should a UI use?',
@@ -108,12 +109,12 @@ const SCHEME_NOTES: Record<
       {
         question: 'Can analogous colors fail contrast?',
         answer:
-          'Yes. Similar hues often have similar luminance. Measure text against the surface in the <a href="/contrast-checker">contrast checker</a> instead of judging the wheel.',
+          'Yes. Similar hues often have similar luminance. Measure text against the surface in the [contrast checker](/contrast-checker) instead of judging the wheel.',
       },
       {
         question: 'How do I export the scheme?',
         answer:
-          'Send it to the <a href="/palettes/analogous">analogous palette generator</a> to lock swatches and copy CSS or Tailwind tokens.',
+          'Send it to the [analogous palette generator](/palettes/analogous) to lock swatches and copy CSS or Tailwind tokens.',
       },
     ],
   },
@@ -128,22 +129,22 @@ const SCHEME_NOTES: Record<
       {
         question: 'What is a triadic color scheme?',
         answer:
-          'Three hues spaced evenly around the wheel, about 120 degrees apart. See <a href="/blog/color-theory-101">color theory 101</a> for hue as a wheel position.',
+          'Three hues spaced evenly around the wheel, about 120 degrees apart. See [color theory 101](/blog/color-theory-101) for hue as a wheel position.',
       },
       {
         question: 'How do I keep a triad from looking chaotic?',
         answer:
-          'Let one hue dominate the area. Use the other two in smaller marks. Tints of the same hues, from the <a href="/palettes/triadic">triadic palette generator</a>, calm the layout without leaving the scheme.',
+          'Let one hue dominate the area. Use the other two in smaller marks. Tints of the same hues, from the [triadic palette generator](/palettes/triadic), calm the layout without leaving the scheme.',
       },
       {
         question: 'Will a triad print the way it looks on screen?',
         answer:
-          'Not necessarily. Saturated hues often shift in CMYK. Check the swatches in the <a href="/print-gamut">print gamut checker</a> and treat the result as a reference, not a proof.',
+          'Not necessarily. Saturated hues often shift in CMYK. Check the swatches in the [print gamut checker](/print-gamut) and treat the result as a reference, not a proof.',
       },
       {
         question: 'Where should text colors come from?',
         answer:
-          'From a darker or lighter step that passes contrast, not from the most saturated triad hue. Confirm the pair in the <a href="/contrast-checker">contrast checker</a>.',
+          'From a darker or lighter step that passes contrast, not from the most saturated triad hue. Confirm the pair in the [contrast checker](/contrast-checker).',
       },
     ],
   },
@@ -158,22 +159,22 @@ const SCHEME_NOTES: Record<
       {
         question: 'How is split complementary different from complementary?',
         answer:
-          'Complementary uses the exact opposite hue. Split complementary uses the two hues beside that opposite. The <a href="/blog/color-theory-101">color theory guide</a> describes both as hue relationships.',
+          'Complementary uses the exact opposite hue. Split complementary uses the two hues beside that opposite. The [color theory guide](/blog/color-theory-101) describes both as hue relationships.',
       },
       {
         question: 'Which color should be dominant?',
         answer:
-          'Usually the base hue, in a larger area, with the two split accents used sparingly. Build that balance in the <a href="/palettes/split-complementary">split complementary palette generator</a>.',
+          'Usually the base hue, in a larger area, with the two split accents used sparingly. Build that balance in the [split complementary palette generator](/palettes/split-complementary).',
       },
       {
         question: 'Can the two accent hues be too close?',
         answer:
-          'Yes. They are neighbors of each other. If a status depends on telling them apart, add a label and check the <a href="/color-blindness">color blindness simulator</a>.',
+          'Yes. They are neighbors of each other. If a status depends on telling them apart, add a label and check the [color blindness simulator](/color-blindness).',
       },
       {
         question: 'Does this scheme handle text contrast?',
         answer:
-          'The wheel does not measure contrast. Check text and background in the <a href="/contrast-checker">contrast checker</a>.',
+          'The wheel does not measure contrast. Check text and background in the [contrast checker](/contrast-checker).',
       },
     ],
   },
@@ -188,12 +189,12 @@ const SCHEME_NOTES: Record<
       {
         question: 'What is a monochromatic palette?',
         answer:
-          'One hue at several lightness levels. Hue, saturation, and value are defined in <a href="/blog/color-theory-101">color theory 101</a>.',
+          'One hue at several lightness levels. Hue, saturation, and value are defined in [color theory 101](/blog/color-theory-101).',
       },
       {
         question: 'How is this different from a tint and shade scale?',
         answer:
-          'The wheel shows the hue relationship. The <a href="/color-scale">tint and shade generator</a> builds an eleven-step ramp, and the <a href="/palettes/monochromatic">monochromatic palette generator</a> keeps five steps you can export.',
+          'The wheel shows the hue relationship. The [tint and shade generator](/color-scale) builds an eleven-step ramp, and the [monochromatic palette generator](/palettes/monochromatic) keeps five steps you can export.',
       },
       {
         question: 'Why do some steps look identical?',
@@ -203,7 +204,7 @@ const SCHEME_NOTES: Record<
       {
         question: 'Which step should be body text?',
         answer:
-          'A dark step on a light surface, or the reverse, after the <a href="/contrast-checker">contrast checker</a> shows the ratio you need. The middle step is rarely the text color.',
+          'A dark step on a light surface, or the reverse, after the [contrast checker](/contrast-checker) shows the ratio you need. The middle step is rarely the text color.',
       },
     ],
   },
@@ -218,22 +219,22 @@ const SCHEME_NOTES: Record<
       {
         question: 'What is a tetradic scheme?',
         answer:
-          'Four hues in a rectangle, made of two complementary pairs. The geometry is the part covered under hue in <a href="/blog/color-theory-101">color theory 101</a>.',
+          'Four hues in a rectangle, made of two complementary pairs. The geometry is the part covered under hue in [color theory 101](/blog/color-theory-101).',
       },
       {
         question: 'How do I stop a tetrad from looking busy?',
         answer:
-          'Give most of the area to one hue. Keep the other three for accents. Refine the set in the <a href="/palettes/tetradic">tetradic palette generator</a>.',
+          'Give most of the area to one hue. Keep the other three for accents. Refine the set in the [tetradic palette generator](/palettes/tetradic).',
       },
       {
         question: 'Are all four hues safe for text?',
         answer:
-          'No. Check each text and background pair in the <a href="/contrast-checker">contrast checker</a>. Hue spacing is not a contrast result.',
+          'No. Check each text and background pair in the [contrast checker](/contrast-checker). Hue spacing is not a contrast result.',
       },
       {
         question: 'Should I simulate color vision on a four-hue palette?',
         answer:
-          'Yes, especially when two of the hues carry different meanings. Use the <a href="/color-blindness">color blindness simulator</a> and add labels where hues move closer together.',
+          'Yes, especially when two of the hues carry different meanings. Use the [color blindness simulator](/color-blindness) and add labels where hues move closer together.',
       },
     ],
   },
@@ -292,12 +293,13 @@ export default async function ColorWheelSchemePage({
               The relationships are introduced in{' '}
               <Link href="/blog/color-theory-101">color theory 101</Link>. Explore every rule on the{' '}
               <Link href="/color-wheel">main color wheel</Link>, or lock swatches in the{' '}
-              <Link href={`/palettes/${slug}`}>{entry.scheme} palette generator</Link>. Named swatches
-              live in the <Link href="/colors">color index</Link>.
+              <Link href={`/palettes/${slug}`}>{entry.scheme} palette generator</Link>. Named
+              swatches live in the <Link href="/colors">color index</Link>.
             </p>
           </>
         ),
-      }}>
+      }}
+    >
       <ColorWheel initialScheme={entry.scheme} showSchemePicker={false} />
     </ToolPageShell>
   );

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { PaletteGenerator } from '@/components/color-tools/palette-generator';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Color Palette Generator — Free Online Color Schemes',
@@ -22,7 +22,7 @@ const config = {
     {
       question: 'Can I export palettes for CSS or Tailwind?',
       answer:
-        'Yes. Copy your palette as CSS custom properties, a Tailwind <code>theme.extend.colors</code> block, or JSON design tokens.',
+        'Yes. Copy your palette as CSS custom properties, a Tailwind `theme.extend.colors` block, or JSON design tokens.',
     },
     {
       question: 'Why do some colors show a CMYK warning?',
@@ -60,11 +60,11 @@ export default function PalettesPage() {
             </p>
             <p>
               Check each swatch&apos;s CMYK column before handing colors to a print vendor. Use the{' '}
-              <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> for precise percentages,
-              or open the <Link href="/contrast-checker">contrast checker</Link> to validate text
-              pairings for accessibility. When a swatch is a CSS named color or one of the catalog
-              neutrals, its hex links to a{' '}
-              <Link href="/colors">color page</Link> with the other conversions and harmony palettes.
+              <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> for precise
+              percentages, or open the <Link href="/contrast-checker">contrast checker</Link> to
+              validate text pairings for accessibility. When a swatch is a CSS named color or one of
+              the catalog neutrals, its hex links to a <Link href="/colors">color page</Link> with
+              the other conversions and harmony palettes.
             </p>
             <h2>Color harmony rules explained</h2>
             <ul>
@@ -73,8 +73,8 @@ export default function PalettesPage() {
                 marketing sites and the default starting point.
               </li>
               <li>
-                <strong>Complementary</strong> — base plus its opposite, with tints and shades;
-                high impact for CTAs and hero sections.
+                <strong>Complementary</strong> — base plus its opposite, with tints and shades; high
+                impact for CTAs and hero sections.
               </li>
               <li>
                 <strong>Analogous</strong> — neighboring hues; ideal for UI surfaces and soft
@@ -87,7 +87,8 @@ export default function PalettesPage() {
             </ul>
           </>
         ),
-      }}>
+      }}
+    >
       <PaletteGenerator />
     </ToolPageShell>
   );

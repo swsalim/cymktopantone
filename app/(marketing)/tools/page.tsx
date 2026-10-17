@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+
 import { ExternalLinkIcon } from 'lucide-react';
 
 import { converters } from '@/config/converters';
-import { internalTools } from '@/config/tools-internal';
 import { ogImages, siteConfig } from '@/config/site';
+import { internalTools } from '@/config/tools-internal';
 
 import { absoluteUrl, cn } from '@/lib/utils';
 
@@ -74,7 +75,7 @@ export default function ToolsHubPage() {
       />
       <Wrapper className="pb-8 md:pb-12">
         <Container as="section">
-          <div className="rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50 via-white/90 to-cyan-50 p-6 shadow-sm md:p-10 dark:border-violet-500/20 dark:from-violet-500/15 dark:via-gray-900 dark:to-cyan-500/10">
+          <div className="to-cyan-50 dark:to-cyan-500/10 rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50 via-white/90 p-6 shadow-sm md:p-10 dark:border-violet-500/20 dark:from-violet-500/15 dark:via-gray-900">
             <p className="mb-4 inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-violet-700 dark:bg-violet-500/20 dark:text-violet-200">
               Free color toolkit
             </p>
@@ -82,8 +83,9 @@ export default function ToolsHubPage() {
               Color Tools for Design, Print & Code
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg dark:text-gray-300">
-              Generate palettes, build CSS gradients, check WCAG contrast, extract colors from photos,
-              and convert between CMYK, RGB, HEX, HSL, and HSV — all free, no account required.
+              Generate palettes, build CSS gradients, check WCAG contrast, extract colors from
+              photos, and convert between CMYK, RGB, HEX, HSL, and HSV — all free, no account
+              required.
             </p>
           </div>
 
@@ -116,13 +118,12 @@ export default function ToolsHubPage() {
             <Prose>
               <h2>How the tools fit one color workflow</h2>
               <p>
-                Start with a role, not a hex. A signature color, a body-text color, a surface, and
-                a chart series are different jobs. The{' '}
-                <Link href="/color-wheel">color wheel</Link> and the{' '}
-                <Link href="/palettes">palette generator</Link> propose hues from a harmony rule.
-                The <Link href="/colors">named color index</Link> is the place to look up a CSS
-                keyword or a common neutral and see the same color as HEX, RGB, HSL, HSV, CMYK, and
-                OKLCH.
+                Start with a role, not a hex. A signature color, a body-text color, a surface, and a
+                chart series are different jobs. The <Link href="/color-wheel">color wheel</Link>{' '}
+                and the <Link href="/palettes">palette generator</Link> propose hues from a harmony
+                rule. The <Link href="/colors">named color index</Link> is the place to look up a
+                CSS keyword or a common neutral and see the same color as HEX, RGB, HSL, HSV, CMYK,
+                and OKLCH.
               </p>
               <p>
                 After the hues exist, check the pairs you will actually ship. The{' '}
@@ -177,21 +178,21 @@ export default function ToolsHubPage() {
                 {
                   question: 'Which tool should I open first?',
                   answer:
-                    'If you have one brand hex, start with the <a href="/palettes">palette generator</a> or the <a href="/color-wheel">color wheel</a>. If you have a photo, start with <a href="/palette-from-image">palette from image</a>. If you already know the CSS name, open the <a href="/colors">color index</a>.',
+                    'If you have one brand hex, start with the [palette generator](/palettes) or the [color wheel](/color-wheel). If you have a photo, start with [palette from image](/palette-from-image). If you already know the CSS name, open the [color index](/colors).',
                 },
                 {
                   question: 'Are the CMYK values a press proof?',
                   answer:
-                    'No. Converters and the <a href="/print-gamut">print gamut checker</a> use a channel conversion so you can see a shift. The printer’s profile, paper, and proof decide the ink.',
+                    'No. Converters and the [print gamut checker](/print-gamut) use a channel conversion so you can see a shift. The printer’s profile, paper, and proof decide the ink.',
                 },
                 {
                   question: 'Does a passing contrast check mean the page is accessible?',
                   answer:
-                    'It means that pair meets the ratio you tested. It does not cover focus, keyboard use, or information that depends on color alone. Preview hues in the <a href="/color-blindness">color blindness simulator</a> and add a second cue when color carries meaning.',
+                    'It means that pair meets the ratio you tested. It does not cover focus, keyboard use, or information that depends on color alone. Preview hues in the [color blindness simulator](/color-blindness) and add a second cue when color carries meaning.',
                 },
                 {
                   question: 'Where are the format converters?',
-                  answer: `The <a href="/convert-color">converter hub</a> lists all ${converters.length} tools between CMYK, RGB, HEX, HSL, and HSV, including <a href="/convert-hsl-to-hsv">HSL to HSV</a>.`,
+                  answer: `The [converter hub](/convert-color) lists all ${converters.length} tools between CMYK, RGB, HEX, HSL, and HSV, including [HSL to HSV](/convert-hsl-to-hsv).`,
                 },
               ]}
             />
@@ -202,7 +203,10 @@ export default function ToolsHubPage() {
               Format converters
             </h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              <Link href="/convert-color" className="font-medium text-violet-600 hover:underline dark:text-violet-400">
+              <Link
+                href="/convert-color"
+                className="font-medium text-violet-600 hover:underline dark:text-violet-400"
+              >
                 View all {converters.length} converters →
               </Link>
             </p>
@@ -213,7 +217,8 @@ export default function ToolsHubPage() {
                   href={c.url}
                   className={cn(
                     'rounded-lg border border-violet-200/70 bg-white/80 px-4 py-3 text-sm font-medium text-gray-900 transition hover:border-violet-400 dark:border-gray-700 dark:bg-gray-900/80 dark:text-gray-100',
-                  )}>
+                  )}
+                >
                   {c.title.replace(' Color Converter', '')}
                 </Link>
               ))}

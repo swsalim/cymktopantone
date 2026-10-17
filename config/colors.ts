@@ -2760,7 +2760,7 @@ export const colorModelFaqs: FAQItem[] = [
   {
     question: 'Which color model is best for printing?',
     answer:
-      'CMYK is the <strong>best color model for printing</strong> because it uses Cyan, Magenta, Yellow, and Black inks. This subtractive method ensures accurate color reproduction on paper.',
+      'CMYK is the **best color model for printing** because it uses Cyan, Magenta, Yellow, and Black inks. This subtractive method ensures accurate color reproduction on paper.',
   },
   {
     question: 'Which color model is best for web design?',
@@ -2775,7 +2775,7 @@ export const colorModelFaqs: FAQItem[] = [
   {
     question: 'What is the difference between HEX and RGB?',
     answer:
-      'HEX is a shorthand hexadecimal representation of RGB values. For example, HEX <a href="/convert-hex-to-pantone-pms/FF0000" class="text-violet-600">#FF0000</a> represents pure red, which is the same as RGB(255, 0, 0). Both are used in digital design, but HEX is more common in CSS and web development.',
+      'HEX is a shorthand hexadecimal representation of RGB values. For example, HEX [#FF0000](/convert-hex-to-pantone-pms/FF0000) represents pure red, which is the same as RGB(255, 0, 0). Both are used in digital design, but HEX is more common in CSS and web development.',
   },
   {
     question: 'What is the difference between HSL and RGB?',
@@ -2817,7 +2817,7 @@ export const colorModelFaqs: FAQItem[] = [
   {
     question: 'What is the difference between HSV and HSL?',
     answer:
-      'Both use hue and saturation, but the third axis differs: HSV uses <strong>Value</strong> (brightness toward the pure hue), while HSL uses <strong>Lightness</strong> (perceived light/dark between white and black). The same numeric inputs rarely look identical. See our <a href="/color-models/hsv" class="text-violet-600 dark:text-violet-400">HSV</a> and <a href="/color-models/hsl" class="text-violet-600 dark:text-violet-400">HSL</a> guides for when each shines.',
+      'Both use hue and saturation, but the third axis differs: HSV uses **Value** (brightness toward the pure hue), while HSL uses **Lightness** (perceived light/dark between white and black). The same numeric inputs rarely look identical. See our [HSV](/color-models/hsv) and [HSL](/color-models/hsl) guides for when each shines.',
   },
 ];
 
@@ -2962,7 +2962,7 @@ export const hsvFaqs: FAQItem[] = [
   {
     question: 'Is HSV the same as HSB?',
     answer:
-      'Yes. <strong>HSB</strong> (Hue, Saturation, Brightness) is another name for the same idea as HSV. Different apps use different labels, but the three dimensions work the same way.',
+      'Yes. **HSB** (Hue, Saturation, Brightness) is another name for the same idea as HSV. Different apps use different labels, but the three dimensions work the same way.',
   },
   {
     question: 'Why do Photoshop and other editors use HSV?',
@@ -2972,11 +2972,11 @@ export const hsvFaqs: FAQItem[] = [
   {
     question: 'How is HSV different from HSL?',
     answer:
-      'They share hue and saturation, but <strong>value</strong> (HSV) and <strong>lightness</strong> (HSL) are computed differently, so sliders do not behave the same at the extremes. Use HSV when your tool uses it natively; use HSL when writing CSS <code>hsl()</code> or building design tokens.',
+      'They share hue and saturation, but **value** (HSV) and **lightness** (HSL) are computed differently, so sliders do not behave the same at the extremes. Use HSV when your tool uses it natively; use HSL when writing CSS `hsl()` or building design tokens.',
   },
   {
     question: 'Can HSV be converted to RGB, HEX, or CMYK?',
     answer:
-      'Yes. HSV is converted to RGB first, then to HEX for the web or to CMYK for print (with gamut limits). Our site offers <a href="/convert-hsv-to-rgb" class="text-violet-600 dark:text-violet-400">HSV to RGB</a>, <a href="/convert-hsv-to-hex" class="text-violet-600 dark:text-violet-400">HSV to HEX</a>, and <a href="/convert-hsv-to-cmyk" class="text-violet-600 dark:text-violet-400">HSV to CMYK</a> converters.',
+      'Yes. HSV is converted to RGB first, then to HEX for the web or to CMYK for print (with gamut limits). Our site offers [HSV to RGB](/convert-hsv-to-rgb), [HSV to HEX](/convert-hsv-to-hex), and [HSV to CMYK](/convert-hsv-to-cmyk) converters.',
   },
 ];
