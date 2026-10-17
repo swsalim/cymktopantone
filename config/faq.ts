@@ -3,7 +3,7 @@ export const facebookFAQ = [
     category: 'Facebook',
     question: 'What is the recommended size for a Facebook profile picture?',
     answer:
-      'The ideal size is <strong>320 x 320 px</strong>. It appears as <strong>170 x 170 px</strong> on desktop and <strong>128 x 128 px</strong> on mobile. Ensure the image is centered and clear for best display across devices.',
+      'The ideal size is **320 x 320 px**. It appears as **170 x 170 px** on desktop and **128 x 128 px** on mobile. Ensure the image is centered and clear for best display across devices.',
   },
   {
     category: 'Facebook',
@@ -15,7 +15,7 @@ export const facebookFAQ = [
     category: 'Facebook',
     question: 'Can I upload any image format to Facebook?',
     answer:
-      'Facebook supports <strong>JPEG</strong>, <strong>PNG</strong>, and <strong>GIF</strong> formats for profile pictures. <strong>JPEG</strong> is preferred for best quality and faster loading times.',
+      'Facebook supports **JPEG**, **PNG**, and **GIF** formats for profile pictures. **JPEG** is preferred for best quality and faster loading times.',
   },
   {
     category: 'Facebook',
@@ -27,7 +27,7 @@ export const facebookFAQ = [
     category: 'Facebook',
     question: 'How can I upload a high-quality profile picture on Facebook?',
     answer:
-      'Upload a high-resolution image of at least <strong>400 x 400 px</strong> to ensure that your profile picture looks sharp on all devices.',
+      'Upload a high-resolution image of at least **400 x 400 px** to ensure that your profile picture looks sharp on all devices.',
   },
   {
     category: 'Facebook',
@@ -61,7 +61,7 @@ export const instagramFAQ = [
     category: 'Instagram',
     question: 'What is the ideal Instagram profile picture size?',
     answer:
-      'The recommended size for Instagram profile pictures is <strong>320 x 320 px</strong>. The image will be displayed as <strong>110 x 110 px</strong> on mobile devices.',
+      'The recommended size for Instagram profile pictures is **320 x 320 px**. The image will be displayed as **110 x 110 px** on mobile devices.',
   },
   {
     category: 'Instagram',
@@ -73,13 +73,13 @@ export const instagramFAQ = [
     category: 'Instagram',
     question: 'What file formats does Instagram support for profile pictures?',
     answer:
-      'Instagram supports <strong>JPEG</strong> and <strong>PNG</strong> formats. <strong>JPEG</strong> is recommended for optimal quality and faster loading times.',
+      'Instagram supports **JPEG** and **PNG** formats. **JPEG** is recommended for optimal quality and faster loading times.',
   },
   {
     category: 'Instagram',
     question: 'Can I upload a high-resolution profile picture on Instagram?',
     answer:
-      'Yes, Instagram allows images up to <strong>1080 x 1080 px</strong>, but they will be displayed at smaller sizes on mobile devices. Uploading at the correct size ensures the best clarity.',
+      'Yes, Instagram allows images up to **1080 x 1080 px**, but they will be displayed at smaller sizes on mobile devices. Uploading at the correct size ensures the best clarity.',
   },
   {
     category: 'Instagram',
@@ -106,7 +106,7 @@ export const twitterFAQ = [
     category: 'X (Twitter)',
     question: 'What is the recommended size for a Twitter profile picture?',
     answer:
-      'The recommended size for a Twitter profile picture is <strong>400 x 400 px</strong>. Uploading a larger image ensures that it remains sharp when resized.',
+      'The recommended size for a Twitter profile picture is **400 x 400 px**. Uploading a larger image ensures that it remains sharp when resized.',
   },
   {
     category: 'X (Twitter)',
@@ -118,7 +118,7 @@ export const twitterFAQ = [
     category: 'X (Twitter)',
     question: 'What file formats does Twitter accept for profile pictures?',
     answer:
-      'Twitter accepts <strong>JPEG</strong>, <strong>PNG</strong>, and <strong>GIF</strong> formats, with <strong>JPEG</strong> being the preferred format for profile pictures.',
+      'Twitter accepts **JPEG**, **PNG**, and **GIF** formats, with **JPEG** being the preferred format for profile pictures.',
   },
   {
     category: 'X (Twitter)',
@@ -130,13 +130,13 @@ export const twitterFAQ = [
     category: 'X (Twitter)',
     question: 'Can I upload a high-resolution image on Twitter?',
     answer:
-      'Yes, you can upload images up to <strong>400 x 400 px</strong>. Larger images will be automatically resized, but using the recommended size ensures the best quality.',
+      'Yes, you can upload images up to **400 x 400 px**. Larger images will be automatically resized, but using the recommended size ensures the best quality.',
   },
   {
     category: 'X (Twitter)',
     question: 'Why does my Twitter profile picture appear blurry?',
     answer:
-      'Blurry profile pictures may result from uploading an image with a low resolution. Use a clear, high-quality image at least <strong>400 x 400 px</strong>.',
+      'Blurry profile pictures may result from uploading an image with a low resolution. Use a clear, high-quality image at least **400 x 400 px**.',
   },
   {
     category: 'X (Twitter)',
@@ -151,7 +151,7 @@ export const linkedinFAQ = [
     category: 'LinkedIn',
     question: 'What is the ideal size for a LinkedIn profile picture?',
     answer:
-      'The recommended size for a LinkedIn profile picture is <strong>400 x 400 px</strong>, but you can upload images up to <strong>7680 x 4320 px</strong> for high-quality photos.',
+      'The recommended size for a LinkedIn profile picture is **400 x 400 px**, but you can upload images up to **7680 x 4320 px** for high-quality photos.',
   },
   {
     category: 'LinkedIn',
@@ -163,7 +163,7 @@ export const linkedinFAQ = [
     category: 'LinkedIn',
     question: 'What is the best format for a LinkedIn profile picture?',
     answer:
-      'LinkedIn accepts <strong>JPEG</strong>, <strong>PNG</strong>, and <strong>GIF</strong> formats, but <strong>JPEG</strong> is preferred for optimal quality.',
+      'LinkedIn accepts **JPEG**, **PNG**, and **GIF** formats, but **JPEG** is preferred for optimal quality.',
   },
   {
     category: 'LinkedIn',
@@ -181,7 +181,7 @@ export const linkedinFAQ = [
     category: 'LinkedIn',
     question: 'Can I upload a high-resolution image on LinkedIn?',
     answer:
-      'Yes, LinkedIn supports images up to <strong>7680 x 4320 px</strong>. However, <strong>400 x 400 px</strong> is sufficient for profile pictures.',
+      'Yes, LinkedIn supports images up to **7680 x 4320 px**. However, **400 x 400 px** is sufficient for profile pictures.',
   },
   {
     category: 'LinkedIn',
@@ -202,7 +202,7 @@ export const discordFAQ = [
     category: 'Discord',
     question: 'What is the recommended size for a Discord profile picture?',
     answer:
-      'The ideal size for a Discord profile picture is <strong>128 x 128 px</strong>, but larger images up to <strong>512 x 512 px</strong> can be uploaded.',
+      'The ideal size for a Discord profile picture is **128 x 128 px**, but larger images up to **512 x 512 px** can be uploaded.',
   },
   {
     category: 'Discord',
@@ -213,20 +213,19 @@ export const discordFAQ = [
   {
     category: 'Discord',
     question: 'What formats does Discord support for profile pictures?',
-    answer:
-      'Discord supports <strong>JPEG</strong>, <strong>PNG</strong>, and <strong>GIF</strong> formats.',
+    answer: 'Discord supports **JPEG**, **PNG**, and **GIF** formats.',
   },
   {
     category: 'Discord',
     question: 'Can I upload a high-resolution profile picture on Discord?',
     answer:
-      'Yes, Discord allows images up to <strong>512 x 512 px</strong>. However, it will resize larger images for optimal display.',
+      'Yes, Discord allows images up to **512 x 512 px**. However, it will resize larger images for optimal display.',
   },
   {
     category: 'Discord',
     question: 'Why does my Discord profile picture look blurry?',
     answer:
-      "Blurry profile pictures can occur if the image is too small. Upload an image that's at least <strong>128 x 128 px</strong> for best results.",
+      "Blurry profile pictures can occur if the image is too small. Upload an image that's at least **128 x 128 px** for best results.",
   },
   {
     category: 'Discord',
@@ -241,31 +240,30 @@ export const telegramFAQ = [
     category: 'Telegram',
     question: 'What is the ideal size for a Telegram profile picture?',
     answer:
-      'The recommended size for a Telegram profile picture is <strong>512 x 512 px</strong> for clear and sharp images.',
+      'The recommended size for a Telegram profile picture is **512 x 512 px** for clear and sharp images.',
   },
   {
     category: 'Telegram',
     question: 'Can I use a GIF as my profile picture on Telegram?',
     answer:
-      "Yes, Telegram supports <strong>GIFs</strong> for profile pictures. Just ensure the file size does not exceed the platform's limit of 2MB.",
+      "Yes, Telegram supports **GIFs** for profile pictures. Just ensure the file size does not exceed the platform's limit of 2MB.",
   },
   {
     category: 'Telegram',
     question: 'What formats does Telegram support for profile pictures?',
-    answer:
-      'Telegram supports <strong>JPEG</strong>, <strong>PNG</strong>, and <strong>GIF</strong> formats for profile pictures.',
+    answer: 'Telegram supports **JPEG**, **PNG**, and **GIF** formats for profile pictures.',
   },
   {
     category: 'Telegram',
     question: 'How can I improve the quality of my Telegram profile picture?',
     answer:
-      'Ensure your image is at least <strong>512 x 512 px</strong>. Telegram supports high-resolution files, so you can upload a high-quality image.',
+      'Ensure your image is at least **512 x 512 px**. Telegram supports high-resolution files, so you can upload a high-quality image.',
   },
   {
     category: 'Telegram',
     question: 'Why does my Telegram profile picture appear blurry?',
     answer:
-      'Blurry profile pictures often result from uploading small or low-resolution images. Try uploading an image that is at least <strong>512 x 512 px</strong> for best clarity.',
+      'Blurry profile pictures often result from uploading small or low-resolution images. Try uploading an image that is at least **512 x 512 px** for best clarity.',
   },
   {
     category: 'Telegram',

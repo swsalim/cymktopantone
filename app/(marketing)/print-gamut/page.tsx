@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { PrintGamutChecker } from '@/components/color-tools/print-gamut-checker';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Print Gamut Checker — Will Your Color Survive CMYK?',
@@ -31,7 +31,7 @@ const config = {
     {
       question: 'Is this the same as a professional proof?',
       answer:
-        'No. This uses a standard CMYK conversion to flag risk early. Final production work should always be checked against a calibrated press proof with your printer&apos;s ICC profile.',
+        "No. This uses a standard CMYK conversion to flag risk early. Final production work should always be checked against a calibrated press proof with your printer's ICC profile.",
     },
   ],
 };
@@ -51,7 +51,8 @@ export default function PrintGamutPage() {
             <Link href="/blog/cmyk-safe-web-palettes">why neon HEX colors lie on screen</Link>.
           </p>
         ),
-      }}>
+      }}
+    >
       <PrintGamutChecker />
     </ToolPageShell>
   );

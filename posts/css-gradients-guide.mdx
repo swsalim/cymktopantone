@@ -120,19 +120,19 @@ For repeated patterns, put the generated rule in `@layer utilities` or your glob
   items={[
     {
       question: "How many color stops should a hero gradient have?",
-      answer: "Two stops are enough when the hues are close. Add a third when the endpoints are far apart on the hue wheel, because an sRGB blend can turn muddy in the middle. More than five stops is rarely worth maintaining. Build them in the <a href=\"/gradients\">gradient generator</a> so you can see the midpoint before you commit.",
+      answer: "Two stops are enough when the hues are close. Add a third when the endpoints are far apart on the hue wheel, because an sRGB blend can turn muddy in the middle. More than five stops is rarely worth maintaining. Build them in the [gradient generator](/gradients) so you can see the midpoint before you commit.",
     },
     {
       question: "What happens if I omit stop positions?",
-      answer: "<a href=\"https://www.w3.org/TR/css-images-4/#gradients\" target=\"_blank\" rel=\"noreferrer\">CSS Images Level 4</a> spaces the missing stops evenly between the positions you did set. The first and last stops default to the start and end of the gradient line. <a href=\"https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient\" target=\"_blank\" rel=\"noreferrer\">MDN</a> shows the syntax.",
+      answer: "[CSS Images Level 4](https://www.w3.org/TR/css-images-4/#gradients) spaces the missing stops evenly between the positions you did set. The first and last stops default to the start and end of the gradient line. [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient) shows the syntax.",
     },
     {
       question: "Why does the middle of my gradient look gray?",
-      answer: "sRGB interpolation between two saturated, distant hues often passes through a dull color. Add a middle stop, or interpolate in Oklch. The color spaces are defined in <a href=\"https://www.w3.org/TR/css-color-4/#interpolation-space\" target=\"_blank\" rel=\"noreferrer\">CSS Color Level 4</a>. Keep a plain `linear-gradient` line first so older browsers still paint something.",
+      answer: "sRGB interpolation between two saturated, distant hues often passes through a dull color. Add a middle stop, or interpolate in Oklch. The color spaces are defined in [CSS Color Level 4](https://www.w3.org/TR/css-color-4/#interpolation-space). Keep a plain `linear-gradient` line first so older browsers still paint something.",
     },
     {
       question: "Can text sit directly on a gradient?",
-      answer: "Only if the lightest and darkest areas under the glyphs both meet the contrast ratio you need. <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 1.4.3</a> is about the background behind the text, and a gradient is not one background. If either sample fails, move the text onto a solid card and check that pair in the <a href=\"/contrast-checker\">contrast checker</a>.",
+      answer: "Only if the lightest and darkest areas under the glyphs both meet the contrast ratio you need. [WCAG 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum) is about the background behind the text, and a gradient is not one background. If either sample fails, move the text onto a solid card and check that pair in the [contrast checker](/contrast-checker).",
     },
     {
       question: "Why does my gradient look banded?",

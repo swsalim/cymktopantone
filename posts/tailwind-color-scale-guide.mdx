@@ -123,11 +123,11 @@ One seed HEX becomes tokens for engineering, specs for print, and stops for CSS 
   items={[
     {
       question: "Why 11 steps from 50 to 950?",
-      answer: "<a href=\"https://tailwindcss.com/docs/colors\" target=\"_blank\" rel=\"noreferrer\">Tailwind's default palettes</a> use 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, and 950. Matching that list keeps a custom color pasteable into `theme.extend.colors`, as described in the <a href=\"https://v3.tailwindcss.com/docs/customizing-colors\" target=\"_blank\" rel=\"noreferrer\">v3 customizing-colors guide</a>.",
+      answer: "[Tailwind's default palettes](https://tailwindcss.com/docs/colors) use 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, and 950. Matching that list keeps a custom color pasteable into `theme.extend.colors`, as described in the [v3 customizing-colors guide](https://v3.tailwindcss.com/docs/customizing-colors).",
     },
     {
       question: "Should I build the ramp in HSL or in sRGB?",
-      answer: "Mix the sRGB channels toward white and black. Changing only HSL lightness often shifts hue, so a blue tint drifts toward cyan. The <a href=\"/color-scale\">color scale generator</a> does the channel mix. Check the result by eye after it.",
+      answer: "Mix the sRGB channels toward white and black. Changing only HSL lightness often shifts hue, so a blue tint drifts toward cyan. The [color scale generator](/color-scale) does the channel mix. Check the result by eye after it.",
     },
     {
       question: "Should 500 always be the input HEX?",
@@ -135,7 +135,7 @@ One seed HEX becomes tokens for engineering, specs for print, and stops for CSS 
     },
     {
       question: "Can I use step 400 as text on white?",
-      answer: "Not in the `#6D39AC` example. Step 400, `#A788CD`, is 2.98:1 on white, which is under the 3:1 large-text minimum and under the 4.5:1 body-text minimum in <a href=\"https://www.w3.org/TR/WCAG22/#contrast-minimum\" target=\"_blank\" rel=\"noreferrer\">WCAG 2.2</a>.",
+      answer: "Not in the `#6D39AC` example. Step 400, `#A788CD`, is 2.98:1 on white, which is under the 3:1 large-text minimum and under the 4.5:1 body-text minimum in [WCAG 2.2](https://www.w3.org/TR/WCAG22/#contrast-minimum).",
     },
     {
       question: "Do I need both a Tailwind export and CSS variables?",
@@ -143,7 +143,7 @@ One seed HEX becomes tokens for engineering, specs for print, and stops for CSS 
     },
     {
       question: "Is a linear ramp the same as an OKLCH ramp?",
-      answer: "No. Linear sRGB mixes are even in channel values, not in perception. <a href=\"https://bottosson.github.io/posts/oklab/\" target=\"_blank\" rel=\"noreferrer\">Oklab</a> is the reference for a more even space. Either ramp still has to pass contrast for the pairs you ship.",
+      answer: "No. Linear sRGB mixes are even in channel values, not in perception. [Oklab](https://bottosson.github.io/posts/oklab/) is the reference for a more even space. Either ramp still has to pass contrast for the pairs you ship.",
     },
   ]}
 />

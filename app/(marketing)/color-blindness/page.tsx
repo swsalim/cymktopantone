@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ColorBlindnessSimulator } from '@/components/color-tools/color-blindness-simulator';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Color Blindness Simulator — Protanopia, Deuteranopia, Tritanopia',
@@ -26,7 +26,7 @@ const config = {
     {
       question: 'Is simulation enough for accessibility?',
       answer:
-        'No. Always validate contrast ratios with the <Link href="/contrast-checker">WCAG contrast checker</Link> and avoid relying on color alone to convey meaning.',
+        'No. Always validate contrast ratios with the [WCAG contrast checker](/contrast-checker) and avoid relying on color alone to convey meaning.',
     },
   ],
 };
@@ -45,7 +45,8 @@ export default function ColorBlindnessPage() {
             the <Link href="/contrast-checker">contrast checker</Link>.
           </p>
         ),
-      }}>
+      }}
+    >
       <ColorBlindnessSimulator />
     </ToolPageShell>
   );

@@ -1,3 +1,5 @@
+import { faqAnswerToPlainText } from '@/lib/faq-answer';
+
 import JsonLd from '@/components/structured-data/json-ld';
 
 export default function FaqJsonLd({
@@ -16,7 +18,7 @@ export default function FaqJsonLd({
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.answer,
+        text: faqAnswerToPlainText(item.answer),
       },
     };
   });

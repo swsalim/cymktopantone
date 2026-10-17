@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { gradientSubpages } from '@/config/tools-internal';
+
 import { GradientType } from '@/lib/gradient';
 
 import { GradientGenerator } from '@/components/color-tools/gradient-generator';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const TYPE_COPY: Record<
   GradientType,
@@ -32,17 +33,17 @@ const TYPE_COPY: Record<
       {
         question: 'How do I keep text readable on a linear gradient?',
         answer:
-          'A gradient is many backgrounds. Check the lightest and darkest points under the text in the <a href="/contrast-checker">contrast checker</a>. WCAG 2.2 Success Criterion 1.4.3 needs 4.5:1 for normal text and 3:1 for large text where it applies. If a region fails, move the type onto a solid card.',
+          'A gradient is many backgrounds. Check the lightest and darkest points under the text in the [contrast checker](/contrast-checker). WCAG 2.2 Success Criterion 1.4.3 needs 4.5:1 for normal text and 3:1 for large text where it applies. If a region fails, move the type onto a solid card.',
       },
       {
         question: 'Why does the middle of a two-stop linear gradient look gray?',
         answer:
-          'sRGB interpolation between distant saturated hues often passes through a dull color. Add a middle stop, or interpolate in a different space. The <a href="/blog/css-gradients-guide">CSS gradients guide</a> and <a href="/blog/7-practical-ways-to-choose-css-gradient-color-stops">gradient stop guide</a> walk through both.',
+          'sRGB interpolation between distant saturated hues often passes through a dull color. Add a middle stop, or interpolate in a different space. The [CSS gradients guide](/blog/css-gradients-guide) and [gradient stop guide](/blog/7-practical-ways-to-choose-css-gradient-color-stops) walk through both.',
       },
       {
         question: 'Can I print a linear CSS gradient?',
         answer:
-          'A continuous blend is a screen paint. For press, extract the stops that matter and check those flat colors in the <a href="/print-gamut">print gamut checker</a> or the <a href="/convert-hex-to-cmyk">HEX to CMYK converter</a>. The CMYK values are a reference, not a press proof.',
+          'A continuous blend is a screen paint. For press, extract the stops that matter and check those flat colors in the [print gamut checker](/print-gamut) or the [HEX to CMYK converter](/convert-hex-to-cmyk). The CMYK values are a reference, not a press proof.',
       },
     ],
   },
@@ -66,12 +67,12 @@ const TYPE_COPY: Record<
       {
         question: 'How do color stops work on a radial gradient?',
         answer:
-          'Stops are still positions along the gradient line, measured from the center toward the edge. 0% is the center. The same positioning rules in CSS Images Level 4 apply. See <a href="/blog/7-practical-ways-to-choose-css-gradient-color-stops">how to choose gradient color stops</a>.',
+          'Stops are still positions along the gradient line, measured from the center toward the edge. 0% is the center. The same positioning rules in CSS Images Level 4 apply. See [how to choose gradient color stops](/blog/7-practical-ways-to-choose-css-gradient-color-stops).',
       },
       {
         question: 'Do radial glows meet contrast requirements by themselves?',
         answer:
-          'No. The ratio changes as the glow fades. Sample the text against the lightest and darkest pixels behind it with the <a href="/contrast-checker">contrast checker</a>, and read the <a href="/blog/css-gradients-guide">CSS gradients guide</a> before you put a headline on the glow.',
+          'No. The ratio changes as the glow fades. Sample the text against the lightest and darkest pixels behind it with the [contrast checker](/contrast-checker), and read the [CSS gradients guide](/blog/css-gradients-guide) before you put a headline on the glow.',
       },
     ],
   },
@@ -90,17 +91,17 @@ const TYPE_COPY: Record<
       {
         question: 'How do I make hard slices instead of a smooth sweep?',
         answer:
-          'Place two stops at the same position. The blend between them has zero length, so the edge is sharp. That is the same hard-stop pattern described in the <a href="/blog/7-practical-ways-to-choose-css-gradient-color-stops">gradient stop guide</a>.',
+          'Place two stops at the same position. The blend between them has zero length, so the edge is sharp. That is the same hard-stop pattern described in the [gradient stop guide](/blog/7-practical-ways-to-choose-css-gradient-color-stops).',
       },
       {
         question: 'Can a conic gradient replace a color wheel?',
         answer:
-          'It can draw a wheel, but it does not compute harmonies. Use the <a href="/color-wheel">interactive color wheel</a> to pick complementary, analogous, or triadic hues, then bring those hex values back here as stops. The relationships are explained in <a href="/blog/color-theory-101">color theory 101</a>.',
+          'It can draw a wheel, but it does not compute harmonies. Use the [interactive color wheel](/color-wheel) to pick complementary, analogous, or triadic hues, then bring those hex values back here as stops. The relationships are explained in [color theory 101](/blog/color-theory-101).',
       },
       {
         question: 'Should chart slices rely on color alone?',
         answer:
-          'No. WCAG 2.2 Success Criterion 1.4.1 says color cannot be the only visual means of conveying information. Label slices or add a pattern. Preview problem pairs in the <a href="/color-blindness">color blindness simulator</a>.',
+          'No. WCAG 2.2 Success Criterion 1.4.1 says color cannot be the only visual means of conveying information. Label slices or add a pattern. Preview problem pairs in the [color blindness simulator](/color-blindness).',
       },
     ],
   },
@@ -157,11 +158,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function GradientTypePage({
-  params,
-}: {
-  params: Promise<{ type: string }>;
-}) {
+export default async function GradientTypePage({ params }: { params: Promise<{ type: string }> }) {
   const { type: slug } = await params;
   const entry = gradientSubpages.find((p) => p.slug === slug);
   if (!entry) notFound();
@@ -188,8 +185,9 @@ export default async function GradientTypePage({
             <p>
               Compare this with the other shapes in the{' '}
               <Link href="/gradients">CSS gradient generator</Link>, including{' '}
-              <Link href="/gradients/linear">linear</Link>, <Link href="/gradients/radial">radial</Link>
-              , and <Link href="/gradients/conic">conic</Link>. The{' '}
+              <Link href="/gradients/linear">linear</Link>,{' '}
+              <Link href="/gradients/radial">radial</Link>, and{' '}
+              <Link href="/gradients/conic">conic</Link>. The{' '}
               <Link href="/blog/css-gradients-guide">CSS gradients guide</Link> covers syntax, and{' '}
               <Link href="/blog/7-practical-ways-to-choose-css-gradient-color-stops">
                 choosing color stops
@@ -200,7 +198,8 @@ export default async function GradientTypePage({
             </p>
           </>
         ),
-      }}>
+      }}
+    >
       <GradientGenerator initialType={entry.type} />
     </ToolPageShell>
   );

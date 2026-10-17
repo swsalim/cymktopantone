@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ImagePaletteExtractor } from '@/components/color-tools/image-palette-extractor';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Extract Colors from Image — Free Palette Tool',
@@ -31,12 +31,12 @@ const config = {
     {
       question: 'Can I use extracted colors for print?',
       answer:
-        'Each swatch can be checked in the <a href="/print-gamut">print gamut checker</a> and the <a href="/convert-hex-to-cmyk">HEX to CMYK converter</a>. Those CMYK numbers are a formula, not a press proof.',
+        'Each swatch can be checked in the [print gamut checker](/print-gamut) and the [HEX to CMYK converter](/convert-hex-to-cmyk). Those CMYK numbers are a formula, not a press proof.',
     },
     {
       question: 'What should I do after I have the swatches?',
       answer:
-        'Open the first color in the <a href="/palettes">palette generator</a>, check text pairs in the <a href="/contrast-checker">contrast checker</a>, and preview problem hues in the <a href="/color-blindness">color blindness simulator</a>.',
+        'Open the first color in the [palette generator](/palettes), check text pairs in the [contrast checker](/contrast-checker), and preview problem hues in the [color blindness simulator](/color-blindness).',
     },
   ],
 };
@@ -55,8 +55,8 @@ export default function PaletteFromImagePage() {
               The image stays in your browser. The tool draws it to a canvas, scales the longest
               side down so the sample stays small, and skips pixels that are mostly transparent.
               Each remaining pixel is grouped by rounding the red, green, and blue channels into
-              coarse steps. The groups that contain the most pixels are returned, up to eight,
-              with the most frequent first.
+              coarse steps. The groups that contain the most pixels are returned, up to eight, with
+              the most frequent first.
             </p>
             <p>
               That count is frequency in the sample, not importance. A large white background will
@@ -66,38 +66,38 @@ export default function PaletteFromImagePage() {
               board has a few.
             </p>
             <p>
-              The hex values are those buckets. They are a starting palette, not a measurement of
-              a brand color and not a match to a named CSS color. If a result happens to be one of
-              the catalog colors, its swatch links to that{' '}
-              <Link href="/colors">color page</Link>. Otherwise copy the hex and continue in the
-              other tools.
+              The hex values are those buckets. They are a starting palette, not a measurement of a
+              brand color and not a match to a named CSS color. If a result happens to be one of the
+              catalog colors, its swatch links to that <Link href="/colors">color page</Link>.
+              Otherwise copy the hex and continue in the other tools.
             </p>
             <h2>What to do with the palette</h2>
             <p>
               Send the first color to the <Link href="/palettes">palette generator</Link> when you
               need a harmony instead of a photo sample. Send the list to the{' '}
               <Link href="/gradients">gradient generator</Link> when you want stops. A photo palette
-              often includes both a very light and a very dark bucket; those are the ones to test
-              as text and background in the <Link href="/contrast-checker">contrast checker</Link>.
-              Hue pairs that look separate in the photo can sit on top of each other for some
-              viewers — preview them in the <Link href="/color-blindness">color blindness simulator</Link>.
+              often includes both a very light and a very dark bucket; those are the ones to test as
+              text and background in the <Link href="/contrast-checker">contrast checker</Link>. Hue
+              pairs that look separate in the photo can sit on top of each other for some viewers —
+              preview them in the <Link href="/color-blindness">color blindness simulator</Link>.
             </p>
             <p>
               For print, frequency in a photo does not mean the color is in gamut. Open the
-              saturated buckets in the <Link href="/print-gamut">print gamut checker</Link> and
-              read <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe web palettes</Link> before
-              you treat a screen sample as ink. The converter output is a reference for a
-              conversation with the printer, not an approved separation.
+              saturated buckets in the <Link href="/print-gamut">print gamut checker</Link> and read{' '}
+              <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe web palettes</Link> before you
+              treat a screen sample as ink. The converter output is a reference for a conversation
+              with the printer, not an approved separation.
             </p>
             <p>
               None of this identifies a person in the photo or a trademark color. It counts
               quantized pixels. If you need a specific brand hex, type that hex into the{' '}
-              <Link href="/convert-color">converter hub</Link> instead of sampling a screenshot of
-              a logo, which will pick up compression and anti-aliasing.
+              <Link href="/convert-color">converter hub</Link> instead of sampling a screenshot of a
+              logo, which will pick up compression and anti-aliasing.
             </p>
           </>
         ),
-      }}>
+      }}
+    >
       <ImagePaletteExtractor />
     </ToolPageShell>
   );

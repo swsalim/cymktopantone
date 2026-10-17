@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { ColorComparator } from '@/components/color-tools/color-comparator';
-import { ToolPageShell, buildToolMetadata } from '@/components/color-tools/tool-page-shell';
+import { buildToolMetadata, ToolPageShell } from '@/components/color-tools/tool-page-shell';
 
 const config = {
   title: 'Compare Colors — Delta E Color Difference Calculator',
@@ -31,7 +31,7 @@ const config = {
     {
       question: 'When would I compare two colors?',
       answer:
-        'Checking if a vendor&apos;s printed sample matches your brand color, validating that a redesigned palette stays close to the original, or confirming two near-identical shades in a design system can be merged.',
+        "Checking if a vendor's printed sample matches your brand color, validating that a redesigned palette stays close to the original, or confirming two near-identical shades in a design system can be merged.",
     },
   ],
 };
@@ -51,7 +51,8 @@ export default function CompareColorsPage() {
             <Link href="/print-gamut">print gamut checker</Link> first.
           </p>
         ),
-      }}>
+      }}
+    >
       <ColorComparator />
     </ToolPageShell>
   );

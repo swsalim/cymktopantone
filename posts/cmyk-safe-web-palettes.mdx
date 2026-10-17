@@ -114,11 +114,11 @@ You are not maintaining a spreadsheet on the side. The same swatch carries web a
     },
     {
       question: "Does converting HEX to CMYK mean it will print exactly?",
-      answer: "No. A naive RGB-to-CMYK formula, including the converter on this site, does not know the inks or the paper. <a href=\"https://www.w3.org/TR/css-color-5/#device-cmyk\" target=\"_blank\" rel=\"noreferrer\">CSS Color Level 5</a> says that kind of conversion is approximate. Production files should use the printer's ICC profile, and you should still proof.",
+      answer: "No. A naive RGB-to-CMYK formula, including the converter on this site, does not know the inks or the paper. [CSS Color Level 5](https://www.w3.org/TR/css-color-5/#device-cmyk) says that kind of conversion is approximate. Production files should use the printer's ICC profile, and you should still proof.",
     },
     {
       question: "What is an ICC profile?",
-      answer: "It is the file format the International Color Consortium defines for connecting color encodings between devices. The specification was also published as ISO 15076-1. See the <a href=\"https://www.color.org/icc_specs2/\" target=\"_blank\" rel=\"noreferrer\">ICC specifications</a>. Without the profile your printer names, a CMYK percentage is not tied to a specific press.",
+      answer: "It is the file format the International Color Consortium defines for connecting color encodings between devices. The specification was also published as ISO 15076-1. See the [ICC specifications](https://www.color.org/icc_specs2/). Without the profile your printer names, a CMYK percentage is not tied to a specific press.",
     },
     {
       question: "Can I use Pantone instead of CMYK?",
@@ -126,11 +126,11 @@ You are not maintaining a spreadsheet on the side. The same swatch carries web a
     },
     {
       question: "Why do gradients look banded in print?",
-      answer: "A CSS gradient is continuous light. A press reproduces tone with dots. For print, use flat fills or very few stops, and convert those stops with the printer profile. See the <a href=\"/blog/css-gradients-guide\">CSS gradients guide</a> for the screen side of that trade-off.",
+      answer: "A CSS gradient is continuous light. A press reproduces tone with dots. For print, use flat fills or very few stops, and convert those stops with the printer profile. See the [CSS gradients guide](/blog/css-gradients-guide) for the screen side of that trade-off.",
     },
     {
       question: "Which greens are risky on a web palette that also prints?",
-      answer: "The corner of sRGB, such as `#00FF00`, is a screen color. Four-color process cannot hit it. Prefer a darker, less saturated green and confirm the shift in the <a href=\"/print-gamut\">print gamut checker</a> before you lock the brand sheet.",
+      answer: "The corner of sRGB, such as `#00FF00`, is a screen color. Four-color process cannot hit it. Prefer a darker, less saturated green and confirm the shift in the [print gamut checker](/print-gamut) before you lock the brand sheet.",
     },
   ]}
 />
