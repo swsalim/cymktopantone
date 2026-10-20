@@ -130,7 +130,7 @@ A chart that separates red revenue from green expenses by color alone excludes r
 
 Raw color names create fragile interfaces. A component should ask for a semantic role such as text, link, surface, or focus, so the system can change a value without hunting through every button and card.
 
-A design token color scale should support real states: default, hover, active, disabled, focus, error, success, warning, and dark mode. Equal numeric steps do not guarantee equal visual differences. CSS Color Module Level 4 documents interpolation behavior across color spaces, so choose an interpolation space deliberately and measure the resulting pairs. The <Link href="/blog/tailwind-color-scale-guide">Tailwind color scale guide</Link> shows one way to turn a single hex into steps.
+A design token color scale should support real states: default, hover, active, disabled, focus, error, success, warning, and dark mode. Equal numeric steps do not guarantee equal visual differences. CSS Color Module Level 4 documents interpolation behavior across color spaces, so choose an interpolation space deliberately and measure the resulting pairs. The <Link href="/blog/tailwind-color-scale-guide">Tailwind color scale guide</Link> shows one way to turn a single hex into steps. Once those steps exist, the <Link href="/blog/css-color-tokens-handoff">CSS color token handoff</Link> is how to keep them in one JSON source and map the roles onto CSS variables and Tailwind utilities.
 
 Here is a compact illustrative token set. The syntax and build behavior depend on the design-system platform.
 
