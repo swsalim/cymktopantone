@@ -1,0 +1,138 @@
+---
+title: "What Color Is This? How to Identify Any Color from an Image or Color Code"
+metaTitle: "What Color Is This? Identify Image and HEX Colors"
+metaDescription: "Learn what color an image contains, read HEX, RGB, HSL, HSV, and CMYK values, check contrast, and prepare colors for web or print."
+summary: "Identify a color from a code you already have, or from the dominant colors in an image. Then read the model you need, check contrast, and test print gamut before the value becomes a token."
+publishedAt: '2026-10-21'
+updatedAt: '2026-10-21'
+author: 'Yuyu'
+status: 'published'
+---
+
+What color is this? You can answer it from a color code, or from the dominant colors in an image. A code such as a HEX value names a digital color exactly. An image gives you an estimate, because the display, lighting, compression, and the colors around the sample all change what you see.
+
+<Link href="/tools">Color Mapper's tools</Link> run in the browser and do not require an account. <Link href="/palette-from-image">Palette from image</Link> extracts dominant colors locally and does not send the file to a server. Use it for screenshots, logos, product photos, and private design files when you need a starting palette rather than a single clicked pixel.
+
+## What color is this? Start with the color source
+
+The source determines the most reliable way to answer the question. A CSS declaration already contains a usable digital specification. A flat logo file is a cleaner source than a photograph of that logo. A photograph is the least exact of the three.
+
+If you have a code such as `#2563EB`, the color already has a machine-readable definition. That hex is `rgb(37, 99, 235)`. Convert it, inspect its lightness, or compare it with another color. Do not re-sample a screenshot of a swatch whose hex you already know. If the question is a named color such as indigo, start from the <Link href="/colors">named color index</Link> and the <Link href="/blog/what-color-is-indigo">indigo article</Link> instead of a photo of something blue.
+
+Perception still depends on context. A blue-gray beside white can look darker than the same blue-gray beside black. A phone with a bright display can make a web color appear more saturated than a calibrated production monitor. JPEG compression can create nearby pixels that differ slightly around a solid area.
+
+A color code identifies a digital value. It does not guarantee identical visual perception across screens, lighting conditions, or printed materials.
+
+### When not to trust one extracted color
+
+Pause before treating an extracted hex as the official brand color when the source has any of these conditions:
+
+- A shadow, reflection, glare, or transparent overlay covers the area.
+- The image uses heavy JPEG compression or has been resized repeatedly.
+- The color you want is a thin outline, small logo, or anti-aliased edge. Those pixels mix two colors, and a large surrounding area will outrank them.
+- The color must match a physical product, fabric, paint, or printed proof.
+
+In those cases, prefer the source file, the design token, or a physical proof. Collect more than one crop if the only source is a photograph.
+
+## How to identify colors from an image
+
+<Link href="/palette-from-image">Palette from image</Link> does not include a single-pixel eyedropper. You cannot click the center of a button and read that pixel. The tool draws the file to a canvas in the browser, scales the longest side down, skips pixels that are mostly transparent, and groups the rest into coarse RGB buckets. It returns up to eight buckets, most frequent first. The hex is the bucket, not a pixel from a specific coordinate, which is why extracted values can look stepped.
+
+The browser API underneath that sample is <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData" target="_blank" rel="noreferrer">Canvas `getImageData()`</a>. The file stays on your device.
+
+1. **Open the clearest source available.** Use the original PNG or design export when possible. A screenshot of a screenshot adds another layer of scaling and compression.
+2. **Crop to the region you care about.** Frequency is not importance. A large white background will outrank a small logo. A campaign screenshot with a large blue field will return that blue among the dominant colors. Edge pixels around a white headline are not a separate click target.
+3. **Read the returned list as buckets.** If several swatches are near each other, the image has gradients, texture, or lighting rather than one flat color. If one swatch dominates a cropped flat area, it is a reasonable starting hex.
+4. **Save the hex you will actually use.** Keep the original file beside it. For web work, store HEX or RGB. For ink, continue to CMYK only after this step.
+5. **Do not expect the screenshot to reproduce a known token.** If the design file says `#2563EB`, that code is the color. An extraction of a screenshot of it can land in a neighboring bucket.
+
+Compare the swatches with the original under the same display conditions. A result that looks correct on a laptop may appear different on a phone with a warmer display setting. <Link href="/blog/primary-colors">Primary colors</Link> is the background for why a screen hex and a paint name can share a word and still be different colors.
+
+## How to read the color code
+
+Color codes describe the same visual target through different mathematical models. HEX and RGB suit screen work, HSL and HSV help you adjust a color, and CMYK supports print planning. <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB, and HSL</Link> compares the three screen spellings.
+
+| Format | What it describes | Typical use | Converter |
+| --- | --- | --- | --- |
+| HEX | Six hexadecimal characters for red, green, and blue | CSS, design tokens, web graphics | `/color-models/hex` |
+| RGB | Red, green, and blue light, commonly 0 to 255 | Screen rendering and code | `/convert-hex-to-rgb` |
+| HSL | Hue, saturation, and lightness | Color adjustments and CSS | `/convert-hex-to-hsl` |
+| HSV | Hue, saturation, and value | Picker interfaces | `/convert-hex-to-hsv` |
+| CMYK | Cyan, magenta, yellow, and black ink percentages | Print planning | `/convert-hex-to-cmyk` |
+
+`#2563EB` and `rgb(37, 99, 235)` are the same sRGB color written two ways. HSL can make a later edit easier because you can change lightness without editing three channels by hand. HSV uses a related approach that often matches color-picker controls. <Link href="/blog/color-theory-101">Color theory 101</Link> explains hue, saturation, and value.
+
+CMYK describes an ink mixture rather than emitted screen light. A conversion is a starting point. The printed result also depends on the paper, ink, press, and color profile.
+
+The <Link href="/convert-color">converter hub</Link> lists 18 converters across RGB, CMYK, HEX, HSL, and HSV. There is no separate RGB-to-HSV page. Use the hub when a developer needs CSS and a print colleague needs CMYK for the same swatch.
+
+The <a href="https://www.w3.org/TR/css-color/" target="_blank" rel="noreferrer">CSS Color Module Level 4 specification</a> describes CSS color values and notes that modern CSS can represent color in spaces beyond traditional sRGB. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Color_values" target="_blank" rel="noreferrer">MDN's CSS color values guide</a> also explains color models as mathematical systems for representing color.
+
+## Why the same color may look different in print
+
+Screen and print use different color-producing systems. Displays emit red, green, and blue light. Printers place cyan, magenta, yellow, and black ink on a surface that reflects light.
+
+A vivid electric blue may fit inside an RGB screen space and fall outside the range a particular CMYK process can reproduce. That condition is being out of gamut. The printer has to choose a printable neighbor, which can look duller, darker, or less saturated.
+
+A website owner might approve a neon turquoise background on a bright monitor, then receive a brochure with a muted teal. The HEX value was valid for the website. It described a screen color the selected ink and paper could not reproduce exactly. <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe web palettes</Link> is the worked version of that failure.
+
+The <Link href="/palettes">palette generator</Link> shows CMYK on each swatch and flags colors that shift under its coated-process approximation. The <Link href="/print-gamut">print gamut checker</Link> shows the screen color, the press preview, and the ΔE2000 between them. Use both before handing a palette to production. Changing a token is still cheap at this stage. <Link href="/blog/the-complete-guide-to-managing-color-from-screen-to-press">Managing color from screen to press</Link> continues from that check into profiles and proofs.
+
+A print-aware workflow should follow these steps:
+
+- Identify the source color and save its HEX or RGB value.
+- Inspect the corresponding CMYK value and any gamut warning.
+- Discuss the paper, ink process, and required color profile with the printer.
+- Review a controlled proof before approving a large run.
+
+A converter cannot promise an exact press match by itself. A proof remains necessary for color-sensitive packaging, signage, branded stationery, and other physical work.
+
+## Check whether the identified color works for text
+
+Knowing the color name or HEX value does not establish readability. Text contrast depends on the foreground, the background, and the text size and weight.
+
+WCAG 2.1 AA and AAA provide contrast targets for normal and large text. Normal body text generally needs a higher contrast ratio than large text. A large heading can pass at a lower ratio than small paragraph copy. Testing the actual size and weight is the safer result. The thresholds are in <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast for brand colors</Link>.
+
+Suppose the identified button fill is a dark blue and the label will be white. Enter both colors in the <Link href="/contrast-checker">WCAG contrast checker</Link>. It shows badges for AA normal, AAA normal, AA large, and AAA large. When the pair misses AA for normal text, it suggests a lighter or darker foreground. A palette matrix reviews combinations from a list of colors.
+
+Use this workflow:
+
+1. Identify the foreground color from the design file, or from a dominant color you accept as the source.
+2. Pair it with the exact background used in the interface.
+3. Test the intended text size, weight, and state, including hover or disabled states.
+4. Adjust the foreground or background if the result fails the required badge.
+5. Retest after rounding or replacing the value in CSS.
+
+Do not solve a contrast failure by changing only the color name. A small lightness adjustment in HSL can improve readability while preserving the hue. The palette matrix shows which combinations work before a developer wires them into components.
+
+Contrast belongs to a color pair. Every identified color needs a background test before it becomes text, a button, or an icon.
+
+## What to do after you identify the color
+
+An isolated color value becomes useful when you turn it into a repeatable system. Start with the approved HEX value, then create related colors, check them, and export the approved tokens.
+
+The <Link href="/palettes">palette generator</Link> supports six harmony rules: complementary, analogous, triadic, split complementary, monochromatic, and tetradic. Generate a small set around the source color, inspect each swatch for the print warning, and export CSS custom properties, a Tailwind `theme.extend.colors` snippet, or JSON.
+
+For a design system, use the <Link href="/color-scale">tint and shade generator</Link> to turn one HEX value into a Tailwind-style 50–950 scale. Each step shows contrast against white and against black. That tool exports a Tailwind config snippet or CSS variables, not JSON.
+
+When two colors look almost identical, compare them with <Link href="/compare-colors">Delta E 2000</Link>. The comparison is a perceptual difference, which is more useful for close matches than comparing HEX strings character by character.
+
+A practical production checklist looks like this:
+
+- Crop to the region that should dominate, and read the extracted buckets.
+- Save the HEX and RGB values for screen implementation.
+- Review CMYK output and resolve gamut warnings for print.
+- Test foreground and background combinations against WCAG targets.
+- Generate a palette or a 50–950 scale from the approved source color.
+- Export CSS, Tailwind, or JSON from the palette generator after the checks pass.
+- Compare replacement colors with Delta E 2000 when visual matching matters.
+
+For example, a front-end developer can take a logo's known hex, confirm it in <Link href="/convert-hex-to-rgb">HEX to RGB</Link>, generate a Tailwind scale, test the darker steps against white text, and export the approved palette as JSON. The same source color then moves into code, accessibility review, and production documentation without three separate manual conversions.
+
+Keep the resulting code beside the design file. That record prevents the next person from extracting a background bucket six months later and calling it the logo color. If the open question is which primary set the color belongs to, continue with <Link href="/blog/primary-colors">primary colors explained</Link>.
+
+## References
+
+- <a href="https://www.w3.org/TR/css-color/" target="_blank" rel="noreferrer">CSS Color Module Level 4</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Color_values" target="_blank" rel="noreferrer">CSS color values</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData" target="_blank" rel="noreferrer">CanvasRenderingContext2D: getImageData()</a>

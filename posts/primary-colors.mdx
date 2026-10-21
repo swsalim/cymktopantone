@@ -1,0 +1,147 @@
+---
+title: "Primary Colors Explained: RGB, CMYK, Traditional Models, and Practical Design Uses"
+metaTitle: "Primary Colors: RGB, CMYK, and RYB Explained"
+metaDescription: "Learn how primary colors work in RYB, RGB, and CMYK, then build accessible palettes and prepare screen colors for print production."
+summary: "Primary colors are not one universal set. RYB teaches paint mixing, RGB describes screen light, and CMYK describes ink. Pick the medium, then convert and test the values."
+publishedAt: '2026-10-21'
+updatedAt: '2026-10-21'
+author: 'Yuyu'
+status: 'published'
+---
+
+A bright button can look perfect on your monitor and muddy in a printed brochure. A red chosen from a paint wheel can also produce unexpected results in CSS. The problem usually starts with treating primary colors as one universal set. Identify the medium first, then choose the model, convert the values, and test the result.
+
+**Quick answer:** primary colors are selected base colors used to mix or represent a wider range of colors. Traditional art commonly teaches red, yellow, and blue (RYB). Screens use red, green, and blue light (RGB). Print uses cyan, magenta, yellow, and black ink (CMYK). The correct set depends on whether you are working with reflected light, emitted light, or ink.
+
+## What Are Primary Colors?
+
+Primary colors are the starting colors in a particular color system. A model chooses them because combinations of those colors can represent or produce many other hues. The word "primary" describes the model, not a permanent property shared by every red, blue, or yellow object.
+
+That distinction explains why different sources give different answers. A traditional classroom color wheel uses pigment-based RYB. A web browser calculates screen color with RGB values. A commercial printer separates artwork into CMYK channels. Each system solves a different production problem.
+
+Color relationships usually follow three terms:
+
+- **Primary colors** are the selected starting colors.
+- **Secondary colors** result from combining two primaries. In RYB, red and yellow produce orange.
+- **Tertiary colors** combine a primary with a neighboring secondary, such as red-orange.
+
+Color also depends on light and perception. The <a href="https://www.w3.org/TR/css-color/" target="_blank" rel="noreferrer">CSS Color Module Level 4</a> describes color as a numeric or textual definition of human visual perception and supports several color spaces beyond sRGB. "Which primary colors are correct?" is the wrong starting question. Ask which medium and color space the finished work must survive.
+
+<Link href="/blog/color-theory-101">Color theory 101</Link> covers hue, saturation, and value once you are past the choice of primaries. <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB, and HSL</Link> are three ways to write one sRGB color, not three different primaries.
+
+## The Three Main Primary-Color Models
+
+Choosing the wrong model creates avoidable rework. Use RYB to explain traditional paint mixing, RGB for screen color, and CMYK for print color.
+
+| Model | Medium | Mixing behavior | Common use |
+| --- | --- | --- | --- |
+| RYB | Traditional pigments | Subtractive, taught through a color wheel | Art education and painting |
+| RGB | Light from displays | Additive; channels add light | Websites, apps, video, monitors |
+| CMYK | Ink on paper | Subtractive; inks absorb light | Press, digital print, packaging |
+
+**RYB** uses red, yellow, and blue as practical teaching primaries. It helps artists reason about warm and cool mixtures, though real pigments differ in strength and transparency.
+
+**RGB** uses red, green, and blue light. A display adds channel intensity: full red and full green produce yellow light, while full red, green, and blue produce white. The system is additive because more emitted light moves toward white. The <Link href="/color-models/rgb">RGB color model guide</Link> is the screen side of that split.
+
+**CMYK** uses cyan, magenta, yellow, and black. Cyan, magenta, and yellow absorb portions of white light reflected from paper. Printers add black, represented by K, to produce darker text, improve shadow control, and reduce the need to build deep neutrals from three colored inks. The <Link href="/color-models/cmyk">CMYK color model guide</Link> walks through the four inks.
+
+Print workflows also depend on characterization data and profiles. The <a href="https://registry.color.org/cmyk-registry/" target="_blank" rel="noreferrer">International Color Consortium's CMYK Characterization Data</a> lists data sets for standard printing processes and recognizes that separation methods and printing conditions affect reproduction.
+
+## How Primary Colors Create Secondary Colors
+
+Secondary colors change with the mixing method. A digital yellow and a painted yellow can share a name while behaving differently in production.
+
+In additive RGB mixing:
+
+- Red light plus green light produces yellow.
+- Green light plus blue light produces cyan.
+- Blue light plus red light produces magenta.
+- Red, green, and blue together produce white at full intensity.
+
+In subtractive CMY mixing, the inks remove portions of reflected light. Cyan absorbs much of the red component, magenta absorbs much of the green component, and yellow absorbs much of the blue component. Cyan plus yellow tends toward green, magenta plus yellow tends toward red, and cyan plus magenta tends toward blue.
+
+Those examples describe idealized mixing. Real pigments and inks contain impurities, have different densities, and interact with paper. A theoretical CMY combination can therefore produce a duller result than the corresponding screen color. Ink coverage, drying, paper whiteness, and the selected profile add further differences.
+
+A saturated electric blue might fit inside a display's RGB gamut while falling outside the selected CMYK gamut. A conversion can approximate it, but no conversion can print a color the ink and paper cannot reproduce. Use the converted value as a production decision, not as a promise of visual identity. The <Link href="/print-gamut">print gamut checker</Link> shows the screen color beside a coated-process approximation and flags a noticeable shift. <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe web palettes</Link> is the longer version of that handoff.
+
+The <Link href="/color-wheel">interactive color wheel</Link> shows complementary, analogous, and triadic relationships from a hue you drag. Those harmonies are screen relationships, not paint recipes.
+
+## Primary Colors in Digital Design
+
+Web interfaces normally store colors as RGB-derived values rather than traditional paint primaries. HEX, RGB, HSL, and HSV describe colors in different forms, but browsers ultimately interpret the common web formats through a digital color system.
+
+A HEX value such as `#3366CC` is three channel values in hexadecimal notation. The equivalent RGB form is `rgb(51, 102, 204)`. HSL expresses the same color through hue, saturation, and lightness, which can make palette adjustments easier. HSV uses value instead of lightness and often suits picker interfaces. Convert that hex with <Link href="/convert-hex-to-rgb">HEX to RGB</Link>, <Link href="/convert-hex-to-hsl">HEX to HSL</Link>, or <Link href="/convert-hex-to-hsv">HEX to HSV</Link>. The <Link href="/convert-color">converter hub</Link> lists the 18 converters between RGB, CMYK, HEX, HSL, and HSV. Not every pair has its own page: there is no RGB-to-HSV converter in that set.
+
+Build a screen palette with this sequence:
+
+1. Choose a base HEX or RGB value.
+2. Generate related hues and lighter or darker steps.
+3. Test text and background pairs rather than judging hue by eye.
+4. Check the result at normal and reduced brightness.
+
+The <Link href="/contrast-checker">WCAG contrast checker</Link> reports AA and AAA results for normal text and large text, suggests a lighter or darker foreground when the pair misses the AA normal-text ratio, and can review a set of colors in a palette matrix. Run it before shipping a navigation label, form error, or button. <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast for brand colors</Link> explains the 4.5:1 and 3:1 thresholds.
+
+WCAG contrast testing measures relative luminance, so two colors with very different hue labels can still fail. Pale yellow text on white is the practical example: the hues differ, yet both colors have high luminance and produce weak text contrast.
+
+The CSS Color Module Level 4 also documents color values beyond sRGB. If you work with newer display color spaces, confirm browser and device support before relying on a wider-gamut value. <Link href="/blog/oklch-for-designers">OKLCH for designers</Link> covers one of those spaces.
+
+## Primary Colors in Print and Production
+
+Print production begins before the PDF reaches the press. A screen can display colors that a CMYK process cannot reproduce, so a designer who skips conversion can approve the wrong expectation.
+
+CMYK separation assigns artwork to cyan, magenta, yellow, and black channels. The chosen paper, ink set, press conditions, and color profile affect the final appearance. Two CMYK files with identical channel numbers can look different when printed on different stock or through different processes.
+
+Before sending a brochure or label to production:
+
+- Convert screen colors to CMYK with <Link href="/convert-hex-to-cmyk">HEX to CMYK</Link> or <Link href="/convert-rgb-to-cmyk">RGB to CMYK</Link>.
+- Inspect the CMYK values for extreme channel coverage or unexpected neutrals.
+- Check gamut warnings for saturated RGB colors in the <Link href="/print-gamut">print gamut checker</Link> or on palette swatches, which show CMYK and flag a shift.
+- Confirm the printer's preferred profile and proofing method.
+
+A product page may use a vivid RGB orange that looks energetic on a backlit display. Its CMYK conversion may become darker or less saturated on uncoated paper. Adjust the print version deliberately instead of allowing an automatic conversion at export to be the only review.
+
+The tools run in the browser and do not ask for an account. For formal color management, the <a href="https://www.color.org/v4spec/" target="_blank" rel="noreferrer">ICC.1 specification</a> defines a profile format used to describe color data across devices and documents. The screen-to-press sequence, including tokens that have to survive real components, is in <Link href="/blog/the-complete-guide-to-managing-color-from-screen-to-press">the complete guide to managing color from screen to press</Link>.
+
+## How to Build a Palette From Primary Colors
+
+A useful palette needs more than three attractive swatches. It needs relationships, readable text colors, usable steps, and a plan for both screen and print.
+
+Use this workflow for a website brand palette:
+
+1. **Set a base hue.** Start with a HEX value that suits the brand. For example, choose a deep blue for a financial dashboard. If you only have a photograph, <Link href="/palette-from-image">palette from image</Link> extracts up to eight dominant colors in the browser. It does not sample a single pixel. <Link href="/blog/what-color-is-this">What color is this?</Link> explains that limit.
+2. **Generate relationships.** The <Link href="/palettes">palette generator</Link> supports six harmony rules: complementary, analogous, triadic, split complementary, monochromatic, and tetradic. The same rules are on the <Link href="/color-wheel">color wheel</Link>.
+3. **Review the gamut.** Swatches show RGB and CMYK. Colors that shift under the coated-process approximation are flagged before you treat them as print colors.
+4. **Test functional pairs.** Check body text, links, buttons, borders, and focus states in the <Link href="/contrast-checker">contrast checker</Link>.
+5. **Create a scale.** The <Link href="/color-scale">tint and shade generator</Link> takes one HEX value and produces a Tailwind-style 50–950 ramp. Each step shows its contrast against white and against black. Export is a Tailwind config snippet or CSS variables.
+6. **Export the artifact.** The palette generator can copy CSS custom properties, a Tailwind `theme.extend.colors` snippet, or JSON. The tint and shade tool does not export JSON.
+
+Keep the base color stable while you adjust saturation and lightness. Then compare the palette in both RGB and CMYK. A screen-only palette can contain an accent that becomes unusable in print. A print-safe palette can look restrained on a modern display.
+
+A named blue-purple such as CSS indigo is a separate decision from "which primaries did we mix." <Link href="/blog/what-color-is-indigo">What color is indigo?</Link> compares that name with blue, navy, and purple, and keeps the full numeric record on the <Link href="/color/4B0082">indigo color page</Link>.
+
+## Common Primary-Color Mistakes
+
+Color errors usually come from carrying a rule from one medium into another.
+
+- **Assuming RYB is the web color model.** RYB explains traditional paint mixing. CSS values use digital color formats such as HEX, RGB, HSL, and HSV.
+- **Treating HEX as print-ready.** HEX describes a screen-oriented value. Convert it and inspect the print gamut warning before production.
+- **Checking contrast by hue alone.** Red and green can look distinct while failing text contrast. Use measured luminance and the contrast checker.
+- **Ignoring color-vision differences.** A red-green distinction can disappear for some users. The <Link href="/color-blindness">color blindness simulator</Link> previews protanopia, deuteranopia, and tritanopia.
+
+Keep colors in a flexible RGB workflow while you are exploring a digital interface, when the printer has not supplied a target profile, or when the final paper and ink process remain undecided. Convert and proof after those production choices exist.
+
+Run this final checklist:
+
+- Identify the medium and color model.
+- Convert values between HEX, RGB, and CMYK where needed.
+- Review gamut flags for every print-bound accent.
+- Test foreground and background pairs with WCAG AA or AAA criteria.
+- Preview protanopia, deuteranopia, and tritanopia simulations.
+- Export CSS, Tailwind, or JSON from the palette generator only after the palette passes review.
+
+## References
+
+- <a href="https://www.w3.org/TR/css-color/" target="_blank" rel="noreferrer">CSS Color Module Level 4</a>
+- <a href="https://registry.color.org/cmyk-registry/" target="_blank" rel="noreferrer">CMYK Characterization Data</a>
+- <a href="https://www.color.org/v4spec/" target="_blank" rel="noreferrer">ICC.1 v4 Specification</a>
+- <a href="https://www.adobe.com/uk/creativecloud/design/discover/primary-colors.html" target="_blank" rel="noreferrer">Primary Colours Guide</a>
