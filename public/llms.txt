@@ -84,6 +84,9 @@ Color Mapper is a static toolkit site. Each page is an interactive tool or guide
 - https://colormapper.xyz/blog/7-practical-ways-to-choose-css-gradient-color-stops — Choosing CSS gradient color stops
 - https://colormapper.xyz/blog/color-blindness-simulation-common-design-questions-answered — Color blindness simulation questions
 - https://colormapper.xyz/blog/css-color-tokens-handoff — How to hand off CSS color tokens to a front-end codebase
+- https://colormapper.xyz/blog/primary-colors — Primary colors: RYB, RGB, and CMYK
+- https://colormapper.xyz/blog/what-color-is-indigo — What color is indigo
+- https://colormapper.xyz/blog/what-color-is-this — What color is this: image colors and color codes
 
 ## Color pages
 

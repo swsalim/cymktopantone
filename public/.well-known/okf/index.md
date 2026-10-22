@@ -41,6 +41,9 @@ Color Mapper offers palette and gradient generators, a WCAG 2.1 contrast checker
 - [One brand HEX is not a design system. You need a 50–950 ramp.](articles/tailwind-color-scale-guide.md)
 - [The Complete Guide to Managing Color from Screen to Press](articles/the-complete-guide-to-managing-color-from-screen-to-press.md)
 - [Your brand purple probably fails WCAG. Here's how to check.](articles/wcag-contrast-brand-colors.md)
+- [Primary Colors Explained: RGB, CMYK, Traditional Models, and Practical Design Uses](articles/primary-colors.md)
+- [What Color Is Indigo? Meaning, HEX Codes, RGB Values, and How It Compares](articles/what-color-is-indigo.md)
+- [What Color Is This? How to Identify Any Color from an Image or Color Code](articles/what-color-is-this.md)
 
 ## History
 
