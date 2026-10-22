@@ -89,6 +89,15 @@ export const internalTools: InternalTool[] = [
     category: 'checker',
     keywords: ['compare colors', 'delta e calculator', 'color difference calculator'],
   },
+  {
+    id: 'random-color-generator',
+    title: 'Random Color Generator',
+    href: '/random-color-generator',
+    description:
+      'Generate a random HEX color, a lockable five-color palette, or a two-color CSS linear gradient. Copy HEX, RGB, HSL, and CMYK.',
+    category: 'generator',
+    keywords: ['random color generator', 'random hex color', 'random color palette'],
+  },
 ];
 
 export const harmonySubpages = [

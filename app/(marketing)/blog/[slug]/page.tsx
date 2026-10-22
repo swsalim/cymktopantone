@@ -16,6 +16,7 @@ import { absoluteUrl, cn } from '@/lib/utils';
 import { LazyAdsArticle } from '@/components/ads/lazy-ads-article';
 import { LazyAdsLeaderboard } from '@/components/ads/lazy-ads-leaderboard';
 import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
+import { ArticleTable } from '@/components/article-table';
 import BlogFaq from '@/components/blog-faq';
 import { BlogNavigation } from '@/components/blog-navigation';
 import { ImageKit } from '@/components/image-kit';
@@ -153,6 +154,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     LazyAdsLeaderboard,
     LazyAdsSquare,
     LazyAdsArticle,
+    table: ArticleTable,
   };
 
   return (
@@ -176,7 +178,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
 
         <div className="mt-6 items-start sm:mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-16 xl:gap-x-24">
-          <article className="mt-12 rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm lg:col-span-8 lg:mt-0 lg:self-start lg:p-8 dark:border-gray-700 dark:bg-gray-900/75">
+          <article className="mt-12 min-w-0 rounded-3xl border border-violet-200/70 bg-white/80 p-6 shadow-sm lg:col-span-8 lg:mt-0 lg:self-start lg:p-8 dark:border-gray-700 dark:bg-gray-900/75">
             {post.coverImage && (
               <ImageKit
                 src={post.coverImage}
@@ -190,7 +192,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div
               className={cn(
-                'prose-pre:font-mono prose prose-gray dark:prose-invert prose-pre:rounded-lg prose-pre:bg-gray-900 prose-pre:p-4 prose-pre:text-sm prose-pre:leading-relaxed prose-pre:tracking-wide prose-pre:text-gray-100',
+                'prose-pre:font-mono prose prose-gray min-w-0 dark:prose-invert prose-pre:rounded-lg prose-pre:bg-gray-900 prose-pre:p-4 prose-pre:text-sm prose-pre:leading-relaxed prose-pre:tracking-wide prose-pre:text-gray-100',
                 'prose-h3:text-xl',
                 'prose-strong:font-bold',
                 'prose-h2:scroll-mt-24 prose-h3:scroll-mt-24 prose-h4:scroll-mt-24',

@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/container';
 
 const FACTS = [
-  { value: '9', label: 'color tools' },
+  { value: '10', label: 'color tools' },
   { value: '18', label: 'format converters' },
   { value: '5', label: 'color model guides' },
 ] as const;

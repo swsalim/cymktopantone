@@ -1,7 +1,7 @@
 /* Hallmark · macrostructure: Bento Grid · genre: modern-minimal · theme: Violet Cyan Gradient (locked, design-system)
  * pre-emit critique: P4 H5 E4 S4 R4 V4
  * enrichment: Tier-A CSS art (palette stripes · live gradient · real contrast ratios · violet 50–950 ramp)
- * nav/footer: site chrome (out of page scope) · motion: CSS-only (scroll-driven reveal + hover micro-interactions, motion-reduce guarded) · honest copy: 9 tools / 18 converters / 5 guides
+ * nav/footer: site chrome (out of page scope) · motion: CSS-only (scroll-driven reveal + hover micro-interactions, motion-reduce guarded) · honest copy: 10 tools / 18 converters / 5 guides
  */
 import Link from 'next/link';
 
@@ -75,7 +75,7 @@ export function HomeBento() {
           <h2
             id="tools-bento-heading"
             className="font-heading text-2xl font-bold tracking-tight text-gray-900 md:text-3xl dark:text-gray-100">
-            Nine tools, one workflow
+            Ten tools, one workflow
           </h2>
           <p className="mt-2 max-w-2xl text-base text-gray-600 dark:text-gray-400">
             Every swatch carries HEX, RGB, and CMYK — and links straight into the converters.
@@ -307,6 +307,18 @@ export function HomeBento() {
           <TileHeading
             title="Compare Colors"
             description="ΔE2000 perceptual difference — can anyone tell them apart?"
+          />
+        </Link>
+
+        <Link href="/random-color-generator" className={tileClass} aria-label="Random Color Generator">
+          <div aria-hidden className="flex h-14 overflow-hidden rounded-xl">
+            {['#3A86FF', '#E76F51', '#2A9D8F', '#E9C46A', '#264653'].map((hex) => (
+              <div key={hex} className="flex-1" style={{ backgroundColor: hex }} />
+            ))}
+          </div>
+          <TileHeading
+            title="Random Color"
+            description="A random HEX, a lockable five-color palette, and a two-color CSS gradient."
           />
         </Link>
       </div>

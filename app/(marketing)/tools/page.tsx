@@ -119,11 +119,14 @@ export default function ToolsHubPage() {
               <h2>How the tools fit one color workflow</h2>
               <p>
                 Start with a role, not a hex. A signature color, a body-text color, a surface, and a
-                chart series are different jobs. The <Link href="/color-wheel">color wheel</Link>{' '}
-                and the <Link href="/palettes">palette generator</Link> propose hues from a harmony
-                rule. The <Link href="/colors">named color index</Link> is the place to look up a
-                CSS keyword or a common neutral and see the same color as HEX, RGB, HSL, HSV, CMYK,
-                and OKLCH.
+                chart series are different jobs. If you do not have a seed color yet, the{' '}
+                <Link href="/random-color-generator">random color generator</Link> can propose a
+                HEX, a five-color palette, or a two-color linear gradient. The{' '}
+                <Link href="/color-wheel">color wheel</Link> and the{' '}
+                <Link href="/palettes">palette generator</Link> propose hues from a harmony rule.
+                The <Link href="/colors">named color index</Link> is the place to look up a CSS
+                keyword or a common neutral and see the same color as HEX, RGB, HSL, HSV, CMYK, and
+                OKLCH.
               </p>
               <p>
                 After the hues exist, check the pairs you will actually ship. The{' '}
@@ -173,7 +176,7 @@ export default function ToolsHubPage() {
                 {
                   question: 'Do I need an account?',
                   answer:
-                    'No. The palette, gradient, contrast, scale, image, simulation, wheel, gamut, compare, and converter tools run without an account.',
+                    'No. The random color, palette, gradient, contrast, scale, image, simulation, wheel, gamut, compare, and converter tools run without an account.',
                 },
                 {
                   question: 'Which tool should I open first?',

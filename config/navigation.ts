@@ -34,6 +34,7 @@ const toolShortDescriptions: Record<string, string> = {
   'color-wheel': 'Drag to explore hues and live harmonies',
   'print-gamut': 'Screen vs press preview with shift warnings',
   'compare-colors': 'ΔE2000 perceptual difference between two colors',
+  'random-color-generator': 'Random HEX, a five-color palette, and a CSS gradient',
 };
 
 const toolShortTitles: Record<string, string> = {
@@ -46,6 +47,7 @@ const toolShortTitles: Record<string, string> = {
   'color-wheel': 'Color Wheel',
   'print-gamut': 'Print Gamut Checker',
   'compare-colors': 'Compare Colors',
+  'random-color-generator': 'Random Color',
 };
 
 function toolNavItem(id: string): NavChildItem {
@@ -91,6 +93,7 @@ export const navItems: NavItem[] = [
       '/color-wheel',
       '/print-gamut',
       '/compare-colors',
+      '/random-color-generator',
       '/colors',
       '/color',
     ],
@@ -104,6 +107,7 @@ export const navItems: NavItem[] = [
           toolNavItem('gradients'),
           toolNavItem('color-scale'),
           toolNavItem('palette-from-image'),
+          toolNavItem('random-color-generator'),
         ],
       },
       {
@@ -163,6 +167,7 @@ export const footerColorTools = [
   { name: 'Compare colors', href: '/compare-colors' },
   { name: 'Tint & shade scale', href: '/color-scale' },
   { name: 'Palette from image', href: '/palette-from-image' },
+  { name: 'Random color generator', href: '/random-color-generator' },
   { name: 'Color blindness sim', href: '/color-blindness' },
 ] as const;
 

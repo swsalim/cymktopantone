@@ -19,5 +19,6 @@ All tools are free, run in the browser, and need no account.
 - [Color wheel](https://colormapper.xyz/color-wheel): interactive wheel with live harmonies.
 - [Print gamut checker](https://colormapper.xyz/print-gamut): shows how a screen RGB color shifts on a CMYK press.
 - [Compare colors](https://colormapper.xyz/compare-colors): Delta E 2000 perceptual difference between two colors.
+- [Random color generator](https://colormapper.xyz/random-color-generator): one random HEX with RGB, HSL, and CMYK, a lockable five-color palette, and a two-color CSS linear gradient.
 
 See also: [Color format converters](color-converters.md).
