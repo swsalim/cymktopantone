@@ -1,6 +1,7 @@
 import { defineCollection, defineConfig } from '@content-collections/core';
 import { compileMDX } from '@content-collections/mdx';
 import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
 import { z } from 'zod';
 
 const posts = defineCollection({
@@ -21,6 +22,7 @@ const posts = defineCollection({
   transform: async (document, context) => {
     const mdx = await compileMDX(context, document, {
       rehypePlugins: [rehypeSlug],
+      remarkPlugins: [remarkGfm],
     });
     const docs = await context.collection.documents();
 
