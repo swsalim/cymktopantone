@@ -1,0 +1,138 @@
+---
+title: "Color Spectrum Explained: A Practical Guide to Hues, Palettes, and Color Mixing"
+metaTitle: "Color Spectrum Guide: Hues, Palettes, and Color Mixing"
+metaDescription: "Learn how the color spectrum connects hues, palettes, RGB, HEX, HSL, HSV, and CMYK with practical contrast, gamut, and export workflows."
+summary: "The color spectrum is the range of visible hues and the order they follow. This guide maps that range onto RGB, HEX, HSL, HSV, and CMYK, then points to the mixing and harmony guides."
+publishedAt: '2026-10-22'
+updatedAt: '2026-10-22'
+author: 'Yuyu'
+status: 'published'
+---
+
+A bright screen color can look dull in a printed brochure, while two text colors that seem readable can fail an accessibility check. The problem usually starts with treating every color value as interchangeable. A working color spectrum workflow connects the visible range and its hue order with the right color model, contrast testing, gamut checks, and export format.
+
+**Quick answer:** The color spectrum describes the range of perceived colors and the order of their hues. Choose a hue from that range, then write it in RGB or HEX for screens or CMYK for print, and check WCAG contrast before it becomes an interface color. Saturation, lightness, and harmony rules are covered in <Link href="/blog/color-theory-101">Color theory 101</Link>.
+
+A color is ready for production only after its appearance, contrast, output format, and gamut have been checked.
+
+## What Is the Color Spectrum?
+
+The color spectrum is an organized range of colors, often shown as a sequence of hues such as red, orange, yellow, green, blue, and violet. In physics, that sequence follows wavelength. Shorter visible wavelengths sit toward the violet end, and longer visible wavelengths sit toward the red end.
+
+Visible radiation is light that can produce a visual sensation. NIST places the generally accepted visible range roughly between 360–400 nanometers and 760–830 nanometers, while also noting that the limits depend on radiant power and the observer's visual response. <a href="https://www.nist.gov/glossary-term/46496" target="_blank" rel="noreferrer">NIST's definition of visible radiation</a> explains why the boundaries are approximate.
+
+A visible-light spectrum is one way to organize color. A <Link href="/color-wheel">color wheel</Link>, an RGB cube, an HSL cylinder, and CMYK percentages organize the same hues for different tasks. The same red can therefore have different numeric descriptions depending on whether you are working with emitted light, reflected ink, or a browser value. The <Link href="/color-models">color models overview</Link> is the map of those descriptions.
+
+**Hue** is the position in that order: blue is not orange. Saturation and lightness change how strong or how light a hue looks, and they are not extra hues on the spectrum. <Link href="/blog/color-theory-101">Color theory 101</Link> is the guide for those two controls and for the harmony rules that place hues around a wheel.
+
+A website button might use a high-saturation blue for emphasis, a lighter version of that same hue for hover feedback, and a dark blue for text. The hue stays in the blue part of the spectrum while the other properties create hierarchy.
+
+## Primary, Secondary, and Tertiary Colors on the Spectrum
+
+Primary, secondary, and tertiary are mixing labels. They are not fixed stations that every spectrum shares.
+
+In additive RGB, red, green, and blue are the primaries, because a screen builds other hues by mixing those lights. A traditional red-yellow-blue classroom model and a CMYK press start from different colors, so the same hue can be called a primary in one system and a secondary in another. Secondary colors, tertiary colors, and the mixing rules for each model are in <Link href="/blog/primary-colors">Primary colors</Link>.
+
+## How the Spectrum Maps to RGB, HEX, HSL, HSV, and CMYK
+
+Color models describe the spectrum for different jobs. They are related, but their numbers do not mean the same thing. <Link href="/convert-color">The converter hub</Link> moves a value between RGB, CMYK, HEX, HSL, and HSV. <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB, and HSL</Link> explains the three screen notations in more detail.
+
+| Model | Typical use | Limitation |
+| --- | --- | --- |
+| RGB | Screen pixels and digital imaging | Values depend on the selected RGB color space and display |
+| HEX | CSS colors such as #2563EB | Compact notation, usually representing sRGB in web work |
+| HSL | CSS adjustments by hue, saturation, and lightness | Equal numeric steps do not always look equally bright |
+| HSV | Color pickers and brightness-oriented controls | Brightness is a model value, not a guarantee of perceived lightness |
+| CMYK | Print production and press-oriented previews | Results depend on ink, paper, profile, and printing process |
+
+RGB is additive. HEX encodes RGB channels in a compact form, so a developer might store a brand blue as `#2563EB` in CSS. HSL can make a hover state easier to reason about, because the hue angle stays put while saturation and lightness change. HSV often suits a picker that separates color intensity from brightness. Neither HSL nor HSV adds hues that the visible spectrum does not already contain. They are other coordinates for the same range.
+
+CMYK is subtractive and suits a printer preparing a flyer. A screen blue can sit outside the printable gamut, meaning no available combination of the selected inks can reproduce it exactly. <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe web palettes</Link> is the longer treatment of that gap. Adobe's <a href="https://helpx.adobe.com/creative-cloud/apps/colors/understand-color-modes.html" target="_blank" rel="noreferrer">overview of color models and color spaces</a> describes these models as task-specific rather than interchangeable.
+
+CSS now supports color values beyond traditional sRGB in the Color 4 specification, but browser support, device capability, and fallback choices still affect delivery. See the <a href="https://www.w3.org/TR/2024/CRD-css-color-4-20240213/" target="_blank" rel="noreferrer">W3C CSS Color specification</a> before shipping wide-gamut values. Stylesheets can also mix two specified colors with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix" target="_blank" rel="noreferrer">the CSS `color-mix()` function</a>.
+
+## What Is a Palette? From Spectrum to Usable Color Sets
+
+A palette is a curated set of colors assigned to a design, brand, interface, or print job. That plain-language palette definition turns a broad color spectrum into a small set that people can apply consistently.
+
+A useful palette includes roles, not just attractive swatches. Assign colors to a background, primary text, secondary text, accent, border, link, success state, warning state, and error state. A five-color set can still fail if its warning color has no readable text treatment.
+
+Which hues are allowed to sit together is a harmony decision. Monochromatic, analogous, complementary, and triadic arrangements are explained in <Link href="/blog/color-theory-101">Color theory 101</Link>. The <Link href="/palettes">palette generator</Link> and the <Link href="/color-wheel">color wheel</Link> apply those rules to a hue you choose.
+
+Suppose a marketing site uses deep navy for headings, a pale blue surface, orange for calls to action, and gray for borders. The color spectrum supplies the hue range, but the palette assigns each color a job. Keep the accent scarce. If every element demands attention, none of them wins.
+
+A palette becomes practical when every swatch has a named role, a tested contrast use, and an output format.
+
+## How to Build and Test a Color Spectrum Palette
+
+Build the palette in the same order that production will use it. That catches a beautiful screen color before it reaches a failed contrast check or an unexpected print conversion.
+
+1. **Choose a base HEX value.** Start with the brand or interface anchor, such as a blue used for links.
+2. **Generate relationships.** Use the <Link href="/color-wheel">color wheel</Link> or the <Link href="/palettes">palette generator</Link> to inspect neighboring and opposing hues. The rules those tools apply are the ones in <Link href="/blog/color-theory-101">Color theory 101</Link>.
+3. **Review print output.** Check the CMYK values in the <Link href="/print-gamut">print gamut checker</Link> before approving a color for press.
+4. **Test contrast.** Use the <Link href="/contrast-checker">WCAG contrast checker</Link> to check text against each intended background. AA and AAA results give a clearer decision than judging a monitor by eye.
+5. **Create a scale.** If the palette supports a design system, use the <Link href="/color-scale">tint and shade generator</Link> to build a Tailwind-style 50–950 ramp and check every step.
+6. **Export tokens.** From the palette generator, choose CSS custom properties for a stylesheet, `theme.extend.colors` for Tailwind, or JSON tokens for a design-to-development handoff.
+
+Color Mapper runs in the browser and requires no account. Its converters cover RGB, CMYK, HEX, HSL, and HSV, and its palette tools flag out-of-gamut colors. A practical handoff includes the source HEX, converted CMYK value, contrast result, role name, and export format.
+
+| Check | Pass condition | Artifact to keep |
+| --- | --- | --- |
+| Harmony | Selected rule supports the intended hierarchy | Palette swatches and role names |
+| Accessibility | Required WCAG 2.1 AA or AAA result passes | Contrast results |
+| Print | Gamut warning reviewed and conversion approved | CMYK values and proof notes |
+| Handoff | Developer receives the required token format | CSS, Tailwind, or JSON export |
+
+## Common Color Spectrum Mistakes to Avoid
+
+Color work fails when people trust a visual impression that the output medium cannot reproduce. Use a measurable check for each decision.
+
+- **Treating models as identical.** Do not paste a CMYK percentage into a CSS workflow. Convert it with the <Link href="/convert-color">converter hub</Link>, then inspect the result in the target space.
+- **Skipping contrast.** A dark blue may look readable on your monitor yet fail for body text. Check the ratio in the <Link href="/contrast-checker">contrast checker</Link>, and test normal text, large text, icons, and focus states separately.
+- **Ignoring print gamut.** A vivid RGB cyan can lose saturation on paper. Review the conversion in the <Link href="/print-gamut">print gamut checker</Link> before sending artwork to production.
+- **Using too many unrelated hues.** Start from one harmony rule, as described in <Link href="/blog/color-theory-101">Color theory 101</Link>, and assign roles. Add a new hue only when it communicates a distinct state or section.
+
+Set a simple rule for approval: no color enters the shared token file without a model label, contrast result, and print status where print matters.
+
+### When not to reuse a spectrum palette
+
+- Skip a screen-first palette for a print-only job until a printer confirms the intended CMYK profile.
+- Skip a harmony rule when an existing brand standard specifies approved colors.
+- Skip a single lightness scale for status colors if users must distinguish success, warning, and error states.
+- Skip visual approval alone when text, controls, or focus indicators require accessibility evidence.
+
+## Frequently Asked Questions About the Color Spectrum
+
+<BlogFaq
+  items={[
+    {
+      question: "What is the color spectrum?",
+      answer: "The color spectrum is an organized range of perceived colors, often associated with visible light arranged by wavelength. Designers also use color wheels and digital color spaces to map relationships that a physical light spectrum does not show on its own, including saturation, lightness, and colors produced through screen or ink mixing. NIST's [visible radiation](https://www.nist.gov/glossary-term/46496) entry is the source for the approximate wavelength limits.",
+    },
+    {
+      question: "What are secondary colors?",
+      answer: "Secondary colors come from mixing two primary colors, and the set depends on the model. RGB, a traditional red-yellow-blue classroom model, and CMYK do not share one list. The definitions are in the [primary colors guide](/blog/primary-colors).",
+    },
+    {
+      question: "What are tertiary colors?",
+      answer: "Tertiary colors come from mixing one primary color with a neighboring secondary color. Which hues those are depends on the mixing system. The [primary colors guide](/blog/primary-colors) covers secondary and tertiary colors for each model.",
+    },
+    {
+      question: "What is the difference between a color spectrum and a color palette?",
+      answer: "A color spectrum represents a broad range or ordered relationship among colors. A color palette is a selected set assigned to a particular design or production task. A website palette might contain background, text, accent, border, and status colors chosen from a much larger color spectrum. The [palette generator](/palettes) is where that smaller set is built.",
+    },
+    {
+      question: "Can every spectrum color be printed?",
+      answer: "No. A printer can reproduce only the colors inside the gamut created by its ink set, paper, color profile, and process. Some vivid screen colors fall outside that gamut. The [print gamut checker](/print-gamut) shows where a selected screen color needs adjustment before a proof.",
+    },
+  ]}
+/>
+
+For a working color spectrum palette, start with one base HEX value, test its relationships on the <Link href="/color-wheel">color wheel</Link>, and keep the contrast and CMYK results beside the exported tokens. The <Link href="/color-scale">tint and shade generator</Link> can turn an approved base into a 50–950 ramp for implementation.
+
+## References
+
+- <a href="https://www.nist.gov/glossary-term/46496" target="_blank" rel="noreferrer">Visible radiation</a>
+- <a href="https://helpx.adobe.com/creative-cloud/apps/colors/understand-color-modes.html" target="_blank" rel="noreferrer">Color models and color spaces</a>
+- <a href="https://www.w3.org/TR/2024/CRD-css-color-4-20240213/" target="_blank" rel="noreferrer">CSS Color Module Level 4</a>
+- <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix" target="_blank" rel="noreferrer">CSS color-mix() function</a>

@@ -87,6 +87,7 @@ Color Mapper is a static toolkit site. Each page is an interactive tool or guide
 - https://colormapper.xyz/blog/primary-colors — Primary colors: RYB, RGB, and CMYK
 - https://colormapper.xyz/blog/what-color-is-indigo — What color is indigo
 - https://colormapper.xyz/blog/what-color-is-this — What color is this: image colors and color codes
+- https://colormapper.xyz/blog/color-spectrum — Color spectrum: visible hues, palettes, and color models
 
 ## Color pages
 
