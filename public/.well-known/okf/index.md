@@ -44,6 +44,7 @@ Color Mapper offers palette and gradient generators, a WCAG 2.1 contrast checker
 - [Primary Colors Explained: RGB, CMYK, Traditional Models, and Practical Design Uses](articles/primary-colors.md)
 - [What Color Is Indigo? Meaning, HEX Codes, RGB Values, and How It Compares](articles/what-color-is-indigo.md)
 - [What Color Is This? How to Identify Any Color from an Image or Color Code](articles/what-color-is-this.md)
+- [Color Spectrum Explained: A Practical Guide to Hues, Palettes, and Color Mixing](articles/color-spectrum.md)
 
 ## History
 
