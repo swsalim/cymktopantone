@@ -11,3 +11,5 @@ tags: [faq]
 Color Mapper is a free color toolkit: a palette generator, interactive color wheel, gradient generator, WCAG contrast checker, print gamut checker, color comparator, tint and shade scale builder, image palette extractor, color blindness simulator, and 18 converters between RGB, CMYK, HEX, HSL, and HSV.
 
 See also: [Color tools](../concepts/color-tools.md).
+
+The random color generator is at https://colormapper.xyz/random-color-generator.

@@ -6,7 +6,7 @@ const faqs = [
     category: 'General',
     question: 'What does Color Mapper do?',
     answer:
-      'Color Mapper is a free color toolkit: a palette generator, interactive color wheel, gradient generator, WCAG contrast checker, print gamut checker, color comparator, tint and shade scale builder, image palette extractor, color blindness simulator, and 18 converters between RGB, CMYK, HEX, HSL, and HSV.',
+      'Color Mapper is a free color toolkit: a random color generator, a palette generator, interactive color wheel, gradient generator, WCAG contrast checker, print gamut checker, color comparator, tint and shade scale builder, image palette extractor, color blindness simulator, and 18 converters between RGB, CMYK, HEX, HSL, and HSV.',
   },
   {
     id: 2,
