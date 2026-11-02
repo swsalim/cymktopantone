@@ -53,6 +53,13 @@ export function middleware(request: NextRequest) {
     return goneResponse();
   }
 
+  const resolved = resolveLegacyPath(pathname);
+  if (resolved.kind === 'redirect') {
+    const url = request.nextUrl.clone();
+    url.pathname = resolved.pathname;
+    return NextResponse.redirect(url, 308);
+  }
+
   return NextResponse.next();
 }
 

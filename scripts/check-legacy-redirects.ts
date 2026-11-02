@@ -9,7 +9,11 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { expectedLegacyCheck, expectedSiteCheck } from '../lib/legacy-path-resolver';
+import {
+  expectedLegacyCheck,
+  expectedSiteCheck,
+  normalizePathname,
+} from '../lib/legacy-path-resolver';
 
 function parseArgs(argv: string[]) {
   let baseUrl = '';
@@ -82,11 +86,29 @@ async function checkPath(
   hostHeader: string,
   cookieHeader?: string,
 ): Promise<string | null> {
-  const requestUrl = `${baseUrl}${pathname}`;
+  let requestUrl = `${baseUrl}${pathname}`;
 
   if (!hostHeader) {
-    const expected = expectedSiteCheck(pathname);
-    const first = await fetchManual(requestUrl, '', cookieHeader);
+    let expected = expectedSiteCheck(pathname);
+    let first = await fetchManual(requestUrl, '', cookieHeader);
+
+    if (
+      pathname.endsWith('/') &&
+      pathname.length > 1 &&
+      REDIRECT_STATUSES.has(first.status) &&
+      expected.status === 410
+    ) {
+      const location = first.headers.get('location');
+      if (location) {
+        const stripped = new URL(location, baseUrl).pathname;
+        if (normalizePathname(pathname) === normalizePathname(stripped)) {
+          requestUrl = `${baseUrl}${stripped}`;
+          expected = expectedSiteCheck(stripped);
+          first = await fetchManual(requestUrl, '', cookieHeader);
+        }
+      }
+    }
+
     if (expected.status === 410) {
       if (first.status !== 410) {
         return `${pathname}: expected 410 on site, got ${first.status}`;
