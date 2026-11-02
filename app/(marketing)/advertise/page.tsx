@@ -77,13 +77,12 @@ export default function AdvertisePage() {
           <h1>Promote Your Brand to Designers Worldwide</h1>
 
           <p>
-            Reach thousands of creative professionals with a highly visible sponsor slot featured on
-            every page of colormapper.xyz.
+            Reach creative professionals with a highly visible sponsor slot featured on every page of
+            colormapper.xyz.
           </p>
           <p>
-            With over 11,000 views each month from the US, Russia, and the UK, your sponsorship will
-            put your brand in front of design decision-makers searching for color conversion and
-            creative solutions.
+            Visitors come mainly from the US, Russia, the UK, and Europe via search and direct
+            traffic—designers and marketers looking for colour conversion and print-ready tools.
           </p>
 
           <p>
@@ -152,7 +151,6 @@ export default function AdvertisePage() {
 
           <h2>Audience Snapshot</h2>
           <ul>
-            <li>Total monthly views: 11,000+</li>
             <li>Top countries: Russia, US, UK, Germany</li>
             <li>Main traffic sources: Bing, Direct, Yandex</li>
             <li>Visitors: creative professionals, marketers, designers</li>

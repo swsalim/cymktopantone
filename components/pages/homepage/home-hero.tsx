@@ -26,14 +26,14 @@ export function HomeHero() {
       <div className="overflow-hidden rounded-3xl border border-violet-200/70 bg-gradient-to-br from-violet-50/90 via-white/90 to-cyan-50/80 shadow-sm dark:border-violet-500/30 dark:from-violet-500/15 dark:via-gray-900/80 dark:to-cyan-500/10">
         <div className="p-6 md:p-12">
           <p className="inline-flex rounded-full border border-violet-200/80 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-violet-800 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-200">
-            Free color toolkit
+            CMYK converter for print
           </p>
           <h1 className="mt-5 max-w-3xl text-balance font-heading text-4xl font-bold tracking-tight text-gray-900 md:text-6xl dark:text-gray-50">
-            Every color tool in one place
+            CMYK converter and colour tools for print
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg dark:text-gray-300">
-            Generate palettes, build gradients, check WCAG contrast, and convert between RGB, CMYK,
-            HEX, HSL, and HSV. Print-aware values on every swatch — all in your browser, no signup.
+            Convert HEX, RGB, CMYK, HSL, and HSV for web and press, check WCAG contrast, build
+            palettes and gradients, and inspect print gamut—all in your browser, no signup.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
