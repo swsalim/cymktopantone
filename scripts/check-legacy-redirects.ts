@@ -120,11 +120,26 @@ async function checkPath(
       if (!REDIRECT_STATUSES.has(first.status)) {
         return `${pathname}: expected redirect on site, got ${first.status}`;
       }
-      const location = first.headers.get('location');
+      let location = first.headers.get('location');
       if (!location) {
         return `${pathname}: redirect missing Location`;
       }
-      const resolvedLocation = new URL(location, baseUrl);
+      let resolvedLocation = new URL(location, baseUrl);
+      if (
+        pathname.endsWith('/') &&
+        pathname.length > 1 &&
+        resolvedLocation.pathname === normalizePathname(pathname)
+      ) {
+        const second = await fetchManual(`${baseUrl}${resolvedLocation.pathname}`, '', cookieHeader);
+        if (!REDIRECT_STATUSES.has(second.status)) {
+          return `${pathname}: expected second redirect after trailing slash, got ${second.status}`;
+        }
+        location = second.headers.get('location');
+        if (!location) {
+          return `${pathname}: second redirect missing Location`;
+        }
+        resolvedLocation = new URL(location, baseUrl);
+      }
       if (resolvedLocation.pathname !== expected.pathname) {
         return `${pathname}: expected path ${expected.pathname}, got ${resolvedLocation.pathname}`;
       }

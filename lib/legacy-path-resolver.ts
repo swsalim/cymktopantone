@@ -82,6 +82,9 @@ export function normalizePathname(pathname: string): string {
 
 export function isGonePath(pathname: string): boolean {
   const path = normalizePathname(pathname);
+  if (path.includes('%5C') || path.includes('\\')) {
+    return true;
+  }
   if (path === '/feed' || path.startsWith('/feed/')) {
     return true;
   }
