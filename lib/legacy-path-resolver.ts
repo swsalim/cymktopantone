@@ -13,13 +13,15 @@ export const LEGACY_HOSTS = new Set([
 ]);
 
 export const GONE_PREFIXES = [
-  '/pantone-color-match/challenge/',
-  '/pantone-color-match/classic/',
+  '/pantone-color-match/challenge',
+  '/pantone-color-match/classic',
   '/pantone-colors/',
   '/pantone/',
 ] as const;
 
 export const GONE_EXACT = new Set(['/pantone-color-match/daily']);
+
+const JUNK_PATH_SEGMENTS = new Set(['c-at_max', 'f-auto', 'q-85']);
 
 const SCREEN_TO_PRESS = '/blog/the-complete-guide-to-managing-color-from-screen-to-press';
 
@@ -56,6 +58,7 @@ export const STATIC_PATH_REDIRECTS: ReadonlyArray<{ source: string; destination:
   { source: '/convert-pantone-pms-to-hsv', destination: '/convert-hsv-to-cmyk' },
   { source: '/convert-pantone-pms-to-rgb', destination: '/convert-cmyk-to-rgb' },
   { source: '/pantone-color-match', destination: '/' },
+  { source: '/pantone-color-match/', destination: '/' },
   { source: '/pantone-colors', destination: '/convert-color' },
   { source: '/pantone', destination: '/convert-color' },
   { source: '/color-models/test', destination: '/color-models' },
@@ -76,6 +79,13 @@ export function normalizePathname(pathname: string): string {
 
 export function isGonePath(pathname: string): boolean {
   const path = normalizePathname(pathname);
+  if (path === '/feed' || path.startsWith('/feed/')) {
+    return true;
+  }
+  const segments = path.split('/').filter(Boolean);
+  if (segments.some((segment) => JUNK_PATH_SEGMENTS.has(segment))) {
+    return true;
+  }
   if (GONE_EXACT.has(path)) {
     return true;
   }
@@ -165,6 +175,23 @@ export function expectedLegacyCheck(pathname: string, search = ''): ExpectedLega
     status: 308,
     finalUrl: `https://${CANONICAL_SITE_HOST}${finalPath}${query}`,
   };
+}
+
+export type ExpectedSiteCheck =
+  | { status: 410 }
+  | { status: 308; pathname: string }
+  | { status: 200 };
+
+/** Expected response when hitting colormapper.xyz (or a preview) directly — not via a legacy host. */
+export function expectedSiteCheck(pathname: string): ExpectedSiteCheck {
+  const resolved = resolveLegacyPath(pathname);
+  if (resolved.kind === 'gone') {
+    return { status: 410 };
+  }
+  if (resolved.kind === 'redirect') {
+    return { status: 308, pathname: resolved.pathname };
+  }
+  return { status: 200 };
 }
 
 export type LegacyPathSummaryBucket = {

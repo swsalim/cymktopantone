@@ -9,12 +9,13 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { expectedLegacyCheck } from '../lib/legacy-path-resolver';
+import { expectedLegacyCheck, expectedSiteCheck } from '../lib/legacy-path-resolver';
 
 function parseArgs(argv: string[]) {
   let baseUrl = '';
   let hostHeader = '';
   let limit = 0;
+  let cookieJar = '';
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--base-url') {
@@ -23,19 +24,54 @@ function parseArgs(argv: string[]) {
       hostHeader = argv[++i] ?? '';
     } else if (arg === '--limit') {
       limit = Number(argv[++i] ?? '0');
+    } else if (arg === '--cookie-jar') {
+      cookieJar = argv[++i] ?? '';
     }
   }
   if (!baseUrl) {
     console.error('Missing --base-url');
     process.exit(1);
   }
-  return { baseUrl: baseUrl.replace(/\/+$/, ''), hostHeader, limit };
+  return { baseUrl: baseUrl.replace(/\/+$/, ''), hostHeader, limit, cookieJar };
 }
 
-async function fetchManual(url: string, hostHeader: string) {
+function readCookieHeader(jarPath: string): string | undefined {
+  if (!jarPath) {
+    return undefined;
+  }
+  try {
+    const raw = readFileSync(jarPath, 'utf8');
+    const cookies = raw
+      .split('\n')
+      .flatMap((line) => {
+        if (!line) {
+          return [];
+        }
+        if (line.startsWith('#') && !line.startsWith('#HttpOnly_')) {
+          return [];
+        }
+        const normalized = line.startsWith('#HttpOnly_') ? line.slice('#HttpOnly_'.length) : line;
+        return [normalized];
+      })
+      .map((line) => line.split('\t'))
+      .filter((parts) => parts.length >= 7)
+      .map((parts) => `${parts[5]}=${parts[6]}`)
+      .join('; ');
+    return cookies || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+const REDIRECT_STATUSES = new Set([301, 302, 307, 308]);
+
+async function fetchManual(url: string, hostHeader: string, cookieHeader?: string) {
   const headers: Record<string, string> = {};
   if (hostHeader) {
     headers.host = hostHeader;
+  }
+  if (cookieHeader) {
+    headers.cookie = cookieHeader;
   }
   return fetch(url, { redirect: 'manual', headers });
 }
@@ -44,12 +80,13 @@ async function checkPath(
   baseUrl: string,
   pathname: string,
   hostHeader: string,
+  cookieHeader?: string,
 ): Promise<string | null> {
-  const expected = expectedLegacyCheck(pathname);
   const requestUrl = `${baseUrl}${pathname}`;
 
   if (!hostHeader) {
-    const first = await fetchManual(requestUrl, '');
+    const expected = expectedSiteCheck(pathname);
+    const first = await fetchManual(requestUrl, '', cookieHeader);
     if (expected.status === 410) {
       if (first.status !== 410) {
         return `${pathname}: expected 410 on site, got ${first.status}`;
@@ -58,20 +95,23 @@ async function checkPath(
     }
 
     if (expected.status === 308) {
-      if (first.status !== 308 && first.status !== 301 && first.status !== 307) {
+      if (!REDIRECT_STATUSES.has(first.status)) {
         return `${pathname}: expected redirect on site, got ${first.status}`;
       }
       const location = first.headers.get('location');
       if (!location) {
         return `${pathname}: redirect missing Location`;
       }
-      const resolvedLocation = new URL(location, baseUrl).href;
-      if (resolvedLocation !== expected.finalUrl) {
-        return `${pathname}: expected Location ${expected.finalUrl}, got ${resolvedLocation}`;
+      const resolvedLocation = new URL(location, baseUrl);
+      if (resolvedLocation.pathname !== expected.pathname) {
+        return `${pathname}: expected path ${expected.pathname}, got ${resolvedLocation.pathname}`;
       }
-      const final = await fetch(resolvedLocation, { redirect: 'manual' });
+      const final = await fetch(resolvedLocation.href, {
+        redirect: 'manual',
+        headers: cookieHeader ? { cookie: cookieHeader } : undefined,
+      });
       if (final.status !== 200) {
-        return `${pathname}: final ${resolvedLocation} returned ${final.status}`;
+        return `${pathname}: final ${resolvedLocation.href} returned ${final.status}`;
       }
       return null;
     }
@@ -82,7 +122,8 @@ async function checkPath(
     return null;
   }
 
-  const first = await fetchManual(requestUrl, hostHeader);
+  const expected = expectedLegacyCheck(pathname);
+  const first = await fetchManual(requestUrl, hostHeader, cookieHeader);
 
   if (expected.status === 410) {
     if (first.status !== 410) {
@@ -91,7 +132,7 @@ async function checkPath(
     return null;
   }
 
-  if (first.status !== 308 && first.status !== 301 && first.status !== 307) {
+  if (!REDIRECT_STATUSES.has(first.status)) {
     return `${pathname}: expected redirect, got ${first.status}`;
   }
 
@@ -114,7 +155,8 @@ async function checkPath(
 }
 
 async function main() {
-  const { baseUrl, hostHeader, limit } = parseArgs(process.argv);
+  const { baseUrl, hostHeader, limit, cookieJar } = parseArgs(process.argv);
+  const cookieHeader = readCookieHeader(cookieJar);
   const fixture = readFileSync(join(process.cwd(), 'data/legacy-old-paths.txt'), 'utf8');
   let paths = fixture
     .split('\n')
@@ -126,7 +168,7 @@ async function main() {
 
   const failures: string[] = [];
   for (const pathname of paths) {
-    const err = await checkPath(baseUrl, pathname, hostHeader);
+    const err = await checkPath(baseUrl, pathname, hostHeader, cookieHeader);
     if (err) {
       failures.push(err);
     }
