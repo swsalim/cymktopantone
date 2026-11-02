@@ -36,9 +36,6 @@ export const LEGACY_BLOG_REDIRECTS: Readonly<Record<string, string>> = {
   '/blog/indesign-pantone-spot-color-pdf': '/blog/spot-color-process-color',
   '/blog/pantone-digital-branding': SCREEN_TO_PRESS,
   '/blog/photoshop-hex-to-pantone-match': '/convert-hex-to-cmyk',
-  '/blog/c-at_max': '/blog',
-  '/blog/f-auto': '/blog',
-  '/blog/q-85': '/blog',
 };
 
 /** Static path redirects (also emitted for next.config.ts). */
