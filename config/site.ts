@@ -5,9 +5,9 @@ import { absoluteUrl, SITE_DOMAIN } from '@/lib/utils';
 export { SITE_DOMAIN };
 
 export const siteConfig: SiteConfig = {
-  title: 'Color Mapper — Free Color Tools: Palettes, Gradients, Contrast & Converters',
+  title: 'Color Mapper — CMYK Converter & Colour Tools for Print and Web',
   description:
-    'Free color tools for designers, printers, and developers. Generate palettes and gradients, check WCAG contrast, build Tailwind scales, and convert between RGB, CMYK, HEX, HSL, and HSV — no account required.',
+    'Free CMYK converter and colour tools for designers and print workflows. Convert HEX, RGB, CMYK, HSL, and HSV, check WCAG contrast, and prepare brand colours for press — no account required.',
   siteName: 'Color Mapper',
   url: new URL(absoluteUrl()),
   openGraph: {
