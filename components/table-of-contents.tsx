@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { TableOfContents as TocData } from '@/lib/toc';
 import { cn } from '@/lib/utils';
@@ -9,6 +9,9 @@ import { LazyAdsSquare } from '@/components/ads/lazy-ads-square';
 
 /** Clears the sticky header (`h-16` plus its 1px offset). */
 const HEADER_OFFSET = 96;
+
+/** Matches `lg:top-24` — max aside height that can stick without clipping. */
+const STICKY_TOP_OFFSET_PX = 96;
 
 interface TocEntry {
   title: string;
@@ -83,6 +86,8 @@ export default function TableOfContents({ toc }: TableOfContentsProps) {
   const ids = useMemo(() => collectIds(items ?? []), [items]);
   const [activeId, setActiveId] = useState<string | null>(ids[0] ?? null);
   const clickedId = useRef<string | null>(null);
+  const asideRef = useRef<HTMLElement>(null);
+  const [fitsViewport, setFitsViewport] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (ids.length === 0) return;
@@ -124,6 +129,25 @@ export default function TableOfContents({ toc }: TableOfContentsProps) {
     };
   }, [ids]);
 
+  useLayoutEffect(() => {
+    const aside = asideRef.current;
+    if (!aside) return;
+
+    const measure = () => {
+      const available = window.innerHeight - STICKY_TOP_OFFSET_PX;
+      setFitsViewport(aside.scrollHeight <= available);
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(aside);
+    window.addEventListener('resize', measure, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [items]);
+
   if (!items || items.length === 0) {
     return null;
   }
@@ -137,7 +161,12 @@ export default function TableOfContents({ toc }: TableOfContentsProps) {
   };
 
   return (
-    <aside className="mt-12 hidden lg:sticky lg:top-24 lg:col-span-4 lg:mt-0 lg:block lg:max-h-[calc(100dvh-7rem)] lg:self-start lg:overflow-y-auto">
+    <aside
+      ref={asideRef}
+      className={cn(
+        'mt-12 hidden lg:col-span-4 lg:mt-0 lg:block lg:self-start',
+        fitsViewport === true && 'lg:sticky lg:top-24',
+      )}>
       <nav aria-label="Table of contents" className="space-y-2">
         <h2 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
           Table of Contents
