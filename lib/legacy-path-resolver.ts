@@ -65,6 +65,7 @@ export const STATIC_PATH_REDIRECTS: ReadonlyArray<{ source: string; destination:
   { source: '/pantone-colors', destination: '/convert-color' },
   { source: '/pantone', destination: '/convert-color' },
   { source: '/color-models/test', destination: '/color-models' },
+  { source: '/color-models/test-alt', destination: '/color-models' },
 ];
 
 export type LegacyPathOutcome =
