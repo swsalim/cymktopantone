@@ -1,9 +1,7 @@
 /**
- * Drop-in Next.js App Router server component.
- * Copy into your host site (for example `components/BadgeRelaySite.tsx`).
- *
- * Renders real <a><img> nodes in the initial HTML so directory crawlers can
- * verify badges without executing JavaScript.
+ * Server-rendered BadgeRelay badges. The links are in the initial HTML so
+ * directory crawlers can see them. The fetch lives in the root layout, so its
+ * revalidate interval is the cache lifetime for every page.
  */
 type PublicBadge = {
   id: string;
@@ -33,12 +31,17 @@ type PublicConfig = {
 
 export type BadgeRelaySiteProps = {
   siteKey: string;
-  /** BadgeRelay origin, e.g. https://badgerelay.com or http://localhost:3000 */
+  /** BadgeRelay origin, e.g. https://badgerelay.com */
   apiBase: string;
-  /** ISR / cache seconds. Keep short so publishes appear quickly. */
+  /**
+   * Cache lifetime in seconds. Default is one day. Keep this long: the fetch
+   * is rendered from the shared layout.
+   */
   revalidateSeconds?: number;
   className?: string;
 };
+
+const DEFAULT_REVALIDATE_SECONDS = 60 * 60 * 24;
 
 function carouselDuration(speed: PublicConfig['appearance']['speed']): string {
   if (speed === 'fast') return '24s';
@@ -89,7 +92,7 @@ function BadgeLink({
 export async function BadgeRelaySite({
   siteKey,
   apiBase,
-  revalidateSeconds = 30,
+  revalidateSeconds = DEFAULT_REVALIDATE_SECONDS,
   className,
 }: BadgeRelaySiteProps) {
   if (!siteKey.startsWith('site_live_')) {

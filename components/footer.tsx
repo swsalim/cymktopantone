@@ -54,18 +54,6 @@ function LinkRow({
   );
 }
 
-function DirectoryBadgeMarquee() {
-  return (
-    <div className="mt-12" aria-label="Featured on directories">
-      <BadgeRelaySite
-        siteKey="site_live_6W2thwbb2e9kpGDhx9y1Jg"
-        apiBase="https://badgerelay.com"
-        revalidateSeconds={30}
-      />
-    </div>
-  );
-}
-
 export default function Footer({ className, ...props }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
@@ -106,7 +94,13 @@ export default function Footer({ className, ...props }: FooterProps) {
           <LinkRow label="Learn" links={footerLearnLinks} />
         </div>
 
-        <DirectoryBadgeMarquee />
+        <div className="mt-12" aria-label="Featured on directories">
+          <BadgeRelaySite
+            siteKey="site_live_6W2thwbb2e9kpGDhx9y1Jg"
+            apiBase="https://badgerelay.com"
+            revalidateSeconds={60 * 60 * 60 * 24}
+          />
+        </div>
 
         {/* Meta row */}
         <div className="mt-14 flex flex-col gap-4 border-t border-gray-800 pt-8 sm:flex-row sm:items-center sm:justify-between">

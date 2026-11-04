@@ -5,10 +5,13 @@ import JsonLd from '@/components/structured-data/json-ld';
 export default function WebPageJsonLd({
   id,
   description,
+  lastReviewed,
   reviewedBy = siteConfig.siteName,
 }: {
   id: string;
   description: string;
+  /** Content date. Omit on pages with no review date so the field is not stamped at render time. */
+  lastReviewed?: string;
   reviewedBy?: string;
 }) {
   return (
@@ -18,7 +21,7 @@ export default function WebPageJsonLd({
         '@type': 'WebPage',
         '@id': id,
         description: description,
-        lastReviewed: new Date().toISOString(),
+        ...(lastReviewed ? { lastReviewed } : {}),
         reviewedBy: {
           type: 'Person',
           name: reviewedBy,

@@ -164,6 +164,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <WebPageJsonLd
         id={absoluteUrl(`/blog/${post._meta.path}`)}
         description={post.metaDescription || post.summary}
+        lastReviewed={post.updatedAt ?? post.publishedAt}
       />
       <BreadcrumbJsonLd itemListElements={JSONLDbreadcrumbs} />
       <main className="container mx-auto max-w-7xl space-y-10 px-4 py-8 md:space-y-12 md:py-16">
