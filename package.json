@@ -10,6 +10,7 @@
     "test": "tsx --test lib/**/*.test.ts",
     "check-legacy-redirects": "tsx scripts/check-legacy-redirects.ts",
     "report-legacy-paths": "tsx scripts/report-legacy-paths.ts",
+    "check-seo-origins": "tsx scripts/check-seo-origins.ts",
     "preview": "next build && next start",
     "postbuild": "node scripts/postbuild.mjs",
     "precompute-colors": "tsx scripts/precompute-related-colors.ts",

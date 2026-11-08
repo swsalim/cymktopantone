@@ -8,12 +8,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Public absolute URL for this deployment. Production always uses {@link SITE_DOMAIN}
+ * so sitemap, robots, and canonicals stay on colormapper.xyz even when Vercel's
+ * project production hostname is still a legacy domain.
+ */
 export function absoluteUrl(input = '') {
   return process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN}${input}`
+    ? `https://${SITE_DOMAIN}${input}`
     : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${input}`
-      : `${process.env.NEXT_PUBLIC_BASE_URL}${input}`;
+      : `${process.env.NEXT_PUBLIC_BASE_URL ?? `https://${SITE_DOMAIN}`}${input}`;
 }
 
 /** Canonical/sitemap URLs: homepage is the origin without a trailing slash. */

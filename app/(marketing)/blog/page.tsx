@@ -48,7 +48,7 @@ export const metadata = {
 
 const JSONLDbreadcrumbs = [
   {
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    url: absoluteUrl(),
     name: 'Home',
   },
   {
