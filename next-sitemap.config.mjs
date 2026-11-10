@@ -19,7 +19,7 @@ const exclude = [
 
 const siteUrl =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ?? SITE_DOMAIN}`
+    ? `https://${SITE_DOMAIN}`
     : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
       : process.env.NEXT_PUBLIC_BASE_URL ?? `https://${SITE_DOMAIN}`;
