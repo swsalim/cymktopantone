@@ -34,14 +34,14 @@ export type BadgeRelaySiteProps = {
   /** BadgeRelay origin, e.g. https://badgerelay.com */
   apiBase: string;
   /**
-   * Cache lifetime in seconds. Default is one day. Keep this long: the fetch
+   * Cache lifetime in seconds. Default is 30 days. Keep this long: the fetch
    * is rendered from the shared layout.
    */
   revalidateSeconds?: number;
   className?: string;
 };
 
-const DEFAULT_REVALIDATE_SECONDS = 60 * 60 * 24;
+const DEFAULT_REVALIDATE_SECONDS = 60 * 60 * 24 * 30;
 
 function carouselDuration(speed: PublicConfig['appearance']['speed']): string {
   if (speed === 'fast') return '24s';
