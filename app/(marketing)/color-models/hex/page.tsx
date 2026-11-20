@@ -372,7 +372,11 @@ export default function ColorModelHex() {
               Convert to <strong>RGB</strong> when working with digital designs.
             </li>
             <li>
-              Use <strong>Pantone matching</strong> for brand consistency in print.
+              Use a{' '}
+              <Link href="/convert-rgb-to-spot-color">
+                <strong>spot color</strong>
+              </Link>{' '}
+              from your printer&apos;s swatch system for brand consistency in print.
             </li>
           </ul>
 

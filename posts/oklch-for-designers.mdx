@@ -19,7 +19,7 @@ Björn Ottosson introduced Oklab on 23 December 2020 in <a href="https://bottoss
 
 CSS Color Module Level 4 standardizes both `oklab()` and `oklch()`. The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch" target="_blank" rel="noreferrer">MDN reference for `oklch()`</a> marks the feature Baseline, widely available, and says it has been available across browsers since May 2023. "Widely available" still has an asterisk on MDN for some parts of the feature. Relative color syntax (`oklch(from …)`) is specified in CSS Color Level 5, so treat that form as something you verify in the browsers you support, even if absolute `oklch()` is fine.
 
-You do not need Ottosson's matrices to use the CSS function. You do need his goal in mind. He was fitting a space for blends and image work, not issuing a new corporate palette. When a brand color is a Pantone standard or a printed ink, OKLCH is how you might explore screen variants. The standard remains the physical color. The <Link href="/blog/pantone-to-hex-rgb">Pantone conversion guide</Link> is the boundary.
+You do not need Ottosson's matrices to use the CSS function. You do need his goal in mind. He was fitting a space for blends and image work, not issuing a new corporate palette. When a brand color comes from a proprietary spot-color system or is a printed ink, OKLCH is how you might explore screen variants. The standard remains the physical color. The <Link href="/blog/spot-color-to-hex-rgb">spot color to HEX guide</Link> is the boundary.
 
 ## How to read the three numbers
 
@@ -77,7 +77,7 @@ Ottosson has a separate note on sRGB gamut clipping from January 2021, linked fr
 
 **Print.** OKLCH does not know your press profile. A high-chroma screen color is a common gamut problem in CMYK as well as in sRGB, and the two gamuts are not the same shape. Run the resolved hex through the <Link href="/print-gamut">print gamut checker</Link> and read the <Link href="/blog/cmyk-safe-web-palettes">CMYK guide</Link> before a brand sheet lists one value for both.
 
-**Spot color.** A Pantone code is a physical standard. An `oklch()` exploration of "a lighter version for the app" is a new screen color. Name it as a variant. Do not overwrite the spot code.
+**Spot color.** A code from a proprietary spot-color system is a physical standard. An `oklch()` exploration of "a lighter version for the app" is a new screen color. Name it as a variant. Do not overwrite the spot code.
 
 **HSL hue numbers.** They do not transfer. Convert with the browser or with a tool that implements the CSS conversion, then read the new hue. The <Link href="/color-models/hsl">HSL model page</Link> remains the right reference for `hsl()` itself. <Link href="/convert-hex-to-hsl">HEX to HSL</Link> is the sRGB cylinder. It will not emit `oklch()`.
 

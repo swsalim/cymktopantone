@@ -33,7 +33,7 @@ A six-digit hex color is three bytes. Each byte is two hexadecimal digits, 00 th
 
 Hex is a good storage form for tokens because it is compact, it round-trips through 8-bit sRGB without a percent, and every browser understands it. It is an awkward editing form. Changing the hue of `#7C3AED` by hand means you already know how the three bytes interact. People who "nudge the hex" are usually guessing.
 
-Hex does not know about paper. A value you copied from a Pantone simulation is still just three bytes. The <Link href="/blog/pantone-to-hex-rgb">Pantone to HEX guide</Link> is about where that value is allowed to come from. The bytes themselves are ordinary sRGB once you have accepted them.
+Hex does not know about paper. A value you copied from a screen simulation of a proprietary spot-color system is still just three bytes. The <Link href="/blog/spot-color-to-hex-rgb">spot color to HEX guide</Link> is about where that value is allowed to come from. The bytes themselves are ordinary sRGB once you have accepted them.
 
 ## What RGB stores
 
@@ -83,7 +83,7 @@ A practical rule: the token file holds one spelling. Reviews and pull requests c
 
 HEX, RGB, and HSL all assume sRGB. They do not describe:
 
-- **A Pantone standard.** The screen value is a simulation. Record the source. See the Pantone guide linked above.
+- **A spot color.** The screen value is a simulation. Record the source. See the spot color guide linked above.
 - **A CMYK build.** Process conversion leaves the sRGB gamut and depends on a profile. The <Link href="/print-gamut">print gamut checker</Link> shows the round-trip shift. The <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link> gives you the percentages to discuss with a printer. The <Link href="/blog/cmyk-safe-web-palettes">CMYK-safe palettes guide</Link> is the longer version.
 - **Perceptual uniformity.** Equal steps in HSL lightness are equal steps in a simple average of encoded channels. They are not equal steps in perceived lightness. OKLCH is the CSS notation built for that problem. After an `oklch()` color is painted, the used color on an sRGB screen is still something you can copy out as hex and run through the contrast checker. Contrast does not read the OKLCH lightness channel. It reads the sRGB channels of the color that was displayed.
 - **Accessibility by itself.** A harmonious HSL set can fail WCAG. The <Link href="/blog/wcag-contrast-brand-colors">contrast guide</Link> is the audit. The <Link href="/blog/accessible-dark-mode-color-palettes">dark-mode palette guide</Link> is what changes when the background stops being white.

@@ -87,7 +87,7 @@ export const colorModelFaqs: FAQItem[] = [
   {
     question: 'What is the difference between HEX and RGB?',
     answer:
-      'HEX is a shorthand hexadecimal representation of RGB values. For example, HEX [#FF0000](/convert-hex-to-pantone-pms/FF0000) represents pure red, which is the same as RGB(255, 0, 0). Both are used in digital design, but HEX is more common in CSS and web development.',
+      'HEX is a shorthand hexadecimal representation of RGB values. For example, HEX [#FF0000](/convert-rgb-to-spot-color) represents pure red, which is the same as RGB(255, 0, 0). Both are used in digital design, but HEX is more common in CSS and web development.',
   },
   {
     question: 'What is the difference between HSL and RGB?',
