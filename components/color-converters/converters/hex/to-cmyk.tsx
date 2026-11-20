@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { hexToRgb, isValidHex, rgbToCmyk } from '@/lib/colors';
+import { normalizeHex } from '@/lib/color-query';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
 
@@ -12,12 +13,13 @@ import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
+import { ColorInputControls } from '@/components/color-tools/color-input-controls';
+import { ShareColorLink } from '@/components/color-tools/share-color-link';
+import { useColorQuery } from '@/components/color-tools/use-color-query';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Wrapper } from '@/components/wrapper';
 
 export default function HexCmykConverter() {
@@ -25,6 +27,12 @@ export default function HexCmykConverter() {
   const { colorHistory } = useColorHistoryContext();
 
   const [hex, setHex] = useState('#6D39AC');
+  const channels = { hex: hex.toUpperCase() };
+  const { markDirty } = useColorQuery('hex', channels, (next) => {
+    if (next.mode !== 'hex') return;
+    const normalized = normalizeHex(next.channels.hex ?? '');
+    if (normalized) setHex(normalized);
+  });
 
   const rgb = hexToRgb(hex);
   const cmyk = rgbToCmyk(rgb);
@@ -42,7 +50,8 @@ export default function HexCmykConverter() {
   const handleInputChange = (value: string) => {
     // Only update if the input is a valid hex color
     if (isValidHex(value)) {
-      setHex(value);
+      markDirty();
+      setHex(normalizeHex(value) ?? value);
     }
   };
 
@@ -73,8 +82,9 @@ export default function HexCmykConverter() {
   const handleColorSelect = (sourceValue: string) => {
     const hexMatch = sourceValue.match(/#([0-9a-f]{6})/i);
     if (hexMatch) {
-      const [hex] = hexMatch;
-      setHex(hex);
+      const [matched] = hexMatch;
+      markDirty();
+      setHex(matched);
 
       // Track selection from history
       trackSelectFromHistory();
@@ -89,24 +99,14 @@ export default function HexCmykConverter() {
           <Card>
             <h2 className="sr-only">Enter HEX Value</h2>
             <CardContent>
-              <div className="flex flex-col gap-y-6">
-                <div>
-                  <Label>HEX</Label>
-                  <div className="mb-2 flex items-center justify-between">
-                    <Input
-                      type="color"
-                      id="colorPicker"
-                      value={hex}
-                      onChange={(e) => handleInputChange(e.target.value)}
-                      className="h-20 w-full cursor-pointer"
-                    />
-                  </div>
-                  <Input
-                    type="text"
-                    value={hex.toUpperCase()}
-                    onChange={(e) => handleInputChange(e.target.value)}
-                  />
-                </div>
+              <ColorInputControls
+                idPrefix="hex-to-cmyk"
+                mode="hex"
+                channels={channels}
+                onChannelsChange={(next) => handleInputChange(next.hex ?? '')}
+              />
+              <div className="mt-4">
+                <ShareColorLink mode="hex" channels={channels} />
               </div>
 
               <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />

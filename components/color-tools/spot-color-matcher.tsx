@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
 
@@ -15,14 +15,16 @@ import {
   rgbToCmyk,
   rgbToHex,
 } from '@/lib/colors';
+import { channelsFromHex, hexFromChannels, type ColorMode } from '@/lib/color-query';
 import { getGamutReport } from '@/lib/gamut';
 import { DISTANCE_BAND_TOOLTIP, distanceBand, nearestSpotColors } from '@/lib/spot-set';
 import type { CMYK, HSL, HSV, RGB } from '@/types';
 
+import { ColorInputControls } from '@/components/color-tools/color-input-controls';
 import { CopyButton } from '@/components/color-tools/copy-button';
+import { ShareColorLink } from '@/components/color-tools/share-color-link';
+import { useColorQuery } from '@/components/color-tools/use-color-query';
 import { Container } from '@/components/container';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Wrapper } from '@/components/wrapper';
 
 const TABS = ['RGB', 'HEX', 'HSL', 'HSV', 'CMYK'] as const;
@@ -107,45 +109,15 @@ const PARSERS: Record<Tab, (fields: Fields) => RGB | null> = {
   CMYK: parseCmyk,
 };
 
-function applyQuery(search: string): { tab: Tab; fields: Fields } | null {
-  const params = new URLSearchParams(search);
-  const rgb = params.get('rgb');
-  if (rgb) {
-    const parts = rgb.split(',');
-    if (parts.length === 3) return { tab: 'RGB', fields: { r: parts[0].trim(), g: parts[1].trim(), b: parts[2].trim() } };
-  }
-  const hex = params.get('hex');
-  if (hex) return { tab: 'HEX', fields: { hex: hex.trim() } };
-  const hsl = params.get('hsl');
-  if (hsl) {
-    const parts = hsl.split(',');
-    if (parts.length === 3) return { tab: 'HSL', fields: { h: parts[0].trim(), s: parts[1].trim(), l: parts[2].trim() } };
-  }
-  const hsv = params.get('hsv');
-  if (hsv) {
-    const parts = hsv.split(',');
-    if (parts.length === 3) return { tab: 'HSV', fields: { h: parts[0].trim(), s: parts[1].trim(), v: parts[2].trim() } };
-  }
-  const cmyk = params.get('cmyk');
-  if (cmyk) {
-    const parts = cmyk.split(',');
-    if (parts.length === 4) {
-      return { tab: 'CMYK', fields: { c: parts[0].trim(), m: parts[1].trim(), y: parts[2].trim(), k: parts[3].trim() } };
-    }
-  }
-  return null;
-}
-
 export function SpotColorMatcher({ disclaimer }: { disclaimer: string }) {
   const [tab, setTab] = useState<Tab>('RGB');
   const [fields, setFields] = useState<Fields>(EMPTY_FIELDS.RGB);
-
-  useEffect(() => {
-    const fromQuery = applyQuery(window.location.search);
-    if (!fromQuery) return;
-    setTab(fromQuery.tab);
-    setFields(fromQuery.fields);
-  }, []);
+  const mode = tab.toLowerCase() as ColorMode;
+  const { markDirty } = useColorQuery(mode, fields, (next) => {
+    const nextTab = next.mode.toUpperCase() as Tab;
+    setTab(nextTab);
+    setFields(next.channels);
+  });
 
   const empty = fieldsAreEmpty(fields);
   const rgb = empty ? null : PARSERS[tab](fields);
@@ -158,10 +130,6 @@ export function SpotColorMatcher({ disclaimer }: { disclaimer: string }) {
         gamut: getGamutReport(rgbToHex(rgb)),
       }
     : null;
-
-  const setField = (key: string, value: string) => {
-    setFields((current) => ({ ...current, [key]: value }));
-  };
 
   const allValues = result
     ? `HEX: ${result.gamut.hex}\nRGB: ${formatRgbString(result.rgb)}\nCMYK: ${formatCmykString(result.cmyk)}`
@@ -177,36 +145,37 @@ export function SpotColorMatcher({ disclaimer }: { disclaimer: string }) {
               type="button"
               role="tab"
               aria-selected={tab === item}
-              className={`rounded-full px-3 py-1 text-sm font-semibold ${
+              className={`min-h-11 rounded-full px-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-600 focus-visible:ring-offset-2 dark:ring-offset-gray-950 ${
                 tab === item
                   ? 'bg-violet-600 text-white'
                   : 'bg-violet-50 text-violet-800 dark:bg-violet-500/10 dark:text-violet-200'
               }`}
               onClick={() => {
+                const nextMode = item.toLowerCase() as ColorMode;
+                const hex = hexFromChannels(mode, fields);
+                const carried = hex ? channelsFromHex(nextMode, hex) : null;
                 setTab(item);
-                setFields(EMPTY_FIELDS[item]);
+                setFields(carried ?? EMPTY_FIELDS[item]);
+                markDirty();
               }}>
               {item}
             </button>
           ))}
         </div>
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{HINTS[tab]}</p>
-        <div className="mb-8 grid max-w-2xl gap-3 sm:grid-cols-2">
-          {Object.keys(fields).map((key) => (
-            <div key={key}>
-              <Label htmlFor={`spot-${tab}-${key}`}>{key.toUpperCase()}</Label>
-              <Input
-                id={`spot-${tab}-${key}`}
-                value={fields[key] ?? ''}
-                onChange={(event) => setField(key, event.target.value)}
-                className="mt-1 font-mono"
-                inputMode={key === 'hex' ? 'text' : 'numeric'}
-                autoCapitalize="off"
-                autoCorrect="off"
-                spellCheck={false}
-              />
-            </div>
-          ))}
+        <div className="mb-4 max-w-2xl">
+          <ColorInputControls
+            idPrefix={`spot-${tab}`}
+            mode={mode}
+            channels={fields}
+            onChannelsChange={(next) => {
+              markDirty();
+              setFields(next);
+            }}
+          />
+        </div>
+        <div className="mb-8">
+          <ShareColorLink mode={mode} channels={fields} />
         </div>
 
         <h2 className="font-heading text-2xl font-bold text-gray-900 dark:text-gray-100">

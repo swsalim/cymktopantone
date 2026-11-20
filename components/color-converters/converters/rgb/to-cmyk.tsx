@@ -12,13 +12,13 @@ import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
+import { ColorInputControls } from '@/components/color-tools/color-input-controls';
+import { ShareColorLink } from '@/components/color-tools/share-color-link';
+import { useColorQuery } from '@/components/color-tools/use-color-query';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
 import { Wrapper } from '@/components/wrapper';
 
 export default function RgbCmykConverter() {
@@ -26,6 +26,15 @@ export default function RgbCmykConverter() {
   const { colorHistory } = useColorHistoryContext();
 
   const [rgb, setRgb] = useState({ r: 199, g: 63, b: 103 });
+  const channels = { r: String(rgb.r), g: String(rgb.g), b: String(rgb.b) };
+  const { markDirty } = useColorQuery('rgb', channels, (next) => {
+    if (next.mode !== 'rgb') return;
+    setRgb({
+      r: Number(next.channels.r),
+      g: Number(next.channels.g),
+      b: Number(next.channels.b),
+    });
+  });
   const hex = rgbToHex(rgb);
   const cmyk = rgbToCmyk(rgb);
   const cmykString = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
@@ -38,11 +47,6 @@ export default function RgbCmykConverter() {
     SOURCE_COLOR,
     TARGET_COLOR,
   );
-
-  const handleInputChange = (key: keyof typeof rgb, value: string) => {
-    const numValue = Math.min(255, Math.max(0, Number(value) || 0));
-    setRgb((prev) => ({ ...prev, [key]: numValue }));
-  };
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -72,6 +76,7 @@ export default function RgbCmykConverter() {
     const rgbMatches = sourceValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
     if (rgbMatches) {
       const [, r, g, b] = rgbMatches;
+      markDirty();
       setRgb({
         r: parseInt(r),
         g: parseInt(g),
@@ -91,38 +96,21 @@ export default function RgbCmykConverter() {
           <Card>
             <h2 className="sr-only">Enter RGB Value</h2>
             <CardContent>
-              <div className="flex flex-col gap-y-6">
-                {Object.entries({
-                  Red: 'r',
-                  Green: 'g',
-                  Blue: 'b',
-                }).map(([label, key]) => (
-                  <div key={key}>
-                    <div className="mb-2 flex items-center justify-between">
-                      <Label>{label}</Label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          type="number"
-                          value={rgb[key as keyof typeof rgb]}
-                          onChange={(e) =>
-                            handleInputChange(key as keyof typeof rgb, e.target.value)
-                          }
-                          className="w-20"
-                          min={0}
-                          max={255}
-                        />
-                      </div>
-                    </div>
-                    <Slider
-                      value={[rgb[key as keyof typeof rgb]]}
-                      onValueChange={([value]) => setRgb((prev) => ({ ...prev, [key]: value }))}
-                      max={255}
-                      step={1}
-                      className="mt-2"
-                      color={label.toLowerCase()}
-                    />
-                  </div>
-                ))}
+              <ColorInputControls
+                idPrefix="rgb-to-cmyk"
+                mode="rgb"
+                channels={channels}
+                onChannelsChange={(next) => {
+                  markDirty();
+                  setRgb({
+                    r: Math.min(255, Math.max(0, Number(next.r) || 0)),
+                    g: Math.min(255, Math.max(0, Number(next.g) || 0)),
+                    b: Math.min(255, Math.max(0, Number(next.b) || 0)),
+                  });
+                }}
+              />
+              <div className="mt-4">
+                <ShareColorLink mode="rgb" channels={channels} />
               </div>
 
               <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
