@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  skipTrailingSlashRedirect: true,
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },

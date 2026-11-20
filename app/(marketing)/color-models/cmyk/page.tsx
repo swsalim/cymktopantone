@@ -262,8 +262,10 @@ export default function ColorModelCmyk() {
             matching across different materials and printing conditions. A cereal box must display
             the same brand red whether printed on glossy cardboard or matte paperboard, requiring
             careful CMYK calibration, color profiling, and rigorous quality control. Many brands
-            supplement CMYK with spot colors (like Pantone) for brand-critical elements that fall
-            outside the CMYK gamut.
+            supplement CMYK with spot colors, which are pre-mixed inks chosen from a swatch system,
+            for brand-critical elements that fall
+            outside the CMYK gamut. To check a screen color before choosing between process and
+            spot, use the <Link href="/convert-rgb-to-spot-color">spot color matcher</Link>.
           </p>
 
           <h3>Large Format and Specialty Printing</h3>
@@ -299,7 +301,8 @@ export default function ColorModelCmyk() {
             Higher-quality papers, premium inks, and precise press calibration all improve color
             reproduction but increase costs. Understanding these trade-offs helps you make informed
             decisions that balance quality with budget constraints. For critical brand colors,
-            consider specifying Pantone spot colors rather than relying solely on CMYK process
+            consider specifying spot colors from your printer&apos;s swatch system rather than
+            relying solely on CMYK process
             colors.
           </p>
 

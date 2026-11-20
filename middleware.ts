@@ -5,6 +5,7 @@ import {
   CANONICAL_SITE_HOST,
   isGonePath,
   LEGACY_HOSTS,
+  normalizePathname,
   resolveLegacyPath,
 } from '@/lib/legacy-path-resolver';
 
@@ -19,45 +20,49 @@ function goneResponse(): NextResponse {
   });
 }
 
+function finalPathFor(pathname: string): string {
+  const resolved = resolveLegacyPath(pathname);
+  if (resolved.kind === 'redirect') {
+    return resolved.pathname;
+  }
+  const colorPath = pathname.match(/^\/color\/([0-9a-fA-F]{6})\/?$/);
+  if (colorPath) {
+    return `/color/${colorPath[1].toUpperCase()}`;
+  }
+  return normalizePathname(pathname);
+}
+
+/**
+ * Build the redirect with a plain URL. NextURL keeps the request's trailing-slash
+ * flag and will put the slash back on `pathname` when the response is formatted.
+ */
+function redirectTo(request: NextRequest, pathname: string, legacyHost: boolean): NextResponse {
+  const destination = legacyHost
+    ? new URL(`https://${CANONICAL_SITE_HOST}${pathname}`)
+    : new URL(request.url);
+  if (!legacyHost) {
+    destination.pathname = pathname;
+  }
+  destination.search = request.nextUrl.search;
+  return NextResponse.redirect(destination, 308);
+}
+
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host')?.split(':')[0] ?? '';
   const { pathname } = request.nextUrl;
-
-  if (LEGACY_HOSTS.has(host)) {
-    const resolved = resolveLegacyPath(pathname);
-    if (resolved.kind === 'gone') {
-      return goneResponse();
-    }
-
-    const url = request.nextUrl.clone();
-    url.hostname = CANONICAL_SITE_HOST;
-    url.port = '';
-    url.protocol = 'https';
-    if (resolved.kind === 'redirect') {
-      url.pathname = resolved.pathname;
-    }
-    return NextResponse.redirect(url, 308);
-  }
-
-  const colorPath = pathname.match(/^\/color\/([0-9a-fA-F]{6})\/?$/);
-  if (colorPath) {
-    const hex = colorPath[1];
-    if (hex !== hex.toUpperCase() || pathname.endsWith('/')) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/color/${hex.toUpperCase()}`;
-      return NextResponse.redirect(url, 308);
-    }
-  }
 
   if (isGonePath(pathname)) {
     return goneResponse();
   }
 
-  const resolved = resolveLegacyPath(pathname);
-  if (resolved.kind === 'redirect') {
-    const url = request.nextUrl.clone();
-    url.pathname = resolved.pathname;
-    return NextResponse.redirect(url, 308);
+  const nextPath = finalPathFor(pathname);
+
+  if (LEGACY_HOSTS.has(host)) {
+    return redirectTo(request, nextPath, true);
+  }
+
+  if (nextPath !== pathname) {
+    return redirectTo(request, nextPath, false);
   }
 
   return NextResponse.next();

@@ -2,7 +2,7 @@ import type { ComponentType } from 'react';
 
 type ModuleLoader = () => Promise<{ default: ComponentType }>;
 
-/** Explicit loaders — avoids webpack resolving deleted pantone converter paths. */
+/** Explicit loaders for the format converters that are still on the site. */
 export const converterLoaders: Record<string, ModuleLoader> = {
   'cmyk/to-hex': () => import('@/components/color-converters/converters/cmyk/to-hex'),
   'cmyk/to-hsl': () => import('@/components/color-converters/converters/cmyk/to-hsl'),

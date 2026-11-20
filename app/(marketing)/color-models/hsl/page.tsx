@@ -222,26 +222,22 @@ export default function ColorModelHsl() {
           </section>
 
           <section>
-            <h2>HSL and Pantone: Bridging Digital and Print Color</h2>
+            <h2>HSL and Spot Colors: Bridging Digital and Print Color</h2>
 
             <p>
-              No discussion about colors is complete without mentioning <strong>Pantone</strong>.
-            </p>
-            <p>
-              <a href="https://www.pantone.com/">Pantone LLC</a> is the company renowned for its
-              proprietary color space, the Pantone Matching System (PMS). This system is extensively
-              used in various industries concerning paint, fabric, and plastics. With a solid
-              Pantone reference, you can ensure that specific hues are consistent across different
-              producers regardless of location.
+              Print often relies on spot colors: inks mixed to a recipe and matched to a physical
+              swatch, so a brand color looks the same from one printer to the next. They&apos;re
+              widely used for packaging, fabric, paint and plastics.
             </p>
 
             <p>
-              While Pantone operates in a unique color space, conversions between{' '}
-              <strong>Pantone and HSL</strong> are possible. Imagine you’re working on a digital
-              project where your brand’s Pantone colors need to be represented on a website.
-              Understanding how to{' '}
-              <Link href="/convert-hex-to-hsl">convert HEX to an HSL model</Link>{' '}
-              ensures fidelity across both digital and print realms.
+              A spot color lives on paper, and HSL lives on screen, so moving between them always
+              involves a simulation. When a brand&apos;s print colors need a web version, start from
+              the brand&apos;s own published digital values, convert them to HSL for easy tints and
+              shades, and check the result against a printed sample. Our{' '}
+              <Link href="/convert-rgb-to-spot-color">RGB to spot color converter</Link> works in
+              the other direction and shows the closest colors in our own reference set for any
+              screen color.
             </p>
           </section>
 
@@ -264,7 +260,7 @@ export default function ColorModelHsl() {
               To wrap things up, exploring the <strong>HSL color model</strong> opens up a new realm
               of possibilities for creativity, precision, and dynamic designs. Whether you’re
               delving into painting digitally or bridging the gap between digital and physical
-              through Pantone, understanding HSL brings exhilarating colorful mastery to your
+              through print, understanding HSL brings exhilarating colorful mastery to your
               fingertips.
             </p>
 

@@ -1,7 +1,5 @@
 import { CMYK, HSL, HSV, RGB } from '@/types';
 
-import { HEX, PMS } from '@/config/colors';
-
 export const cmykToRgb = ({ c, m, y, k }: CMYK): RGB => {
   const r = 255 * (1 - c / 100) * (1 - k / 100);
   const g = 255 * (1 - m / 100) * (1 - k / 100);
@@ -241,105 +239,6 @@ export function getTextColor(hex: string): string {
   const bestColor = ratios.find((r) => r.ratio >= 7);
   return bestColor !== undefined ? bestColor.color : ratios[0].color;
 }
-
-/**
- * Get the HEX value of a Pantone color
- * @param {string} color The Pantone color to get the HEX for
- * @returns {string} The HEX value of the Pantone color
- */
-export const convertPantoneToHex = (pantoneColor: string): string => {
-  const pantoneIndex = PMS.indexOf(pantoneColor);
-  return pantoneIndex !== -1 ? HEX[pantoneIndex] : '';
-};
-/**
- * Converts an HEX color to its corresponding Pantone color.
- * @param {string} HEXColor - The RGB color to convert.
- * @returns {string} The matching Pantone color or an empty string if not found.
- */
-export const convertHexToPantone = (hexColor: string): string => {
-  const hexIndex = HEX.indexOf(hexColor);
-  return hexIndex !== -1 ? PMS[hexIndex] : '';
-};
-export const findMatchingPMSColors = async (
-  hexColor: string,
-  maxDistance = 15,
-): Promise<{ pantone: string; hex: string; matchPercentage: number }[]> => {
-  // Dynamically import the heavy color matching logic only when needed
-  const { rgbToLab, deltaE00, calculateMatchPercentage } = await import('./color-matching');
-
-  const result: { pantone: string; hex: string; matchPercentage: number }[] = [];
-  const seenPantones = new Set<string>();
-
-  // Convert input color to Lab
-  const inputRgb = {
-    r: parseInt(hexColor.substring(0, 2), 16),
-    g: parseInt(hexColor.substring(2, 4), 16),
-    b: parseInt(hexColor.substring(4, 6), 16),
-  };
-  const inputLab = rgbToLab(inputRgb);
-
-  // Check for exact hex match first
-  const exactMatchPantone = convertHexToPantone(hexColor);
-  if (exactMatchPantone) {
-    result.push({
-      pantone: exactMatchPantone,
-      hex: hexColor,
-      matchPercentage: 100,
-    });
-    seenPantones.add(exactMatchPantone);
-  }
-
-  // Find close matches
-  const closeMatches: { pantone: string; hex: string; deltaE: number }[] = [];
-
-  for (let i = 0; i < HEX.length; i++) {
-    if (seenPantones.has(PMS[i])) continue;
-
-    const pantoneRgb = {
-      r: parseInt(HEX[i].substring(0, 2), 16),
-      g: parseInt(HEX[i].substring(2, 4), 16),
-      b: parseInt(HEX[i].substring(4, 6), 16),
-    };
-    const pantoneLab = rgbToLab(pantoneRgb);
-    const deltaE = deltaE00(inputLab, pantoneLab);
-
-    if (deltaE <= maxDistance) {
-      closeMatches.push({
-        pantone: PMS[i],
-        hex: HEX[i],
-        deltaE,
-      });
-    }
-  }
-
-  // Sort by deltaE and calculate match percentages
-  closeMatches.sort((a, b) => a.deltaE - b.deltaE);
-
-  // If we don't have an exact match but have very close matches
-  if (result.length === 0 && closeMatches.length > 0 && closeMatches[0].deltaE <= 2.3) {
-    // Only the closest one gets 100%
-    result.push({
-      pantone: closeMatches[0].pantone,
-      hex: closeMatches[0].hex,
-      matchPercentage: 100,
-    });
-    closeMatches.shift(); // Remove the first one since we've added it
-  }
-
-  // Add remaining matches with calculated percentages
-  for (const match of closeMatches) {
-    const matchPercentage = calculateMatchPercentage(match.deltaE);
-    if (matchPercentage > 0) {
-      result.push({
-        pantone: match.pantone,
-        hex: match.hex,
-        matchPercentage,
-      });
-    }
-  }
-
-  return result;
-};
 
 /**
  * Validates if a string is a valid hex color code

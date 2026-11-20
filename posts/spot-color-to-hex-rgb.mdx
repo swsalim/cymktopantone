@@ -1,0 +1,125 @@
+---
+title: "How to turn a spot color code into HEX and RGB, and where the number stops being real"
+metaTitle: "Spot Color to HEX and RGB: What the Conversion Can and Cannot Do"
+metaDescription: "A spot color code names a physical ink chip; HEX is a screen simulation. How to pick a value you can defend, handle coated vs uncoated, and check it."
+summary: "A spot color code names a physical ink chip; HEX is a screen simulation. How to pick a value you can defend, handle coated vs uncoated, and check it."
+publishedAt: '2026-11-20'
+updatedAt: '2026-11-20'
+author: 'Yuyu'
+status: 'published'
+---
+
+A brand PDF lists a spot color code, and the website needs a HEX value by Friday. That's a reasonable request. The mistake is treating the HEX value you get back as the spot color itself. It's a simulation of a physical standard, measured under one set of conditions and then encoded for an sRGB screen. Two careful people can publish two different HEX values for the same code, and both can be right.
+
+This guide is the workflow to use when a spot color has to live on the web: where the number can come from, what it can't promise, and which checks to run before the HEX goes into a token file. The converters on this site take HEX, RGB, HSL, HSV and CMYK. They don't replace a swatch library or a physical swatch book.
+
+Color Mapper is independent and not affiliated with any color-standard or ink company.
+
+## What a spot color code specifies
+
+A spot color system is a set of named color standards, printed as physical swatches, so a designer, a brand team and a printer can point at the same chip.
+
+Several proprietary spot-color systems exist, and the same rules apply to whichever one your brand uses.
+
+A code in such a system is a name, and any suffix is part of that name. Many systems use separate libraries for coated and uncoated paper. The same number in both libraries is not a promise that the two chips match, because ink film, paper absorbency and optical brighteners all change what you see.
+
+Spot color and process color are different ways of producing a color. A spot color is a pre-mixed ink with its own plate. Process color builds the image from cyan, magenta, yellow and black. Some swatch publishers also print reference guides that pair each spot color with a suggested CMYK build and screen values. Those CMYK builds are approximations. They're still four-color recipes, and they still depend on the press. The <Link href="/blog/cmyk-safe-web-palettes">guide to CMYK-safe web palettes</Link> covers what happens when an sRGB color is pushed through a process conversion. A spot code adds one step before all that: you have to decide which physical standard you're simulating before any CMYK or HEX number means anything.
+
+## What HEX and RGB can hold
+
+HEX and RGB, in CSS and in most design tools, are notations for sRGB. A six-digit HEX code is three 8-bit channels: #7C3AED is red 124, green 58, blue 237, which you can confirm by splitting the pairs and reading them as base 16. The <Link href="/convert-hex-to-rgb">HEX to RGB converter</Link> does that split for you, and the <Link href="/blog/hex-vs-rgb-vs-hsl">HEX, RGB and HSL guide</Link> explains why those three notations can name the same screen color and still fail as a description of ink on paper.
+
+An sRGB value has no paper, no varnish and no light source. It's a code each display interprets through its own profile, brightness and white point, so two monitors showing the same HEX can disagree with each other and with a chip in a viewing booth. That's normal. It's why a brand guide that only lists a HEX code has already thrown away what a printer needs, and why one that only lists a spot code hasn't yet given engineering a screen color.
+
+## Why two published screen values can both be right
+
+The screen value for a spot color depends on how the chip was measured. The ISO 13655 standard defines measurement conditions that differ in how they handle ultraviolet light, which affects papers containing optical brighteners. M1 includes a set amount of UV, so it captures the effect of brighteners, while M2 filters UV out. A value measured one way and a value measured the other way can differ for the same chip, and both can be correct for their condition. A number from a random website is something else entirely. It may be an old export, a conversion through an unrelated CMYK profile, or a photo of a chip, and none of those is a second measurement.
+
+If you already have two HEX values and want to know whether the difference matters, paste them into <Link href="/compare-colors">Compare colors</Link>. It reports the CIEDE2000 (ΔE2000) difference between the two, plus HEX, RGB, CMYK and HSL for each. That tells you how far apart the two screen codes are, but not which one matches the chip under booth light.
+
+## A conversion you can defend
+
+Work in this order. Jumping straight to a converter is how teams end up with three HEX codes in three files.
+
+1. **Write down the full code, including the library suffix.** A number alone isn't a specification. If the job is an uncoated label, you may need the uncoated version of the code. Get it from the brand owner or the publisher's cross-reference, and don't reuse the coated HEX.
+2. **Take the screen value from a source you can name.** Prefer the value in the current brand guidelines if they cite where it came from. Otherwise use the swatch publisher's own digital reference, and note which one and which measurement condition.
+3. **Don't mix measurement conditions without saying so.** If design and production read values measured differently, expect the RGB to differ. Record both with labels, and don't average them.
+4. **Convert the chosen HEX with a tool that does only that.** <Link href="/convert-hex-to-rgb">HEX to RGB</Link> and <Link href="/convert-rgb-to-hex">RGB to HEX</Link> are lossless for 8-bit sRGB, and <Link href="/convert-hex-to-hsl">HEX to HSL</Link> is the same color in another form. None of these looks up a swatch library. They only restate the screen code you've already accepted.
+5. **Keep the screen token separate from the print build.** Run the HEX through the <Link href="/print-gamut">print gamut checker</Link> and the <Link href="/convert-hex-to-cmyk">HEX to CMYK converter</Link>. A large shift means process ink won't hold the screen color. The spot ink may still match the chip, because spot ink isn't limited to the CMYK gamut. Record the spot code, the screen value and the process build as three separate fields.
+6. **Proof the physical color on the real paper.** A website can check arithmetic, but it can't sign off a press run.
+
+The <Link href="/convert-color">converter index</Link> lists the screen and process pairs this site supports: CMYK, RGB, HEX, HSL and HSV. If a site promises a universal table from spot codes to HEX, treat it as an unverified lookup and check it against your named source before anyone treats it as the brand color.
+
+## Coated, uncoated and the process column
+
+Brand guidelines often list one spot code, then a CMYK recipe "for when you can't print spot." Those are different instructions:
+
+- Spot ink on coated paper follows the coated standard and depends on the printer hitting that ink.
+- Spot ink on uncoated paper follows the uncoated standard. Don't assume the coated simulation is close enough. Specify the suffix.
+- Four-color process follows a CMYK build under an agreed profile. A published recipe is a starting point, and your printer's profile can move it. The <Link href="/color-models/cmyk">CMYK color model page</Link> explains why those four percentages aren't just a HEX code in a different format.
+
+When one campaign needs a website, a coated brochure and an uncoated carton, an honest brand sheet has one row for each. A single HEX labeled as "the" spot color collapses those rows and makes the next person wrong whichever file they open.
+
+## When all you have is a photo of the chip
+
+Photographing a swatch book and sampling the JPEG is fine for a mood board but a poor way to set a brand token. The camera, the lighting, the paper's brighteners and the JPEG compression all sit between you and the standard. If a photo really is your only reference, pull candidate colors with <Link href="/palette-from-image">Palette from image</Link>, which runs in your browser and returns up to eight dominant colors. Then replace those samples with a value you can name, because a sampled color is a reading of a photograph and not of the chip.
+
+## What to put in the file the team will reuse
+
+| Field | Example of what belongs there |
+| --- | --- |
+| Spot name | The full code, including the library suffix |
+| Source of the screen value | The named source and the measurement condition |
+| sRGB HEX | The value from that source, unchanged |
+| RGB | The same color, split into 0–255 channels |
+| Process build | CMYK percentages, with the profile name if you have it |
+| Proof status | Screen only, until a physical proof is signed |
+
+Store the HEX in the design tokens and the spot code in the brand guidelines, then link them. When someone later asks why the website and the carton look different, the table answers the question without a new argument.
+
+Check the screen colors you'll actually ship. A saturated simulation that looks right next to the chip can still fail as text. Run the HEX against the page background in the <Link href="/contrast-checker">contrast checker</Link>. WCAG contrast is a property of the sRGB values, so it won't drift because a monitor is dim, and it tells you nothing about the printed chip. The <Link href="/blog/wcag-contrast-brand-colors">WCAG contrast guide</Link> walks through that check.
+
+## Limits worth stating in your guidelines
+
+Put these next to the HEX so the next conversion doesn't restart the argument:
+
+- The HEX is an sRGB simulation of a named physical standard, valid for the measurement condition you recorded.
+- Values measured under different conditions can legitimately differ. Pick one for digital files and say which.
+- Coated and uncoated are different standards, so keep the suffix in the name.
+- A CMYK build is a process approximation, and spot ink can go beyond that gamut. The print gamut checker flags the process problem but doesn't approve the spot color.
+- A photo of a chip, a screenshot of a logo and an old blog table aren't sources. If you have to start from one, say so, and replace the number once the brand owner confirms it.
+- When the deliverable is ink, nothing on a screen replaces a physical standard.
+
+## FAQ
+
+<BlogFaq
+  items={[
+    {
+      question: 'Can a spot color be converted to HEX without any loss?',
+      answer:
+        'No. A spot color is a physical ink on paper, and HEX is an sRGB screen code. Treat the HEX as the digital simulation you chose, and record which source and measurement condition it came from.',
+    },
+    {
+      question: 'Why do two sources give different HEX values for the same spot color?',
+      answer:
+        'They may have measured the chip under different conditions, for example with or without UV, which changes how papers with optical brighteners read. They may also have used different conversions. Label the value you store with its source.',
+    },
+    {
+      question: 'Is a coated spot color the same as the uncoated one with the same number?',
+      answer:
+        "Don't treat them as interchangeable. Coated and uncoated are separate libraries. Specify the suffix your guidelines require, and proof on the paper you'll print on.",
+    },
+    {
+      question: 'Which Color Mapper tool converts a spot color code?',
+      answer:
+        'None of our tools take a spot color code as input. Once you have an sRGB value from a named source, use [HEX to RGB](/convert-hex-to-rgb), [HEX to CMYK](/convert-hex-to-cmyk), the [print gamut checker](/print-gamut) and [Compare colors](/compare-colors) to inspect it. To go the other way, from a screen color to the nearest colors in our own reference set, use the [RGB to spot color converter](/convert-rgb-to-spot-color).',
+    },
+    {
+      question: 'Does a passing WCAG contrast check mean the spot color is right?',
+      answer:
+        'No. Contrast compares two sRGB colors using the WCAG relative-luminance formula. It tells you whether text is readable on screen, and nothing about a match to the chip.',
+    },
+  ]}
+/>
+
+Pick the source, name the measurement condition, and only then run the HEX through <Link href="/convert-hex-to-rgb">HEX to RGB</Link> and the <Link href="/print-gamut">print gamut checker</Link>. The screen code is ready for CSS when you can say where it came from. The spot color is ready for press when someone has looked at the physical standard on the real paper.

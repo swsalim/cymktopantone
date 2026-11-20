@@ -287,7 +287,9 @@ export default function ColorModelRgb() {
             using proper color profiles, rather than the reverse. This approach preserves color
             information better and produces more predictable print results. Always use professional
             conversion tools rather than simple mathematical conversions, which don't account for
-            color gamut differences.
+            color gamut differences. Moving an RGB color to print? The{' '}
+            <Link href="/convert-rgb-to-spot-color">RGB to spot color converter</Link> shows its
+            CMYK build and the closest colors in our reference set.
           </p>
 
           <h3>Design Software RGB Features</h3>

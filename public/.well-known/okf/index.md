@@ -37,7 +37,7 @@ Color Mapper offers palette and gradient generators, a WCAG 2.1 contrast checker
 - [Stop hand-writing linear-gradient() at 11pm](articles/css-gradients-guide.md)
 - [HEX vs RGB vs HSL: three ways to write one screen color](articles/hex-vs-rgb-vs-hsl.md)
 - [OKLCH for designers: lightness that matches what you see](articles/oklch-for-designers.md)
-- [How to convert Pantone to HEX and RGB, and where the number stops being real](articles/pantone-to-hex-rgb.md)
+- [Spot Color to HEX and RGB: What the Conversion Can and Cannot Do](articles/spot-color-to-hex-rgb.md)
 - [One brand HEX is not a design system. You need a 50–950 ramp.](articles/tailwind-color-scale-guide.md)
 - [The Complete Guide to Managing Color from Screen to Press](articles/the-complete-guide-to-managing-color-from-screen-to-press.md)
 - [Your brand purple probably fails WCAG. Here's how to check.](articles/wcag-contrast-brand-colors.md)

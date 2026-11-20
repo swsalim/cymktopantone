@@ -47,7 +47,6 @@ This document outlines the event tracking implemented in the color converter too
 2. **Color Format Preferences**
    - Most popular source color formats
    - Most popular target color formats
-   - Most common Pantone conversions
 
 ### Growth & Retention
 
@@ -95,6 +94,6 @@ Events follow the naming convention: `[action]_[source]_to_[target]` to ensure c
 
 The converter analytics integrate with the main site analytics to provide a holistic view of user behavior, including:
 
-- Cross-tool usage patterns (e.g., users who use both converters and the Pantone Color Match game)
+- Cross-tool usage patterns (for example, converters and the print gamut checker)
 - Overall user journey through the site
 - Comprehensive retention and growth metrics

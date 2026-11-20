@@ -1,48 +1,39 @@
 # Legacy domain redirects (cmyktopantone.com → colormapper.xyz)
 
-This document describes how legacy hostnames are handled in code and what must change in Vercel before that behaviour applies on production traffic.
+This document describes the redirect behaviour implemented in this repository. It does not describe Vercel domain settings. Whether any hostname still has a platform-level redirect is unknown from the code alone.
 
-## What the app does today
+## What the app does
 
-`middleware.ts` treats these hosts as **legacy** (same behaviour for all):
+`LEGACY_HOSTS` in `lib/legacy-path-resolver.ts` is:
 
 - `cmyktopantone.com`, `www.cmyktopantone.com`
 - `cymktopantone.com`, `www.cymktopantone.com`
-- `rgbtocmyk.com`, `www.rgbtocmyk.com` (unchanged from before)
+- `rgbtocmyk.com`, `www.rgbtocmyk.com`
 
-For each request on a legacy host, `resolveLegacyPath()` in `lib/legacy-path-resolver.ts` decides the **final** outcome:
+`rgbtopantone.com` is not in that list. Those hostnames are not attached to this project.
 
-| Outcome | HTTP on legacy host |
-|--------|----------------------|
-| Removed Pantone detail URLs (`/pantone/*`, `/pantone-colors/*`, etc.) | **410 Gone** (single response, no redirect) |
-| Mapped legacy paths (Pantone converters, old blog slugs, etc.) | **308** to `https://colormapper.xyz`<final-path> |
-| Everything else | **308** to the same path on `https://colormapper.xyz` |
+`next.config.ts` sets `skipTrailingSlashRedirect: true`. For every static legacy rule, `getNextConfigRedirects()` emits two redirects:
 
-Redirect targets and 410 prefixes are defined once in `lib/legacy-path-resolver.ts`. `next.config.ts` imports the same map via `getNextConfigRedirects()` so colormapper.xyz does not need a second hop after the domain change.
+1. A host-conditioned rule. `has.host` is `(www\.)?(cmyktopantone|cymktopantone|rgbtocmyk)\.com`. The destination is `https://colormapper.xyz` plus the final path. `permanent: true` (308).
+2. The same source with no host condition, destination the final path on the current host. This is the rule for `colormapper.xyz`.
 
-Query strings are preserved on 308 responses.
+`middleware.ts` then:
 
-## Vercel domain setting (owner approval required)
+- returns **410** for `GONE_EXACT` and `GONE_PREFIXES`, including `/pantone-color-match` and `/pantone-color-match/`, with `X-Robots-Tag: noindex, nofollow`
+- on a legacy host, sends one **308** to `https://colormapper.xyz` and the resolved path when `next.config` did not already redirect
+- on the canonical host, sends one **308** when the path itself redirects or still has a trailing slash
 
-On the `cymktopantone` Vercel project, **`cmyktopantone.com` and `cymktopantone.com` are currently configured to redirect at the platform level to `colormapper.xyz`.** Platform redirects run **before** Next.js middleware, so the single-hop resolver in middleware **does not run** for those hostnames until the setting changes.
+`resolveLegacyPath()` strips a trailing slash before it matches, so `/convert-cmyk-to-pantone-pms/` and `/convert-color/` resolve in that same step. Query strings are copied with the redirect URL.
 
-**Required change (do not apply in this PR):**
+Forward screen-colour paths resolve to `SPOT_TARGET` (`/convert-rgb-to-spot-color`). Reverse lookup paths, including `/blog/pantone-to-hex-rgb`, resolve to `REVERSE_TARGET` (`/blog/spot-color-to-hex-rgb`). `/pantone` and `/pantone-colors` resolve to `/colors`. No rule redirects to `/`.
 
-1. In Vercel → Project → Domains, change `cmyktopantone.com` and `cymktopantone.com` from **Redirect to colormapper.xyz** to **Serve this project** (same as `colormapper.xyz`).
-2. Add **`www.cmyktopantone.com`** (and `www.cymktopantone.com` if used) to the project so Vercel issues a valid certificate. Point DNS at Vercel as today.
-3. After the change, verify:  
-   `curl -sI https://www.cmyktopantone.com/convert-hex-to-cmyk`  
-   should return **one** `308` to `https://colormapper.xyz/convert-hex-to-cmyk` with a valid TLS chain.
+## What was removed from this document
 
-Until step 1 is done, apex `cmyktopantone.com` traffic still gets Vercel’s platform redirect (usually one hop to the same path on colormapper.xyz, but without middleware’s 410-on-legacy and without consolidated Pantone converter targets). **`www.cmyktopantone.com` remains broken** (expired cert + 307 to apex) until it is added to the project.
+An earlier revision said Vercel redirected the legacy domains to `colormapper.xyz` before the app ran. A later read of live responses found the project itself answering those hosts (410s served on the legacy host, and `/api/og` redirected on the legacy host). This file no longer states a platform redirect as current behaviour.
 
 ## Verification
 
-- **Unit tests:** `npm test` — resolver outcomes without network.
+- **Unit tests:** `npm test` — resolver outcomes, no redirect chains, destinations are real routes.
 - **Path census:** `npm run report-legacy-paths` — counts 410 / 308 targets for `data/legacy-old-paths.txt`.
-- **HTTP checks:** `npm run check-legacy-redirects -- --base-url <url> [--host cmyktopantone.com]`  
-  On a preview deployment, pass `--host cmyktopantone.com` so middleware runs the legacy branch. Legacy hostnames cannot be bound to preview URLs in Vercel; the Host header simulates the legacy host.
-
-## Related
-
-- `rgbtopantone.com` is out of scope for this repo and was not modified.
+- **HTTP checks:** `npm run check-legacy-redirects -- --base-url <url> [--host cmyktopantone.com]`
+  The checker fails when a path takes more than one redirect, or when the destination path on that base URL is not 200 (410 paths are the exception). On a local or preview server, pass `--host` so the legacy host branch runs. The `Location` header for a legacy host is the absolute `colormapper.xyz` URL. The status of that path is read on the base URL under test.

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
+
 import { hsvToRgb, rgbToCmyk, rgbToHex } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
@@ -10,19 +12,28 @@ import { AddToHistoryButton } from '@/components/color-converters/shared/add-to-
 import { ColorHistory } from '@/components/color-converters/shared/color-history';
 import { ColorPreview } from '@/components/color-converters/shared/color-preview';
 import { ColorValueDisplay } from '@/components/color-converters/shared/color-value-display';
+import { ColorInputControls } from '@/components/color-tools/color-input-controls';
+import { ShareColorLink } from '@/components/color-tools/share-color-link';
+import { useColorQuery } from '@/components/color-tools/use-color-query';
 import { Container } from '@/components/container';
 import { useColorHistoryContext } from '@/components/dynamic-converter';
 import RelatedTools from '@/components/related-tools';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
 import { Wrapper } from '@/components/wrapper';
 
 export default function HsvCmykConverter() {
   const { toast } = useToast();
   const { colorHistory } = useColorHistoryContext();
   const [hsv, setHsv] = useState({ h: 199, s: 68, v: 38 });
+  const channels = { h: String(hsv.h), s: String(hsv.s), v: String(hsv.v) };
+  const { markDirty } = useColorQuery('hsv', channels, (next) => {
+    if (next.mode !== 'hsv') return;
+    setHsv({
+      h: Number(next.channels.h),
+      s: Number(next.channels.s),
+      v: Number(next.channels.v),
+    });
+  });
 
   const rgb = hsvToRgb(hsv);
   const hex = rgbToHex(rgb);
@@ -37,11 +48,6 @@ export default function HsvCmykConverter() {
     SOURCE_COLOR,
     TARGET_COLOR,
   );
-
-  const handleInputChange = (key: keyof typeof hsv, value: string) => {
-    const numValue = Math.min(key === 'h' ? 360 : 100, Math.max(0, Number(value) || 0));
-    setHsv((prev) => ({ ...prev, [key]: numValue }));
-  };
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -71,6 +77,7 @@ export default function HsvCmykConverter() {
     const hsvMatches = sourceValue.match(/hsv\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
     if (hsvMatches) {
       const [, h, s, v] = hsvMatches;
+      markDirty();
       setHsv({
         h: parseInt(h),
         s: parseInt(s),
@@ -90,38 +97,21 @@ export default function HsvCmykConverter() {
           <Card>
             <h2 className="sr-only">Enter HSV Value</h2>
             <CardContent>
-              <div className="flex flex-col gap-y-6">
-                {Object.entries({
-                  Hue: 'h',
-                  Saturation: 's',
-                  Brightness: 'v',
-                }).map(([label, key]) => (
-                  <div key={key}>
-                    <div className="mb-2 flex items-center justify-between">
-                      <Label>{label}</Label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          type="number"
-                          value={hsv[key as keyof typeof hsv]}
-                          onChange={(e) =>
-                            handleInputChange(key as keyof typeof hsv, e.target.value)
-                          }
-                          className="w-20"
-                          min={0}
-                          max={key === 'h' ? 360 : 100}
-                        />
-                      </div>
-                    </div>
-                    <Slider
-                      value={[hsv[key as keyof typeof hsv]]}
-                      onValueChange={([value]) => setHsv((prev) => ({ ...prev, [key]: value }))}
-                      max={key === 'h' ? 360 : 100}
-                      step={1}
-                      className="mt-2"
-                      color={label.toLowerCase()}
-                    />
-                  </div>
-                ))}
+              <ColorInputControls
+                idPrefix="hsv-to-cmyk"
+                mode="hsv"
+                channels={channels}
+                onChannelsChange={(next) => {
+                  markDirty();
+                  setHsv({
+                    h: Math.min(360, Math.max(0, Number(next.h) || 0)),
+                    s: Math.min(100, Math.max(0, Number(next.s) || 0)),
+                    v: Math.min(100, Math.max(0, Number(next.v) || 0)),
+                  });
+                }}
+              />
+              <div className="mt-4">
+                <ShareColorLink mode="hsv" channels={channels} />
               </div>
 
               <ColorHistory history={colorHistory} onColorSelect={handleColorSelect} />
@@ -146,6 +136,12 @@ export default function HsvCmykConverter() {
         </div>
       </Container>
       <Container>
+        <p className="mb-6 text-sm text-gray-700 dark:text-gray-300">
+          <Link href="/convert-rgb-to-spot-color" className="font-semibold text-violet-700 hover:underline dark:text-violet-300">
+            RGB to Spot Color Converter.
+          </Link>{' '}
+          Find the closest colors in our own reference set, with ΔE and a CMYK build.
+        </p>
         <RelatedTools />
       </Container>
     </Wrapper>

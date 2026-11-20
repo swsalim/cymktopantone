@@ -22,6 +22,7 @@ export interface ToolPageConfig {
   intro?: string;
   faq?: { question: string; answer: string }[];
   faqDescription?: string;
+  imageAlt?: string;
   content?: ReactNode;
 }
 
@@ -34,7 +35,7 @@ export function buildToolMetadata(config: ToolPageConfig) {
       title: config.title,
       description: config.description,
       url: config.url,
-      images: ogImages(config.title),
+      images: ogImages(config.imageAlt ?? config.title),
       locale: 'en_US' as const,
       type: 'website' as const,
     },
@@ -43,7 +44,7 @@ export function buildToolMetadata(config: ToolPageConfig) {
       description: config.description,
       card: 'summary_large_image' as const,
       creator: siteConfig.creator,
-      images: ogImages(config.title),
+      images: ogImages(config.imageAlt ?? config.title),
     },
   };
 }
