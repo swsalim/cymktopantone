@@ -35,6 +35,7 @@ const toolShortDescriptions: Record<string, string> = {
   'print-gamut': 'Screen vs press preview with shift warnings',
   'compare-colors': 'ΔE2000 perceptual difference between two colors',
   'random-color-generator': 'Random HEX, a five-color palette, and a CSS gradient',
+  'spot-color-matcher': 'Closest colors in our own reference set, with ΔE and a CMYK build',
 };
 
 const toolShortTitles: Record<string, string> = {
@@ -48,6 +49,7 @@ const toolShortTitles: Record<string, string> = {
   'print-gamut': 'Print Gamut Checker',
   'compare-colors': 'Compare Colors',
   'random-color-generator': 'Random Color',
+  'spot-color-matcher': 'Spot color matcher',
 };
 
 function toolNavItem(id: string): NavChildItem {
@@ -94,6 +96,7 @@ export const navItems: NavItem[] = [
       '/print-gamut',
       '/compare-colors',
       '/random-color-generator',
+      '/convert-rgb-to-spot-color',
       '/colors',
       '/color',
     ],
@@ -117,6 +120,7 @@ export const navItems: NavItem[] = [
           toolNavItem('print-gamut'),
           toolNavItem('compare-colors'),
           toolNavItem('color-blindness'),
+          toolNavItem('spot-color-matcher'),
         ],
       },
     ],
@@ -169,6 +173,7 @@ export const footerColorTools = [
   { name: 'Palette from image', href: '/palette-from-image' },
   { name: 'Random color generator', href: '/random-color-generator' },
   { name: 'Color blindness sim', href: '/color-blindness' },
+  { name: 'Spot color matcher', href: '/convert-rgb-to-spot-color' },
 ] as const;
 
 export const footerLearnLinks = [
@@ -195,6 +200,9 @@ export function getNavDropdownItems(item: NavItem): NavChildItem[] {
 
 export function isNavItemActive(pathname: string | null, item: NavItem): boolean {
   if (!pathname) return false;
+  if (item.href === '/convert-color' && pathname.startsWith('/convert-rgb-to-spot-color')) {
+    return false;
+  }
   if (item.href && pathname === item.href) return true;
   return (
     item.segments?.some((segment) => {

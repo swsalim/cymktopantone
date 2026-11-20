@@ -7,12 +7,15 @@
  *   tsx scripts/check-legacy-redirects.ts --base-url https://<preview>.vercel.app --host cmyktopantone.com
  */
 import { readFileSync } from 'node:fs';
+import http from 'node:http';
+import https from 'node:https';
 import { join } from 'node:path';
 
 import {
+  CANONICAL_SITE_HOST,
   expectedLegacyCheck,
-  expectedSiteCheck,
   normalizePathname,
+  resolveLegacyPath,
 } from '../lib/legacy-path-resolver';
 
 function parseArgs(argv: string[]) {
@@ -69,15 +72,65 @@ function readCookieHeader(jarPath: string): string | undefined {
 
 const REDIRECT_STATUSES = new Set([301, 302, 307, 308]);
 
-async function fetchManual(url: string, hostHeader: string, cookieHeader?: string) {
+/**
+ * `fetch` drops the Host header (it is a forbidden header name), so a --host
+ * check would silently hit the base host. Node's HTTP client sends Host as set.
+ */
+function fetchManual(
+  url: string,
+  hostHeader: string,
+  cookieHeader?: string,
+): Promise<{ status: number; headers: { get(name: string): string | null } }> {
+  const parsed = new URL(url);
+  const lib = parsed.protocol === 'https:' ? https : http;
   const headers: Record<string, string> = {};
   if (hostHeader) {
-    headers.host = hostHeader;
+    headers.Host = hostHeader;
   }
   if (cookieHeader) {
-    headers.cookie = cookieHeader;
+    headers.Cookie = cookieHeader;
   }
-  return fetch(url, { redirect: 'manual', headers });
+
+  return new Promise((resolve, reject) => {
+    const req = lib.request(
+      {
+        protocol: parsed.protocol,
+        hostname: parsed.hostname,
+        port: parsed.port || undefined,
+        path: `${parsed.pathname}${parsed.search}`,
+        method: 'GET',
+        headers,
+      },
+      (res) => {
+        res.resume();
+        resolve({
+          status: res.statusCode ?? 0,
+          headers: {
+            get(name: string) {
+              const value = res.headers[name.toLowerCase()];
+              if (Array.isArray(value)) {
+                return value[0] ?? null;
+              }
+              return value ?? null;
+            },
+          },
+        });
+      },
+    );
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+type Hop = { code: number; url: string; location: string | null };
+
+function expectedFinalPath(pathname: string): string | 'gone' {
+  const resolved = resolveLegacyPath(pathname);
+  if (resolved.kind === 'gone') return 'gone';
+  if (resolved.kind === 'redirect') return resolved.pathname;
+  const colorPath = pathname.match(/^\/color\/([0-9a-fA-F]{6})\/?$/);
+  if (colorPath) return `/color/${colorPath[1].toUpperCase()}`;
+  return normalizePathname(pathname);
 }
 
 async function checkPath(
@@ -86,108 +139,67 @@ async function checkPath(
   hostHeader: string,
   cookieHeader?: string,
 ): Promise<string | null> {
+  const hops: Hop[] = [];
   let requestUrl = `${baseUrl}${pathname}`;
+  let host = hostHeader;
 
-  if (!hostHeader) {
-    let expected = expectedSiteCheck(pathname);
-    let first = await fetchManual(requestUrl, '', cookieHeader);
-
-    if (
-      pathname.endsWith('/') &&
-      pathname.length > 1 &&
-      REDIRECT_STATUSES.has(first.status) &&
-      expected.status === 410
-    ) {
-      const location = first.headers.get('location');
-      if (location) {
-        const stripped = new URL(location, baseUrl).pathname;
-        if (normalizePathname(pathname) === normalizePathname(stripped)) {
-          requestUrl = `${baseUrl}${stripped}`;
-          expected = expectedSiteCheck(stripped);
-          first = await fetchManual(requestUrl, '', cookieHeader);
-        }
-      }
+  for (let step = 0; step < 6; step += 1) {
+    const response = await fetchManual(requestUrl, host, cookieHeader);
+    const location = response.headers.get('location');
+    hops.push({ code: response.status, url: requestUrl, location });
+    if (!REDIRECT_STATUSES.has(response.status)) break;
+    if (!location) {
+      return `${pathname}: redirect missing Location (hops=${hops.length})`;
     }
+    const next = new URL(location, requestUrl);
+    requestUrl = `${baseUrl}${next.pathname}${next.search}`;
+    host = '';
+  }
 
+  const redirectHops = hops.filter((hop) => REDIRECT_STATUSES.has(hop.code)).length;
+  const final = hops[hops.length - 1];
+  const trace = hops.map((hop) => `${hop.code} ${hop.url}`).join(' -> ');
+
+  if (redirectHops > 1) {
+    return `${pathname}: hops=${redirectHops} (max 1) ${trace}`;
+  }
+
+  const expectedPath = expectedFinalPath(pathname);
+  if (expectedPath === 'gone') {
+    if (final.code !== 410 || redirectHops !== 0) {
+      return `${pathname}: expected direct 410, hops=${redirectHops} final=${final.code} ${trace}`;
+    }
+    return null;
+  }
+
+  if (hostHeader) {
+    const expected = expectedLegacyCheck(pathname);
     if (expected.status === 410) {
-      if (first.status !== 410) {
-        return `${pathname}: expected 410 on site, got ${first.status}`;
-      }
-      return null;
+      return `${pathname}: resolver expected 410 but path check did not`;
     }
-
-    if (expected.status === 308) {
-      if (!REDIRECT_STATUSES.has(first.status)) {
-        return `${pathname}: expected redirect on site, got ${first.status}`;
-      }
-      let location = first.headers.get('location');
-      if (!location) {
-        return `${pathname}: redirect missing Location`;
-      }
-      let resolvedLocation = new URL(location, baseUrl);
-      if (
-        pathname.endsWith('/') &&
-        pathname.length > 1 &&
-        resolvedLocation.pathname === normalizePathname(pathname)
-      ) {
-        const second = await fetchManual(`${baseUrl}${resolvedLocation.pathname}`, '', cookieHeader);
-        if (!REDIRECT_STATUSES.has(second.status)) {
-          return `${pathname}: expected second redirect after trailing slash, got ${second.status}`;
-        }
-        location = second.headers.get('location');
-        if (!location) {
-          return `${pathname}: second redirect missing Location`;
-        }
-        resolvedLocation = new URL(location, baseUrl);
-      }
-      if (resolvedLocation.pathname !== expected.pathname) {
-        return `${pathname}: expected path ${expected.pathname}, got ${resolvedLocation.pathname}`;
-      }
-      const final = await fetch(resolvedLocation.href, {
-        redirect: 'manual',
-        headers: cookieHeader ? { cookie: cookieHeader } : undefined,
-      });
-      if (final.status !== 200) {
-        return `${pathname}: final ${resolvedLocation.href} returned ${final.status}`;
-      }
-      return null;
+    const location = hops[0]?.location;
+    if (!location) return `${pathname}: missing Location`;
+    const resolved = new URL(location, `${baseUrl}${pathname}`).href;
+    if (resolved !== expected.finalUrl) {
+      return `${pathname}: expected Location ${expected.finalUrl}, got ${resolved}`;
     }
-
-    if (first.status !== 200) {
-      return `${pathname}: expected 200 on site, got ${first.status}`;
+  } else if (redirectHops === 1) {
+    const location = hops[0]?.location;
+    if (!location) return `${pathname}: missing Location`;
+    const resolvedPath = new URL(location, baseUrl).pathname;
+    if (resolvedPath !== expectedPath) {
+      return `${pathname}: expected path ${expectedPath}, got ${resolvedPath}`;
     }
-    return null;
+  } else if (normalizePathname(pathname) !== pathname && pathname !== '/') {
+    return `${pathname}: expected one redirect to ${expectedPath}, got ${final.code}`;
   }
 
-  const expected = expectedLegacyCheck(pathname);
-  const first = await fetchManual(requestUrl, hostHeader, cookieHeader);
-
-  if (expected.status === 410) {
-    if (first.status !== 410) {
-      return `${pathname}: expected 410, got ${first.status}`;
-    }
-    return null;
+  if (final.code !== 200) {
+    return `${pathname}: hops=${redirectHops} final=${final.code} ${trace}`;
   }
-
-  if (!REDIRECT_STATUSES.has(first.status)) {
-    return `${pathname}: expected redirect, got ${first.status}`;
+  if (hostHeader && !hops[0]?.location?.includes(CANONICAL_SITE_HOST)) {
+    return `${pathname}: legacy Location did not use ${CANONICAL_SITE_HOST}`;
   }
-
-  const location = first.headers.get('location');
-  if (!location) {
-    return `${pathname}: redirect missing Location header`;
-  }
-
-  const resolvedLocation = new URL(location, baseUrl).href;
-  if (resolvedLocation !== expected.finalUrl) {
-    return `${pathname}: expected Location ${expected.finalUrl}, got ${resolvedLocation}`;
-  }
-
-  const final = await fetch(resolvedLocation, { redirect: 'manual' });
-  if (final.status !== 200) {
-    return `${pathname}: final URL ${resolvedLocation} returned ${final.status}`;
-  }
-
   return null;
 }
 
@@ -223,7 +235,7 @@ async function main() {
   }
 
   console.log(
-    `OK: ${paths.length} paths — base ${baseUrl}${hostHeader ? ` (Host: ${hostHeader})` : ''}`,
+    `OK: ${paths.length} paths, no chain over 1 hop — base ${baseUrl}${hostHeader ? ` (Host: ${hostHeader})` : ''}`,
   );
 }
 

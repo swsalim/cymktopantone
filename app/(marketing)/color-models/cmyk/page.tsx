@@ -263,7 +263,8 @@ export default function ColorModelCmyk() {
             the same brand red whether printed on glossy cardboard or matte paperboard, requiring
             careful CMYK calibration, color profiling, and rigorous quality control. Many brands
             supplement CMYK with spot colors (like Pantone) for brand-critical elements that fall
-            outside the CMYK gamut.
+            outside the CMYK gamut. To check a screen color before choosing between process and
+            spot, use the <Link href="/convert-rgb-to-spot-color">spot color matcher</Link>.
           </p>
 
           <h3>Large Format and Specialty Printing</h3>

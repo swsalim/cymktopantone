@@ -19,7 +19,16 @@ export const GONE_PREFIXES = [
   '/pantone/',
 ] as const;
 
-export const GONE_EXACT = new Set(['/pantone-color-match/daily']);
+export const GONE_EXACT = new Set(['/pantone-color-match/daily', '/pantone-color-match']);
+
+/** Final path for forward screen-to-reference matches. */
+export const SPOT_TARGET = '/convert-rgb-to-spot-color';
+
+/** Final path for reverse spot-code questions. One place to retarget. */
+export const REVERSE_TARGET = '/blog/spot-color-to-hex-rgb';
+
+/** Hosts that still resolve to this project. rgbtopantone.com is not attached. */
+export const LEGACY_HOST_PATTERN = '(www\\.)?(cmyktopantone|cymktopantone|rgbtocmyk)\\.com';
 
 const JUNK_PATH_SEGMENTS = new Set(['c-at_max', 'f-auto', 'q-85']);
 
@@ -36,6 +45,7 @@ export const LEGACY_BLOG_REDIRECTS: Readonly<Record<string, string>> = {
   '/blog/indesign-pantone-spot-color-pdf': '/blog/spot-color-process-color',
   '/blog/pantone-digital-branding': SCREEN_TO_PRESS,
   '/blog/photoshop-hex-to-pantone-match': '/convert-hex-to-cmyk',
+  '/blog/pantone-to-hex-rgb': REVERSE_TARGET,
 };
 
 /** Static path redirects (also emitted for next.config.ts). */
@@ -44,23 +54,21 @@ export const STATIC_PATH_REDIRECTS: ReadonlyArray<{ source: string; destination:
   { source: '/privacy', destination: '/legal/privacy-policy' },
   { source: '/terms', destination: '/legal/terms-and-conditions' },
   { source: '/brand-palette-to-pantone', destination: '/print-gamut' },
-  { source: '/convert-pantone-to-cmyk', destination: '/color-models/cmyk' },
-  { source: '/convert-pantone-to-hex', destination: '/convert-hex-to-cmyk' },
-  { source: '/convert-pantone-to-rgb', destination: '/convert-rgb-to-cmyk' },
-  { source: '/convert-rgb-to-pantone-pms', destination: '/convert-rgb-to-cmyk' },
-  { source: '/convert-cmyk-to-pantone-pms', destination: '/color-models/cmyk' },
-  { source: '/convert-hex-to-pantone-pms', destination: '/convert-hex-to-cmyk' },
-  { source: '/convert-hsl-to-pantone-pms', destination: '/convert-hsl-to-cmyk' },
-  { source: '/convert-hsv-to-pantone-pms', destination: '/convert-hsv-to-cmyk' },
-  { source: '/convert-pantone-pms-to-cmyk', destination: '/color-models/cmyk' },
-  { source: '/convert-pantone-pms-to-hex', destination: '/convert-hex-to-cmyk' },
-  { source: '/convert-pantone-pms-to-hsl', destination: '/convert-hsl-to-cmyk' },
-  { source: '/convert-pantone-pms-to-hsv', destination: '/convert-hsv-to-cmyk' },
-  { source: '/convert-pantone-pms-to-rgb', destination: '/convert-cmyk-to-rgb' },
-  { source: '/pantone-color-match', destination: '/' },
-  { source: '/pantone-color-match/', destination: '/' },
-  { source: '/pantone-colors', destination: '/convert-color' },
-  { source: '/pantone', destination: '/convert-color' },
+  { source: '/convert-pantone-to-cmyk', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-to-hex', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-to-rgb', destination: REVERSE_TARGET },
+  { source: '/convert-rgb-to-pantone-pms', destination: SPOT_TARGET },
+  { source: '/convert-cmyk-to-pantone-pms', destination: SPOT_TARGET },
+  { source: '/convert-hex-to-pantone-pms', destination: SPOT_TARGET },
+  { source: '/convert-hsl-to-pantone-pms', destination: SPOT_TARGET },
+  { source: '/convert-hsv-to-pantone-pms', destination: SPOT_TARGET },
+  { source: '/convert-pantone-pms-to-cmyk', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-pms-to-hex', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-pms-to-hsl', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-pms-to-hsv', destination: REVERSE_TARGET },
+  { source: '/convert-pantone-pms-to-rgb', destination: REVERSE_TARGET },
+  { source: '/pantone-colors', destination: '/colors' },
+  { source: '/pantone', destination: '/colors' },
   { source: '/color-models/test', destination: '/color-models' },
   { source: '/color-models/test-alt', destination: '/color-models' },
 ];
@@ -107,12 +115,8 @@ function matchStaticRedirect(pathname: string): string | null {
 
 function matchHexToPantoneRedirect(pathname: string): string | null {
   const path = normalizePathname(pathname);
-  if (path === '/convert-hex-to-pantone-pms') {
-    return '/convert-hex-to-cmyk';
-  }
-  const hexMatch = path.match(/^\/convert-hex-to-pantone-pms\/([0-9a-fA-F]{3,8})$/);
-  if (hexMatch) {
-    return '/convert-hex-to-cmyk';
+  if (path === '/convert-hex-to-pantone-pms' || path.startsWith('/convert-hex-to-pantone-pms/')) {
+    return SPOT_TARGET;
   }
   return null;
 }
@@ -230,27 +234,32 @@ export function summarizeLegacyPaths(paths: string[]): LegacyPathSummaryBucket {
   return summary;
 }
 
-/** Redirect rules for next.config.ts — keep in sync via this module only. */
-export function getNextConfigRedirects(): Redirect[] {
-  const fromStatic: Redirect[] = STATIC_PATH_REDIRECTS.map((rule) => ({
-    source: rule.source,
-    destination: rule.destination,
-    permanent: true,
-  }));
-
-  const hexPantone: Redirect = {
-    source: '/convert-hex-to-pantone-pms/:hex',
-    destination: '/convert-hex-to-cmyk',
-    permanent: true,
-  };
-
-  const blogRedirects: Redirect[] = Object.entries(LEGACY_BLOG_REDIRECTS).map(
-    ([source, destination]) => ({
+function emitRedirect(source: string, destination: string): Redirect[] {
+  return [
+    {
+      source,
+      has: [{ type: 'host', value: LEGACY_HOST_PATTERN }],
+      destination: `https://${CANONICAL_SITE_HOST}${destination}`,
+      permanent: true,
+    },
+    {
       source,
       destination,
       permanent: true,
-    }),
-  );
+    },
+  ];
+}
 
-  return [...fromStatic, hexPantone, ...blogRedirects];
+/** Redirect rules for next.config.ts — keep in sync via this module only. */
+export function getNextConfigRedirects(): Redirect[] {
+  const rules: Array<{ source: string; destination: string }> = [
+    ...STATIC_PATH_REDIRECTS,
+    { source: '/convert-hex-to-pantone-pms/:path*', destination: SPOT_TARGET },
+    ...Object.entries(LEGACY_BLOG_REDIRECTS).map(([source, destination]) => ({
+      source,
+      destination,
+    })),
+  ];
+
+  return rules.flatMap((rule) => emitRedirect(rule.source, rule.destination));
 }

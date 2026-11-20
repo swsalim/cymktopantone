@@ -1,7 +1,3 @@
-import { execSync } from 'node:child_process';
-
-if (process.env.MAINTENANCE_MODE !== 'true') {
-  execSync('npm run precompute-colors', { stdio: 'inherit' });
-} else {
-  console.log('Maintenance mode: skipped precompute-colors.');
-}
+// The precompute-colors script and the list it read were removed.
+// This hook stays so `npm run build` still has a prebuild step with nothing to generate.
+console.log('prebuild: no colour-list precompute.');

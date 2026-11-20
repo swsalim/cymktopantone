@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
+
 import { hexToRgb, isValidHex, rgbToCmyk } from '@/lib/colors';
 import { useConverterTracking } from '@/lib/hooks/use-converter-tracking';
 import { useToast } from '@/lib/hooks/use-toast';
@@ -129,6 +131,12 @@ export default function HexCmykConverter() {
         </div>
       </Container>
       <Container>
+        <p className="mb-6 text-sm text-gray-700 dark:text-gray-300">
+          <Link href="/convert-rgb-to-spot-color" className="font-semibold text-violet-700 hover:underline dark:text-violet-300">
+            RGB to Spot Color Converter.
+          </Link>{' '}
+          Find the closest colors in our own reference set, with ΔE and a CMYK build.
+        </p>
         <RelatedTools />
       </Container>
     </Wrapper>

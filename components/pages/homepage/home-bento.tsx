@@ -1,7 +1,7 @@
 /* Hallmark · macrostructure: Bento Grid · genre: modern-minimal · theme: Violet Cyan Gradient (locked, design-system)
  * pre-emit critique: P4 H5 E4 S4 R4 V4
  * enrichment: Tier-A CSS art (palette stripes · live gradient · real contrast ratios · violet 50–950 ramp)
- * nav/footer: site chrome (out of page scope) · motion: CSS-only (scroll-driven reveal + hover micro-interactions, motion-reduce guarded) · honest copy: 10 tools / 18 converters / 5 guides
+ * nav/footer: site chrome (out of page scope) · motion: CSS-only (scroll-driven reveal + hover micro-interactions, motion-reduce guarded) · honest copy: 11 tools / 18 converters / 5 guides
  */
 import Link from 'next/link';
 
@@ -75,7 +75,7 @@ export function HomeBento() {
           <h2
             id="tools-bento-heading"
             className="font-heading text-2xl font-bold tracking-tight text-gray-900 md:text-3xl dark:text-gray-100">
-            Ten tools, one workflow
+            Eleven tools, one workflow
           </h2>
           <p className="mt-2 max-w-2xl text-base text-gray-600 dark:text-gray-400">
             Every swatch carries HEX, RGB, and CMYK — and links straight into the converters.
@@ -307,6 +307,21 @@ export function HomeBento() {
           <TileHeading
             title="Compare Colors"
             description="ΔE2000 perceptual difference — can anyone tell them apart?"
+          />
+        </Link>
+
+        <Link
+          href="/convert-rgb-to-spot-color"
+          className={tileClass}
+          aria-label="RGB to Spot Color Converter">
+          <div aria-hidden className="flex h-14 overflow-hidden rounded-xl">
+            {['#7C3AED', '#5B21B6', '#A78BFA', '#3AED7C', '#ED7C3A'].map((hex) => (
+              <div key={hex} className="flex-1" style={{ backgroundColor: hex }} />
+            ))}
+          </div>
+          <TileHeading
+            title="RGB to Spot Color Converter"
+            description="Find the closest colors in our own spot-color reference set for any RGB, HEX or CMYK value, with ΔE and a CMYK build."
           />
         </Link>
 

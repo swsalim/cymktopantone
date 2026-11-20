@@ -98,6 +98,20 @@ export const internalTools: InternalTool[] = [
     category: 'generator',
     keywords: ['random color generator', 'random hex color', 'random color palette'],
   },
+  {
+    id: 'spot-color-matcher',
+    title: 'RGB to Spot Color Converter',
+    href: '/convert-rgb-to-spot-color',
+    description:
+      'Find the closest colors in our own spot-color reference set for any RGB, HEX, HSL, HSV or CMYK value, ranked by ΔE2000, with a CMYK process build.',
+    category: 'converter',
+    keywords: [
+      'rgb to spot color converter',
+      'convert rgb to spot color',
+      'rgb to print spot color',
+      'closest spot color match for rgb',
+    ],
+  },
 ];
 
 export const harmonySubpages = [

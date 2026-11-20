@@ -2,7 +2,7 @@
 
 import { Trash2, X } from 'lucide-react';
 
-import { cmykToRgb, convertPantoneToHex, hslToRgb, hsvToRgb } from '@/lib/colors';
+import { cmykToRgb, hslToRgb, hsvToRgb } from '@/lib/colors';
 import { rgbToHex } from '@/lib/colors';
 import { ColorHistoryItem, ColorHistoryState } from '@/lib/hooks/use-color-history';
 
@@ -71,9 +71,6 @@ export function ColorHistory({ history, onColorSelect }: ColorHistoryProps) {
         const hex = rgbToHex(rgb);
         return hex;
       }
-    } else if (item.sourceColor === 'PANTONE') {
-      const hex = `#${convertPantoneToHex(item.sourceValue)}`;
-      return hex;
     }
   };
 

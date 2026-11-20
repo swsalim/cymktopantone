@@ -130,7 +130,13 @@ export function PrintGamutChecker() {
             className="font-medium text-violet-600 hover:underline dark:text-violet-400">
             our guide to CMYK-safe palettes
           </Link>
-          .
+          . If a color shifts a lot, the{' '}
+          <Link
+            href="/convert-rgb-to-spot-color"
+            className="font-medium text-violet-600 hover:underline dark:text-violet-400">
+            RGB to spot color converter
+          </Link>{' '}
+          shows the nearest colors in our reference set to help you brief a spot ink.
         </p>
 
         <RelatedColorTools excludeHref="/print-gamut" className="mt-12" />

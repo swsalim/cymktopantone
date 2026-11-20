@@ -92,6 +92,12 @@ const popularWorkflows = [
     label: 'RGB to HEX',
     description: 'Convert channel values to copy-ready hex codes.',
   },
+  {
+    href: '/convert-rgb-to-spot-color',
+    label: 'RGB to spot color converter',
+    description:
+      'Matching a screen color for print? See the closest colors in our own reference set and the CMYK build.',
+  },
 ];
 
 export default function ConvertColorsPage() {

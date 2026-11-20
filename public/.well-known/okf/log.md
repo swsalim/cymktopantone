@@ -11,3 +11,4 @@ description: Chronological history of changes to this OKF bundle.
 - 2026-10-21: Added primary-colors, what-color-is-indigo, and what-color-is-this.
 - 2026-10-22: Added color-spectrum.
 - 2026-10-22: Added the random color generator tool and random-color-generator-guide.
+- 2026-11-20: Replaced the spot-color HEX guide with /blog/spot-color-to-hex-rgb. Added /convert-rgb-to-spot-color.
